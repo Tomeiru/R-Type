@@ -1,3 +1,6 @@
 [submodule "sfml"]
 	path = sfml
 	url = git@github.com:Tomeiru/sfml-encapsulation.git
+[submodule "ecs"]
+	path = ecs
+	url = git@github.com:Tomeiru/entity-component-system.git
