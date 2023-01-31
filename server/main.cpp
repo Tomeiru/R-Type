@@ -18,10 +18,12 @@ int main(int ac, char **av)
 {
     try {
         std::uint16_t port = parseArguments(ac, av);
-        RType::Network::PackageManager package_manager;
-        RType::Network::UDPHandler handler(port, package_manager);
-        handler.startHandler();
-        handler.stopHandler();
+        ECS::Coordinator coordinator;
+        auto package_manager = coordinator.registerResource<RType::Network::PackageManager>();
+        auto udp_handler = coordinator.registerResource<RType::Network::UDPHandler>(port, package_manager);
+        udp_handler->startHandler();
+
+        udp_handler->stopHandler();
     }
     catch(std::invalid_argument &e) {
         std::cerr << "An exception appeared in the argument checking part of the code: " << e.what() << std::endl;
