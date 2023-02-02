@@ -7,20 +7,36 @@
 #define NETWORK_MAGIC 0xDEADBEEF
 
 namespace RType::Network {
+    /**
+     * @brief Header of a packet which is sent over the network
+     */
     struct Header {
         unsigned int magic;
         char id;
         unsigned int created_at;
     };
 
+    /**
+     * @brief Packet which is sent over the network
+     * @tparam PayloadT Type of the payload
+     */
     template<typename PayloadT>
     struct Packet {
         Header header;
         PayloadT payload;
     };
 
+    /**
+     * @brief Package manager which is used to register and create packets
+     */
     class PackageManager {
     public:
+        /**
+         * @brief Create a packet with the given payload
+         * @tparam PayloadT Type of the payload
+         * @param payload Payload which contains the data
+         * @return Packet created
+         */
         template<typename PayloadT>
         Packet<PayloadT> createPacket(PayloadT &payload) {
             std::string data_type = typeid(PayloadT).name();
@@ -32,6 +48,10 @@ namespace RType::Network {
             return packet;
         }
 
+        /**
+         * @brief Register a payload type
+         * @tparam PayloadT Type of the payload
+         */
         template<typename PayloadT>
         void registerPacket() {
             static unsigned int id = 0;
@@ -44,6 +64,11 @@ namespace RType::Network {
             id++;
         }
 
+        /**
+         * @brief Get the type name of the given id
+         * @param id Id of the type
+         * @return Type name
+         */
         std::string getTypeName(char id) const {
             auto type_name =  _id_to_typename.find(id);
             if (type_name == _id_to_typename.end())
@@ -51,6 +76,11 @@ namespace RType::Network {
             return (type_name->second);
         }
 
+        /**
+         * @brief Get the type id of the given name
+         * @param name Name of the type
+         * @return Type id
+         */
         char getTypeId(const std::string &name) const {
             auto type_id = _typename_to_id.find(name);
             if (type_id == _typename_to_id.end())

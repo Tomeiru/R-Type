@@ -6,13 +6,25 @@
 
 
 namespace RType::Network {
+    /**
+     * @brief Thread safe queue
+     * @tparam T Type of the queue
+     */
     template <typename T>
     class ThreadSafeQueue {
     public:
+        /**
+         * @brief Push an element in the queue
+         * @param element Element to push
+         */
         void push(T element) {
             std::lock_guard<std::mutex> lock(_mutex);
             _queue.push(element);
         }
+        /**
+         * @brief Pop an element from the queue
+         * @return Element popped
+         */
         T pop() {
             std::lock_guard<std::mutex> lock(_mutex);
             if (_queue.empty())
@@ -21,6 +33,10 @@ namespace RType::Network {
             _queue.pop();
             return value;
         }
+        /**
+         * @brief Check if the queue is empty
+         * @return True if the queue is empty, false otherwise
+         */
         bool empty() {
             std::lock_guard<std::mutex> lock(_mutex);
             return (_queue.empty());
