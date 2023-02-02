@@ -2,20 +2,21 @@
 
 #include <cstdint>
 #include <thread>
-#include <SFML/Network/UdpSocket.hpp>
+#include "../sfml/UDPSocket.hpp"
 #include <iostream>
+#include <memory>
 #include "PackageManager.hpp"
 #include "ThreadSafeQueue.hpp"
 
 namespace RType::Network {
     class UDPHandler {
     public:
-        UDPHandler(std::uint16_t port, const Network::PackageManager &package_manager) : _port(port), _started(false), _package_manager(package_manager) {}
+        UDPHandler(std::uint16_t port, std::shared_ptr<Network::PackageManager> package_manager) : _port(port), _started(false), _package_manager(package_manager) {}
         void startHandler() {
             if (_started)
                 throw RuntimeException("Server::startHandler", "Handler already started");
             _socket.setBlocking(false);
-            if (_socket.bind(_port) != sf::Socket::Done)
+            if (_socket.bind(_port) != SFML::UDPSocket::Done)
                 throw RuntimeException("Server::startHandler", "Binding a port to the handler failed");
             _started = true;
             _thread = std::thread([this] {while (_started) {receive();}});
@@ -30,18 +31,18 @@ namespace RType::Network {
 
         template<typename PayloadT>
         void registerPacket() {
-            return _package_manager.registerPacket<PayloadT>();
+            return _package_manager->registerPacket<PayloadT>();
         }
 
         std::uint32_t receive() {
             Network::Header header{};
-            sf::IpAddress sender;
+            SFML::IpAddress sender(0);
             std::uint16_t port;
             std::size_t received;
             char data[1024];
             auto status = _socket.receive(data, 1024, received, sender, port);
 
-            if (status != sf::Socket::Done) {
+            if (status != SFML::UDPSocket::Done) {
                 return status;
             }
             std::string data_received(data, received);
@@ -50,20 +51,20 @@ namespace RType::Network {
             return received;
         }
 
-        void send(const void *data, std::size_t size, const sf::IpAddress &address, uint16_t port) {
-            if (_socket.send(data, size, address, port) == sf::Socket::Done)
+        void send(const void *data, std::size_t size, const SFML::IpAddress &address, uint16_t port) {
+            if (_socket.send(data, size, address, port) == SFML::UDPSocket::Done)
                 std::cout << "UDPHandler::send: data successfully sent" <<  std::endl;
         }
 
         template<typename PayloadT>
         Network::Packet<PayloadT> createPacket(PayloadT &payload) {
-            return _package_manager.createPacket(payload);
+            return _package_manager->createPacket(payload);
         }
 
     private:
-        const Network::PackageManager &_package_manager;
+        std::shared_ptr<Network::PackageManager> _package_manager;
         std::thread _thread;
-        sf::UdpSocket _socket;
+        SFML::UDPSocket _socket;
         std::uint16_t _port;
         Network::ThreadSafeQueue<std::string> _queue;
         bool _started;
