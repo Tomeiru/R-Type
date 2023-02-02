@@ -89,19 +89,20 @@ $(function() {
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;../component/Transform.hpp&quot;</span></div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">namespace </span>SFML {</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="class_s_f_m_l_1_1_spin_sprite.html">   14</a></span>    <span class="keyword">class </span><a class="code hl_class" href="class_s_f_m_l_1_1_spin_sprite.html">SpinSprite</a> : <span class="keyword">public</span> ECS::System {</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>        <span class="keywordtype">void</span> update(ECS::Coordinator &amp;coordinator) {</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>            <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;entity : entities) {</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>                std::cout &lt;&lt; <span class="stringliteral">&quot;Entity: &quot;</span> &lt;&lt; entity &lt;&lt; std::endl;</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>                <span class="keyword">auto</span> &amp;transform = coordinator.getComponent&lt;<a class="code hl_struct" href="struct_s_f_m_l_1_1_transform.html">Transform</a>&gt;(entity);</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>                <span class="keyword">auto</span> &amp;spin = coordinator.getComponent&lt;<a class="code hl_struct" href="struct_s_f_m_l_1_1_spin.html">Spin</a>&gt;(entity);</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>                transform.rotation += spin.speed;</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>            }</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        }</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    };</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>}</div>
-<div class="ttc" id="aclass_s_f_m_l_1_1_spin_sprite_html"><div class="ttname"><a href="class_s_f_m_l_1_1_spin_sprite.html">SFML::SpinSprite</a></div><div class="ttdef"><b>Definition:</b> SpinSprite.hpp:14</div></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="class_s_f_m_l_1_1_spin_sprite.html">   17</a></span>    <span class="keyword">class </span><a class="code hl_class" href="class_s_f_m_l_1_1_spin_sprite.html">SpinSprite</a> : <span class="keyword">public</span> ECS::System {</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="class_s_f_m_l_1_1_spin_sprite.html#adb30362a78b5aa2ef4d5ae5aa0c1a506">   25</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="class_s_f_m_l_1_1_spin_sprite.html#adb30362a78b5aa2ef4d5ae5aa0c1a506">update</a>(ECS::Coordinator &amp;coordinator) {</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>            <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;entity : entities) {</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>                std::cout &lt;&lt; <span class="stringliteral">&quot;Entity: &quot;</span> &lt;&lt; entity &lt;&lt; std::endl;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>                <span class="keyword">auto</span> &amp;transform = coordinator.getComponent&lt;<a class="code hl_struct" href="struct_s_f_m_l_1_1_transform.html">Transform</a>&gt;(entity);</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>                <span class="keyword">auto</span> &amp;spin = coordinator.getComponent&lt;<a class="code hl_struct" href="struct_s_f_m_l_1_1_spin.html">Spin</a>&gt;(entity);</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>                transform.rotation += spin.speed;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>            }</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        }</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    };</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>}</div>
+<div class="ttc" id="aclass_s_f_m_l_1_1_spin_sprite_html"><div class="ttname"><a href="class_s_f_m_l_1_1_spin_sprite.html">SFML::SpinSprite</a></div><div class="ttdoc">System that spins all sprites with a Spin component and a Transform component.</div><div class="ttdef"><b>Definition:</b> SpinSprite.hpp:17</div></div>
+<div class="ttc" id="aclass_s_f_m_l_1_1_spin_sprite_html_adb30362a78b5aa2ef4d5ae5aa0c1a506"><div class="ttname"><a href="class_s_f_m_l_1_1_spin_sprite.html#adb30362a78b5aa2ef4d5ae5aa0c1a506">SFML::SpinSprite::update</a></div><div class="ttdeci">void update(ECS::Coordinator &amp;coordinator)</div><div class="ttdoc">Function that spins all sprites with a Spin component and a Transform component.</div><div class="ttdef"><b>Definition:</b> SpinSprite.hpp:25</div></div>
 <div class="ttc" id="astruct_s_f_m_l_1_1_spin_html"><div class="ttname"><a href="struct_s_f_m_l_1_1_spin.html">SFML::Spin</a></div><div class="ttdef"><b>Definition:</b> Spin.hpp:4</div></div>
 <div class="ttc" id="astruct_s_f_m_l_1_1_transform_html"><div class="ttname"><a href="struct_s_f_m_l_1_1_transform.html">SFML::Transform</a></div><div class="ttdef"><b>Definition:</b> Transform.hpp:6</div></div>
 </div><!-- fragment --></div><!-- contents -->

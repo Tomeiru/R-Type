@@ -84,32 +84,33 @@ $(function() {
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;../component/MusicReference.hpp&quot;</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">namespace </span>SFML {</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="class_s_f_m_l_1_1_play_music.html">    9</a></span>    <span class="keyword">class </span><a class="code hl_class" href="class_s_f_m_l_1_1_play_music.html">PlayMusic</a> : <span class="keyword">public</span> ECS::System {</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>        <span class="keywordtype">void</span> update(ECS::Coordinator &amp;coordinator) {</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>            <span class="keyword">auto</span> music_manager = coordinator.getResource&lt;SFML::MusicManager&gt;();</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>            <span class="keywordflow">if</span> (!music_manager-&gt;isEnabled())</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>                <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>            <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;entity: entities) {</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>                <span class="keyword">auto</span> &amp;music_ref = coordinator.getComponent&lt;<a class="code hl_struct" href="struct_s_f_m_l_1_1_music_reference.html">MusicReference</a>&gt;(entity);</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>                <span class="keyword">auto</span> music = music_manager-&gt;getMusic(music_ref.id);</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>                <span class="keywordflow">if</span> (!music_ref.first || music-&gt;getStatus() == music_ref.status) {</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>                    music-&gt;updateStatus();</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>                    <span class="keywordflow">continue</span>;</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>                }</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>                <span class="keywordflow">switch</span> (music_ref.status) {</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>                    <span class="keywordflow">case</span> (Music::Playing): music-&gt;play(); <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>                    <span class="keywordflow">case</span> (Music::Stopped): music-&gt;stop(); <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>                    <span class="keywordflow">default</span>: music-&gt;pause();</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>                }</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>                music_ref.first = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>            }</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>        }</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    };</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>}</div>
-<div class="ttc" id="aclass_s_f_m_l_1_1_play_music_html"><div class="ttname"><a href="class_s_f_m_l_1_1_play_music.html">SFML::PlayMusic</a></div><div class="ttdef"><b>Definition:</b> PlayMusic.hpp:9</div></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="class_s_f_m_l_1_1_play_music.html">   12</a></span>    <span class="keyword">class </span><a class="code hl_class" href="class_s_f_m_l_1_1_play_music.html">PlayMusic</a> : <span class="keyword">public</span> ECS::System {</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="class_s_f_m_l_1_1_play_music.html#a50ceb8dff8b57fecd31f57c36ef9d8cc">   19</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="class_s_f_m_l_1_1_play_music.html#a50ceb8dff8b57fecd31f57c36ef9d8cc">update</a>(ECS::Coordinator &amp;coordinator) {</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>            <span class="keyword">auto</span> music_manager = coordinator.getResource&lt;SFML::MusicManager&gt;();</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>            <span class="keywordflow">if</span> (!music_manager-&gt;isEnabled())</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>                <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>            <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;entity: entities) {</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>                <span class="keyword">auto</span> &amp;music_ref = coordinator.getComponent&lt;<a class="code hl_struct" href="struct_s_f_m_l_1_1_music_reference.html">MusicReference</a>&gt;(entity);</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>                <span class="keyword">auto</span> music = music_manager-&gt;getMusic(music_ref.id);</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>                <span class="keywordflow">if</span> (!music_ref.first || music-&gt;getStatus() == music_ref.status) {</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>                    music-&gt;updateStatus();</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>                    <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>                }</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>                <span class="keywordflow">switch</span> (music_ref.status) {</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>                    <span class="keywordflow">case</span> (Music::Playing): music-&gt;play(); <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>                    <span class="keywordflow">case</span> (Music::Stopped): music-&gt;stop(); <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>                    <span class="keywordflow">default</span>: music-&gt;pause();</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>                }</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>                music_ref.first = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>            }</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        }</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    };</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>}</div>
+<div class="ttc" id="aclass_s_f_m_l_1_1_play_music_html"><div class="ttname"><a href="class_s_f_m_l_1_1_play_music.html">SFML::PlayMusic</a></div><div class="ttdoc">System that plays all musics.</div><div class="ttdef"><b>Definition:</b> PlayMusic.hpp:12</div></div>
+<div class="ttc" id="aclass_s_f_m_l_1_1_play_music_html_a50ceb8dff8b57fecd31f57c36ef9d8cc"><div class="ttname"><a href="class_s_f_m_l_1_1_play_music.html#a50ceb8dff8b57fecd31f57c36ef9d8cc">SFML::PlayMusic::update</a></div><div class="ttdeci">void update(ECS::Coordinator &amp;coordinator)</div><div class="ttdoc">Function that plays all musics.</div><div class="ttdef"><b>Definition:</b> PlayMusic.hpp:19</div></div>
 <div class="ttc" id="astruct_s_f_m_l_1_1_music_reference_html"><div class="ttname"><a href="struct_s_f_m_l_1_1_music_reference.html">SFML::MusicReference</a></div><div class="ttdef"><b>Definition:</b> MusicReference.hpp:7</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

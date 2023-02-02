@@ -85,20 +85,21 @@ $(function() {
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;../component/HoverTint.hpp&quot;</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">namespace </span>SFML {</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="class_s_f_m_l_1_1_update_hover_tint.html">   10</a></span>    <span class="keyword">class </span><a class="code hl_class" href="class_s_f_m_l_1_1_update_hover_tint.html">UpdateHoverTint</a> : <span class="keyword">public</span> ECS::System {</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>        <span class="keywordtype">void</span> update(ECS::Coordinator &amp;coordinator) {</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>            <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;entity: entities) {</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>                <span class="keyword">auto</span> &amp;hover = coordinator.getComponent&lt;<a class="code hl_struct" href="struct_s_f_m_l_1_1_hover.html">Hover</a>&gt;(entity);</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>                <span class="keyword">auto</span> &amp;hoverTint = coordinator.getComponent&lt;<a class="code hl_struct" href="struct_s_f_m_l_1_1_hover_tint.html">HoverTint</a>&gt;(entity);</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>                <span class="keyword">auto</span> &amp;tint = coordinator.getComponent&lt;<a class="code hl_struct" href="struct_s_f_m_l_1_1_tint.html">Tint</a>&gt;(entity);</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>                tint.id = hover.hovered ? hoverTint.on_id : hoverTint.off_id;</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>            }</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        }</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    };</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>}</div>
-<div class="ttc" id="aclass_s_f_m_l_1_1_update_hover_tint_html"><div class="ttname"><a href="class_s_f_m_l_1_1_update_hover_tint.html">SFML::UpdateHoverTint</a></div><div class="ttdef"><b>Definition:</b> UpdateHoverTint.hpp:10</div></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="class_s_f_m_l_1_1_update_hover_tint.html">   13</a></span>    <span class="keyword">class </span><a class="code hl_class" href="class_s_f_m_l_1_1_update_hover_tint.html">UpdateHoverTint</a> : <span class="keyword">public</span> ECS::System {</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="class_s_f_m_l_1_1_update_hover_tint.html#a675fa7dda56420f1bd0758b0225dcbde">   20</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="class_s_f_m_l_1_1_update_hover_tint.html#a675fa7dda56420f1bd0758b0225dcbde">update</a>(ECS::Coordinator &amp;coordinator) {</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>            <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;entity: entities) {</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>                <span class="keyword">auto</span> &amp;hover = coordinator.getComponent&lt;<a class="code hl_struct" href="struct_s_f_m_l_1_1_hover.html">Hover</a>&gt;(entity);</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>                <span class="keyword">auto</span> &amp;hoverTint = coordinator.getComponent&lt;<a class="code hl_struct" href="struct_s_f_m_l_1_1_hover_tint.html">HoverTint</a>&gt;(entity);</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>                <span class="keyword">auto</span> &amp;tint = coordinator.getComponent&lt;<a class="code hl_struct" href="struct_s_f_m_l_1_1_tint.html">Tint</a>&gt;(entity);</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>                tint.id = hover.hovered ? hoverTint.on_id : hoverTint.off_id;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>            }</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        }</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    };</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>}</div>
+<div class="ttc" id="aclass_s_f_m_l_1_1_update_hover_tint_html"><div class="ttname"><a href="class_s_f_m_l_1_1_update_hover_tint.html">SFML::UpdateHoverTint</a></div><div class="ttdoc">System that updates the tint of all entities with a HoverTint component, a Hover component and a Tint...</div><div class="ttdef"><b>Definition:</b> UpdateHoverTint.hpp:13</div></div>
+<div class="ttc" id="aclass_s_f_m_l_1_1_update_hover_tint_html_a675fa7dda56420f1bd0758b0225dcbde"><div class="ttname"><a href="class_s_f_m_l_1_1_update_hover_tint.html#a675fa7dda56420f1bd0758b0225dcbde">SFML::UpdateHoverTint::update</a></div><div class="ttdeci">void update(ECS::Coordinator &amp;coordinator)</div><div class="ttdoc">Function that updates the tint of all entities with a HoverTint component, a Hover component and a Ti...</div><div class="ttdef"><b>Definition:</b> UpdateHoverTint.hpp:20</div></div>
 <div class="ttc" id="astruct_s_f_m_l_1_1_hover_html"><div class="ttname"><a href="struct_s_f_m_l_1_1_hover.html">SFML::Hover</a></div><div class="ttdef"><b>Definition:</b> Hover.hpp:4</div></div>
 <div class="ttc" id="astruct_s_f_m_l_1_1_hover_tint_html"><div class="ttname"><a href="struct_s_f_m_l_1_1_hover_tint.html">SFML::HoverTint</a></div><div class="ttdef"><b>Definition:</b> HoverTint.hpp:7</div></div>
 <div class="ttc" id="astruct_s_f_m_l_1_1_tint_html"><div class="ttname"><a href="struct_s_f_m_l_1_1_tint.html">SFML::Tint</a></div><div class="ttdef"><b>Definition:</b> Tint.hpp:7</div></div>
