@@ -8,8 +8,16 @@
 #include "../component/Outline.hpp"
 
 namespace SFML {
+    /**
+     * @brief System that sets the outline of all texts
+     */
     class OutlineText : public ECS::System {
     public:
+        /**
+         * @brief Function that sets the outline of all texts
+         * 
+         * @param coordinator Reference to the ecs coordinator
+         */
         void update(ECS::Coordinator &coordinator) {
             auto text_manager = coordinator.getResource<SFML::TextManager>();
             auto color_manager = coordinator.getResource<SFML::ColorManager>();

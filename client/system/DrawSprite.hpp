@@ -7,8 +7,16 @@
 #include "../sfml/Window.hpp"
 
 namespace SFML {
+    /**
+     * @brief System that draws all sprites
+     */
     class DrawSprite : public ECS::System {
     public:
+        /**
+         * @brief Function that draws all sprites
+         * 
+         * @param coordinator Reference to the ecs coordinator
+         */
         void update(ECS::Coordinator &coordinator) {
             auto sprite_manager = coordinator.getResource<SFML::SpriteManager>();
             auto window = coordinator.getResource<SFML::Window>();

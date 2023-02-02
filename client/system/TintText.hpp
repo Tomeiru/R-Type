@@ -9,6 +9,9 @@
 #include "../sfml/ColorManager.hpp"
 
 namespace SFML {
+    /**
+     * @brief System that sets the tint of all texts with a Tint component
+     */
     class TintText : public ECS::System {
     public:
         void update(ECS::Coordinator &coordinator) {

@@ -7,8 +7,16 @@
 #include "../sfml/TextManager.hpp"
 
 namespace SFML {
+    /**
+     * @brief System that draws all texts
+     */
     class DrawText : public ECS::System {
     public:
+        /**
+         * @brief Function that draws all texts
+         * 
+         * @param coordinator Reference to the ecs coordinator
+         */
         void update(ECS::Coordinator &coordinator) {
             auto text_manager = coordinator.getResource<SFML::TextManager>();
             auto window = coordinator.getResource<SFML::Window>();

@@ -6,8 +6,16 @@
 #include "../component/MusicReference.hpp"
 
 namespace SFML {
+    /**
+     * @brief System that plays all musics
+     */
     class PlayMusic : public ECS::System {
     public:
+        /**
+         * @brief Function that plays all musics
+         * 
+         * @param coordinator Reference to the ecs coordinator
+         */
         void update(ECS::Coordinator &coordinator) {
             auto music_manager = coordinator.getResource<SFML::MusicManager>();
 
