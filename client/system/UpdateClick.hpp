@@ -7,8 +7,16 @@
 #include "../component/Clickable.hpp"
 
 namespace SFML {
+    /**
+     * @brief System that updates the click state of entities with a Clickable component
+     */
     class UpdateClick : public ECS::System {
     public:
+        /**
+         * @brief Function that updates the click state of entities with a Clickable component
+         * 
+         * @param coordinator Reference to the ecs coordinator
+         */
         void update(ECS::Coordinator &coordinator) {
             if (!Mouse::isButtonPressed(Mouse::Left))
                 return;

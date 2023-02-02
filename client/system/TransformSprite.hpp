@@ -8,8 +8,17 @@
 #include "../component/Hitbox.hpp"
 
 namespace SFML {
+    /**
+     * @brief System that transforms all sprites with a Transform component
+     */
     class TransformSprite : public ECS::System {
     public:
+        /**
+         * @brief Function that transforms all sprites with a Transform component
+         * 
+         * @param coordinator Reference to the ecs coordinator
+         * 
+         */
         void update(ECS::Coordinator &coordinator) {
             auto sprite_manager = coordinator.getResource<SFML::SpriteManager>();
             for (const auto &entity : entities) {

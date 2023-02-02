@@ -5,8 +5,16 @@
 #include "../component/MovementKeys.hpp"
 
 namespace SFML {
+    /**
+     * @brief System that updates the position of all entities with a MovementKeys component and a Transform component
+     */
     class UpdateKeysMovements : public ECS::System {
     public:
+        /**
+         * @brief Function that updates the position of all entities with a MovementKeys component and a Transform component
+         * 
+         * @param coordinator Reference to the ecs coordinator
+         */
         void update(ECS::Coordinator &coordinator) {
             for (const auto &entity: entities) {
                 float x_movements = 0;

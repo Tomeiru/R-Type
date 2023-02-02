@@ -6,8 +6,16 @@
 #include "../component/SoundReference.hpp"
 
 namespace SFML {
+    /**
+     * @brief System that plays all sounds
+     */
     class PlaySound : public ECS::System {
     public:
+        /**
+         * @brief Function that plays all sounds
+         * 
+         * @param coordinator Reference to the ecs coordinator
+         */
         void update(ECS::Coordinator &coordinator) {
             auto sound_manager = coordinator.getResource<SFML::SoundManager>();
 
