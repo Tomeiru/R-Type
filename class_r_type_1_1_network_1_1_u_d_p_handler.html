@@ -82,9 +82,9 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a9291b5762293fdd09825215915ae5edf"><td class="memItemLeft" align="right" valign="top"><a id="a9291b5762293fdd09825215915ae5edf" name="a9291b5762293fdd09825215915ae5edf"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>UDPHandler</b> (std::uint16_t port, const <a class="el" href="class_r_type_1_1_network_1_1_package_manager.html">Network::PackageManager</a> &amp;package_manager)</td></tr>
-<tr class="separator:a9291b5762293fdd09825215915ae5edf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0711137a81483e8efce570a51bebe74"><td class="memItemLeft" align="right" valign="top"><a id="ac0711137a81483e8efce570a51bebe74" name="ac0711137a81483e8efce570a51bebe74"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>UDPHandler</b> (std::uint16_t port, std::shared_ptr&lt; <a class="el" href="class_r_type_1_1_network_1_1_package_manager.html">Network::PackageManager</a> &gt; package_manager)</td></tr>
+<tr class="separator:ac0711137a81483e8efce570a51bebe74"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a669f02053a5812632dce6b13e2227568"><td class="memItemLeft" align="right" valign="top"><a id="a669f02053a5812632dce6b13e2227568" name="a669f02053a5812632dce6b13e2227568"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>startHandler</b> ()</td></tr>
 <tr class="separator:a669f02053a5812632dce6b13e2227568"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -98,9 +98,9 @@ template&lt;typename PayloadT &gt; </td></tr>
 <tr class="memitem:ad07941346b2da68a840bcf5eb9545e13"><td class="memItemLeft" align="right" valign="top"><a id="ad07941346b2da68a840bcf5eb9545e13" name="ad07941346b2da68a840bcf5eb9545e13"></a>
 std::uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>receive</b> ()</td></tr>
 <tr class="separator:ad07941346b2da68a840bcf5eb9545e13"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a83fa6215b53b3eca2e7478be29e27936"><td class="memItemLeft" align="right" valign="top"><a id="a83fa6215b53b3eca2e7478be29e27936" name="a83fa6215b53b3eca2e7478be29e27936"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>send</b> (const void *data, std::size_t size, const sf::IpAddress &amp;address, uint16_t port)</td></tr>
-<tr class="separator:a83fa6215b53b3eca2e7478be29e27936"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21ba82bd3706efb6f69ebd4ffeab6fa4"><td class="memItemLeft" align="right" valign="top"><a id="a21ba82bd3706efb6f69ebd4ffeab6fa4" name="a21ba82bd3706efb6f69ebd4ffeab6fa4"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>send</b> (const void *data, std::size_t size, const SFML::IpAddress &amp;address, uint16_t port)</td></tr>
+<tr class="separator:a21ba82bd3706efb6f69ebd4ffeab6fa4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab25dd57f54ce3e9e781199107b08f0c4"><td class="memTemplParams" colspan="2"><a id="ab25dd57f54ce3e9e781199107b08f0c4" name="ab25dd57f54ce3e9e781199107b08f0c4"></a>
 template&lt;typename PayloadT &gt; </td></tr>
 <tr class="memitem:ab25dd57f54ce3e9e781199107b08f0c4"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_r_type_1_1_network_1_1_packet.html">Network::Packet</a>&lt; PayloadT &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>createPacket</b> (PayloadT &amp;payload)</td></tr>
