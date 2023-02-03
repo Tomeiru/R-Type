@@ -21,11 +21,11 @@ set (SRC_COMMON
 
 set(SRC_CLIENT
         client/main.cpp
-        )
+        client/Client.hpp)
 
 set(SRC_SERVER
         server/main.cpp
-        server/PlayerManager.hpp common/UDPClient.hpp server/Types.hpp)
+        server/PlayerManager.hpp common/UDPClient.hpp server/Types.hpp server/Server.hpp)
 
 if(NOT EXISTS ${CMAKE_BINARY_DIR}/vcpkg-2023.01.09/vcpkg)
     message(STATUS "VCPKG n'est pas installé, téléchargement en cours...")
