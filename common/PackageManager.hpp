@@ -2,6 +2,8 @@
 
 #include <unordered_map>
 #include <string>
+#include <cstring>
+#include <memory>
 #include "RuntimeException.hpp"
 
 #define NETWORK_MAGIC 0xDEADBEEF
@@ -51,11 +53,39 @@ namespace RType::Network {
             return (type_name->second);
         }
 
+        template<typename PayloadT>
+        char getTypeId() const {
+            std::string name = typeid(PayloadT).name();
+            auto type_id = _typename_to_id.find(name);
+            if (type_id == _typename_to_id.end())
+                throw RuntimeException("PackageManager::getTypeId", "Packet Type has not been registered yet");
+            return (type_id->second);
+        }
+
         char getTypeId(const std::string &name) const {
             auto type_id = _typename_to_id.find(name);
             if (type_id == _typename_to_id.end())
                 throw RuntimeException("PackageManager::getTypeId", "Packet Type has not been registered yet");
             return (type_id->second);
+        }
+
+        std::shared_ptr<Header> decodeHeader(const std::string &data) {
+            Header header{};
+            char *raw_data = const_cast<char *>(data.c_str());
+
+            std::memcpy(&header, raw_data, sizeof(Header));
+            if (header.magic != NETWORK_MAGIC || _id_to_typename.find(header.id) ==_id_to_typename.end())
+                return nullptr;
+            return (std::make_shared<Header>(header));
+        }
+
+        template<typename PayloadT>
+        std::shared_ptr<PayloadT> decodeContent(const std::string &data) {
+            PayloadT payload;
+            char *raw_data = const_cast<char *>(data.c_str()) + sizeof(Header);
+
+            std::memcpy(&payload, raw_data, sizeof(PayloadT));
+            return (std::make_shared<PayloadT>(payload));
         }
 
     private:
