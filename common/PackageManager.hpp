@@ -9,20 +9,36 @@
 #define NETWORK_MAGIC 0xDEADBEEF
 
 namespace RType::Network {
+    /**
+     * @brief Header is a struct that represents a packet header
+     */
     struct Header {
         unsigned int magic;
         char id;
         unsigned int created_at;
     };
 
+    /**
+     * @brief Packet is a struct that represents a packet
+     * @tparam PayloadT The type of the payload
+     */
     template<typename PayloadT>
     struct Packet {
         Header header;
         PayloadT payload;
     };
 
+    /**
+     * @brief PackageManager is a class that manages the packets
+     */
     class PackageManager {
     public:
+        /**
+         * @brief Creates a packet of PayloadT type
+         * @tparam PayloadT The type of the payload
+         * @param payload The payload of the packet
+         * @return The packet
+         */
         template<typename PayloadT>
         Packet<PayloadT> createPacket(PayloadT &payload) {
             std::string data_type = typeid(PayloadT).name();
@@ -34,6 +50,10 @@ namespace RType::Network {
             return packet;
         }
 
+        /**
+         * @brief Registers a packet Type to the package manager
+         * @tparam PayloadT The type of the payload
+         */
         template<typename PayloadT>
         void registerPacket() {
             static unsigned int id = 0;
@@ -46,6 +66,11 @@ namespace RType::Network {
             id++;
         }
 
+        /**
+         * @brief Gets the type name of a packet from its TypeId
+         * @param id The id of the packet
+         * @return The type name of the packet
+         */
         std::string getTypeName(char id) const {
             auto type_name =  _id_to_typename.find(id);
             if (type_name == _id_to_typename.end())
@@ -53,6 +78,11 @@ namespace RType::Network {
             return (type_name->second);
         }
 
+        /**
+         * @brief Gets the TypeId of a packet from its type
+         * @tparam PayloadT The type of the payload
+         * @return The id of the packet
+         */
         template<typename PayloadT>
         char getTypeId() const {
             std::string name = typeid(PayloadT).name();
@@ -62,6 +92,11 @@ namespace RType::Network {
             return (type_id->second);
         }
 
+        /**
+         * @brief Gets the TypeId of a packet from its type name
+         * @param name The name of the packet
+         * @return The id of the packet
+         */
         char getTypeId(const std::string &name) const {
             auto type_id = _typename_to_id.find(name);
             if (type_id == _typename_to_id.end())
@@ -69,6 +104,11 @@ namespace RType::Network {
             return (type_id->second);
         }
 
+        /**
+         * @brief Decodes the packet header from its data in string
+         * @param data The data of the packet
+         * @return The header of the packet
+         */
         std::shared_ptr<Header> decodeHeader(const std::string &data) {
             Header header{};
             char *raw_data = const_cast<char *>(data.c_str());
@@ -79,6 +119,12 @@ namespace RType::Network {
             return (std::make_shared<Header>(header));
         }
 
+        /**
+         * @brief Decodes the packet payload from its data in string
+         * @tparam PayloadT The type of the payload
+         * @param data The data of the packet
+         * @return The payload of the packet
+         */
         template<typename PayloadT>
         std::shared_ptr<PayloadT> decodeContent(const std::string &data) {
             PayloadT payload;
