@@ -7,6 +7,8 @@
 #include <memory>
 #include "PackageManager.hpp"
 #include "ThreadSafeQueue.hpp"
+#include "UDPClient.hpp"
+#include "ReceivedPacket.hpp"
 
 namespace RType::Network {
     class UDPHandler {
@@ -46,7 +48,8 @@ namespace RType::Network {
                 return status;
             }
             std::string data_received(data, received);
-            _queue.push(data);
+            ReceivedPacket received_packet(sender, port, data_received);
+            _queue.push(received_packet);
             std::cout << "A packed has been received" << std::endl;
             return received;
         }
@@ -61,12 +64,20 @@ namespace RType::Network {
             return _package_manager->createPacket(payload);
         }
 
+        bool isQueueEmpty() {
+            return (_queue.empty());
+        };
+
+        ReceivedPacket popElement() {
+            return (_queue.pop());
+        }
+
     private:
         std::shared_ptr<Network::PackageManager> _package_manager;
         std::thread _thread;
         SFML::UDPSocket _socket;
         std::uint16_t _port;
-        Network::ThreadSafeQueue<std::string> _queue;
+        Network::ThreadSafeQueue<ReceivedPacket> _queue;
         bool _started;
     };
 }
