@@ -79,19 +79,130 @@ $(function() {
   <div class="headertitle"><div class="title">RType::Network::ThreadSafeQueue&lt; T &gt; Class Template Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p><a class="el" href="class_r_type_1_1_network_1_1_thread_safe_queue.html" title="ThreadSafeQueue is a thread-safe queue.">ThreadSafeQueue</a> is a thread-safe queue.  
+ <a href="class_r_type_1_1_network_1_1_thread_safe_queue.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_thread_safe_queue_8hpp_source.html">ThreadSafeQueue.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aafe7cc2e5b6ad6b1e998f28376276c6e"><td class="memItemLeft" align="right" valign="top"><a id="aafe7cc2e5b6ad6b1e998f28376276c6e" name="aafe7cc2e5b6ad6b1e998f28376276c6e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>push</b> (T element)</td></tr>
+<tr class="memitem:aafe7cc2e5b6ad6b1e998f28376276c6e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_type_1_1_network_1_1_thread_safe_queue.html#aafe7cc2e5b6ad6b1e998f28376276c6e">push</a> (T element)</td></tr>
+<tr class="memdesc:aafe7cc2e5b6ad6b1e998f28376276c6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pushes an element in the queue.  <br /></td></tr>
 <tr class="separator:aafe7cc2e5b6ad6b1e998f28376276c6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a754bff0b842ffa50343eb32d54f99192"><td class="memItemLeft" align="right" valign="top"><a id="a754bff0b842ffa50343eb32d54f99192" name="a754bff0b842ffa50343eb32d54f99192"></a>
-T&#160;</td><td class="memItemRight" valign="bottom"><b>pop</b> ()</td></tr>
+<tr class="memitem:a754bff0b842ffa50343eb32d54f99192"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_type_1_1_network_1_1_thread_safe_queue.html#a754bff0b842ffa50343eb32d54f99192">pop</a> ()</td></tr>
+<tr class="memdesc:a754bff0b842ffa50343eb32d54f99192"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pops an element from the queue.  <br /></td></tr>
 <tr class="separator:a754bff0b842ffa50343eb32d54f99192"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad8bb00d593830af651ee0efbad0128f3"><td class="memItemLeft" align="right" valign="top"><a id="ad8bb00d593830af651ee0efbad0128f3" name="ad8bb00d593830af651ee0efbad0128f3"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>empty</b> ()</td></tr>
+<tr class="memitem:ad8bb00d593830af651ee0efbad0128f3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_type_1_1_network_1_1_thread_safe_queue.html#ad8bb00d593830af651ee0efbad0128f3">empty</a> ()</td></tr>
+<tr class="memdesc:ad8bb00d593830af651ee0efbad0128f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the queue is empty.  <br /></td></tr>
 <tr class="separator:ad8bb00d593830af651ee0efbad0128f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
+class RType::Network::ThreadSafeQueue&lt; T &gt;</div><p><a class="el" href="class_r_type_1_1_network_1_1_thread_safe_queue.html" title="ThreadSafeQueue is a thread-safe queue.">ThreadSafeQueue</a> is a thread-safe queue. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The type of the elements in the queue </td></tr>
+  </table>
+  </dd>
+</dl>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="ad8bb00d593830af651ee0efbad0128f3" name="ad8bb00d593830af651ee0efbad0128f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8bb00d593830af651ee0efbad0128f3">&#9670;&#160;</a></span>empty()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="class_r_type_1_1_network_1_1_thread_safe_queue.html">RType::Network::ThreadSafeQueue</a>&lt; T &gt;::empty </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if the queue is empty. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if the queue is empty, false otherwise </dd></dl>
+
+</div>
+</div>
+<a id="a754bff0b842ffa50343eb32d54f99192" name="a754bff0b842ffa50343eb32d54f99192"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a754bff0b842ffa50343eb32d54f99192">&#9670;&#160;</a></span>pop()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T <a class="el" href="class_r_type_1_1_network_1_1_thread_safe_queue.html">RType::Network::ThreadSafeQueue</a>&lt; T &gt;::pop </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pops an element from the queue. </p>
+<dl class="section return"><dt>Returns</dt><dd>The element popped </dd></dl>
+
+</div>
+</div>
+<a id="aafe7cc2e5b6ad6b1e998f28376276c6e" name="aafe7cc2e5b6ad6b1e998f28376276c6e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aafe7cc2e5b6ad6b1e998f28376276c6e">&#9670;&#160;</a></span>push()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_r_type_1_1_network_1_1_thread_safe_queue.html">RType::Network::ThreadSafeQueue</a>&lt; T &gt;::push </td>
+          <td>(</td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>element</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pushes an element in the queue. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">element</td><td>The element to push </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>common/<a class="el" href="_thread_safe_queue_8hpp_source.html">ThreadSafeQueue.hpp</a></li>
 </ul>

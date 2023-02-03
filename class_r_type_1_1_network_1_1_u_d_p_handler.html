@@ -82,30 +82,310 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ac0711137a81483e8efce570a51bebe74"><td class="memItemLeft" align="right" valign="top"><a id="ac0711137a81483e8efce570a51bebe74" name="ac0711137a81483e8efce570a51bebe74"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>UDPHandler</b> (std::uint16_t port, std::shared_ptr&lt; <a class="el" href="class_r_type_1_1_network_1_1_package_manager.html">Network::PackageManager</a> &gt; package_manager)</td></tr>
-<tr class="separator:ac0711137a81483e8efce570a51bebe74"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a365a380f933bd187b64c8f9879191474"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_type_1_1_network_1_1_u_d_p_handler.html#a365a380f933bd187b64c8f9879191474">UDPHandler</a> (std::uint16_t port, std::shared_ptr&lt; <a class="el" href="class_r_type_1_1_network_1_1_package_manager.html">Network::PackageManager</a> &gt; &amp;package_manager)</td></tr>
+<tr class="memdesc:a365a380f933bd187b64c8f9879191474"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="class_r_type_1_1_network_1_1_u_d_p_handler.html">UDPHandler</a> object.  <br /></td></tr>
+<tr class="separator:a365a380f933bd187b64c8f9879191474"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a669f02053a5812632dce6b13e2227568"><td class="memItemLeft" align="right" valign="top"><a id="a669f02053a5812632dce6b13e2227568" name="a669f02053a5812632dce6b13e2227568"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>startHandler</b> ()</td></tr>
 <tr class="separator:a669f02053a5812632dce6b13e2227568"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aefce9f7c8b435fcabf8abb1369f2a96e"><td class="memItemLeft" align="right" valign="top"><a id="aefce9f7c8b435fcabf8abb1369f2a96e" name="aefce9f7c8b435fcabf8abb1369f2a96e"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>stopHandler</b> ()</td></tr>
+<tr class="memdesc:aefce9f7c8b435fcabf8abb1369f2a96e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stops the handler. <br /></td></tr>
 <tr class="separator:aefce9f7c8b435fcabf8abb1369f2a96e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a38e668daec2cd74701d50a4f866384a6"><td class="memTemplParams" colspan="2"><a id="a38e668daec2cd74701d50a4f866384a6" name="a38e668daec2cd74701d50a4f866384a6"></a>
-template&lt;typename PayloadT &gt; </td></tr>
-<tr class="memitem:a38e668daec2cd74701d50a4f866384a6"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>registerPacket</b> ()</td></tr>
+<tr class="memitem:a38e668daec2cd74701d50a4f866384a6"><td class="memTemplParams" colspan="2">template&lt;typename PayloadT &gt; </td></tr>
+<tr class="memitem:a38e668daec2cd74701d50a4f866384a6"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_r_type_1_1_network_1_1_u_d_p_handler.html#a38e668daec2cd74701d50a4f866384a6">registerPacket</a> ()</td></tr>
+<tr class="memdesc:a38e668daec2cd74701d50a4f866384a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers a packet to the package manager.  <br /></td></tr>
 <tr class="separator:a38e668daec2cd74701d50a4f866384a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad07941346b2da68a840bcf5eb9545e13"><td class="memItemLeft" align="right" valign="top"><a id="ad07941346b2da68a840bcf5eb9545e13" name="ad07941346b2da68a840bcf5eb9545e13"></a>
-std::uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>receive</b> ()</td></tr>
+<tr class="memitem:ad07941346b2da68a840bcf5eb9545e13"><td class="memItemLeft" align="right" valign="top">std::uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_type_1_1_network_1_1_u_d_p_handler.html#ad07941346b2da68a840bcf5eb9545e13">receive</a> ()</td></tr>
+<tr class="memdesc:ad07941346b2da68a840bcf5eb9545e13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Receives a packet from the network.  <br /></td></tr>
 <tr class="separator:ad07941346b2da68a840bcf5eb9545e13"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a21ba82bd3706efb6f69ebd4ffeab6fa4"><td class="memItemLeft" align="right" valign="top"><a id="a21ba82bd3706efb6f69ebd4ffeab6fa4" name="a21ba82bd3706efb6f69ebd4ffeab6fa4"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>send</b> (const void *data, std::size_t size, const SFML::IpAddress &amp;address, uint16_t port)</td></tr>
+<tr class="memitem:a21ba82bd3706efb6f69ebd4ffeab6fa4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_type_1_1_network_1_1_u_d_p_handler.html#a21ba82bd3706efb6f69ebd4ffeab6fa4">send</a> (const void *data, std::size_t size, const SFML::IpAddress &amp;address, uint16_t port)</td></tr>
+<tr class="memdesc:a21ba82bd3706efb6f69ebd4ffeab6fa4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends a packet to the network.  <br /></td></tr>
 <tr class="separator:a21ba82bd3706efb6f69ebd4ffeab6fa4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab25dd57f54ce3e9e781199107b08f0c4"><td class="memTemplParams" colspan="2"><a id="ab25dd57f54ce3e9e781199107b08f0c4" name="ab25dd57f54ce3e9e781199107b08f0c4"></a>
-template&lt;typename PayloadT &gt; </td></tr>
-<tr class="memitem:ab25dd57f54ce3e9e781199107b08f0c4"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_r_type_1_1_network_1_1_packet.html">Network::Packet</a>&lt; PayloadT &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>createPacket</b> (PayloadT &amp;payload)</td></tr>
+<tr class="memitem:ab25dd57f54ce3e9e781199107b08f0c4"><td class="memTemplParams" colspan="2">template&lt;typename PayloadT &gt; </td></tr>
+<tr class="memitem:ab25dd57f54ce3e9e781199107b08f0c4"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_r_type_1_1_network_1_1_packet.html">Network::Packet</a>&lt; PayloadT &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_r_type_1_1_network_1_1_u_d_p_handler.html#ab25dd57f54ce3e9e781199107b08f0c4">createPacket</a> (PayloadT &amp;payload)</td></tr>
+<tr class="memdesc:ab25dd57f54ce3e9e781199107b08f0c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a packet.  <br /></td></tr>
 <tr class="separator:ab25dd57f54ce3e9e781199107b08f0c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63461f2275831b2f286e30f53e37fc13"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_type_1_1_network_1_1_u_d_p_handler.html#a63461f2275831b2f286e30f53e37fc13">isQueueEmpty</a> ()</td></tr>
+<tr class="memdesc:a63461f2275831b2f286e30f53e37fc13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the queue is empty.  <br /></td></tr>
+<tr class="separator:a63461f2275831b2f286e30f53e37fc13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a105dc422583f7423ebb8a3d75c66924e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_r_type_1_1_network_1_1_received_packet.html">ReceivedPacket</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_type_1_1_network_1_1_u_d_p_handler.html#a105dc422583f7423ebb8a3d75c66924e">popElement</a> ()</td></tr>
+<tr class="memdesc:a105dc422583f7423ebb8a3d75c66924e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pops an element from the queue.  <br /></td></tr>
+<tr class="separator:a105dc422583f7423ebb8a3d75c66924e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a365a380f933bd187b64c8f9879191474" name="a365a380f933bd187b64c8f9879191474"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a365a380f933bd187b64c8f9879191474">&#9670;&#160;</a></span>UDPHandler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">RType::Network::UDPHandler::UDPHandler </td>
+          <td>(</td>
+          <td class="paramtype">std::uint16_t&#160;</td>
+          <td class="paramname"><em>port</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="class_r_type_1_1_network_1_1_package_manager.html">Network::PackageManager</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>package_manager</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructs a new <a class="el" href="class_r_type_1_1_network_1_1_u_d_p_handler.html">UDPHandler</a> object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">port</td><td>The port to bind the handler to </td></tr>
+    <tr><td class="paramname">package_manager</td><td>The package manager that will handle the packet registration and creation </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ab25dd57f54ce3e9e781199107b08f0c4" name="ab25dd57f54ce3e9e781199107b08f0c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab25dd57f54ce3e9e781199107b08f0c4">&#9670;&#160;</a></span>createPacket()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename PayloadT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_r_type_1_1_network_1_1_packet.html">Network::Packet</a>&lt; PayloadT &gt; RType::Network::UDPHandler::createPacket </td>
+          <td>(</td>
+          <td class="paramtype">PayloadT &amp;&#160;</td>
+          <td class="paramname"><em>payload</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates a packet. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">PayloadT</td><td>The type of the packet </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">payload</td><td>The payload of the packet </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The packet </dd></dl>
+
+</div>
+</div>
+<a id="a63461f2275831b2f286e30f53e37fc13" name="a63461f2275831b2f286e30f53e37fc13"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63461f2275831b2f286e30f53e37fc13">&#9670;&#160;</a></span>isQueueEmpty()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool RType::Network::UDPHandler::isQueueEmpty </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if the queue is empty. </p>
+<dl class="section return"><dt>Returns</dt><dd>If the queue is empty </dd></dl>
+
+</div>
+</div>
+<a id="a105dc422583f7423ebb8a3d75c66924e" name="a105dc422583f7423ebb8a3d75c66924e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a105dc422583f7423ebb8a3d75c66924e">&#9670;&#160;</a></span>popElement()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_r_type_1_1_network_1_1_received_packet.html">ReceivedPacket</a> RType::Network::UDPHandler::popElement </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pops an element from the queue. </p>
+<dl class="section return"><dt>Returns</dt><dd>The element </dd></dl>
+
+</div>
+</div>
+<a id="ad07941346b2da68a840bcf5eb9545e13" name="ad07941346b2da68a840bcf5eb9545e13"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad07941346b2da68a840bcf5eb9545e13">&#9670;&#160;</a></span>receive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::uint32_t RType::Network::UDPHandler::receive </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Receives a packet from the network. </p>
+<dl class="section return"><dt>Returns</dt><dd>The status of the reception or the size received </dd></dl>
+
+</div>
+</div>
+<a id="a38e668daec2cd74701d50a4f866384a6" name="a38e668daec2cd74701d50a4f866384a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a38e668daec2cd74701d50a4f866384a6">&#9670;&#160;</a></span>registerPacket()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename PayloadT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RType::Network::UDPHandler::registerPacket </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Registers a packet to the package manager. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">PayloadT</td><td>The type of the packet </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a21ba82bd3706efb6f69ebd4ffeab6fa4" name="a21ba82bd3706efb6f69ebd4ffeab6fa4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21ba82bd3706efb6f69ebd4ffeab6fa4">&#9670;&#160;</a></span>send()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RType::Network::UDPHandler::send </td>
+          <td>(</td>
+          <td class="paramtype">const void *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::size_t&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const SFML::IpAddress &amp;&#160;</td>
+          <td class="paramname"><em>address</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>port</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sends a packet to the network. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">PayloadT</td><td>The type of the packet </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">payload</td><td>The payload of the packet </td></tr>
+    <tr><td class="paramname">address</td><td>The address to send the packet to </td></tr>
+    <tr><td class="paramname">port</td><td>The port to send the packet to </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>common/<a class="el" href="_u_d_p_handler_8hpp_source.html">UDPHandler.hpp</a></li>
 </ul>

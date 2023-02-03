@@ -1,12 +1,8 @@
 var searchData=
 [
-  ['textreference_0',['TextReference',['../struct_s_f_m_l_1_1_text_reference.html',1,'SFML']]],
-  ['threadsafequeue_1',['ThreadSafeQueue',['../class_r_type_1_1_network_1_1_thread_safe_queue.html',1,'RType::Network']]],
-  ['threadsafequeue_3c_20std_3a_3astring_20_3e_2',['ThreadSafeQueue&lt; std::string &gt;',['../class_r_type_1_1_network_1_1_thread_safe_queue.html',1,'RType::Network']]],
-  ['tint_3',['Tint',['../struct_s_f_m_l_1_1_tint.html',1,'SFML']]],
-  ['tintsprite_4',['TintSprite',['../class_s_f_m_l_1_1_tint_sprite.html',1,'SFML']]],
-  ['tinttext_5',['TintText',['../class_s_f_m_l_1_1_tint_text.html',1,'SFML']]],
-  ['transform_6',['Transform',['../struct_s_f_m_l_1_1_transform.html',1,'SFML']]],
-  ['transformsprite_7',['TransformSprite',['../class_s_f_m_l_1_1_transform_sprite.html',1,'SFML']]],
-  ['transformtext_8',['TransformText',['../class_s_f_m_l_1_1_transform_text.html',1,'SFML']]]
+  ['soundreference_0',['SoundReference',['../struct_s_f_m_l_1_1_sound_reference.html',1,'SFML']]],
+  ['spin_1',['Spin',['../struct_s_f_m_l_1_1_spin.html',1,'SFML']]],
+  ['spinsprite_2',['SpinSprite',['../class_s_f_m_l_1_1_spin_sprite.html',1,'SFML']]],
+  ['spritereference_3',['SpriteReference',['../struct_s_f_m_l_1_1_sprite_reference.html',1,'SFML']]],
+  ['systemexample_4',['SystemExample',['../class_r_type_1_1_server_1_1_system_example.html',1,'RType::Server::SystemExample'],['../class_r_type_1_1_system_example.html',1,'RType::SystemExample']]]
 ];

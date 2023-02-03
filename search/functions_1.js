@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['hitbox_0',['Hitbox',['../struct_s_f_m_l_1_1_hitbox.html#a49967ce990ff5821f08d01443e9268bd',1,'SFML::Hitbox']]],
-  ['hover_1',['Hover',['../struct_s_f_m_l_1_1_hover.html#a888f9b47c66300b9a8dd6a2c155d5264',1,'SFML::Hover']]],
-  ['hovertint_2',['HoverTint',['../struct_s_f_m_l_1_1_hover_tint.html#ae55ad6ef5373c69acd1990d1d5fe2849',1,'SFML::HoverTint']]]
+  ['decodecontent_0',['decodeContent',['../class_r_type_1_1_network_1_1_package_manager.html#a0ce4f31a2a3ea03d57d537057cb9a51f',1,'RType::Network::PackageManager']]],
+  ['decodeheader_1',['decodeHeader',['../class_r_type_1_1_network_1_1_package_manager.html#a7c9d4ac8b57a317bf40f2e498e9ebac0',1,'RType::Network::PackageManager']]]
 ];

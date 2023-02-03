@@ -1,6 +1,9 @@
 var searchData=
 [
-  ['movementjoystick_0',['MovementJoystick',['../struct_s_f_m_l_1_1_movement_joystick.html#a756330cb8265308cbcc8a2d70e30ef00',1,'SFML::MovementJoystick::MovementJoystick()'],['../struct_s_f_m_l_1_1_movement_joystick.html',1,'SFML::MovementJoystick']]],
-  ['movementkeys_1',['MovementKeys',['../struct_s_f_m_l_1_1_movement_keys.html#a88aa6ebefc6e3520393d00fcc230e58d',1,'SFML::MovementKeys::MovementKeys()'],['../struct_s_f_m_l_1_1_movement_keys.html',1,'SFML::MovementKeys']]],
-  ['musicreference_2',['MusicReference',['../struct_s_f_m_l_1_1_music_reference.html#a34b8c5926c6b74b3db5f8ce8005ad8b8',1,'SFML::MusicReference::MusicReference()'],['../struct_s_f_m_l_1_1_music_reference.html',1,'SFML::MusicReference']]]
+  ['gamestart_0',['GameStart',['../struct_r_type_1_1_packet_1_1_game_start.html',1,'RType::Packet']]],
+  ['getipaddress_1',['getIpAddress',['../class_r_type_1_1_network_1_1_u_d_p_client.html#a732f5c0a90c5403cbfaa95c5d7be507b',1,'RType::Network::UDPClient']]],
+  ['getnbplayerconnected_2',['getNbPlayerConnected',['../class_r_type_1_1_player_manager.html#aa7509188aa4409eb49d923c61e6c5c8a',1,'RType::PlayerManager']]],
+  ['getport_3',['getPort',['../class_r_type_1_1_network_1_1_u_d_p_client.html#aac08f0119c58f751345b743bb512705a',1,'RType::Network::UDPClient']]],
+  ['gettypeid_4',['getTypeId',['../class_r_type_1_1_network_1_1_package_manager.html#a8e09c4cdce8444036e6882563345ebc2',1,'RType::Network::PackageManager::getTypeId() const'],['../class_r_type_1_1_network_1_1_package_manager.html#aec5a31b024d7a9d290698e53fc0b5e69',1,'RType::Network::PackageManager::getTypeId(const std::string &amp;name) const']]],
+  ['gettypename_5',['getTypeName',['../class_r_type_1_1_network_1_1_package_manager.html#aad176f90f589438c0fc5030a10c3ecd0',1,'RType::Network::PackageManager']]]
 ];

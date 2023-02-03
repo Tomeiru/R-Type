@@ -79,24 +79,305 @@ $(function() {
   <div class="headertitle"><div class="title">RType::Network::PackageManager Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p><a class="el" href="class_r_type_1_1_network_1_1_package_manager.html" title="PackageManager is a class that manages the packets.">PackageManager</a> is a class that manages the packets.  
+ <a href="class_r_type_1_1_network_1_1_package_manager.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_package_manager_8hpp_source.html">PackageManager.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad924e984e789f248aa09065e66236e69"><td class="memTemplParams" colspan="2"><a id="ad924e984e789f248aa09065e66236e69" name="ad924e984e789f248aa09065e66236e69"></a>
-template&lt;typename PayloadT &gt; </td></tr>
-<tr class="memitem:ad924e984e789f248aa09065e66236e69"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_r_type_1_1_network_1_1_packet.html">Packet</a>&lt; PayloadT &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>createPacket</b> (PayloadT &amp;payload)</td></tr>
+<tr class="memitem:ad924e984e789f248aa09065e66236e69"><td class="memTemplParams" colspan="2">template&lt;typename PayloadT &gt; </td></tr>
+<tr class="memitem:ad924e984e789f248aa09065e66236e69"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_r_type_1_1_network_1_1_packet.html">Packet</a>&lt; PayloadT &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_r_type_1_1_network_1_1_package_manager.html#ad924e984e789f248aa09065e66236e69">createPacket</a> (PayloadT &amp;payload)</td></tr>
+<tr class="memdesc:ad924e984e789f248aa09065e66236e69"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a packet of PayloadT type.  <br /></td></tr>
 <tr class="separator:ad924e984e789f248aa09065e66236e69"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeaab1176d55148c80296c71dbc393198"><td class="memTemplParams" colspan="2"><a id="aeaab1176d55148c80296c71dbc393198" name="aeaab1176d55148c80296c71dbc393198"></a>
-template&lt;typename PayloadT &gt; </td></tr>
-<tr class="memitem:aeaab1176d55148c80296c71dbc393198"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>registerPacket</b> ()</td></tr>
+<tr class="memitem:aeaab1176d55148c80296c71dbc393198"><td class="memTemplParams" colspan="2">template&lt;typename PayloadT &gt; </td></tr>
+<tr class="memitem:aeaab1176d55148c80296c71dbc393198"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_r_type_1_1_network_1_1_package_manager.html#aeaab1176d55148c80296c71dbc393198">registerPacket</a> ()</td></tr>
+<tr class="memdesc:aeaab1176d55148c80296c71dbc393198"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers a packet Type to the package manager.  <br /></td></tr>
 <tr class="separator:aeaab1176d55148c80296c71dbc393198"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aad176f90f589438c0fc5030a10c3ecd0"><td class="memItemLeft" align="right" valign="top"><a id="aad176f90f589438c0fc5030a10c3ecd0" name="aad176f90f589438c0fc5030a10c3ecd0"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getTypeName</b> (char id) const</td></tr>
+<tr class="memitem:aad176f90f589438c0fc5030a10c3ecd0"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_type_1_1_network_1_1_package_manager.html#aad176f90f589438c0fc5030a10c3ecd0">getTypeName</a> (char id) const</td></tr>
+<tr class="memdesc:aad176f90f589438c0fc5030a10c3ecd0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the type name of a packet from its TypeId.  <br /></td></tr>
 <tr class="separator:aad176f90f589438c0fc5030a10c3ecd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aec5a31b024d7a9d290698e53fc0b5e69"><td class="memItemLeft" align="right" valign="top"><a id="aec5a31b024d7a9d290698e53fc0b5e69" name="aec5a31b024d7a9d290698e53fc0b5e69"></a>
-char&#160;</td><td class="memItemRight" valign="bottom"><b>getTypeId</b> (const std::string &amp;name) const</td></tr>
+<tr class="memitem:a8e09c4cdce8444036e6882563345ebc2"><td class="memTemplParams" colspan="2">template&lt;typename PayloadT &gt; </td></tr>
+<tr class="memitem:a8e09c4cdce8444036e6882563345ebc2"><td class="memTemplItemLeft" align="right" valign="top">char&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_r_type_1_1_network_1_1_package_manager.html#a8e09c4cdce8444036e6882563345ebc2">getTypeId</a> () const</td></tr>
+<tr class="memdesc:a8e09c4cdce8444036e6882563345ebc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the TypeId of a packet from its type.  <br /></td></tr>
+<tr class="separator:a8e09c4cdce8444036e6882563345ebc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec5a31b024d7a9d290698e53fc0b5e69"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_type_1_1_network_1_1_package_manager.html#aec5a31b024d7a9d290698e53fc0b5e69">getTypeId</a> (const std::string &amp;name) const</td></tr>
+<tr class="memdesc:aec5a31b024d7a9d290698e53fc0b5e69"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the TypeId of a packet from its type name.  <br /></td></tr>
 <tr class="separator:aec5a31b024d7a9d290698e53fc0b5e69"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c9d4ac8b57a317bf40f2e498e9ebac0"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="struct_r_type_1_1_network_1_1_header.html">Header</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_type_1_1_network_1_1_package_manager.html#a7c9d4ac8b57a317bf40f2e498e9ebac0">decodeHeader</a> (const std::string &amp;data)</td></tr>
+<tr class="memdesc:a7c9d4ac8b57a317bf40f2e498e9ebac0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decodes the packet header from its data in string.  <br /></td></tr>
+<tr class="separator:a7c9d4ac8b57a317bf40f2e498e9ebac0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ce4f31a2a3ea03d57d537057cb9a51f"><td class="memTemplParams" colspan="2">template&lt;typename PayloadT &gt; </td></tr>
+<tr class="memitem:a0ce4f31a2a3ea03d57d537057cb9a51f"><td class="memTemplItemLeft" align="right" valign="top">std::shared_ptr&lt; PayloadT &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_r_type_1_1_network_1_1_package_manager.html#a0ce4f31a2a3ea03d57d537057cb9a51f">decodeContent</a> (const std::string &amp;data)</td></tr>
+<tr class="memdesc:a0ce4f31a2a3ea03d57d537057cb9a51f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decodes the packet payload from its data in string.  <br /></td></tr>
+<tr class="separator:a0ce4f31a2a3ea03d57d537057cb9a51f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p><a class="el" href="class_r_type_1_1_network_1_1_package_manager.html" title="PackageManager is a class that manages the packets.">PackageManager</a> is a class that manages the packets. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="ad924e984e789f248aa09065e66236e69" name="ad924e984e789f248aa09065e66236e69"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad924e984e789f248aa09065e66236e69">&#9670;&#160;</a></span>createPacket()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename PayloadT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_r_type_1_1_network_1_1_packet.html">Packet</a>&lt; PayloadT &gt; RType::Network::PackageManager::createPacket </td>
+          <td>(</td>
+          <td class="paramtype">PayloadT &amp;&#160;</td>
+          <td class="paramname"><em>payload</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates a packet of PayloadT type. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">PayloadT</td><td>The type of the payload </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">payload</td><td>The payload of the packet </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The packet </dd></dl>
+
+</div>
+</div>
+<a id="a0ce4f31a2a3ea03d57d537057cb9a51f" name="a0ce4f31a2a3ea03d57d537057cb9a51f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ce4f31a2a3ea03d57d537057cb9a51f">&#9670;&#160;</a></span>decodeContent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename PayloadT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::shared_ptr&lt; PayloadT &gt; RType::Network::PackageManager::decodeContent </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>data</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Decodes the packet payload from its data in string. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">PayloadT</td><td>The type of the payload </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>The data of the packet </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The payload of the packet </dd></dl>
+
+</div>
+</div>
+<a id="a7c9d4ac8b57a317bf40f2e498e9ebac0" name="a7c9d4ac8b57a317bf40f2e498e9ebac0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c9d4ac8b57a317bf40f2e498e9ebac0">&#9670;&#160;</a></span>decodeHeader()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::shared_ptr&lt; <a class="el" href="struct_r_type_1_1_network_1_1_header.html">Header</a> &gt; RType::Network::PackageManager::decodeHeader </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>data</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Decodes the packet header from its data in string. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>The data of the packet </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The header of the packet </dd></dl>
+
+</div>
+</div>
+<a id="a8e09c4cdce8444036e6882563345ebc2" name="a8e09c4cdce8444036e6882563345ebc2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e09c4cdce8444036e6882563345ebc2">&#9670;&#160;</a></span>getTypeId() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename PayloadT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">char RType::Network::PackageManager::getTypeId </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the TypeId of a packet from its type. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">PayloadT</td><td>The type of the payload </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The id of the packet </dd></dl>
+
+</div>
+</div>
+<a id="aec5a31b024d7a9d290698e53fc0b5e69" name="aec5a31b024d7a9d290698e53fc0b5e69"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec5a31b024d7a9d290698e53fc0b5e69">&#9670;&#160;</a></span>getTypeId() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">char RType::Network::PackageManager::getTypeId </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the TypeId of a packet from its type name. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>The name of the packet </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The id of the packet </dd></dl>
+
+</div>
+</div>
+<a id="aad176f90f589438c0fc5030a10c3ecd0" name="aad176f90f589438c0fc5030a10c3ecd0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad176f90f589438c0fc5030a10c3ecd0">&#9670;&#160;</a></span>getTypeName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string RType::Network::PackageManager::getTypeName </td>
+          <td>(</td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>id</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the type name of a packet from its TypeId. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>The id of the packet </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The type name of the packet </dd></dl>
+
+</div>
+</div>
+<a id="aeaab1176d55148c80296c71dbc393198" name="aeaab1176d55148c80296c71dbc393198"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeaab1176d55148c80296c71dbc393198">&#9670;&#160;</a></span>registerPacket()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename PayloadT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RType::Network::PackageManager::registerPacket </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Registers a packet Type to the package manager. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">PayloadT</td><td>The type of the payload </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>common/<a class="el" href="_package_manager_8hpp_source.html">PackageManager.hpp</a></li>
 </ul>
