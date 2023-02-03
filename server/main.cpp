@@ -7,8 +7,9 @@
 #include "../server/PlayerManager.hpp"
 #include "../common/packet/PlayerName.hpp"
 #include "../common/packet/GameStart.hpp"
+#include "Server.hpp"
 
-std::uint16_t parseArguments(int ac, char **av) {
+std::uint16_t RType::Server::parseArguments(int ac, char **av) {
     if (ac != 2)
         throw std::invalid_argument("parseArguments: Wrong number of argument (2 arguments expected)");
     std::uint64_t port = std::stoul(av[1]);
@@ -17,20 +18,20 @@ std::uint16_t parseArguments(int ac, char **av) {
     return (port);
 }
 
-void registerResources(std::unique_ptr<ECS::Coordinator> &coordinator, std::uint16_t port) {
+void RType::Server::registerResources(std::unique_ptr<ECS::Coordinator> &coordinator, std::uint16_t port) {
     auto package_manager = coordinator->registerResource<RType::Network::PackageManager>();
     coordinator->registerResource<RType::Network::UDPHandler>(port, package_manager);
     coordinator->registerResource<RType::PlayerManager>();
 }
 
-void registerPackets(std::unique_ptr<ECS::Coordinator> &coordinator) {
+void RType::Server::registerPackets(std::unique_ptr<ECS::Coordinator> &coordinator) {
     auto package_manager = coordinator->getResource<RType::Network::PackageManager>();
 
     package_manager->registerPacket<RType::Packet::PlayerName>();
     package_manager->registerPacket<RType::Packet::GameStart>();
 }
 
-void waiting_for_players(std::unique_ptr<ECS::Coordinator> &coordinator) {
+void RType::Server::waiting_for_players(std::unique_ptr<ECS::Coordinator> &coordinator) {
     auto package_manager = coordinator->getResource<RType::Network::PackageManager>();
     auto udp_handler = coordinator->getResource<RType::Network::UDPHandler>();
     auto player_manager = coordinator->getResource<RType::PlayerManager>();
@@ -56,16 +57,16 @@ void waiting_for_players(std::unique_ptr<ECS::Coordinator> &coordinator) {
 int main(int ac, char **av)
 {
     try {
-        std::uint16_t port = parseArguments(ac, av);
+        std::uint16_t port = RType::Server::parseArguments(ac, av);
         auto coordinator = std::make_unique<ECS::Coordinator>();
 
-        registerResources(coordinator, port);
-        registerPackets(coordinator);
+        RType::Server::registerResources(coordinator, port);
+        RType::Server::registerPackets(coordinator);
 
         auto udp_handler = coordinator->getResource<RType::Network::UDPHandler>();
 
         udp_handler->startHandler();
-        waiting_for_players(coordinator);
+        RType::Server::waiting_for_players(coordinator);
         udp_handler->stopHandler();
     }
     catch(std::invalid_argument &e) {
