@@ -54,6 +54,12 @@ void RType::Server::waiting_for_players(std::unique_ptr<ECS::Coordinator> &coord
     player_manager->sendPacketToAllPlayer(&packet, sizeof(packet), udp_handler);
 }
 
+/**
+ * @brief Main function of the RType Server
+ * @param ac Number of command-line arguments
+ * @param av Content of command-line arguments
+ * @return Status code (0 in case of success, 84 in case of failure)
+ */
 int main(int ac, char **av)
 {
     try {
