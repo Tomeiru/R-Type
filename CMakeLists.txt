@@ -17,15 +17,16 @@ set (SRC_ENCAPSULATION
 
 set (SRC_COMMON
         common/PackageManager.hpp common/RuntimeException.hpp common/ThreadSafeQueue.hpp common/UDPHandler.hpp
-        )
+        common/packet/PlayerName.hpp common/ReceivedPacket.hpp common/packet/GameStart.hpp)
 
 set(SRC_CLIENT
-        server/main.cpp
-        )
+        client/main.cpp
+        client/Client.hpp)
 
 set(SRC_SERVER
-        client/main.cpp
-        )
+        server/main.cpp
+        server/PlayerManager.hpp common/UDPClient.hpp server/Types.hpp server/Server.hpp)
+
 if(NOT EXISTS ${CMAKE_BINARY_DIR}/vcpkg-2023.01.09/vcpkg)
     message(STATUS "VCPKG n'est pas installé, téléchargement en cours...")
     file(DOWNLOAD https://github.com/microsoft/vcpkg/archive/refs/tags/2023.01.09.tar.gz ${CMAKE_BINARY_DIR}/vcpkg.tar.gz SHOW_PROGRESS)
@@ -40,9 +41,8 @@ execute_process(COMMAND ${CMAKE_BINARY_DIR}/vcpkg-2023.01.09/vcpkg install sfml
 if(result)
     message(FATAL_ERROR "Echec de l'installation de la SFML: ${output}")
 endif()
-add_executable (client ${SRC_CLIENT} ${SRC_ECS} ${SRC_ENCAPSULATION})
-add_executable (server ${SRC_SERVER} ${SRC_ECS} ${SRC_ENCAPSULATION})
-
+add_executable (client ${SRC_CLIENT} ${SRC_ECS} ${SRC_ENCAPSULATION} ${SRC_COMMON})
+add_executable (server ${SRC_SERVER} ${SRC_ECS} ${SRC_ENCAPSULATION} ${SRC_COMMON})
 set(VCPKG_ROOT_DIR ${CMAKE_BINARY_DIR}/vcpkg-2023.01.09)
 
 if(UNIX AND NOT APPLE)
