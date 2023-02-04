@@ -30,4 +30,10 @@ namespace RType::Client {
      * @return The IP address and port given of the server and its own IP given in argument
      */
     std::pair<RType::Network::UDPClient, std::uint16_t>parseArguments(int ac, char **av);
+
+    /**
+     * @brief game_loop is a function that runs the game loop
+     * @param coordinator Reference to the ECS' Coordinator
+     */
+    void game_loop(std::unique_ptr<ECS::Coordinator> &coordinator);
 }

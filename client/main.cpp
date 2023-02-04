@@ -3,6 +3,9 @@
 #include "../common/packet/PlayerName.hpp"
 #include "../common/UDPHandler.hpp"
 #include "../common/packet/GameStart.hpp"
+#include "../sfml/Window.hpp"
+#include "../sfml/Event.hpp"
+#include "../sfml/TextureManager.hpp"
 #include "Client.hpp"
 
 std::pair<RType::Network::UDPClient, std::uint16_t> RType::Client::parseArguments(int ac, char **av) {
@@ -19,6 +22,8 @@ std::pair<RType::Network::UDPClient, std::uint16_t> RType::Client::parseArgument
 void RType::Client::registerResources(std::unique_ptr<ECS::Coordinator> &coordinator, std::uint16_t port) {
     auto package_manager = coordinator->registerResource<RType::Network::PackageManager>();
     coordinator->registerResource<RType::Network::UDPHandler>(port, package_manager);
+    coordinator->registerResource<SFML::EventManager>();
+    coordinator->registerResource<SFML::TextureManager>();
 }
 
 void RType::Client::registerPackets(std::unique_ptr<ECS::Coordinator> &coordinator) {
@@ -46,6 +51,32 @@ void RType::Client::waiting_game_to_start(std::unique_ptr<ECS::Coordinator> &coo
     std::cout << "Everyone joined! The game can finally start!" << std::endl;
 }
 
+void RType::Client::game_loop(std::unique_ptr<ECS::Coordinator> &coordinator) {
+    auto package_manager = coordinator->getResource<RType::Network::PackageManager>();
+    auto udp_handler = coordinator->getResource<RType::Network::UDPHandler>();
+    auto event_manager = coordinator->getResource<SFML::EventManager>();
+    auto window = coordinator->registerResource<SFML::Window>(1920, 1080, "Le R-Type", SFML::Window::Style::Default);
+    SFML::Event event;
+
+    std::cout << "Game loop started!" << std::endl;
+    while (window->isOpen()) {
+        while(window->pollEvent(event))
+            event_manager->newEvent(event.getEvent());
+        while(!udp_handler->isQueueEmpty()) {
+            RType::Network::ReceivedPacket packet_received = udp_handler->popElement();
+            std::shared_ptr<RType::Network::Header> header = package_manager->decodeHeader(packet_received.packet_data);
+            if (!header)
+                continue;
+            std::cout << "Received packet with id: " << header->id << std::endl;
+        }
+        if (event_manager->quitEventRegistered())
+            window->close();
+        window->clear();
+        window->display();
+        event_manager->clear();
+    }
+}
+
 /**
  * @brief main is the entry point of the RType Client
  * @param ac Number of command-line arguments
@@ -68,7 +99,8 @@ int main(int ac, char **av)
 
     udp_handler->startHandler();
     udp_handler->send(&packet, sizeof(packet),std::string( "127.0.0.1"), 8080);
-    RType::Client::waiting_game_to_start(coordinator);
+    RType::Client::game_loop(coordinator);
+    //RType::Client::waiting_game_to_start(coordinator);
     udp_handler->stopHandler();
     return (0);
 }
