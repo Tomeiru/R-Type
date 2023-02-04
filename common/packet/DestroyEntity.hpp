@@ -11,8 +11,13 @@ namespace RType::Packet {
          * @brief Constructs a new DestroyEntity object
          * @param id The id of the entity
          */
-        DestroyEntity(std::uint32_t id = 0) : id(id) {};
+        DestroyEntity(std::string id = 0) {
+            for (int i = 0; i < 15; i++) {
+                sprite_id[i] = (i < id.size() ? id[i] : '\0');
+            }
+            sprite_id[15] = '\0';
+        };
 
-        std::uint32_t id;
+        char sprite_id[15];
     };
 };

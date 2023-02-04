@@ -8,10 +8,15 @@ namespace RType::Packet {
      */
     struct EntityPosition {
 
-        EntityPosition(std::uint32_t id = 0, float x = 0, float y = 0) : id(id), x(x), y(y) {};
+        EntityPosition(std::string id = 0, float x = 0, float y = 0) : _x(x), _y(y) {
+            for (int i = 0; i < 15; i++) {
+                sprite_id[i] = (i < id.size() ? id[i] : '\0');
+            }
+            sprite_id[15] = '\0';
+        };
 
-        std::uint32_t id;
-        float x;
-        float y;
+        char sprite_id[15];
+        float _x;
+        float _y;
     };
 }
