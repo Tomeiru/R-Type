@@ -24,6 +24,12 @@ namespace RType::Client {
     void registerResources(std::unique_ptr<ECS::Coordinator> &coordinator, std::uint16_t port);
 
     /**
+     * @brief loadAssets is a function that loads all the assets used by the RType Client
+     * @param coordinator Reference to the ECS' Coordinator
+     */
+    void loadAssets(std::unique_ptr<ECS::Coordinator> &coordinator);
+
+    /**
      * @brief parseArguments is a function that checks and returns parsed command-line arguments if they are correct
      * @param ac Number of command-line arguments
      * @param av Content of command-line arguments

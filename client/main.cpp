@@ -6,6 +6,7 @@
 #include "../sfml/Window.hpp"
 #include "../sfml/Event.hpp"
 #include "../sfml/TextureManager.hpp"
+#include "../sfml/SpriteManager.hpp"
 #include "Client.hpp"
 
 std::pair<RType::Network::UDPClient, std::uint16_t> RType::Client::parseArguments(int ac, char **av) {
@@ -24,6 +25,7 @@ void RType::Client::registerResources(std::unique_ptr<ECS::Coordinator> &coordin
     coordinator->registerResource<RType::Network::UDPHandler>(port, package_manager);
     coordinator->registerResource<SFML::EventManager>();
     coordinator->registerResource<SFML::TextureManager>();
+    coordinator->registerResource<SFML::SpriteManager>();
 }
 
 void RType::Client::registerPackets(std::unique_ptr<ECS::Coordinator> &coordinator) {
@@ -31,6 +33,20 @@ void RType::Client::registerPackets(std::unique_ptr<ECS::Coordinator> &coordinat
 
     package_manager->registerPacket<RType::Packet::PlayerName>();
     package_manager->registerPacket<RType::Packet::GameStart>();
+}
+
+void RType::Client::loadAssets(std::unique_ptr<ECS::Coordinator> &coordinator) {
+    auto texture_manager = coordinator->getResource<SFML::TextureManager>();
+    auto sprite_manager = coordinator->getResource<SFML::SpriteManager>();
+
+    texture_manager->registerTexture("player_blue", "../assets/textures/player-blue.png");
+    texture_manager->registerTexture("player_red", "../assets/textures/player-red.png");
+    texture_manager->registerTexture("player_green", "../assets/textures/player-green.png");
+    texture_manager->registerTexture("player_orange", "../assets/textures/player-orange.png");
+    sprite_manager->registerSprite("player_blue", texture_manager->getTexture("player_blue"));
+    sprite_manager->registerSprite("player_red", texture_manager->getTexture("player_red"));
+    sprite_manager->registerSprite("player_green", texture_manager->getTexture("player_green"));
+    sprite_manager->registerSprite("player_orange", texture_manager->getTexture("player_orange"));
 }
 
 void RType::Client::waiting_game_to_start(std::unique_ptr<ECS::Coordinator> &coordinator) {
@@ -99,6 +115,7 @@ int main(int ac, char **av)
 
     udp_handler->startHandler();
     udp_handler->send(&packet, sizeof(packet),std::string( "127.0.0.1"), 8080);
+    RType::Client::loadAssets(coordinator);
     RType::Client::game_loop(coordinator);
     //RType::Client::waiting_game_to_start(coordinator);
     udp_handler->stopHandler();

@@ -10,6 +10,12 @@ namespace RType::Server {
     void waiting_for_players(std::unique_ptr<ECS::Coordinator> &coordinator);
 
     /**
+     * @brief Function that loads all the assets used by the RType Server
+     * @param coordinator Reference to the ECS' Coordinator
+     */
+    void loadAssets(std::unique_ptr<ECS::Coordinator> &coordinator);
+
+    /**
     * @brief Function that registers all the packets used by the RType Server
     * @param coordinator Reference to the ECS' Coordinator
     */

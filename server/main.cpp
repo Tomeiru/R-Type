@@ -7,6 +7,8 @@
 #include "../server/PlayerManager.hpp"
 #include "../common/packet/PlayerName.hpp"
 #include "../common/packet/GameStart.hpp"
+#include "../sfml/TextureManager.hpp"
+#include "../sfml/SpriteManager.hpp"
 #include "Server.hpp"
 
 std::uint16_t RType::Server::parseArguments(int ac, char **av) {
@@ -29,6 +31,20 @@ void RType::Server::registerPackets(std::unique_ptr<ECS::Coordinator> &coordinat
 
     package_manager->registerPacket<RType::Packet::PlayerName>();
     package_manager->registerPacket<RType::Packet::GameStart>();
+}
+
+void RType::Server::loadAssets(std::unique_ptr<ECS::Coordinator> &coordinator) {
+    auto texture_manager = coordinator->getResource<SFML::TextureManager>();
+    auto sprite_manager = coordinator->getResource<SFML::SpriteManager>();
+
+    texture_manager->registerTexture("player_blue", "../assets/textures/player-blue.png");
+    texture_manager->registerTexture("player_red", "../assets/textures/player-red.png");
+    texture_manager->registerTexture("player_green", "../assets/textures/player-green.png");
+    texture_manager->registerTexture("player_orange", "../assets/textures/player-orange.png");
+    sprite_manager->registerSprite("player_blue", texture_manager->getTexture("player_blue"));
+    sprite_manager->registerSprite("player_red", texture_manager->getTexture("player_red"));
+    sprite_manager->registerSprite("player_green", texture_manager->getTexture("player_green"));
+    sprite_manager->registerSprite("player_orange", texture_manager->getTexture("player_orange"));
 }
 
 void RType::Server::waiting_for_players(std::unique_ptr<ECS::Coordinator> &coordinator) {
