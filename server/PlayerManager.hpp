@@ -4,7 +4,10 @@
 #include <unordered_map>
 #include "../sfml/IpAddress.hpp"
 #include "Types.hpp"
+#include "../common/packet/SpawnEntity.hpp"
 #include "../common/UDPClient.hpp"
+#include "../common/component/SpriteReference.hpp"
+#include "../common/component/Transform.hpp"
 
 namespace RType {
     /**
@@ -44,6 +47,23 @@ namespace RType {
         void sendPacketToAllPlayer(const void *data, size_t size, std::shared_ptr<Network::UDPHandler> &udp_handler) {
             for (const auto &[id, client]: id_to_client)
                 udp_handler->send(data, size, client.getIpAddress(), client.getPort());
+        }
+
+        void spawnPlayers(std::shared_ptr<Network::UDPHandler> &udp_handler, std::shared_ptr<RType::Network::PackageManager> &package_manager, std::unique_ptr<ECS::Coordinator> &coordinator) {
+            std::cout << "Spawning players" << std::endl;
+            for (const auto &[id, client]: id_to_client) {
+                auto player = coordinator->createEntity();
+                std::string name = "player_" + std::to_string(id);
+                coordinator->addComponent(player, SFML::SpriteReference(name));
+                coordinator->addComponent(player, SFML::Transform({0, 200 * id}));
+
+                RType::Packet::SpawnEntity entity_payload(name, name, 0, 200 * id);
+                auto packet = package_manager->createPacket<RType::Packet::SpawnEntity>(entity_payload);
+                for (const auto &[id_to_send, client_to_send]: id_to_client) {
+                    udp_handler->send(&packet, sizeof(packet), client_to_send.getIpAddress(), client_to_send.getPort());
+                }
+            }
+            std::cout << "All players spawned" << std::endl;
         }
     private:
         std::unordered_map<PlayerID, Network::UDPClient> id_to_client;

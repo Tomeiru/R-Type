@@ -24,6 +24,12 @@ namespace RType::Client {
     void registerResources(std::unique_ptr<ECS::Coordinator> &coordinator, std::uint16_t port);
 
     /**
+     * @brief registerComponents is a function that registers all the components used by the RType Client
+     * @param coordinator Reference to the ECS' Coordinator
+     */
+    void registerComponents(std::unique_ptr<ECS::Coordinator> &coordinator);
+
+    /**
      * @brief loadAssets is a function that loads all the assets used by the RType Client
      * @param coordinator Reference to the ECS' Coordinator
      */

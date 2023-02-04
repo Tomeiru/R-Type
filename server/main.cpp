@@ -7,8 +7,11 @@
 #include "../server/PlayerManager.hpp"
 #include "../common/packet/PlayerName.hpp"
 #include "../common/packet/GameStart.hpp"
+#include "../common/packet/SpawnEntity.hpp"
 #include "../sfml/TextureManager.hpp"
 #include "../sfml/SpriteManager.hpp"
+#include "../common/component/SpriteReference.hpp"
+#include "../common/component/Transform.hpp"
 #include "Server.hpp"
 
 std::uint16_t RType::Server::parseArguments(int ac, char **av) {
@@ -24,6 +27,13 @@ void RType::Server::registerResources(std::unique_ptr<ECS::Coordinator> &coordin
     auto package_manager = coordinator->registerResource<RType::Network::PackageManager>();
     coordinator->registerResource<RType::Network::UDPHandler>(port, package_manager);
     coordinator->registerResource<RType::PlayerManager>();
+    coordinator->registerResource<SFML::TextureManager>();
+    coordinator->registerResource<SFML::SpriteManager>();
+}
+
+void RType::Server::registerComponents(std::unique_ptr<ECS::Coordinator> &coordinator) {
+    coordinator->registerComponent<SFML::SpriteReference>();
+    coordinator->registerComponent<SFML::Transform>();
 }
 
 void RType::Server::registerPackets(std::unique_ptr<ECS::Coordinator> &coordinator) {
@@ -31,6 +41,7 @@ void RType::Server::registerPackets(std::unique_ptr<ECS::Coordinator> &coordinat
 
     package_manager->registerPacket<RType::Packet::PlayerName>();
     package_manager->registerPacket<RType::Packet::GameStart>();
+    package_manager->registerPacket<RType::Packet::SpawnEntity>();
 }
 
 void RType::Server::loadAssets(std::unique_ptr<ECS::Coordinator> &coordinator) {
@@ -41,10 +52,10 @@ void RType::Server::loadAssets(std::unique_ptr<ECS::Coordinator> &coordinator) {
     texture_manager->registerTexture("player_red", "../assets/textures/player-red.png");
     texture_manager->registerTexture("player_green", "../assets/textures/player-green.png");
     texture_manager->registerTexture("player_orange", "../assets/textures/player-orange.png");
-    sprite_manager->registerSprite("player_blue", texture_manager->getTexture("player_blue"));
-    sprite_manager->registerSprite("player_red", texture_manager->getTexture("player_red"));
-    sprite_manager->registerSprite("player_green", texture_manager->getTexture("player_green"));
-    sprite_manager->registerSprite("player_orange", texture_manager->getTexture("player_orange"));
+    sprite_manager->registerSprite("player_1", texture_manager->getTexture("player_blue"));
+    sprite_manager->registerSprite("player_2", texture_manager->getTexture("player_red"));
+    sprite_manager->registerSprite("player_3", texture_manager->getTexture("player_green"));
+    sprite_manager->registerSprite("player_4", texture_manager->getTexture("player_orange"));
 }
 
 void RType::Server::waiting_for_players(std::unique_ptr<ECS::Coordinator> &coordinator) {
@@ -75,6 +86,8 @@ void RType::Server::game_loop(std::unique_ptr<ECS::Coordinator> &coordinator) {
     auto udp_handler = coordinator->getResource<RType::Network::UDPHandler>();
     auto player_manager = coordinator->getResource<RType::PlayerManager>();
 
+    std::cout << "Game loop started!" << std::endl;
+    player_manager->spawnPlayers(udp_handler, package_manager, coordinator);
     while (player_manager->getNbPlayerConnected() > 0) {
         while(!udp_handler->isQueueEmpty()) {
             RType::Network::ReceivedPacket packet_received = udp_handler->popElement();
@@ -99,11 +112,13 @@ int main(int ac, char **av)
 
         RType::Server::registerResources(coordinator, port);
         RType::Server::registerPackets(coordinator);
+        RType::Server::registerComponents(coordinator);
 
         auto udp_handler = coordinator->getResource<RType::Network::UDPHandler>();
 
         udp_handler->startHandler();
         RType::Server::waiting_for_players(coordinator);
+        RType::Server::loadAssets(coordinator);
         RType::Server::game_loop(coordinator);
         udp_handler->stopHandler();
     }

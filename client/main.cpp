@@ -3,10 +3,13 @@
 #include "../common/packet/PlayerName.hpp"
 #include "../common/UDPHandler.hpp"
 #include "../common/packet/GameStart.hpp"
+#include "../common/packet/SpawnEntity.hpp"
 #include "../sfml/Window.hpp"
 #include "../sfml/Event.hpp"
 #include "../sfml/TextureManager.hpp"
 #include "../sfml/SpriteManager.hpp"
+#include "../common/component/SpriteReference.hpp"
+#include "../common/component/Transform.hpp"
 #include "Client.hpp"
 
 std::pair<RType::Network::UDPClient, std::uint16_t> RType::Client::parseArguments(int ac, char **av) {
@@ -18,6 +21,11 @@ std::pair<RType::Network::UDPClient, std::uint16_t> RType::Client::parseArgument
     if (port > 65535 || client_port > 65535)
         throw std::invalid_argument("parseArguments: Port should be a number between 0 and 65535");
     return std::make_pair<RType::Network::UDPClient, std::uint16_t>(RType::Network::UDPClient(address, port), client_port);
+}
+
+void RType::Client::registerComponents(std::unique_ptr<ECS::Coordinator> &coordinator) {
+    coordinator->registerComponent<SFML::SpriteReference>();
+    coordinator->registerComponent<SFML::Transform>();
 }
 
 void RType::Client::registerResources(std::unique_ptr<ECS::Coordinator> &coordinator, std::uint16_t port) {
@@ -33,6 +41,7 @@ void RType::Client::registerPackets(std::unique_ptr<ECS::Coordinator> &coordinat
 
     package_manager->registerPacket<RType::Packet::PlayerName>();
     package_manager->registerPacket<RType::Packet::GameStart>();
+    package_manager->registerPacket<RType::Packet::SpawnEntity>();
 }
 
 void RType::Client::loadAssets(std::unique_ptr<ECS::Coordinator> &coordinator) {
@@ -43,10 +52,10 @@ void RType::Client::loadAssets(std::unique_ptr<ECS::Coordinator> &coordinator) {
     texture_manager->registerTexture("player_red", "../assets/textures/player-red.png");
     texture_manager->registerTexture("player_green", "../assets/textures/player-green.png");
     texture_manager->registerTexture("player_orange", "../assets/textures/player-orange.png");
-    sprite_manager->registerSprite("player_blue", texture_manager->getTexture("player_blue"));
-    sprite_manager->registerSprite("player_red", texture_manager->getTexture("player_red"));
-    sprite_manager->registerSprite("player_green", texture_manager->getTexture("player_green"));
-    sprite_manager->registerSprite("player_orange", texture_manager->getTexture("player_orange"));
+    sprite_manager->registerSprite("player_1", texture_manager->getTexture("player_blue"));
+    sprite_manager->registerSprite("player_2", texture_manager->getTexture("player_red"));
+    sprite_manager->registerSprite("player_3", texture_manager->getTexture("player_green"));
+    sprite_manager->registerSprite("player_4", texture_manager->getTexture("player_orange"));
 }
 
 void RType::Client::waiting_game_to_start(std::unique_ptr<ECS::Coordinator> &coordinator) {
@@ -83,7 +92,11 @@ void RType::Client::game_loop(std::unique_ptr<ECS::Coordinator> &coordinator) {
             std::shared_ptr<RType::Network::Header> header = package_manager->decodeHeader(packet_received.packet_data);
             if (!header)
                 continue;
-            std::cout << "Received packet with id: " << header->id << std::endl;
+            if (header->id == package_manager->getTypeId<RType::Packet::SpawnEntity>()) {
+                std::cout << "Spawn Entity packet received!" << std::endl;
+                auto packet = package_manager->decodeContent<RType::Packet::SpawnEntity>(packet_received.packet_data);
+                std::cout << "Entity ID: " << packet->_x << std::endl;
+            }
         }
         if (event_manager->quitEventRegistered())
             window->close();
@@ -106,6 +119,7 @@ int main(int ac, char **av)
 
     RType::Client::registerResources(coordinator, client_port);
     RType::Client::registerPackets(coordinator);
+    RType::Client::registerComponents(coordinator);
 
     auto package_manager = coordinator->getResource<RType::Network::PackageManager>();
     auto udp_handler = coordinator->getResource<RType::Network::UDPHandler>();
@@ -114,10 +128,10 @@ int main(int ac, char **av)
     auto packet = package_manager->createPacket<RType::Packet::PlayerName>(player_name);
 
     udp_handler->startHandler();
-    udp_handler->send(&packet, sizeof(packet),std::string( "127.0.0.1"), 8080);
+    udp_handler->send(&packet, sizeof(packet),std::string( "127.0.0.1"), server_infos.getPort());
     RType::Client::loadAssets(coordinator);
+    RType::Client::waiting_game_to_start(coordinator);
     RType::Client::game_loop(coordinator);
-    //RType::Client::waiting_game_to_start(coordinator);
     udp_handler->stopHandler();
     return (0);
 }

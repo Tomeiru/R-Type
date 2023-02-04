@@ -29,6 +29,12 @@ namespace RType::Server {
     void registerResources(std::unique_ptr<ECS::Coordinator> &coordinator, std::uint16_t port);
 
     /**
+     * @brief registerComponents is a function that registers all the components used by the RType Client
+     * @param coordinator Reference to the ECS' Coordinator
+     */
+    void registerComponents(std::unique_ptr<ECS::Coordinator> &coordinator);
+
+    /**
      * @brief Function that runs the game loop
      * @param coordinator Reference to the ECS' Coordinator
      */
