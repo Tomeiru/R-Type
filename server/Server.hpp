@@ -29,6 +29,12 @@ namespace RType::Server {
     void registerResources(std::unique_ptr<ECS::Coordinator> &coordinator, std::uint16_t port);
 
     /**
+     * @brief Function that runs the game loop
+     * @param coordinator Reference to the ECS' Coordinator
+     */
+    void game_loop(std::unique_ptr<ECS::Coordinator> &coordinator);
+
+    /**
     * @brief Check and returns parsed command-line arguments if they are correct
     * @param ac Number of command-line arguments
     * @param av Content of command-line arguments

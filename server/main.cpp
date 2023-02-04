@@ -70,6 +70,21 @@ void RType::Server::waiting_for_players(std::unique_ptr<ECS::Coordinator> &coord
     player_manager->sendPacketToAllPlayer(&packet, sizeof(packet), udp_handler);
 }
 
+void RType::Server::game_loop(std::unique_ptr<ECS::Coordinator> &coordinator) {
+    auto package_manager = coordinator->getResource<RType::Network::PackageManager>();
+    auto udp_handler = coordinator->getResource<RType::Network::UDPHandler>();
+    auto player_manager = coordinator->getResource<RType::PlayerManager>();
+
+    while (player_manager->getNbPlayerConnected() > 0) {
+        while(!udp_handler->isQueueEmpty()) {
+            RType::Network::ReceivedPacket packet_received = udp_handler->popElement();
+            std::shared_ptr<RType::Network::Header> header = package_manager->decodeHeader(packet_received.packet_data);
+            if (!header)
+                continue;
+        }
+    }
+}
+
 /**
  * @brief Main function of the RType Server
  * @param ac Number of command-line arguments
@@ -89,6 +104,7 @@ int main(int ac, char **av)
 
         udp_handler->startHandler();
         RType::Server::waiting_for_players(coordinator);
+        RType::Server::game_loop(coordinator);
         udp_handler->stopHandler();
     }
     catch(std::invalid_argument &e) {
