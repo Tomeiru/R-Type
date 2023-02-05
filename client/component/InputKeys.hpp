@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../sfml/Keyboard.hpp"
+#include "../../sfml/Keyboard.hpp"
 
 namespace SFML {
     /**
@@ -16,8 +16,8 @@ namespace SFML {
          * @param key_down Key to move the entity down
          * @param key_left Key to move the entity left
          */
-        MovementKeys(float speed_value = 1, SFML::Keyboard::Key key_up = SFML::Keyboard::Key::Z, SFML::Keyboard::Key key_right = SFML::Keyboard::Key::D, 
-        SFML::Keyboard::Key key_down = SFML::Keyboard::Key::S, SFML::Keyboard::Key key_left = SFML::Keyboard::Key::Q) : 
+        MovementKeys(float speed_value = 1, SFML::Keyboard::Key key_up = SFML::Keyboard::Key::Z, SFML::Keyboard::Key key_right = SFML::Keyboard::Key::D,
+        SFML::Keyboard::Key key_down = SFML::Keyboard::Key::S, SFML::Keyboard::Key key_left = SFML::Keyboard::Key::Q) :
         up(key_up), right(key_right), down(key_down), left(key_left), speed(speed_value), key_down_pressed(false), key_up_pressed(false), key_left_pressed(false), key_right_pressed(false) {}
         SFML::Keyboard::Key up;
         SFML::Keyboard::Key right;
