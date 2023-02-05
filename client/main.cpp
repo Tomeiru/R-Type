@@ -10,6 +10,8 @@
 #include "../sfml/SpriteManager.hpp"
 #include "../common/component/SpriteReference.hpp"
 #include "../common/component/Transform.hpp"
+#include "./component/Hitbox.hpp"
+#include "./component/MovementKeys.hpp"
 #include "./system/TransformSprite.hpp"
 #include "./system/DrawSprite.hpp"
 #include "Client.hpp"
@@ -28,6 +30,8 @@ std::pair<RType::Network::UDPClient, std::uint16_t> RType::Client::parseArgument
 void RType::Client::registerComponents(std::unique_ptr<ECS::Coordinator> &coordinator) {
     coordinator->registerComponent<SFML::SpriteReference>();
     coordinator->registerComponent<SFML::Transform>();
+    coordinator->registerComponent<SFML::Hitbox>();
+    coordinator->registerComponent<SFML::MovementKeys>();
 }
 
 void RType::Client::registerResources(std::unique_ptr<ECS::Coordinator> &coordinator, std::uint16_t port) {
@@ -67,6 +71,11 @@ void RType::Client::loadAssets(std::unique_ptr<ECS::Coordinator> &coordinator) {
     sprite_manager->registerSprite("player_4", texture_manager->getTexture("player_orange"));
 }
 
+void RType::Client::sendMovementsKeys(std::unique_ptr<ECS::Coordinator> &coordinator,
+std::shared_ptr<RType::Network::UDPClient> &client, std::shared_ptr<RType::Network::PackageManager> &packageManager) {
+
+}
+
 void RType::Client::waiting_game_to_start(std::unique_ptr<ECS::Coordinator> &coordinator) {
     bool game_started = false;
     auto package_manager = coordinator->getResource<RType::Network::PackageManager>();
@@ -91,6 +100,8 @@ void RType::Client::waiting_game_to_start(std::unique_ptr<ECS::Coordinator> &coo
             tmp_queue.pop();
         }
     }
+    auto keyChecker = coordinator->createEntity();
+    coordinator->addComponent<SFML::MovementKeys>(keyChecker, SFML::MovementKeys());
     std::cout << "Everyone joined! The game can finally start!" << std::endl;
 }
 

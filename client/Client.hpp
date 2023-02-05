@@ -42,6 +42,12 @@ namespace RType::Client {
     void loadAssets(std::unique_ptr<ECS::Coordinator> &coordinator);
 
     /**
+     * @brief sendMovementsKeys is a function that sends the movements keys to the server
+     * @param coordinator Reference to the ECS' Coordinator
+     */
+    void sendMovementsKeys(std::unique_ptr<ECS::Coordinator> &coordinator, std::shared_ptr<RType::Network::UDPClient> &client, std::shared_ptr<RType::Network::PackageManager> &packageManager);
+
+    /**
      * @brief parseArguments is a function that checks and returns parsed command-line arguments if they are correct
      * @param ac Number of command-line arguments
      * @param av Content of command-line arguments

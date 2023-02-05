@@ -23,17 +23,10 @@ namespace SFML {
                 auto &movementKeys = coordinator.getComponent<MovementKeys>(entity);
                 auto pos = transform.position.getVector2();
     
-                if (SFML::Keyboard::isKeyPressed(movementKeys.up))
-                    y_movements -= 1;
-                if (SFML::Keyboard::isKeyPressed(movementKeys.down))
-                    y_movements += 1;
-                if (SFML::Keyboard::isKeyPressed(movementKeys.left))
-                    x_movements -= 1;
-                if (SFML::Keyboard::isKeyPressed(movementKeys.right))
-                    x_movements += 1;
-                
-                if (x_movements != 0 || y_movements != 0)
-                    transform.position = {pos.x + x_movements * movementKeys.speed, pos.y + y_movements * movementKeys.speed};
+                movementKeys.key_up_pressed = SFML::Keyboard::isKeyPressed(movementKeys.up);
+                movementKeys.key_down_pressed = SFML::Keyboard::isKeyPressed(movementKeys.down);
+                movementKeys.key_left_pressed = SFML::Keyboard::isKeyPressed(movementKeys.left);
+                movementKeys.key_right_pressed = SFML::Keyboard::isKeyPressed(movementKeys.right);
             }
         }
     };
