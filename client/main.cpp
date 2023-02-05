@@ -10,6 +10,8 @@
 #include "../sfml/SpriteManager.hpp"
 #include "../common/component/SpriteReference.hpp"
 #include "../common/component/Transform.hpp"
+#include "./system/TransformSprite.hpp"
+#include "./system/DrawSprite.hpp"
 #include "Client.hpp"
 
 std::pair<RType::Network::UDPClient, std::uint16_t> RType::Client::parseArguments(int ac, char **av) {
@@ -42,6 +44,13 @@ void RType::Client::registerPackets(std::unique_ptr<ECS::Coordinator> &coordinat
     package_manager->registerPacket<RType::Packet::PlayerName>();
     package_manager->registerPacket<RType::Packet::GameStart>();
     package_manager->registerPacket<RType::Packet::SpawnEntity>();
+}
+
+void RType::Client::registerSystems(std::unique_ptr<ECS::Coordinator> &coordinator) {
+    // coordinator->registerSystem<SFML::TransformSprite>();
+    // coordinator->setSignatureBits<SFML::TransformSprite, SFML::SpriteReference, SFML::Transform>();
+    // coordinator->registerSystem<SFML::DrawSprite>();
+    // coordinator->setSignatureBits<SFML::DrawSprite, SFML::SpriteReference, SFML::Transform>();
 }
 
 void RType::Client::loadAssets(std::unique_ptr<ECS::Coordinator> &coordinator) {
@@ -81,6 +90,10 @@ void RType::Client::game_loop(std::unique_ptr<ECS::Coordinator> &coordinator) {
     auto udp_handler = coordinator->getResource<RType::Network::UDPHandler>();
     auto event_manager = coordinator->getResource<SFML::EventManager>();
     auto window = coordinator->registerResource<SFML::Window>(1920, 1080, "Le R-Type", SFML::Window::Style::Default);
+    auto draw_sprite = coordinator->registerSystem<SFML::DrawSprite>();
+    coordinator->setSignatureBits<SFML::DrawSprite, SFML::SpriteReference, SFML::Transform>();
+    auto transform_sprite = coordinator->registerSystem<SFML::TransformSprite>();
+    coordinator->setSignatureBits<SFML::TransformSprite, SFML::SpriteReference, SFML::Transform>();
     SFML::Event event;
 
     std::cout << "Game loop started!" << std::endl;
@@ -95,11 +108,16 @@ void RType::Client::game_loop(std::unique_ptr<ECS::Coordinator> &coordinator) {
             if (header->id == package_manager->getTypeId<RType::Packet::SpawnEntity>()) {
                 std::cout << "Spawn Entity packet received!" << std::endl;
                 auto packet = package_manager->decodeContent<RType::Packet::SpawnEntity>(packet_received.packet_data);
-                std::cout << "Entity ID: " << packet->_x << std::endl;
+                auto player = coordinator->createEntity();
+                coordinator->addComponent<SFML::SpriteReference>(player, SFML::SpriteReference(packet->_sprite_id));
+                coordinator->addComponent<SFML::Transform>(player, SFML::Transform({packet->_x, packet->_y}));
+                std::cout << "Player " << packet->_sprite_id << " spawned at " << packet->_x << " " << packet->_y << std::endl;
             }
         }
         if (event_manager->quitEventRegistered())
             window->close();
+        transform_sprite->update(coordinator);
+        draw_sprite->update(coordinator);
         window->clear();
         window->display();
         event_manager->clear();

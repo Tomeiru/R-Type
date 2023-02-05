@@ -57,7 +57,7 @@ namespace RType {
                 coordinator->addComponent(player, SFML::SpriteReference(name));
                 coordinator->addComponent(player, SFML::Transform({0, 200 * id}));
 
-                RType::Packet::SpawnEntity entity_payload(name, name, 0, 200 * id);
+                RType::Packet::SpawnEntity entity_payload(name, 0, 200 * id);
                 auto packet = package_manager->createPacket<RType::Packet::SpawnEntity>(entity_payload);
                 for (const auto &[id_to_send, client_to_send]: id_to_client) {
                     udp_handler->send(&packet, sizeof(packet), client_to_send.getIpAddress(), client_to_send.getPort());

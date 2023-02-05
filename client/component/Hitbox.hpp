@@ -1,7 +1,7 @@
 #pragma once
 
 #include <cstdint>
-#include "../sfml/Rect.hpp"
+#include "../../sfml/Rect.hpp"
 
 namespace SFML {
     /**

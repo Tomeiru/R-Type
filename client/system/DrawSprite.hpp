@@ -1,10 +1,10 @@
 #pragma once
 
-#include "../ecs/System.hpp"
-#include "../ecs/Coordinator.hpp"
-#include "../component/SpriteReference.hpp"
-#include "../sfml/SpriteManager.hpp"
-#include "../sfml/Window.hpp"
+#include "../../ecs/System.hpp"
+#include "../../ecs/Coordinator.hpp"
+#include "../../common/component/SpriteReference.hpp"
+#include "../../sfml/SpriteManager.hpp"
+#include "../../sfml/Window.hpp"
 
 namespace SFML {
     /**
@@ -17,11 +17,11 @@ namespace SFML {
          * 
          * @param coordinator Reference to the ecs coordinator
          */
-        void update(ECS::Coordinator &coordinator) {
-            auto sprite_manager = coordinator.getResource<SFML::SpriteManager>();
-            auto window = coordinator.getResource<SFML::Window>();
+        void update(std::unique_ptr<ECS::Coordinator> &coordinator) {
+            auto sprite_manager = coordinator->getResource<SFML::SpriteManager>();
+            auto window = coordinator->getResource<SFML::Window>();
             for (const auto &entity : entities) {
-                auto &sprite_ref = coordinator.getComponent<SpriteReference>(entity);
+                auto &sprite_ref = coordinator->getComponent<SpriteReference>(entity);
                 auto sprite = sprite_manager->getSprite(sprite_ref.id);
 
                 if (sprite->isVisible())
