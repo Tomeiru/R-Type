@@ -96,7 +96,7 @@ void RType::Client::game_loop(std::unique_ptr<ECS::Coordinator> &coordinator) {
     coordinator->setSignatureBits<SFML::TransformSprite, SFML::SpriteReference, SFML::Transform>();
     SFML::Event event;
 
-    std::cout << "Game loop started!" << std::endl;
+    window->setFramerateLimit(60);
     while (window->isOpen()) {
         while(window->pollEvent(event))
             event_manager->newEvent(event.getEvent());
@@ -106,7 +106,6 @@ void RType::Client::game_loop(std::unique_ptr<ECS::Coordinator> &coordinator) {
             if (!header)
                 continue;
             if (header->id == package_manager->getTypeId<RType::Packet::SpawnEntity>()) {
-                std::cout << "Spawn Entity packet received!" << std::endl;
                 auto packet = package_manager->decodeContent<RType::Packet::SpawnEntity>(packet_received.packet_data);
                 auto player = coordinator->createEntity();
                 coordinator->addComponent<SFML::SpriteReference>(player, SFML::SpriteReference(packet->_sprite_id));
