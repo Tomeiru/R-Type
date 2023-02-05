@@ -54,7 +54,7 @@ namespace RType {
                 auto player = coordinator->createEntity();
                 std::string name = "player_" + std::to_string(id);
                 coordinator->addComponent(player, SFML::SpriteReference(name));
-                coordinator->addComponent(player, SFML::Transform({0, static_cast<float>(200 * id)}));
+                coordinator->addComponent(player, SFML::Transform({0, static_cast<float>(200 * id)}, 0, {3, 3}));
 
                 RType::Packet::SpawnEntity entity_payload(name, 0, static_cast<float>(200 * id));
                 auto packet = package_manager->createPacket<RType::Packet::SpawnEntity>(entity_payload);
