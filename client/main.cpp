@@ -71,15 +71,24 @@ void RType::Client::waiting_game_to_start(std::unique_ptr<ECS::Coordinator> &coo
     bool game_started = false;
     auto package_manager = coordinator->getResource<RType::Network::PackageManager>();
     auto udp_handler = coordinator->getResource<RType::Network::UDPHandler>();
+    std::queue<RType::Network::ReceivedPacket> tmp_queue;
 
     std::cout << "Waiting for the game to start!" << std::endl;
     while (!game_started) {
         while(!udp_handler->isQueueEmpty()) {
             RType::Network::ReceivedPacket packet_received = udp_handler->popElement();
             std::shared_ptr<RType::Network::Header> header = package_manager->decodeHeader(packet_received.packet_data);
-            if (!header || header->id != package_manager->getTypeId<RType::Packet::GameStart>())
+            if (!header)
                 continue;
-            game_started = true;
+            if (header->id == package_manager->getTypeId<RType::Packet::GameStart>()) {
+                game_started = true;
+                break;
+            }
+            tmp_queue.push(packet_received);
+        }
+        while (!tmp_queue.empty()) {
+            udp_handler->pushQueue(tmp_queue.front());
+            tmp_queue.pop();
         }
     }
     std::cout << "Everyone joined! The game can finally start!" << std::endl;
@@ -109,15 +118,14 @@ void RType::Client::game_loop(std::unique_ptr<ECS::Coordinator> &coordinator) {
                 auto packet = package_manager->decodeContent<RType::Packet::SpawnEntity>(packet_received.packet_data);
                 auto player = coordinator->createEntity();
                 coordinator->addComponent<SFML::SpriteReference>(player, SFML::SpriteReference(packet->_sprite_id));
-                coordinator->addComponent<SFML::Transform>(player, SFML::Transform({packet->_x, packet->_y}));
-                std::cout << "Player " << packet->_sprite_id << " spawned at " << packet->_x << " " << packet->_y << std::endl;
+                coordinator->addComponent<SFML::Transform>(player, SFML::Transform({packet->_x, packet->_y}, 0, {3, 3}));
             }
         }
         if (event_manager->quitEventRegistered())
             window->close();
         transform_sprite->update(coordinator);
-        draw_sprite->update(coordinator);
         window->clear();
+        draw_sprite->update(coordinator);
         window->display();
         event_manager->clear();
     }
