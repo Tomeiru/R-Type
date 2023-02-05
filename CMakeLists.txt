@@ -18,11 +18,11 @@ set(SRC_ENCAPSULATION
 
 set (SRC_COMMON
         common/PackageManager.hpp common/RuntimeException.hpp common/ThreadSafeQueue.hpp common/UDPHandler.hpp
-        common/packet/PlayerName.hpp common/ReceivedPacket.hpp common/packet/GameStart.hpp)
+        common/packet/PlayerName.hpp common/ReceivedPacket.hpp common/packet/GameStart.hpp common/packet/PlayerInputs.hpp common/packet/EntityPosition.hpp)
 
 set(SRC_CLIENT
         client/main.cpp
-        client/Client.hpp)
+        client/Client.hpp client/PlayerID.hpp client/ServerEntityManager.hpp)
 
 set(SRC_SERVER
         server/main.cpp
