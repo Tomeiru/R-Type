@@ -15,7 +15,7 @@ namespace RType::Packet {
             sprite_id[15] = '\0';
         };
 
-        char sprite_id[15];
+        char sprite_id[16];
         float _x;
         float _y;
     };
