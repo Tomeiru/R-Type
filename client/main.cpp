@@ -154,6 +154,7 @@ int main(int ac, char **av)
     RType::Client::registerResources(coordinator, client_port);
     RType::Client::registerPackets(coordinator);
     RType::Client::registerComponents(coordinator);
+    RType::Client::registerSystems(coordinator);
 
     auto package_manager = coordinator->getResource<RType::Network::PackageManager>();
     auto udp_handler = coordinator->getResource<RType::Network::UDPHandler>();
