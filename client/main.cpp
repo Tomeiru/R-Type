@@ -51,10 +51,10 @@ void RType::Client::registerPackets(std::unique_ptr<ECS::Coordinator> &coordinat
 }
 
 void RType::Client::registerSystems(std::unique_ptr<ECS::Coordinator> &coordinator) {
-    // coordinator->registerSystem<SFML::TransformSprite>();
-    // coordinator->setSignatureBits<SFML::TransformSprite, SFML::SpriteReference, SFML::Transform>();
-    // coordinator->registerSystem<SFML::DrawSprite>();
-    // coordinator->setSignatureBits<SFML::DrawSprite, SFML::SpriteReference, SFML::Transform>();
+    coordinator->registerSystem<SFML::TransformSprite>();
+    coordinator->setSignatureBits<SFML::TransformSprite, SFML::SpriteReference, SFML::Transform>();
+    coordinator->registerSystem<SFML::DrawSprite>();
+    coordinator->setSignatureBits<SFML::DrawSprite, SFML::SpriteReference, SFML::Transform>();
 }
 
 void RType::Client::loadAssets(std::unique_ptr<ECS::Coordinator> &coordinator) {
@@ -110,10 +110,8 @@ void RType::Client::game_loop(std::unique_ptr<ECS::Coordinator> &coordinator) {
     auto udp_handler = coordinator->getResource<RType::Network::UDPHandler>();
     auto event_manager = coordinator->getResource<SFML::EventManager>();
     auto window = coordinator->registerResource<SFML::Window>(1920, 1080, "Le R-Type", SFML::Window::Style::Default);
-    auto draw_sprite = coordinator->registerSystem<SFML::DrawSprite>();
-    coordinator->setSignatureBits<SFML::DrawSprite, SFML::SpriteReference, SFML::Transform>();
-    auto transform_sprite = coordinator->registerSystem<SFML::TransformSprite>();
-    coordinator->setSignatureBits<SFML::TransformSprite, SFML::SpriteReference, SFML::Transform>();
+    auto draw_sprite = coordinator->getSystem<SFML::DrawSprite>();
+    auto transform_sprite = coordinator->getSystem<SFML::TransformSprite>();
     SFML::Event event;
 
     window->setFramerateLimit(60);
