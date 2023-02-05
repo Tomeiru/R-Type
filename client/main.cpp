@@ -83,7 +83,7 @@ void RType::Client::game_loop(std::unique_ptr<ECS::Coordinator> &coordinator) {
     auto window = coordinator->registerResource<SFML::Window>(1920, 1080, "Le R-Type", SFML::Window::Style::Default);
     SFML::Event event;
 
-    std::cout << "Game loop started!" << std::endl;
+    window->setFramerateLimit(60);
     while (window->isOpen()) {
         while(window->pollEvent(event))
             event_manager->newEvent(event.getEvent());
@@ -92,11 +92,8 @@ void RType::Client::game_loop(std::unique_ptr<ECS::Coordinator> &coordinator) {
             std::shared_ptr<RType::Network::Header> header = package_manager->decodeHeader(packet_received.packet_data);
             if (!header)
                 continue;
-            if (header->id == package_manager->getTypeId<RType::Packet::SpawnEntity>()) {
-                std::cout << "Spawn Entity packet received!" << std::endl;
+            if (header->id == package_manager->getTypeId<RType::Packet::SpawnEntity>())
                 auto packet = package_manager->decodeContent<RType::Packet::SpawnEntity>(packet_received.packet_data);
-                std::cout << "Entity ID: " << packet->_x << std::endl;
-            }
         }
         if (event_manager->quitEventRegistered())
             window->close();

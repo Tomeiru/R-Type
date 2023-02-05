@@ -50,18 +50,15 @@ namespace RType {
         }
 
         void spawnPlayers(std::shared_ptr<Network::UDPHandler> &udp_handler, std::shared_ptr<RType::Network::PackageManager> &package_manager, std::unique_ptr<ECS::Coordinator> &coordinator) {
-            std::cout << "Spawning players" << std::endl;
             for (const auto &[id, client]: id_to_client) {
                 auto player = coordinator->createEntity();
                 std::string name = "player_" + std::to_string(id);
                 coordinator->addComponent(player, SFML::SpriteReference(name));
-                coordinator->addComponent(player, SFML::Transform({0, 200 * id}));
+                coordinator->addComponent(player, SFML::Transform({0, static_cast<float>(200 * id)}));
 
-                RType::Packet::SpawnEntity entity_payload(name, name, 0, 200 * id);
+                RType::Packet::SpawnEntity entity_payload(name, name, 0, static_cast<float>(200 * id));
                 auto packet = package_manager->createPacket<RType::Packet::SpawnEntity>(entity_payload);
-                for (const auto &[id_to_send, client_to_send]: id_to_client) {
-                    udp_handler->send(&packet, sizeof(packet), client_to_send.getIpAddress(), client_to_send.getPort());
-                }
+                sendPacketToAllPlayer(&packet, sizeof(packet), udp_handler);
             }
             std::cout << "All players spawned" << std::endl;
         }
