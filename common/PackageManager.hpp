@@ -15,6 +15,7 @@ namespace RType::Network {
     struct Header {
         unsigned int magic;
         char id;
+        unsigned short player_id;
         unsigned int created_at;
     };
 
@@ -40,13 +41,13 @@ namespace RType::Network {
          * @return The packet
          */
         template<typename PayloadT>
-        Packet<PayloadT> createPacket(PayloadT &payload) {
+        Packet<PayloadT> createPacket(PayloadT &payload, std::uint16_t player_id = 0) {
             std::string data_type = typeid(PayloadT).name();
             auto type_id = _typename_to_id.find(data_type);
 
             if (type_id == _typename_to_id.end())
                 throw RuntimeException("PackageManager::createPacket", "Packet Type has not been registered yet");
-            Packet<PayloadT> packet = {{NETWORK_MAGIC, type_id->second, 0}, payload};
+            Packet<PayloadT> packet = {{NETWORK_MAGIC, type_id->second, player_id, 0}, payload};
             return packet;
         }
 
@@ -56,14 +57,13 @@ namespace RType::Network {
          */
         template<typename PayloadT>
         void registerPacket() {
-            static unsigned int id = 0;
             std::string data_type = typeid(PayloadT).name();
 
             if (_typename_to_id.find(data_type) != _typename_to_id.end())
                 throw RuntimeException("PackageManager::registerPacket", "Packet Type has already been registered yet");
-            _typename_to_id.emplace(data_type, id);
-            _id_to_typename.emplace(id, data_type);
-            id++;
+            _typename_to_id.emplace(data_type, _id);
+            _id_to_typename.emplace(_id, data_type);
+            _id++;
         }
 
         /**
@@ -137,5 +137,6 @@ namespace RType::Network {
     private:
         std::unordered_map<std::string, char> _typename_to_id;
         std::unordered_map<char, std::string> _id_to_typename;
+        std::uint8_t _id = 0;
     };
 }
