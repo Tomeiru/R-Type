@@ -16,14 +16,15 @@ namespace SFML {
          * @param coordinator Reference to the ecs coordinator
          */
         void update(std::unique_ptr<ECS::Coordinator> &coordinator) {
+            auto window = coordinator->getResource<SFML::Window>();
             for (const auto &entity: entities) {
                 auto &input_keys = coordinator->getComponent<InputKeys>(entity);
-
-                input_keys.key_up_pressed = SFML::Keyboard::isKeyPressed(input_keys.up);
-                input_keys.key_down_pressed = SFML::Keyboard::isKeyPressed(input_keys.down);
-                input_keys.key_left_pressed = SFML::Keyboard::isKeyPressed(input_keys.left);
-                input_keys.key_right_pressed = SFML::Keyboard::isKeyPressed(input_keys.right);
-                input_keys.key_shoot_pressed = SFML::Keyboard::isKeyPressed(input_keys.shoot);
+                bool focus = window->hasFocus();
+                input_keys.key_up_pressed = focus && SFML::Keyboard::isKeyPressed(input_keys.up);
+                input_keys.key_down_pressed = focus && SFML::Keyboard::isKeyPressed(input_keys.down);
+                input_keys.key_left_pressed = focus && SFML::Keyboard::isKeyPressed(input_keys.left);
+                input_keys.key_right_pressed = focus && SFML::Keyboard::isKeyPressed(input_keys.right);
+                input_keys.key_shoot_pressed = focus && SFML::Keyboard::isKeyPressed(input_keys.shoot);
             }
         }
     };
