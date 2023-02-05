@@ -28,6 +28,7 @@ std::pair<RType::Network::UDPClient, std::uint16_t> RType::Client::parseArgument
 void RType::Client::registerComponents(std::unique_ptr<ECS::Coordinator> &coordinator) {
     coordinator->registerComponent<SFML::SpriteReference>();
     coordinator->registerComponent<SFML::Transform>();
+    coordinator->registerComponent<SFML::Hitbox>();
 }
 
 void RType::Client::registerResources(std::unique_ptr<ECS::Coordinator> &coordinator, std::uint16_t port) {
@@ -143,6 +144,7 @@ int main(int ac, char **av)
     RType::Client::registerResources(coordinator, client_port);
     RType::Client::registerPackets(coordinator);
     RType::Client::registerComponents(coordinator);
+    RType::Client::registerSystems(coordinator);
 
     auto package_manager = coordinator->getResource<RType::Network::PackageManager>();
     auto udp_handler = coordinator->getResource<RType::Network::UDPHandler>();
