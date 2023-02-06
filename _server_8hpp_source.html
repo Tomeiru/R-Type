@@ -81,20 +81,21 @@ $(function() {
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;../ecs/Coordinator.hpp&quot;</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">namespace </span>RType::Server {</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    <span class="keywordtype">void</span> waiting_for_players(std::unique_ptr&lt;ECS::Coordinator&gt; &amp;coordinator);</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keywordtype">void</span> waiting_for_players(std::unique_ptr&lt;ECS::Coordinator&gt;&amp; coordinator);</div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <span class="keywordtype">void</span> loadAssets(std::unique_ptr&lt;ECS::Coordinator&gt; &amp;coordinator);</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keywordtype">void</span> loadAssets(std::unique_ptr&lt;ECS::Coordinator&gt;&amp; coordinator);</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keywordtype">void</span> registerPackets(std::unique_ptr&lt;ECS::Coordinator&gt; &amp;coordinator);</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="keywordtype">void</span> registerPackets(std::unique_ptr&lt;ECS::Coordinator&gt;&amp; coordinator);</div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keywordtype">void</span> registerResources(std::unique_ptr&lt;ECS::Coordinator&gt; &amp;coordinator, std::uint16_t port);</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keywordtype">void</span> registerComponents(std::unique_ptr&lt;ECS::Coordinator&gt; &amp;coordinator);</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keywordtype">void</span> game_loop(std::unique_ptr&lt;ECS::Coordinator&gt; &amp;coordinator);</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    std::uint16_t parseArguments(<span class="keywordtype">int</span> ac, <span class="keywordtype">char</span> **av);</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>}</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="keywordtype">void</span> registerResources(std::unique_ptr&lt;ECS::Coordinator&gt;&amp; coordinator,</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    std::uint16_t port);</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="keywordtype">void</span> registerComponents(std::unique_ptr&lt;ECS::Coordinator&gt;&amp; coordinator);</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="keywordtype">void</span> game_loop(std::unique_ptr&lt;ECS::Coordinator&gt;&amp; coordinator);</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>std::uint16_t parseArguments(<span class="keywordtype">int</span> ac, <span class="keywordtype">char</span>** av);</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>} <span class="comment">// namespace RType::Server</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

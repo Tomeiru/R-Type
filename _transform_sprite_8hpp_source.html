@@ -78,35 +78,36 @@ $(function() {
 <div class="contents">
 <div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;../../ecs/System.hpp&quot;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;../../ecs/Coordinator.hpp&quot;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;../../sfml/SpriteManager.hpp&quot;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;../../common/component/SpriteReference.hpp&quot;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;../../common/component/Transform.hpp&quot;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;../../common/component/SpriteReference.hpp&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;../../common/component/Transform.hpp&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;../../ecs/Coordinator.hpp&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;../../ecs/System.hpp&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;../../sfml/SpriteManager.hpp&quot;</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;../component/Hitbox.hpp&quot;</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">namespace </span>SFML {</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="class_s_f_m_l_1_1_transform_sprite.html">   14</a></span>    <span class="keyword">class </span><a class="code hl_class" href="class_s_f_m_l_1_1_transform_sprite.html">TransformSprite</a> : <span class="keyword">public</span> ECS::System {</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="class_s_f_m_l_1_1_transform_sprite.html#a3265babcc4b3582fc860be98b94734f4">   22</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="class_s_f_m_l_1_1_transform_sprite.html#a3265babcc4b3582fc860be98b94734f4">update</a>(std::unique_ptr&lt;ECS::Coordinator&gt; &amp;coordinator) {</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>            <span class="keyword">auto</span> sprite_manager = coordinator-&gt;getResource&lt;SFML::SpriteManager&gt;();</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>            <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;entity : entities) {</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>                <span class="keyword">auto</span> &amp;sprite_ref = coordinator-&gt;getComponent&lt;<a class="code hl_struct" href="struct_s_f_m_l_1_1_sprite_reference.html">SpriteReference</a>&gt;(entity);</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>                <span class="keyword">auto</span> &amp;transform = coordinator-&gt;getComponent&lt;<a class="code hl_struct" href="struct_s_f_m_l_1_1_transform.html">Transform</a>&gt;(entity);</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>                <span class="keyword">auto</span> sprite = sprite_manager-&gt;getSprite(sprite_ref.id);</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>                sprite-&gt;setPosition(transform.position);</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>                sprite-&gt;setRotation(transform.rotation);</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>                sprite-&gt;setScale(transform.scale);</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>                sprite-&gt;setOrigin(transform.origin);</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>                <span class="comment">// if (coordinator-&gt;hasComponent&lt;Hitbox&gt;(entity)) {</span></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>                <span class="comment">//     auto &amp;hitbox = coordinator-&gt;getComponent&lt;Hitbox&gt;(entity);</span></div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>                <span class="comment">//     hitbox.rect = sprite-&gt;getGlobalBounds();</span></div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>                <span class="comment">// }</span></div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>            }</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="class_s_f_m_l_1_1_transform_sprite.html">   14</a></span><span class="keyword">class </span><a class="code hl_class" href="class_s_f_m_l_1_1_transform_sprite.html">TransformSprite</a> : <span class="keyword">public</span> ECS::System {</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="class_s_f_m_l_1_1_transform_sprite.html#a3265babcc4b3582fc860be98b94734f4">   22</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_s_f_m_l_1_1_transform_sprite.html#a3265babcc4b3582fc860be98b94734f4">update</a>(std::unique_ptr&lt;ECS::Coordinator&gt;&amp; coordinator)</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    {</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        <span class="keyword">auto</span> sprite_manager = coordinator-&gt;getResource&lt;SFML::SpriteManager&gt;();</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; entity : entities) {</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>            <span class="keyword">auto</span>&amp; sprite_ref = coordinator-&gt;getComponent&lt;<a class="code hl_struct" href="struct_s_f_m_l_1_1_sprite_reference.html">SpriteReference</a>&gt;(entity);</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>            <span class="keyword">auto</span>&amp; transform = coordinator-&gt;getComponent&lt;<a class="code hl_struct" href="struct_s_f_m_l_1_1_transform.html">Transform</a>&gt;(entity);</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>            <span class="keyword">auto</span> sprite = sprite_manager-&gt;getSprite(sprite_ref.id);</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>            sprite-&gt;setPosition(transform.position);</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>            sprite-&gt;setRotation(transform.rotation);</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>            sprite-&gt;setScale(transform.scale);</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>            sprite-&gt;setOrigin(transform.origin);</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>            <span class="comment">// if (coordinator-&gt;hasComponent&lt;Hitbox&gt;(entity)) {</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>            <span class="comment">//     auto &amp;hitbox = coordinator-&gt;getComponent&lt;Hitbox&gt;(entity);</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>            <span class="comment">//     hitbox.rect = sprite-&gt;getGlobalBounds();</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>            <span class="comment">// }</span></div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        }</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    };</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>}</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    }</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>};</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>}</div>
 <div class="ttc" id="aclass_s_f_m_l_1_1_transform_sprite_html"><div class="ttname"><a href="class_s_f_m_l_1_1_transform_sprite.html">SFML::TransformSprite</a></div><div class="ttdoc">System that transforms all sprites with a Transform component.</div><div class="ttdef"><b>Definition:</b> TransformSprite.hpp:14</div></div>
 <div class="ttc" id="aclass_s_f_m_l_1_1_transform_sprite_html_a3265babcc4b3582fc860be98b94734f4"><div class="ttname"><a href="class_s_f_m_l_1_1_transform_sprite.html#a3265babcc4b3582fc860be98b94734f4">SFML::TransformSprite::update</a></div><div class="ttdeci">void update(std::unique_ptr&lt; ECS::Coordinator &gt; &amp;coordinator)</div><div class="ttdoc">Function that transforms all sprites with a Transform component.</div><div class="ttdef"><b>Definition:</b> TransformSprite.hpp:22</div></div>
 <div class="ttc" id="astruct_s_f_m_l_1_1_sprite_reference_html"><div class="ttname"><a href="struct_s_f_m_l_1_1_sprite_reference.html">SFML::SpriteReference</a></div><div class="ttdoc">Component that allows an entity to have a sprite.</div><div class="ttdef"><b>Definition:</b> SpriteReference.hpp:9</div></div>

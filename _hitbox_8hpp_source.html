@@ -78,16 +78,20 @@ $(function() {
 <div class="contents">
 <div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;cstdint&gt;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;../../sfml/Rect.hpp&quot;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;../../sfml/Rect.hpp&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;cstdint&gt;</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">namespace </span>SFML {</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="struct_s_f_m_l_1_1_hitbox.html">   10</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="struct_s_f_m_l_1_1_hitbox.html">Hitbox</a> {</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="struct_s_f_m_l_1_1_hitbox.html#a49967ce990ff5821f08d01443e9268bd">   16</a></span>        <a class="code hl_function" href="struct_s_f_m_l_1_1_hitbox.html#a49967ce990ff5821f08d01443e9268bd">Hitbox</a>() : rect(FloatRect(0,0,0,0)) {}</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        <a class="code hl_function" href="struct_s_f_m_l_1_1_hitbox.html#a49967ce990ff5821f08d01443e9268bd">Hitbox</a>(FloatRect rect) : rect(rect) {};</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        FloatRect rect;</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    };</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>}</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="struct_s_f_m_l_1_1_hitbox.html">   10</a></span><span class="keyword">struct </span><a class="code hl_struct" href="struct_s_f_m_l_1_1_hitbox.html">Hitbox</a> {</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="struct_s_f_m_l_1_1_hitbox.html#a49967ce990ff5821f08d01443e9268bd">   16</a></span>    <a class="code hl_function" href="struct_s_f_m_l_1_1_hitbox.html#a49967ce990ff5821f08d01443e9268bd">Hitbox</a>()</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        : rect(FloatRect(0, 0, 0, 0))</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    {</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    }</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <a class="code hl_function" href="struct_s_f_m_l_1_1_hitbox.html#a49967ce990ff5821f08d01443e9268bd">Hitbox</a>(FloatRect rect)</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        : rect(rect) {};</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    FloatRect rect;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>};</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>}</div>
 <div class="ttc" id="astruct_s_f_m_l_1_1_hitbox_html"><div class="ttname"><a href="struct_s_f_m_l_1_1_hitbox.html">SFML::Hitbox</a></div><div class="ttdoc">Component that give a hitbox to an entity.</div><div class="ttdef"><b>Definition:</b> Hitbox.hpp:10</div></div>
 <div class="ttc" id="astruct_s_f_m_l_1_1_hitbox_html_a49967ce990ff5821f08d01443e9268bd"><div class="ttname"><a href="struct_s_f_m_l_1_1_hitbox.html#a49967ce990ff5821f08d01443e9268bd">SFML::Hitbox::Hitbox</a></div><div class="ttdeci">Hitbox()</div><div class="ttdoc">Construct a new Hitbox Component.</div><div class="ttdef"><b>Definition:</b> Hitbox.hpp:16</div></div>
 </div><!-- fragment --></div><!-- contents -->

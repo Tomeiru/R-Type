@@ -81,22 +81,33 @@ $(function() {
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;../../sfml/Keyboard.hpp&quot;</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">namespace </span>SFML {</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="struct_s_f_m_l_1_1_input_keys.html">    9</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="struct_s_f_m_l_1_1_input_keys.html">InputKeys</a> {</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="struct_s_f_m_l_1_1_input_keys.html#a0fb97fdf57ed8c3776e97d5b2b1561f1">   19</a></span>        <a class="code hl_function" href="struct_s_f_m_l_1_1_input_keys.html#a0fb97fdf57ed8c3776e97d5b2b1561f1">InputKeys</a>(SFML::Keyboard::Key key_up = SFML::Keyboard::Key::Z, SFML::Keyboard::Key key_right = SFML::Keyboard::Key::D,</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>                  SFML::Keyboard::Key key_down = SFML::Keyboard::Key::S, SFML::Keyboard::Key key_left = SFML::Keyboard::Key::Q, SFML::Keyboard::Key key_shoot = SFML::Keyboard::Key::Space) :</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        up(key_up), right(key_right), down(key_down), left(key_left), shoot(key_shoot), key_down_pressed(false), key_up_pressed(false), key_left_pressed(false), key_right_pressed(false), key_shoot_pressed(false) {}</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        SFML::Keyboard::Key up;</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        SFML::Keyboard::Key right;</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        SFML::Keyboard::Key down;</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        SFML::Keyboard::Key left;</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        SFML::Keyboard::Key shoot;</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        <span class="keywordtype">bool</span> key_down_pressed;</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        <span class="keywordtype">bool</span> key_up_pressed;</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        <span class="keywordtype">bool</span> key_left_pressed;</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        <span class="keywordtype">bool</span> key_right_pressed;</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>        <span class="keywordtype">bool</span> key_shoot_pressed;</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    };</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>}</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="struct_s_f_m_l_1_1_input_keys.html">    9</a></span><span class="keyword">struct </span><a class="code hl_struct" href="struct_s_f_m_l_1_1_input_keys.html">InputKeys</a> {</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="struct_s_f_m_l_1_1_input_keys.html#a0fb97fdf57ed8c3776e97d5b2b1561f1">   19</a></span>    <a class="code hl_function" href="struct_s_f_m_l_1_1_input_keys.html#a0fb97fdf57ed8c3776e97d5b2b1561f1">InputKeys</a>(SFML::Keyboard::Key key_up = SFML::Keyboard::Key::Z, SFML::Keyboard::Key key_right = SFML::Keyboard::Key::D,</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        SFML::Keyboard::Key key_down = SFML::Keyboard::Key::S, SFML::Keyboard::Key key_left = SFML::Keyboard::Key::Q, SFML::Keyboard::Key key_shoot = SFML::Keyboard::Key::Space)</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        : up(key_up)</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        , right(key_right)</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        , down(key_down)</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        , left(key_left)</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        , shoot(key_shoot)</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        , key_down_pressed(false)</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        , key_up_pressed(false)</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        , key_left_pressed(false)</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        , key_right_pressed(false)</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        , key_shoot_pressed(false)</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    {</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    }</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    SFML::Keyboard::Key up;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    SFML::Keyboard::Key right;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    SFML::Keyboard::Key down;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    SFML::Keyboard::Key left;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    SFML::Keyboard::Key shoot;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keywordtype">bool</span> key_down_pressed;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keywordtype">bool</span> key_up_pressed;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keywordtype">bool</span> key_left_pressed;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keywordtype">bool</span> key_right_pressed;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keywordtype">bool</span> key_shoot_pressed;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>};</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>}</div>
 <div class="ttc" id="astruct_s_f_m_l_1_1_input_keys_html"><div class="ttname"><a href="struct_s_f_m_l_1_1_input_keys.html">SFML::InputKeys</a></div><div class="ttdoc">Component that allows an entity to be moved with the keyboard.</div><div class="ttdef"><b>Definition:</b> InputKeys.hpp:9</div></div>
 <div class="ttc" id="astruct_s_f_m_l_1_1_input_keys_html_a0fb97fdf57ed8c3776e97d5b2b1561f1"><div class="ttname"><a href="struct_s_f_m_l_1_1_input_keys.html#a0fb97fdf57ed8c3776e97d5b2b1561f1">SFML::InputKeys::InputKeys</a></div><div class="ttdeci">InputKeys(SFML::Keyboard::Key key_up=SFML::Keyboard::Key::Z, SFML::Keyboard::Key key_right=SFML::Keyboard::Key::D, SFML::Keyboard::Key key_down=SFML::Keyboard::Key::S, SFML::Keyboard::Key key_left=SFML::Keyboard::Key::Q, SFML::Keyboard::Key key_shoot=SFML::Keyboard::Key::Space)</div><div class="ttdoc">Construct a new InputKeys Component.</div><div class="ttdef"><b>Definition:</b> InputKeys.hpp:19</div></div>
 </div><!-- fragment --></div><!-- contents -->

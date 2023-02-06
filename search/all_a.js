@@ -9,6 +9,5 @@ var searchData=
   ['spin_6',['Spin',['../struct_s_f_m_l_1_1_spin.html',1,'SFML::Spin'],['../struct_s_f_m_l_1_1_spin.html#a251cfa456a75fa5821eae4dc5566e19e',1,'SFML::Spin::Spin()']]],
   ['spinsprite_7',['SpinSprite',['../class_s_f_m_l_1_1_spin_sprite.html',1,'SFML']]],
   ['spritereference_8',['SpriteReference',['../struct_s_f_m_l_1_1_sprite_reference.html',1,'SFML::SpriteReference'],['../struct_s_f_m_l_1_1_sprite_reference.html#a1107e802ae2fac2e15cde047659c001d',1,'SFML::SpriteReference::SpriteReference()']]],
-  ['stophandler_9',['stopHandler',['../class_r_type_1_1_network_1_1_u_d_p_handler.html#aefce9f7c8b435fcabf8abb1369f2a96e',1,'RType::Network::UDPHandler']]],
-  ['systemexample_10',['SystemExample',['../class_r_type_1_1_server_1_1_system_example.html',1,'RType::Server::SystemExample'],['../class_r_type_1_1_system_example.html',1,'RType::SystemExample']]]
+  ['stophandler_9',['stopHandler',['../class_r_type_1_1_network_1_1_u_d_p_handler.html#aefce9f7c8b435fcabf8abb1369f2a96e',1,'RType::Network::UDPHandler']]]
 ];

@@ -78,29 +78,29 @@ $(function() {
 <div class="contents">
 <div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;../ecs/Coordinator.hpp&quot;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;../common/UDPClient.hpp&quot;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;../common/UDPClient.hpp&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;../ecs/Coordinator.hpp&quot;</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">namespace </span>RType::Client {</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    <span class="keywordtype">void</span> waiting_game_to_start(std::unique_ptr&lt;ECS::Coordinator&gt; &amp;coordinator);</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keywordtype">void</span> waiting_game_to_start(std::unique_ptr&lt;ECS::Coordinator&gt;&amp; coordinator);</div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keywordtype">void</span> registerPackets(std::unique_ptr&lt;ECS::Coordinator&gt; &amp;coordinator);</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keywordtype">void</span> registerPackets(std::unique_ptr&lt;ECS::Coordinator&gt;&amp; coordinator);</div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keywordtype">void</span> registerResources(std::unique_ptr&lt;ECS::Coordinator&gt; &amp;coordinator, std::uint16_t port);</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keywordtype">void</span> registerResources(std::unique_ptr&lt;ECS::Coordinator&gt;&amp; coordinator, std::uint16_t port);</div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keywordtype">void</span> registerComponents(std::unique_ptr&lt;ECS::Coordinator&gt; &amp;coordinator);</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="keywordtype">void</span> registerComponents(std::unique_ptr&lt;ECS::Coordinator&gt;&amp; coordinator);</div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keywordtype">void</span> registerSystems(std::unique_ptr&lt;ECS::Coordinator&gt; &amp;coordinator);</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="keywordtype">void</span> registerSystems(std::unique_ptr&lt;ECS::Coordinator&gt;&amp; coordinator);</div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keywordtype">void</span> loadAssets(std::unique_ptr&lt;ECS::Coordinator&gt; &amp;coordinator);</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="keywordtype">void</span> loadAssets(std::unique_ptr&lt;ECS::Coordinator&gt;&amp; coordinator);</div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keywordtype">void</span> sendMovementsKeys(std::unique_ptr&lt;ECS::Coordinator&gt; &amp;coordinator, <span class="keyword">const</span> <a class="code hl_class" href="class_r_type_1_1_network_1_1_u_d_p_client.html">RType::Network::UDPClient</a> &amp;server, ECS::Entity key_checker);</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="keywordtype">void</span> sendMovementsKeys(std::unique_ptr&lt;ECS::Coordinator&gt;&amp; coordinator, <span class="keyword">const</span> <a class="code hl_class" href="class_r_type_1_1_network_1_1_u_d_p_client.html">RType::Network::UDPClient</a>&amp; server, ECS::Entity key_checker);</div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    std::pair&lt;RType::Network::UDPClient, std::uint16_t&gt; parseArguments(<span class="keywordtype">int</span> ac, <span class="keywordtype">char</span> **av);</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>std::pair&lt;RType::Network::UDPClient, std::uint16_t&gt; parseArguments(<span class="keywordtype">int</span> ac, <span class="keywordtype">char</span>** av);</div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="keywordtype">void</span> game_loop(std::unique_ptr&lt;ECS::Coordinator&gt; &amp;coordinator, <span class="keyword">const</span> <a class="code hl_class" href="class_r_type_1_1_network_1_1_u_d_p_client.html">RType::Network::UDPClient</a> &amp;server_infos);</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="keywordtype">void</span> game_loop(std::unique_ptr&lt;ECS::Coordinator&gt;&amp; coordinator, <span class="keyword">const</span> <a class="code hl_class" href="class_r_type_1_1_network_1_1_u_d_p_client.html">RType::Network::UDPClient</a>&amp; server_infos);</div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>}</div>
-<div class="ttc" id="aclass_r_type_1_1_network_1_1_u_d_p_client_html"><div class="ttname"><a href="class_r_type_1_1_network_1_1_u_d_p_client.html">RType::Network::UDPClient</a></div><div class="ttdoc">UDPClient is a class that represents an UDP client.</div><div class="ttdef"><b>Definition:</b> UDPClient.hpp:10</div></div>
+<div class="ttc" id="aclass_r_type_1_1_network_1_1_u_d_p_client_html"><div class="ttname"><a href="class_r_type_1_1_network_1_1_u_d_p_client.html">RType::Network::UDPClient</a></div><div class="ttdoc">UDPClient is a class that represents an UDP client.</div><div class="ttdef"><b>Definition:</b> UDPClient.hpp:9</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

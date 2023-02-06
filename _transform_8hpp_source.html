@@ -81,16 +81,22 @@ $(function() {
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;../../sfml/Vector2.hpp&quot;</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">namespace </span>SFML {</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="struct_s_f_m_l_1_1_transform.html">    9</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="struct_s_f_m_l_1_1_transform.html">Transform</a> {</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="struct_s_f_m_l_1_1_transform.html#a624d01318ced89c7578a8557bf0a1248">   18</a></span>        <a class="code hl_function" href="struct_s_f_m_l_1_1_transform.html#a624d01318ced89c7578a8557bf0a1248">Transform</a>(<span class="keyword">const</span> Vector2f &amp;position = {0.0, 0.0}, <span class="keywordtype">float</span> rotation = 0.0, <span class="keyword">const</span> Vector2f &amp;scale = {1.0, 1.0}, <span class="keyword">const</span> Vector2f &amp;origin = {0.0, 0.0}) : position(position), rotation (rotation), scale(scale), origin(origin) {}</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        Vector2f position;</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        <span class="keywordtype">float</span> rotation;</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        Vector2f scale;</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        Vector2f origin;</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    };</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>}</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="struct_s_f_m_l_1_1_transform.html">    9</a></span><span class="keyword">struct </span><a class="code hl_struct" href="struct_s_f_m_l_1_1_transform.html">Transform</a> {</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="struct_s_f_m_l_1_1_transform.html#a0230af79cad2d0b9405c1cc9312c1642">   18</a></span>    <a class="code hl_function" href="struct_s_f_m_l_1_1_transform.html#a0230af79cad2d0b9405c1cc9312c1642">Transform</a>(<span class="keyword">const</span> Vector2f&amp; position = { 0.0, 0.0 }, <span class="keywordtype">float</span> rotation = 0.0, <span class="keyword">const</span> Vector2f&amp; scale = { 1.0, 1.0 }, <span class="keyword">const</span> Vector2f&amp; origin = { 0.0, 0.0 })</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        : position(position)</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        , rotation(rotation)</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        , scale(scale)</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        , origin(origin)</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    {</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    }</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    Vector2f position;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keywordtype">float</span> rotation;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    Vector2f scale;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    Vector2f origin;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>};</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>}</div>
 <div class="ttc" id="astruct_s_f_m_l_1_1_transform_html"><div class="ttname"><a href="struct_s_f_m_l_1_1_transform.html">SFML::Transform</a></div><div class="ttdoc">Component that allows an entity to be transformed (position, rotation, scale, origin)</div><div class="ttdef"><b>Definition:</b> Transform.hpp:9</div></div>
-<div class="ttc" id="astruct_s_f_m_l_1_1_transform_html_a624d01318ced89c7578a8557bf0a1248"><div class="ttname"><a href="struct_s_f_m_l_1_1_transform.html#a624d01318ced89c7578a8557bf0a1248">SFML::Transform::Transform</a></div><div class="ttdeci">Transform(const Vector2f &amp;position={0.0, 0.0}, float rotation=0.0, const Vector2f &amp;scale={1.0, 1.0}, const Vector2f &amp;origin={0.0, 0.0})</div><div class="ttdoc">Construct a new Transform Component.</div><div class="ttdef"><b>Definition:</b> Transform.hpp:18</div></div>
+<div class="ttc" id="astruct_s_f_m_l_1_1_transform_html_a0230af79cad2d0b9405c1cc9312c1642"><div class="ttname"><a href="struct_s_f_m_l_1_1_transform.html#a0230af79cad2d0b9405c1cc9312c1642">SFML::Transform::Transform</a></div><div class="ttdeci">Transform(const Vector2f &amp;position={ 0.0, 0.0 }, float rotation=0.0, const Vector2f &amp;scale={ 1.0, 1.0 }, const Vector2f &amp;origin={ 0.0, 0.0 })</div><div class="ttdoc">Construct a new Transform Component.</div><div class="ttdef"><b>Definition:</b> Transform.hpp:18</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

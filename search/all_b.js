@@ -6,7 +6,7 @@ var searchData=
   ['tint_3',['Tint',['../struct_s_f_m_l_1_1_tint.html',1,'SFML::Tint'],['../struct_s_f_m_l_1_1_tint.html#a867b166589ba398f7316a8f414b23d17',1,'SFML::Tint::Tint()']]],
   ['tintsprite_4',['TintSprite',['../class_s_f_m_l_1_1_tint_sprite.html',1,'SFML']]],
   ['tinttext_5',['TintText',['../class_s_f_m_l_1_1_tint_text.html',1,'SFML']]],
-  ['transform_6',['Transform',['../struct_s_f_m_l_1_1_transform.html',1,'SFML::Transform'],['../struct_s_f_m_l_1_1_transform.html#a624d01318ced89c7578a8557bf0a1248',1,'SFML::Transform::Transform()']]],
+  ['transform_6',['Transform',['../struct_s_f_m_l_1_1_transform.html',1,'SFML::Transform'],['../struct_s_f_m_l_1_1_transform.html#a0230af79cad2d0b9405c1cc9312c1642',1,'SFML::Transform::Transform()']]],
   ['transformsprite_7',['TransformSprite',['../class_s_f_m_l_1_1_transform_sprite.html',1,'SFML']]],
   ['transformtext_8',['TransformText',['../class_s_f_m_l_1_1_transform_text.html',1,'SFML']]]
 ];
