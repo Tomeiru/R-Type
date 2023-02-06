@@ -38,3 +38,5 @@ build/
 # IDE folders
 .idea
 .vscode
+.vs
+CMakeSettings.json
