@@ -112,6 +112,10 @@ namespace RType::Network {
             return (_queue.pop());
         }
 
+        void pushQueue(ReceivedPacket &packet) {
+            _queue.push(packet);
+        }
+
     private:
         std::shared_ptr<Network::PackageManager> _package_manager;
         std::thread _thread;

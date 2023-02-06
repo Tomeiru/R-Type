@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../sfml/Vector2.hpp"
+#include "../../sfml/Vector2.hpp"
 
 namespace SFML {
     /**
