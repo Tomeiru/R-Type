@@ -8,11 +8,13 @@
 #include "../common/packet/PlayerName.hpp"
 #include "../common/packet/GameStart.hpp"
 #include "../common/packet/SpawnEntity.hpp"
+#include "../common/packet/PlayerInputs.hpp"
 #include "../sfml/TextureManager.hpp"
 #include "../sfml/SpriteManager.hpp"
 #include "../common/component/SpriteReference.hpp"
 #include "../common/component/Transform.hpp"
 #include "Server.hpp"
+#include "../common/packet/EntityPosition.hpp"
 
 std::uint16_t RType::Server::parseArguments(int ac, char **av) {
     if (ac != 2)
@@ -42,6 +44,8 @@ void RType::Server::registerPackets(std::unique_ptr<ECS::Coordinator> &coordinat
     package_manager->registerPacket<RType::Packet::PlayerName>();
     package_manager->registerPacket<RType::Packet::GameStart>();
     package_manager->registerPacket<RType::Packet::SpawnEntity>();
+    package_manager->registerPacket<RType::Packet::PlayerInputs>();
+    package_manager->registerPacket<RType::Packet::EntityPosition>();
 }
 
 void RType::Server::loadAssets(std::unique_ptr<ECS::Coordinator> &coordinator) {
@@ -75,10 +79,8 @@ void RType::Server::waiting_for_players(std::unique_ptr<ECS::Coordinator> &coord
             std::cout << "A new player joined the game! We're now " << player_manager->getNbPlayerConnected() << std::endl;
         }
     }
-    RType::Packet::GameStart game_start;
-    auto packet = package_manager->createPacket<RType::Packet::GameStart>(game_start);
     std::cout << "Everyone joined! The game can finally start!" << std::endl;
-    player_manager->sendPacketToAllPlayer(&packet, sizeof(packet), udp_handler);
+    player_manager->sendGamestartToAllPlayers(udp_handler, package_manager);
 }
 
 void RType::Server::game_loop(std::unique_ptr<ECS::Coordinator> &coordinator) {
@@ -94,7 +96,29 @@ void RType::Server::game_loop(std::unique_ptr<ECS::Coordinator> &coordinator) {
             std::shared_ptr<RType::Network::Header> header = package_manager->decodeHeader(packet_received.packet_data);
             if (!header)
                 continue;
+            if (header->id == package_manager->getTypeId<RType::Packet::PlayerInputs>()) {
+                auto decoded_player_inputs = package_manager->decodeContent<RType::Packet::PlayerInputs>(packet_received.packet_data);
+                auto player = player_manager->getEntityFromPlayerID(header->player_id);
+                auto &transform = coordinator->getComponent<SFML::Transform>(player);
+                float movement_x = 0;
+                float movement_y = 0;
+                float speed = 10;
+
+                if (decoded_player_inputs->left == 1)
+                    movement_x -= speed;
+                if (decoded_player_inputs->right == 1)
+                    movement_x += speed;
+                if (decoded_player_inputs->up == 1)
+                    movement_y -= speed;
+                if (decoded_player_inputs->down == 1)
+                    movement_y += speed;
+                transform.position = sf::Vector2f(transform.position.getX() + movement_x, transform.position.getY() + movement_y);
+                RType::Packet::EntityPosition entity_position(player, transform.position.getX(), transform.position.getY());
+                auto packet = package_manager->createPacket<RType::Packet::EntityPosition>(entity_position);
+                player_manager->sendPacketToAllPlayer(&packet, sizeof(packet), udp_handler);
+            }
         }
+
     }
 }
 

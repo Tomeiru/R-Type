@@ -13,7 +13,7 @@ namespace SFML {
          * 
          * @param rect Rectangle that represents the hitbox
          */
-        Hitbox() : rect((FloatRect){0,0,0,0}) {}
+        Hitbox() : rect(FloatRect(0,0,0,0)) {}
         Hitbox(FloatRect rect) : rect(rect) {};
         FloatRect rect;
     };

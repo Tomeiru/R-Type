@@ -1,7 +1,5 @@
 #pragma once
 
-#include <string>
-
 namespace RType::Packet {
     /**
      * @brief PlayerInputs is a class that represents a player inputs packet
