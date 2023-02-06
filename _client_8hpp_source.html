@@ -88,8 +88,16 @@ $(function() {
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keywordtype">void</span> registerResources(std::unique_ptr&lt;ECS::Coordinator&gt; &amp;coordinator, std::uint16_t port);</div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    std::pair&lt;RType::Network::UDPClient, std::uint16_t&gt;parseArguments(<span class="keywordtype">int</span> ac, <span class="keywordtype">char</span> **av);</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>}</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keywordtype">void</span> registerComponents(std::unique_ptr&lt;ECS::Coordinator&gt; &amp;coordinator);</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keywordtype">void</span> registerSystems(std::unique_ptr&lt;ECS::Coordinator&gt; &amp;coordinator);</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keywordtype">void</span> loadAssets(std::unique_ptr&lt;ECS::Coordinator&gt; &amp;coordinator);</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    std::pair&lt;RType::Network::UDPClient, std::uint16_t&gt;parseArguments(<span class="keywordtype">int</span> ac, <span class="keywordtype">char</span> **av);</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="keywordtype">void</span> game_loop(std::unique_ptr&lt;ECS::Coordinator&gt; &amp;coordinator);</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>}</div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
