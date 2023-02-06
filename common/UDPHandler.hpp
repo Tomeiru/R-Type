@@ -2,24 +2,38 @@
 
 #include <cstdint>
 #include <thread>
-#include <SFML/Network/UdpSocket.hpp>
+#include "../sfml/UDPSocket.hpp"
 #include <iostream>
+#include <memory>
 #include "PackageManager.hpp"
 #include "ThreadSafeQueue.hpp"
+#include "UDPClient.hpp"
+#include "ReceivedPacket.hpp"
 
 namespace RType::Network {
+    /**
+     * @brief
+     */
     class UDPHandler {
     public:
-        UDPHandler(std::uint16_t port, const Network::PackageManager &package_manager) : _port(port), _started(false), _package_manager(package_manager) {}
+        /**
+         * @brief Constructs a new UDPHandler object
+         * @param port The port to bind the handler to
+         * @param package_manager The package manager that will handle the packet registration and creation
+         */
+        UDPHandler(std::uint16_t port, std::shared_ptr<Network::PackageManager> &package_manager) : _port(port), _started(false), _package_manager(package_manager) {}
         void startHandler() {
             if (_started)
                 throw RuntimeException("Server::startHandler", "Handler already started");
             _socket.setBlocking(false);
-            if (_socket.bind(_port) != sf::Socket::Done)
+            if (_socket.bind(_port) != SFML::UDPSocket::Done)
                 throw RuntimeException("Server::startHandler", "Binding a port to the handler failed");
             _started = true;
             _thread = std::thread([this] {while (_started) {receive();}});
         }
+        /**
+         * @brief Stops the handler
+         */
         void stopHandler() {
             if (!_started)
                 throw RuntimeException("Server::stopHandler", "Handler has not been started yet");
@@ -28,44 +42,86 @@ namespace RType::Network {
             _thread.join();
         }
 
+        /**
+         * @brief Registers a packet to the package manager
+         * @tparam PayloadT The type of the packet
+         */
         template<typename PayloadT>
         void registerPacket() {
-            return _package_manager.registerPacket<PayloadT>();
+            return _package_manager->registerPacket<PayloadT>();
         }
 
+        /**
+         * @brief Receives a packet from the network
+         * @return The status of the reception or the size received
+         */
         std::uint32_t receive() {
             Network::Header header{};
-            sf::IpAddress sender;
+            SFML::IpAddress sender(0);
             std::uint16_t port;
             std::size_t received;
             char data[1024];
             auto status = _socket.receive(data, 1024, received, sender, port);
 
-            if (status != sf::Socket::Done) {
+            if (status != SFML::UDPSocket::Done) {
                 return status;
             }
             std::string data_received(data, received);
-            _queue.push(data);
+            ReceivedPacket received_packet(sender, port, data_received);
+            _queue.push(received_packet);
             std::cout << "A packed has been received" << std::endl;
             return received;
         }
 
-        void send(const void *data, std::size_t size, const sf::IpAddress &address, uint16_t port) {
-            if (_socket.send(data, size, address, port) == sf::Socket::Done)
+        /**
+         * @brief Sends a packet to the network
+         * @tparam PayloadT The type of the packet
+         * @param payload The payload of the packet
+         * @param address The address to send the packet to
+         * @param port The port to send the packet to
+         */
+        void send(const void *data, std::size_t size, const SFML::IpAddress &address, uint16_t port) {
+            if (_socket.send(data, size, address, port) == SFML::UDPSocket::Done)
                 std::cout << "UDPHandler::send: data successfully sent" <<  std::endl;
         }
 
+        /**
+         * @brief Creates a packet
+         * @tparam PayloadT The type of the packet
+         * @param payload The payload of the packet
+         * @return The packet
+         */
         template<typename PayloadT>
         Network::Packet<PayloadT> createPacket(PayloadT &payload) {
-            return _package_manager.createPacket(payload);
+            return _package_manager->createPacket(payload);
+        }
+
+        /**
+         * @brief Checks if the queue is empty
+         * @return If the queue is empty
+         */
+        bool isQueueEmpty() {
+            return (_queue.empty());
+        };
+
+        /**
+         * @brief Pops an element from the queue
+         * @return The element
+         */
+        ReceivedPacket popElement() {
+            return (_queue.pop());
+        }
+
+        void pushQueue(ReceivedPacket &packet) {
+            _queue.push(packet);
         }
 
     private:
-        const Network::PackageManager &_package_manager;
+        std::shared_ptr<Network::PackageManager> _package_manager;
         std::thread _thread;
-        sf::UdpSocket _socket;
+        SFML::UDPSocket _socket;
         std::uint16_t _port;
-        Network::ThreadSafeQueue<std::string> _queue;
+        Network::ThreadSafeQueue<ReceivedPacket> _queue;
         bool _started;
     };
 }

@@ -5,8 +5,16 @@
 #include "../component/MovementJoystick.hpp"
 
 namespace SFML {
+    /**
+     * @brief System that updates the position of all entities with a MovementJoystick component and a Transform component
+     */
     class UpdateJoystickMovements : public ECS::System {
     public:
+        /**
+         * @brief Function that updates the position of all entities with a MovementJoystick component and a Transform component
+         * 
+         * @param coordinator Reference to the ecs coordinator
+         */
         void update(ECS::Coordinator &coordinator) {
             for (const auto &entity: entities) {
                 auto &transform = coordinator.getComponent<Transform>(entity);

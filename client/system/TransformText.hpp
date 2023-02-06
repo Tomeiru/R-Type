@@ -7,8 +7,16 @@
 #include "../component/Transform.hpp"
 
 namespace SFML {
+    /**
+     * @brief System that sets the transform of all texts with a Transform component
+     */
     class TransformText : public ECS::System {
     public:
+        /**
+         * @brief Function that sets the transform of all texts with a Transform component
+         * 
+         * @param coordinator Reference to the ecs coordinator
+         */
         void update(ECS::Coordinator &coordinator) {
             auto text_manager = coordinator.getResource<SFML::TextManager>();
             for (const auto &entity : entities) {
