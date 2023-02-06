@@ -188,25 +188,42 @@ void RType::Client::game_loop(std::unique_ptr<ECS::Coordinator>& coordinator, co
  */
 int main(int ac, char** av)
 {
-    auto [server_infos, client_port] = RType::Client::parseArguments(ac, av);
-    auto coordinator = std::make_unique<ECS::Coordinator>();
+    try {
+        auto [server_infos, client_port] = RType::Client::parseArguments(ac, av);
+        auto coordinator = std::make_unique<ECS::Coordinator>();
 
-    RType::Client::registerResources(coordinator, client_port);
-    RType::Client::registerPackets(coordinator);
-    RType::Client::registerComponents(coordinator);
-    RType::Client::registerSystems(coordinator);
+        RType::Client::registerResources(coordinator, client_port);
+        RType::Client::registerPackets(coordinator);
+        RType::Client::registerComponents(coordinator);
+        RType::Client::registerSystems(coordinator);
 
-    auto package_manager = coordinator->getResource<RType::Network::PackageManager>();
-    auto udp_handler = coordinator->getResource<RType::Network::UDPHandler>();
+        auto package_manager = coordinator->getResource<RType::Network::PackageManager>();
+        auto udp_handler = coordinator->getResource<RType::Network::UDPHandler>();
 
-    RType::Packet::PlayerName player_name("AAAAAAAAAAA");
-    auto packet = package_manager->createPacket<RType::Packet::PlayerName>(player_name);
+        RType::Packet::PlayerName player_name("AAAAAAAAAAA");
+        auto packet = package_manager->createPacket<RType::Packet::PlayerName>(player_name);
 
-    udp_handler->startHandler();
-    udp_handler->send(&packet, sizeof(packet), server_infos.getIpAddress(), server_infos.getPort());
-    RType::Client::loadAssets(coordinator);
-    RType::Client::waiting_game_to_start(coordinator);
-    RType::Client::game_loop(coordinator, server_infos);
-    udp_handler->stopHandler();
+        udp_handler->startHandler();
+        udp_handler->send(&packet, sizeof(packet), server_infos.getIpAddress(), server_infos.getPort());
+        RType::Client::loadAssets(coordinator);
+        RType::Client::waiting_game_to_start(coordinator);
+        RType::Client::game_loop(coordinator, server_infos);
+        udp_handler->stopHandler();
+    } catch (std::invalid_argument& e) {
+        std::cerr
+            << "An exception appeared in the argument checking part of the code: "
+            << e.what() << std::endl;
+        return (84);
+    } catch (std::out_of_range& e) {
+        std::cerr
+            << "An exception appeared in the argument checking part of the code: "
+            << "parseArguments: Port should be a number between 0 and 65535"
+            << std::endl;
+        return (84);
+    } catch (ECS::RuntimeException& e) {
+        std::cerr << "An exception appeared in the ECS part of the code: "
+                  << e.what() << std::endl;
+        return (84);
+    }
     return (0);
 }
