@@ -80,6 +80,9 @@ if (MSVC OR MSYS OR MINGW OR WIN32)
     file(GLOB debug_dll "${VCPKG_LIBRARY_DIR}/debug/bin/*.dll")
     file(COPY ${release_dll} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
     file(COPY ${debug_dll} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+    file(GLOB assets_file "${VCPKG_LIBRARY_DIR}/debug/bin/*.dll")
+    file(COPY ./assets DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/..
+        PATTERN "*")
     set(CMAKE_PREFIX_PATH ${VCPKG_ROOT_DIR}\\installed\\${VCPKG_TARGET_TRIPLET})
 endif()
 
