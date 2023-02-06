@@ -82,20 +82,21 @@ $(function() {
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">namespace </span>RType::Packet {</div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="struct_r_type_1_1_packet_1_1_spawn_entity.html">   10</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="struct_r_type_1_1_packet_1_1_spawn_entity.html">SpawnEntity</a> {</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="struct_r_type_1_1_packet_1_1_spawn_entity.html#aa1cda10343929e1a9886ff73e4aa4bc8">   18</a></span>        <a class="code hl_function" href="struct_r_type_1_1_packet_1_1_spawn_entity.html#aa1cda10343929e1a9886ff73e4aa4bc8">SpawnEntity</a>(std::string sprite_id = <span class="stringliteral">&quot;&quot;</span>,<span class="keywordtype">float</span> x = 0, <span class="keywordtype">float</span> y = 0) :_x(x), _y(y) {</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="struct_r_type_1_1_packet_1_1_spawn_entity.html#afba03708d7f865570eab085e087efcbb">   18</a></span>        <a class="code hl_function" href="struct_r_type_1_1_packet_1_1_spawn_entity.html#afba03708d7f865570eab085e087efcbb">SpawnEntity</a>(ECS::Entity entity = 0, std::string sprite_id = <span class="stringliteral">&quot;&quot;</span>,<span class="keywordtype">float</span> x = 0, <span class="keywordtype">float</span> y = 0) : _entity(entity), _x(x), _y(y) {</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 15; i++) {</div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>                _sprite_id[i] = (i &lt; sprite_id.size() ? sprite_id[i] : <span class="charliteral">&#39;\0&#39;</span>);</div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>            }</div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>            _sprite_id[15] = <span class="charliteral">&#39;\0&#39;</span>;</div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        };</div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        <span class="keywordtype">char</span> _sprite_id[16];</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        <span class="keywordtype">float</span> _x;</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        <span class="keywordtype">float</span> _y;</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    };</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>};</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        ECS::Entity _entity;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        <span class="keywordtype">char</span> _sprite_id[16];</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        <span class="keywordtype">float</span> _x;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        <span class="keywordtype">float</span> _y;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    };</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>};</div>
 <div class="ttc" id="astruct_r_type_1_1_packet_1_1_spawn_entity_html"><div class="ttname"><a href="struct_r_type_1_1_packet_1_1_spawn_entity.html">RType::Packet::SpawnEntity</a></div><div class="ttdoc">SpawnEntity is a class that represents a spawn entity packet.</div><div class="ttdef"><b>Definition:</b> SpawnEntity.hpp:10</div></div>
-<div class="ttc" id="astruct_r_type_1_1_packet_1_1_spawn_entity_html_aa1cda10343929e1a9886ff73e4aa4bc8"><div class="ttname"><a href="struct_r_type_1_1_packet_1_1_spawn_entity.html#aa1cda10343929e1a9886ff73e4aa4bc8">RType::Packet::SpawnEntity::SpawnEntity</a></div><div class="ttdeci">SpawnEntity(std::string sprite_id=&quot;&quot;, float x=0, float y=0)</div><div class="ttdoc">Constructs a new SpawnEntity object.</div><div class="ttdef"><b>Definition:</b> SpawnEntity.hpp:18</div></div>
+<div class="ttc" id="astruct_r_type_1_1_packet_1_1_spawn_entity_html_afba03708d7f865570eab085e087efcbb"><div class="ttname"><a href="struct_r_type_1_1_packet_1_1_spawn_entity.html#afba03708d7f865570eab085e087efcbb">RType::Packet::SpawnEntity::SpawnEntity</a></div><div class="ttdeci">SpawnEntity(ECS::Entity entity=0, std::string sprite_id=&quot;&quot;, float x=0, float y=0)</div><div class="ttdoc">Constructs a new SpawnEntity object.</div><div class="ttdef"><b>Definition:</b> SpawnEntity.hpp:18</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -78,21 +78,19 @@ $(function() {
 <div class="contents">
 <div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">namespace </span>RType::Packet {</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="struct_r_type_1_1_packet_1_1_player_inputs.html">    9</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="struct_r_type_1_1_packet_1_1_player_inputs.html">PlayerInputs</a> {</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="struct_r_type_1_1_packet_1_1_player_inputs.html#a47a6d3fc78bccdb97dbe4d4149aaad6b">   18</a></span>        <a class="code hl_function" href="struct_r_type_1_1_packet_1_1_player_inputs.html#a47a6d3fc78bccdb97dbe4d4149aaad6b">PlayerInputs</a>(<span class="keywordtype">char</span> left = <span class="keyword">false</span>, <span class="keywordtype">char</span> right = <span class="keyword">false</span>, <span class="keywordtype">char</span> up = <span class="keyword">false</span>, <span class="keywordtype">char</span> down = <span class="keyword">false</span>, <span class="keywordtype">char</span> shoot = <span class="keyword">false</span>) : left(left), right(right), up(up), down(down), shoot(shoot) {};</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        <span class="keywordtype">char</span> left;</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        <span class="keywordtype">char</span> right;</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        <span class="keywordtype">char</span> up;</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        <span class="keywordtype">char</span> down;</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        <span class="keywordtype">char</span> shoot;</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    };</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>};</div>
-<div class="ttc" id="astruct_r_type_1_1_packet_1_1_player_inputs_html"><div class="ttname"><a href="struct_r_type_1_1_packet_1_1_player_inputs.html">RType::Packet::PlayerInputs</a></div><div class="ttdoc">PlayerInputs is a class that represents a player inputs packet.</div><div class="ttdef"><b>Definition:</b> PlayerInputs.hpp:9</div></div>
-<div class="ttc" id="astruct_r_type_1_1_packet_1_1_player_inputs_html_a47a6d3fc78bccdb97dbe4d4149aaad6b"><div class="ttname"><a href="struct_r_type_1_1_packet_1_1_player_inputs.html#a47a6d3fc78bccdb97dbe4d4149aaad6b">RType::Packet::PlayerInputs::PlayerInputs</a></div><div class="ttdeci">PlayerInputs(char left=false, char right=false, char up=false, char down=false, char shoot=false)</div><div class="ttdoc">Constructs a new PlayerInputs object.</div><div class="ttdef"><b>Definition:</b> PlayerInputs.hpp:18</div></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="keyword">namespace </span>RType::Packet {</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno"><a class="line" href="struct_r_type_1_1_packet_1_1_player_inputs.html">    7</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="struct_r_type_1_1_packet_1_1_player_inputs.html">PlayerInputs</a> {</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="struct_r_type_1_1_packet_1_1_player_inputs.html#a47a6d3fc78bccdb97dbe4d4149aaad6b">   16</a></span>        <a class="code hl_function" href="struct_r_type_1_1_packet_1_1_player_inputs.html#a47a6d3fc78bccdb97dbe4d4149aaad6b">PlayerInputs</a>(<span class="keywordtype">char</span> left = <span class="keyword">false</span>, <span class="keywordtype">char</span> right = <span class="keyword">false</span>, <span class="keywordtype">char</span> up = <span class="keyword">false</span>, <span class="keywordtype">char</span> down = <span class="keyword">false</span>, <span class="keywordtype">char</span> shoot = <span class="keyword">false</span>) : left(left), right(right), up(up), down(down), shoot(shoot) {};</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        <span class="keywordtype">char</span> left;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        <span class="keywordtype">char</span> right;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        <span class="keywordtype">char</span> up;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        <span class="keywordtype">char</span> down;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        <span class="keywordtype">char</span> shoot;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    };</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>};</div>
+<div class="ttc" id="astruct_r_type_1_1_packet_1_1_player_inputs_html"><div class="ttname"><a href="struct_r_type_1_1_packet_1_1_player_inputs.html">RType::Packet::PlayerInputs</a></div><div class="ttdoc">PlayerInputs is a class that represents a player inputs packet.</div><div class="ttdef"><b>Definition:</b> PlayerInputs.hpp:7</div></div>
+<div class="ttc" id="astruct_r_type_1_1_packet_1_1_player_inputs_html_a47a6d3fc78bccdb97dbe4d4149aaad6b"><div class="ttname"><a href="struct_r_type_1_1_packet_1_1_player_inputs.html#a47a6d3fc78bccdb97dbe4d4149aaad6b">RType::Packet::PlayerInputs::PlayerInputs</a></div><div class="ttdeci">PlayerInputs(char left=false, char right=false, char up=false, char down=false, char shoot=false)</div><div class="ttdoc">Constructs a new PlayerInputs object.</div><div class="ttdef"><b>Definition:</b> PlayerInputs.hpp:16</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

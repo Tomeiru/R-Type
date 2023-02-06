@@ -88,12 +88,15 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aa1cda10343929e1a9886ff73e4aa4bc8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_r_type_1_1_packet_1_1_spawn_entity.html#aa1cda10343929e1a9886ff73e4aa4bc8">SpawnEntity</a> (std::string sprite_id=&quot;&quot;, float x=0, float y=0)</td></tr>
-<tr class="memdesc:aa1cda10343929e1a9886ff73e4aa4bc8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="struct_r_type_1_1_packet_1_1_spawn_entity.html" title="SpawnEntity is a class that represents a spawn entity packet.">SpawnEntity</a> object.  <br /></td></tr>
-<tr class="separator:aa1cda10343929e1a9886ff73e4aa4bc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afba03708d7f865570eab085e087efcbb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_r_type_1_1_packet_1_1_spawn_entity.html#afba03708d7f865570eab085e087efcbb">SpawnEntity</a> (ECS::Entity entity=0, std::string sprite_id=&quot;&quot;, float x=0, float y=0)</td></tr>
+<tr class="memdesc:afba03708d7f865570eab085e087efcbb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="struct_r_type_1_1_packet_1_1_spawn_entity.html" title="SpawnEntity is a class that represents a spawn entity packet.">SpawnEntity</a> object.  <br /></td></tr>
+<tr class="separator:afba03708d7f865570eab085e087efcbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
+<tr class="memitem:a60c6270f9f2f05dad4e1014b44c55460"><td class="memItemLeft" align="right" valign="top"><a id="a60c6270f9f2f05dad4e1014b44c55460" name="a60c6270f9f2f05dad4e1014b44c55460"></a>
+ECS::Entity&#160;</td><td class="memItemRight" valign="bottom"><b>_entity</b></td></tr>
+<tr class="separator:a60c6270f9f2f05dad4e1014b44c55460"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a46bf8946a8f8cc3bb7c7e083326fc61c"><td class="memItemLeft" align="right" valign="top"><a id="a46bf8946a8f8cc3bb7c7e083326fc61c" name="a46bf8946a8f8cc3bb7c7e083326fc61c"></a>
 char&#160;</td><td class="memItemRight" valign="bottom"><b>_sprite_id</b> [16]</td></tr>
 <tr class="separator:a46bf8946a8f8cc3bb7c7e083326fc61c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -107,8 +110,8 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>_y</b></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="struct_r_type_1_1_packet_1_1_spawn_entity.html" title="SpawnEntity is a class that represents a spawn entity packet.">SpawnEntity</a> is a class that represents a spawn entity packet. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="aa1cda10343929e1a9886ff73e4aa4bc8" name="aa1cda10343929e1a9886ff73e4aa4bc8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa1cda10343929e1a9886ff73e4aa4bc8">&#9670;&#160;</a></span>SpawnEntity()</h2>
+<a id="afba03708d7f865570eab085e087efcbb" name="afba03708d7f865570eab085e087efcbb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afba03708d7f865570eab085e087efcbb">&#9670;&#160;</a></span>SpawnEntity()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -119,6 +122,12 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>_y</b></td></tr>
         <tr>
           <td class="memname">RType::Packet::SpawnEntity::SpawnEntity </td>
           <td>(</td>
+          <td class="paramtype">ECS::Entity&#160;</td>
+          <td class="paramname"><em>entity</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">std::string&#160;</td>
           <td class="paramname"><em>sprite_id</em> = <code>&quot;&quot;</code>, </td>
         </tr>

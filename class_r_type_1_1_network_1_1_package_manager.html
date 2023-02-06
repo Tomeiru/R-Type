@@ -87,10 +87,10 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad924e984e789f248aa09065e66236e69"><td class="memTemplParams" colspan="2">template&lt;typename PayloadT &gt; </td></tr>
-<tr class="memitem:ad924e984e789f248aa09065e66236e69"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_r_type_1_1_network_1_1_packet.html">Packet</a>&lt; PayloadT &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_r_type_1_1_network_1_1_package_manager.html#ad924e984e789f248aa09065e66236e69">createPacket</a> (PayloadT &amp;payload)</td></tr>
-<tr class="memdesc:ad924e984e789f248aa09065e66236e69"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a packet of PayloadT type.  <br /></td></tr>
-<tr class="separator:ad924e984e789f248aa09065e66236e69"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6eb6e09c1841ec20a55a52e7cdb5d64"><td class="memTemplParams" colspan="2">template&lt;typename PayloadT &gt; </td></tr>
+<tr class="memitem:af6eb6e09c1841ec20a55a52e7cdb5d64"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_r_type_1_1_network_1_1_packet.html">Packet</a>&lt; PayloadT &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_r_type_1_1_network_1_1_package_manager.html#af6eb6e09c1841ec20a55a52e7cdb5d64">createPacket</a> (PayloadT &amp;payload, std::uint16_t player_id=0)</td></tr>
+<tr class="memdesc:af6eb6e09c1841ec20a55a52e7cdb5d64"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a packet of PayloadT type.  <br /></td></tr>
+<tr class="separator:af6eb6e09c1841ec20a55a52e7cdb5d64"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeaab1176d55148c80296c71dbc393198"><td class="memTemplParams" colspan="2">template&lt;typename PayloadT &gt; </td></tr>
 <tr class="memitem:aeaab1176d55148c80296c71dbc393198"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_r_type_1_1_network_1_1_package_manager.html#aeaab1176d55148c80296c71dbc393198">registerPacket</a> ()</td></tr>
 <tr class="memdesc:aeaab1176d55148c80296c71dbc393198"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers a packet Type to the package manager.  <br /></td></tr>
@@ -116,8 +116,8 @@ Public Member Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="class_r_type_1_1_network_1_1_package_manager.html" title="PackageManager is a class that manages the packets.">PackageManager</a> is a class that manages the packets. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="ad924e984e789f248aa09065e66236e69" name="ad924e984e789f248aa09065e66236e69"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad924e984e789f248aa09065e66236e69">&#9670;&#160;</a></span>createPacket()</h2>
+<a id="af6eb6e09c1841ec20a55a52e7cdb5d64" name="af6eb6e09c1841ec20a55a52e7cdb5d64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6eb6e09c1841ec20a55a52e7cdb5d64">&#9670;&#160;</a></span>createPacket()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -131,8 +131,18 @@ template&lt;typename PayloadT &gt; </div>
           <td class="memname"><a class="el" href="struct_r_type_1_1_network_1_1_packet.html">Packet</a>&lt; PayloadT &gt; RType::Network::PackageManager::createPacket </td>
           <td>(</td>
           <td class="paramtype">PayloadT &amp;&#160;</td>
-          <td class="paramname"><em>payload</em></td><td>)</td>
+          <td class="paramname"><em>payload</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">std::uint16_t&#160;</td>
+          <td class="paramname"><em>player_id</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>

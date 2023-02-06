@@ -88,15 +88,15 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a081c8b57cfc01fd9fecce8a936c7cd34"><td class="memItemLeft" align="right" valign="top"><a id="a081c8b57cfc01fd9fecce8a936c7cd34" name="a081c8b57cfc01fd9fecce8a936c7cd34"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>EntityPosition</b> (std::string id=&quot;&quot;, float x=0, float y=0)</td></tr>
-<tr class="separator:a081c8b57cfc01fd9fecce8a936c7cd34"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4da9d3059b5d0084586189ed37f8d661"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_r_type_1_1_packet_1_1_entity_position.html#a4da9d3059b5d0084586189ed37f8d661">EntityPosition</a> (ECS::Entity entity=0, float x=0, float y=0)</td></tr>
+<tr class="memdesc:a4da9d3059b5d0084586189ed37f8d661"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="struct_r_type_1_1_packet_1_1_entity_position.html" title="EntityPosition is a class that represents an enemy position packet.">EntityPosition</a> packet.  <br /></td></tr>
+<tr class="separator:a4da9d3059b5d0084586189ed37f8d661"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a7bfa4e505cdba25d534862b17cd6156e"><td class="memItemLeft" align="right" valign="top"><a id="a7bfa4e505cdba25d534862b17cd6156e" name="a7bfa4e505cdba25d534862b17cd6156e"></a>
-char&#160;</td><td class="memItemRight" valign="bottom"><b>sprite_id</b> [16]</td></tr>
-<tr class="separator:a7bfa4e505cdba25d534862b17cd6156e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac768bfe375cb86293d73230e7964da43"><td class="memItemLeft" align="right" valign="top"><a id="ac768bfe375cb86293d73230e7964da43" name="ac768bfe375cb86293d73230e7964da43"></a>
+ECS::Entity&#160;</td><td class="memItemRight" valign="bottom"><b>_entity</b></td></tr>
+<tr class="separator:ac768bfe375cb86293d73230e7964da43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1fe9f01f2a9c145142fd241fc136d3fb"><td class="memItemLeft" align="right" valign="top"><a id="a1fe9f01f2a9c145142fd241fc136d3fb" name="a1fe9f01f2a9c145142fd241fc136d3fb"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>_x</b></td></tr>
 <tr class="separator:a1fe9f01f2a9c145142fd241fc136d3fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -106,7 +106,60 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>_y</b></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="struct_r_type_1_1_packet_1_1_entity_position.html" title="EntityPosition is a class that represents an enemy position packet.">EntityPosition</a> is a class that represents an enemy position packet. </p>
-</div><hr/>The documentation for this struct was generated from the following file:<ul>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a4da9d3059b5d0084586189ed37f8d661" name="a4da9d3059b5d0084586189ed37f8d661"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4da9d3059b5d0084586189ed37f8d661">&#9670;&#160;</a></span>EntityPosition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">RType::Packet::EntityPosition::EntityPosition </td>
+          <td>(</td>
+          <td class="paramtype">ECS::Entity&#160;</td>
+          <td class="paramname"><em>entity</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>x</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>y</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructs a new <a class="el" href="struct_r_type_1_1_packet_1_1_entity_position.html" title="EntityPosition is a class that represents an enemy position packet.">EntityPosition</a> packet. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>The server id of the entity </td></tr>
+    <tr><td class="paramname">x</td><td>The x position of the entity </td></tr>
+    <tr><td class="paramname">y</td><td>The y position of the entity </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
 <li>common/packet/<a class="el" href="_entity_position_8hpp_source.html">EntityPosition.hpp</a></li>
 </ul>
 </div><!-- contents -->
