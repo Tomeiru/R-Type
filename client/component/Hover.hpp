@@ -1,16 +1,17 @@
 #pragma once
 
 namespace SFML {
+/**
+ * @brief Component that allows an entity to be hovered
+ */
+struct Hover {
     /**
-     * @brief Component that allows an entity to be hovered
+     * @brief Construct a new Hover Component
+     *
+     * @param hovered Whether the entity is hovered or not
      */
-    struct Hover {
-        /**
-         * @brief Construct a new Hover Component
-         * 
-         * @param hovered Whether the entity is hovered or not
-         */
-        Hover(bool hovered = false) : hovered(hovered) {};
-        bool hovered;
-    };
+    Hover(bool hovered = false)
+        : hovered(hovered) {};
+    bool hovered;
+};
 }
