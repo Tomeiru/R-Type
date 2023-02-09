@@ -22,7 +22,7 @@ set (SRC_COMMON
 
 set(SRC_CLIENT
         client/main.cpp
-        client/Client.hpp client/PlayerID.hpp client/ServerEntityManager.hpp server/component/Speed.hpp server/component/Direction.hpp server/component/Attack.hpp server/component/DestroyEntity.hpp server/component/Health.hpp server/system/DestroyEntityOutWindow.hpp server/system/LinearMove.hpp server/system/Shoot.hpp)
+        client/Client.hpp client/PlayerID.hpp client/ServerEntityManager.hpp server/component/Speed.hpp server/component/Direction.hpp server/component/Attack.hpp server/component/DestroyEntity.hpp server/component/Health.hpp server/system/DestroyEntityOutWindow.hpp server/system/LinearMove.hpp server/system/Shoot.hpp server/system/KillNoLife.hpp client/system/TintSprite.hpp client/component/Clickable.hpp client/component/Hover.hpp client/component/Hover.hpp client/component/HoverTint.hpp client/component/MovementJoystick.hpp client/component/MusicReference.hpp client/component/Outline.hpp client/component/SoundReference.hpp client/component/Spin.hpp client/component/TextReference.hpp client/system/DrawText.hpp client/system/OutlineText.hpp client/system/PlayMusic.hpp client/system/PlaySound.hpp client/system/SpinSprite.hpp client/system/TintText.hpp client/system/TransformText.hpp client/system/UpdateClick.hpp client/system/UpdateHover.hpp client/system/UpdateHoverTint.hpp client/system/UpdateJoystickMovements.hpp)
 
 set(SRC_SERVER
         server/main.cpp

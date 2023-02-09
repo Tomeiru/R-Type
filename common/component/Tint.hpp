@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../sfml/Color.hpp"
+#include "../../sfml/Color.hpp"
 #include <memory>
 #include <string>
 
