@@ -22,7 +22,7 @@ set (SRC_COMMON
 
 set(SRC_CLIENT
         client/main.cpp
-        client/Client.hpp client/PlayerID.hpp client/ServerEntityManager.hpp)
+        client/Client.hpp client/PlayerID.hpp client/ServerEntityManager.hpp server/component/Speed.hpp server/component/Direction.hpp server/component/Attack.hpp server/component/DestroyEntity.hpp server/component/Health.hpp server/system/DestroyEntityOutWindow.hpp server/system/LinearMove.hpp server/system/Shoot.hpp)
 
 set(SRC_SERVER
         server/main.cpp

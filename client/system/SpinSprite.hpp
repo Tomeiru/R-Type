@@ -1,8 +1,8 @@
 #pragma once
 
+#include "../../common/component/Tint.hpp"
 #include "../component/Spin.hpp"
 #include "../component/SpriteReference.hpp"
-#include "../component/Tint.hpp"
 #include "../component/Transform.hpp"
 #include "../ecs/Coordinator.hpp"
 #include "../ecs/System.hpp"

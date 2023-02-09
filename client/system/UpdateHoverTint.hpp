@@ -1,8 +1,8 @@
 #pragma once
 
+#include "../../common/component/Tint.hpp"
 #include "../component/Hover.hpp"
 #include "../component/HoverTint.hpp"
-#include "../component/Tint.hpp"
 #include "../ecs/Coordinator.hpp"
 #include "../ecs/System.hpp"
 
