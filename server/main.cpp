@@ -3,6 +3,7 @@
 #include "../common/PackageManager.hpp"
 #include "../common/UDPHandler.hpp"
 #include "../common/component/SpriteReference.hpp"
+#include "../common/component/Tint.hpp"
 #include "../common/component/Transform.hpp"
 #include "../common/packet/EntityPosition.hpp"
 #include "../common/packet/GameStart.hpp"
@@ -14,7 +15,16 @@
 #include "../server/PlayerManager.hpp"
 #include "../sfml/SpriteManager.hpp"
 #include "../sfml/TextureManager.hpp"
+#include "BulletManager.hpp"
+#include "EnemyManager.hpp"
 #include "Server.hpp"
+#include "component/BackupTransform.hpp"
+#include "component/Health.hpp"
+#include "system/DestroyEntityOutWindow.hpp"
+#include "system/KillNoLife.hpp"
+#include "system/LinearMove.hpp"
+#include "system/Shoot.hpp"
+#include "system/UpdateEntityPositions.hpp"
 
 std::uint16_t RType::Server::parseArguments(int ac, char** av)
 {
@@ -37,6 +47,8 @@ void RType::Server::registerResources(
     coordinator->registerResource<RType::PlayerManager>();
     coordinator->registerResource<SFML::TextureManager>();
     coordinator->registerResource<SFML::SpriteManager>();
+    coordinator->registerResource<RType::EnemyManager>();
+    coordinator->registerResource<RType::BulletManager>();
 }
 
 void RType::Server::registerComponents(
@@ -44,6 +56,27 @@ void RType::Server::registerComponents(
 {
     coordinator->registerComponent<SFML::SpriteReference>();
     coordinator->registerComponent<SFML::Transform>();
+    coordinator->registerComponent<SFML::Attack>();
+    coordinator->registerComponent<SFML::DestroyEntity>();
+    coordinator->registerComponent<SFML::Direction>();
+    coordinator->registerComponent<SFML::Health>();
+    coordinator->registerComponent<SFML::Speed>();
+    coordinator->registerComponent<SFML::BackupTransform>();
+}
+
+void RType::Server::registerSystems(
+    std::unique_ptr<ECS::Coordinator>& coordinator)
+{
+    coordinator->registerSystem<SFML::DestroyEntityOutWindow>();
+    coordinator->setSignatureBits<SFML::DestroyEntityOutWindow, SFML::DestroyEntity, SFML::Transform>();
+    coordinator->registerSystem<SFML::LinearMove>();
+    coordinator->setSignatureBits<SFML::LinearMove, SFML::Speed, SFML::Direction, SFML::Transform>();
+    coordinator->registerSystem<SFML::Shoot>();
+    coordinator->setSignatureBits<SFML::Shoot, SFML::Attack>();
+    coordinator->registerSystem<SFML::KillNoLife>();
+    coordinator->setSignatureBits<SFML::KillNoLife, SFML::Health>();
+    coordinator->registerSystem<SFML::UpdateEntityPositions>();
+    coordinator->setSignatureBits<SFML::UpdateEntityPositions, SFML::Transform, SFML::BackupTransform>();
 }
 
 void RType::Server::registerPackets(
@@ -56,6 +89,8 @@ void RType::Server::registerPackets(
     package_manager->registerPacket<RType::Packet::SpawnEntity>();
     package_manager->registerPacket<RType::Packet::PlayerInputs>();
     package_manager->registerPacket<RType::Packet::EntityPosition>();
+    package_manager->registerPacket<RType::Packet::TransformEntity>();
+    package_manager->registerPacket<RType::Packet::DestroyEntity>();
 }
 
 void RType::Server::loadAssets(std::unique_ptr<ECS::Coordinator>& coordinator)
@@ -112,9 +147,12 @@ void RType::Server::game_loop(std::unique_ptr<ECS::Coordinator>& coordinator)
     auto package_manager = coordinator->getResource<RType::Network::PackageManager>();
     auto udp_handler = coordinator->getResource<RType::Network::UDPHandler>();
     auto player_manager = coordinator->getResource<RType::PlayerManager>();
+    auto enemy_manager = coordinator->getResource<RType::EnemyManager>();
+    auto bullet_manager = coordinator->getResource<RType::BulletManager>();
 
     std::cout << "Game loop started!" << std::endl;
     player_manager->spawnPlayers(udp_handler, package_manager, coordinator);
+    enemy_manager->spawnEnemy(udp_handler, coordinator);
     while (player_manager->getNbPlayerConnected() > 0) {
         while (!udp_handler->isQueueEmpty()) {
             RType::Network::ReceivedPacket packet_received = udp_handler->popElement();
@@ -148,6 +186,12 @@ void RType::Server::game_loop(std::unique_ptr<ECS::Coordinator>& coordinator)
                     udp_handler);
             }
         }
+
+        coordinator->getSystem<SFML::LinearMove>()->update(coordinator);
+        coordinator->getSystem<SFML::KillNoLife>()->update(coordinator);
+        //coordinator->getSystem<SFML::Shoot>()->update(coordinator);
+        coordinator->getSystem<SFML::DestroyEntityOutWindow>()->update(coordinator);
+        coordinator->getSystem<SFML::UpdateEntityPositions>()->update(coordinator, udp_handler);
     }
 }
 
@@ -166,6 +210,7 @@ int main(int ac, char** av)
         RType::Server::registerResources(coordinator, port);
         RType::Server::registerPackets(coordinator);
         RType::Server::registerComponents(coordinator);
+        RType::Server::registerSystems(coordinator);
 
         auto udp_handler = coordinator->getResource<RType::Network::UDPHandler>();
 

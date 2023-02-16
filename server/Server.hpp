@@ -37,6 +37,12 @@ void registerResources(std::unique_ptr<ECS::Coordinator>& coordinator,
 void registerComponents(std::unique_ptr<ECS::Coordinator>& coordinator);
 
 /**
+ * @brief registerSystems is a function that registers all the systems used by the RType Server
+ * @param coordinator Reference to the ECS' Coordinator
+ */
+void registerSystems(std::unique_ptr<ECS::Coordinator>& coordinator);
+
+/**
  * @brief Function that runs the game loop
  * @param coordinator Reference to the ECS' Coordinator
  */

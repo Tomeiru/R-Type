@@ -18,11 +18,11 @@ public:
      *
      * @param coordinator Reference to the ecs coordinator
      */
-    void update(ECS::Coordinator &coordinator) {
+    void update(std::unique_ptr<ECS::Coordinator>& coordinator) {
         for (const auto &entity: entities) {
-            auto &transform = coordinator.getComponent<Transform>(entity);
-            auto speed = coordinator.getComponent<Speed>(entity).speed;
-            auto direction = coordinator.getComponent<Direction>(entity).angle;
+            auto &transform = coordinator->getComponent<SFML::Transform>(entity);
+            auto speed = coordinator->getComponent<SFML::Speed>(entity).speed;
+            auto direction = coordinator->getComponent<SFML::Direction>(entity).angle;
             float rad = direction * M_PI / 180;
 
             transform.position = {static_cast<float>(transform.position.getVector2().x + std::cos(rad) * speed),static_cast<float>(transform.position.getVector2().y + std::sin(rad) * speed)};

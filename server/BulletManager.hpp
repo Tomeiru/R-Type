@@ -1,0 +1,105 @@
+#pragma once
+
+#include "../common/PackageManager.hpp"
+#include "../common/UDPHandler.hpp"
+#include "../common/component/SpriteReference.hpp"
+#include "../common/component/Transform.hpp"
+#include "../common/packet/SpawnEntity.hpp"
+#include "../common/packet/TransformEntity.hpp"
+#include "../ecs/Coordinator.hpp"
+#include "../ecs/Types.hpp"
+#include "PlayerManager.hpp"
+#include "Types.hpp"
+#include "component/Attack.hpp"
+#include "component/BackupTransform.hpp"
+#include "component/DestroyEntity.hpp"
+#include "component/Direction.hpp"
+#include "component/Speed.hpp"
+#include <cstdint>
+#include <memory>
+
+namespace RType {
+/**
+ * @brief Class to manage bullets
+ */
+class BulletManager {
+public:
+    /**
+     * @brief Construct a new BulletManager
+     */
+    BulletManager() : _bulletNumber(0){};
+
+    /**
+     * @brief Get the number of bullets created
+     * @return the number of bullets
+     */
+    std::uint64_t getBulletNumber() {return _bulletNumber;}
+
+    /**
+     * @brief Create a bullet with all the components
+     * @param coordinator Reference to the ECS coordinator
+     * @param attack Attack component contained in the entity that shoots
+     * @param bulletTransform Transform to apply to the bullet
+     */
+    void createBullet(std::unique_ptr<ECS::Coordinator>& coordinator, SFML::Attack attack, const SFML::Transform& bulletTransform)
+    {
+        if (_bulletNumber == UINT64_MAX)
+            return;
+        auto udp_handler = coordinator->getResource<RType::Network::UDPHandler>();
+        auto bullet = coordinator->createEntity();
+        std::string bulletId = "bullet"+std::to_string(_bulletNumber);
+        coordinator->addComponent(bullet, SFML::Direction(attack.attackAngle));
+        coordinator->addComponent(bullet, SFML::SpriteReference(bulletId));
+        coordinator->addComponent(bullet, SFML::Transform(bulletTransform));
+        coordinator->addComponent(bullet, SFML::BackupTransform(bulletTransform));
+        setBulletSpeed(coordinator, bullet, attack.type);
+        coordinator->addComponent(bullet, SFML::DestroyEntity(true, true, true));
+        RType::Packet::SpawnEntity entity_spawn(bullet, bulletId, bulletTransform.position.getVector2().x, bulletTransform.position.getVector2().y);
+        auto packet = coordinator->getResource<RType::Network::PackageManager>()->createPacket<RType::Packet::SpawnEntity>(entity_spawn);
+        coordinator->getResource<PlayerManager>()->sendPacketToAllPlayer(&packet, sizeof(packet), udp_handler);
+        RType::Packet::TransformEntity entity_transform(bullet, bulletTransform);
+        auto packetTwo = coordinator->getResource<RType::Network::PackageManager>()->createPacket<RType::Packet::TransformEntity>(entity_transform);
+        coordinator->getResource<PlayerManager>()->sendPacketToAllPlayer(&packetTwo, sizeof(packetTwo), udp_handler);
+        _id_to_entity.emplace(_bulletNumber, bullet);
+        _bulletNumber++;
+    }
+
+    /**
+     * @brief Get the ECS entity that content the bullet
+     * @param id The bullet ID
+     * @return The entity containing the bullet
+     */
+    ECS::Entity getEntityFromBulletId(BulletID id) {return _id_to_entity[id];}
+
+private:
+    /**
+     * @brief Function that sets the speed of a bullet
+     *
+     * @param coordinator Reference to the ecs coordinator
+     * @param bullet Bullet entity to speed up
+     * @param type Type of bullet to shoot
+     */
+    void setBulletSpeed(std::unique_ptr<ECS::Coordinator>&coordinator, ECS::Entity bullet, SFML::AttackType type) {
+        switch (type) {
+        case SFML::AttackType::NormalAttack:
+            coordinator->addComponent(bullet, SFML::Speed(2));
+            break;
+        case SFML::AttackType::FastAttack:
+            coordinator->addComponent(bullet, SFML::Speed(4));
+            break;
+        case SFML::AttackType::VeryFastAttack:
+            coordinator->addComponent(bullet, SFML::Speed(3));
+            break;
+        case SFML::AttackType::SlowAttack:
+            coordinator->addComponent(bullet, SFML::Speed(1));
+            break;
+        default:
+            coordinator->addComponent(bullet, SFML::Speed(2));
+            break;
+        }
+    }
+
+    std::uint64_t _bulletNumber;
+    std::unordered_map<BulletID, ECS::Entity> _id_to_entity;
+};
+}
