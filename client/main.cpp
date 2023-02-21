@@ -2,6 +2,7 @@
 #include "../common/UDPHandler.hpp"
 #include "../common/component/SpriteReference.hpp"
 #include "../common/component/Transform.hpp"
+#include "../common/packet/CreateSpriteReference.hpp"
 #include "../common/packet/DestroyEntity.hpp"
 #include "../common/packet/EntityPosition.hpp"
 #include "../common/packet/GameStart.hpp"
@@ -64,6 +65,7 @@ void RType::Client::registerPackets(std::unique_ptr<ECS::Coordinator>& coordinat
     package_manager->registerPacket<RType::Packet::EntityPosition>();
     package_manager->registerPacket<RType::Packet::TransformEntity>();
     package_manager->registerPacket<RType::Packet::DestroyEntity>();
+    package_manager->registerPacket<RType::Packet::CreateSpriteReference>();
 }
 
 void RType::Client::registerSystems(std::unique_ptr<ECS::Coordinator>& coordinator)
@@ -85,16 +87,12 @@ void RType::Client::loadAssets(std::unique_ptr<ECS::Coordinator>& coordinator)
     texture_manager->registerTexture("player_red", "../assets/textures/player-red.png");
     texture_manager->registerTexture("player_green", "../assets/textures/player-green.png");
     texture_manager->registerTexture("player_orange", "../assets/textures/player-orange.png");
+    texture_manager->registerTexture("bulletTexture", "../assets/textures/player-green.png");
+    texture_manager->registerTexture("enemyTexture", "../assets/textures/player-red.png");
     sprite_manager->registerSprite("player_1", texture_manager->getTexture("player_blue"));
     sprite_manager->registerSprite("player_2", texture_manager->getTexture("player_red"));
     sprite_manager->registerSprite("player_3", texture_manager->getTexture("player_green"));
     sprite_manager->registerSprite("player_4", texture_manager->getTexture("player_orange"));
-    sprite_manager->registerSprite("enemy_0", texture_manager->getTexture("player_blue"));
-    sprite_manager->registerSprite("enemy_1", texture_manager->getTexture("player_red"));
-    sprite_manager->registerSprite("enemy_2", texture_manager->getTexture("player_green"));
-    sprite_manager->registerSprite("enemy_3", texture_manager->getTexture("player_orange"));
-    sprite_manager->registerSprite("enemy_4", texture_manager->getTexture("player_blue"));
-    sprite_manager->registerSprite("enemy_5", texture_manager->getTexture("player_red"));
 }
 
 void RType::Client::sendMovementsKeys(std::unique_ptr<ECS::Coordinator>& coordinator,

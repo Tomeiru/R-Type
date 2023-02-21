@@ -52,20 +52,36 @@ private:
         coordinator->destroyEntity(entity);
     }
 
+    static void createSpriteReference(std::unique_ptr<ECS::Coordinator>& coordinator, std::shared_ptr<Network::PackageManager> &package_manager, const RType::Network::ReceivedPacket& packet_received, const std::shared_ptr<RType::Client::ServerEntityManager>& server_entity_manager)
+    {
+        auto texture_manager = coordinator->getResource<SFML::TextureManager>();
+        auto sprite_manager = coordinator->getResource<SFML::SpriteManager>();
+        auto packet = package_manager->decodeContent<RType::Packet::CreateSpriteReference>(packet_received.packet_data);
+        sprite_manager->registerSprite(packet->_spriteId, texture_manager->getTexture(packet->_linkSprite));
+    }
+
 public:
     void choosePacket(std::unique_ptr<ECS::Coordinator>& coordinator, char headerId, const RType::Network::ReceivedPacket& packet_received, const std::shared_ptr<RType::Client::ServerEntityManager>& server_entity_manager) {
         auto package_manager = coordinator->getResource<RType::Network::PackageManager>();
         if (headerId == package_manager->getTypeId<RType::Packet::SpawnEntity>()) {
+            std::cerr << "It's a SpawnEntity packet" << std::endl;
             spawnEntity(coordinator, package_manager, packet_received, server_entity_manager);
         }
         if (headerId == package_manager->getTypeId<RType::Packet::EntityPosition>()) {
+            std::cerr << "It's a EntityPosition packet" << std::endl;
             entityPosition(coordinator, package_manager, packet_received, server_entity_manager);
         }
         if (headerId == package_manager->getTypeId<RType::Packet::TransformEntity>()) {
+            std::cerr << "It's a TransformEntity packet" << std::endl;
             transformEntity(coordinator, package_manager, packet_received, server_entity_manager);
         }
         if (headerId == package_manager->getTypeId<RType::Packet::DestroyEntity>()) {
+            std::cerr << "It's a DestroyEntity packet" << std::endl;
             destroyEntity(coordinator, package_manager, packet_received, server_entity_manager);
+        }
+        if (headerId == package_manager->getTypeId<RType::Packet::CreateSpriteReference>()) {
+            std::cerr << "It's a CreateSpriteReference packet" << std::endl;
+            createSpriteReference(coordinator, package_manager, packet_received, server_entity_manager);
         }
     }
 };
