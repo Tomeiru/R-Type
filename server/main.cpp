@@ -5,14 +5,15 @@
 #include "../common/component/SpriteReference.hpp"
 #include "../common/component/Tint.hpp"
 #include "../common/component/Transform.hpp"
+#include "../common/packet/CreateSpriteReference.hpp"
 #include "../common/packet/EntityPosition.hpp"
 #include "../common/packet/GameStart.hpp"
 #include "../common/packet/PlayerInputs.hpp"
 #include "../common/packet/PlayerName.hpp"
 #include "../common/packet/SpawnEntity.hpp"
 #include "../ecs/Coordinator.hpp"
-#include "../ecs/RuntimeException.hpp"
 #include "../server/PlayerManager.hpp"
+#include "../sfml/Clock.hpp"
 #include "../sfml/SpriteManager.hpp"
 #include "../sfml/TextureManager.hpp"
 #include "BulletManager.hpp"
@@ -49,6 +50,7 @@ void RType::Server::registerResources(
     coordinator->registerResource<SFML::SpriteManager>();
     coordinator->registerResource<RType::EnemyManager>();
     coordinator->registerResource<RType::BulletManager>();
+    coordinator->registerResource<SFML::Clock>();
 }
 
 void RType::Server::registerComponents(
@@ -91,6 +93,7 @@ void RType::Server::registerPackets(
     package_manager->registerPacket<RType::Packet::EntityPosition>();
     package_manager->registerPacket<RType::Packet::TransformEntity>();
     package_manager->registerPacket<RType::Packet::DestroyEntity>();
+    package_manager->registerPacket<RType::Packet::CreateSpriteReference>();
 }
 
 void RType::Server::loadAssets(std::unique_ptr<ECS::Coordinator>& coordinator)
@@ -186,10 +189,11 @@ void RType::Server::game_loop(std::unique_ptr<ECS::Coordinator>& coordinator)
                     udp_handler);
             }
         }
+        auto elapsed_time(coordinator->getResource<SFML::Clock>()->restart());
 
-        coordinator->getSystem<SFML::LinearMove>()->update(coordinator);
+        coordinator->getSystem<SFML::LinearMove>()->update(coordinator, elapsed_time.asMilliseconds());
         coordinator->getSystem<SFML::KillNoLife>()->update(coordinator);
-        //coordinator->getSystem<SFML::Shoot>()->update(coordinator);
+        coordinator->getSystem<SFML::Shoot>()->update(coordinator, elapsed_time.asMilliseconds());
         coordinator->getSystem<SFML::DestroyEntityOutWindow>()->update(coordinator);
         coordinator->getSystem<SFML::UpdateEntityPositions>()->update(coordinator, udp_handler);
     }
