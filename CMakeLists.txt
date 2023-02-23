@@ -106,6 +106,7 @@ set(SFML_LIBS
         sfml-network
         sfml-system
         sfml-window
+        freetype
         )
 target_link_libraries(client ${SFML_LIBS})
 target_link_libraries(server ${SFML_LIBS})

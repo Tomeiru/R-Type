@@ -11,11 +11,16 @@
 #include "../sfml/Event.hpp"
 #include "../sfml/SpriteManager.hpp"
 #include "../sfml/TextureManager.hpp"
+#include "../sfml/FontManager.hpp"
+#include "../sfml/TextManager.hpp"
 #include "../sfml/Window.hpp"
 #include "./component/Hitbox.hpp"
 #include "./component/InputKeys.hpp"
+#include "./component/TextReference.hpp"
 #include "./system/DrawSprite.hpp"
 #include "./system/TransformSprite.hpp"
+#include "./system/TransformText.hpp"
+#include "./system/DrawText.hpp"
 #include "./system/UpdateKeysInput.hpp"
 #include "Client.hpp"
 #include "PlayerID.hpp"
@@ -39,6 +44,7 @@ void RType::Client::registerComponents(std::unique_ptr<ECS::Coordinator>& coordi
     coordinator->registerComponent<SFML::Transform>();
     coordinator->registerComponent<SFML::Hitbox>();
     coordinator->registerComponent<SFML::InputKeys>();
+    coordinator->registerComponent<SFML::TextReference>();
 }
 
 void RType::Client::registerResources(std::unique_ptr<ECS::Coordinator>& coordinator, std::uint16_t port)
@@ -48,6 +54,8 @@ void RType::Client::registerResources(std::unique_ptr<ECS::Coordinator>& coordin
     coordinator->registerResource<SFML::EventManager>();
     coordinator->registerResource<SFML::TextureManager>();
     coordinator->registerResource<SFML::SpriteManager>();
+    coordinator->registerResource<SFML::FontManager>();
+    coordinator->registerResource<SFML::TextManager>();
 }
 
 void RType::Client::registerPackets(std::unique_ptr<ECS::Coordinator>& coordinator)
@@ -69,12 +77,18 @@ void RType::Client::registerSystems(std::unique_ptr<ECS::Coordinator>& coordinat
     coordinator->setSignatureBits<SFML::DrawSprite, SFML::SpriteReference, SFML::Transform>();
     coordinator->registerSystem<SFML::UpdateKeysInput>();
     coordinator->setSignatureBits<SFML::UpdateKeysInput, SFML::InputKeys>();
+    coordinator->registerSystem<SFML::DrawText>();
+    coordinator->setSignatureBits<SFML::DrawText, SFML::TextReference, SFML::Transform>();
+    coordinator->registerSystem<SFML::TransformText>();
+    coordinator->setSignatureBits<SFML::TransformText, SFML::TextReference, SFML::Transform>();
 }
 
 void RType::Client::loadAssets(std::unique_ptr<ECS::Coordinator>& coordinator)
 {
     auto texture_manager = coordinator->getResource<SFML::TextureManager>();
     auto sprite_manager = coordinator->getResource<SFML::SpriteManager>();
+    auto font_manager = coordinator->getResource<SFML::FontManager>();
+    auto text_manager = coordinator->getResource<SFML::TextManager>();
 
     texture_manager->registerTexture("player_blue", "../assets/textures/player-blue.png");
     texture_manager->registerTexture("player_red", "../assets/textures/player-red.png");
@@ -86,6 +100,9 @@ void RType::Client::loadAssets(std::unique_ptr<ECS::Coordinator>& coordinator)
     sprite_manager->registerSprite("player_3", texture_manager->getTexture("player_green"));
     sprite_manager->registerSprite("player_4", texture_manager->getTexture("player_orange"));
     sprite_manager->registerSprite("logo", texture_manager->getTexture("logo"));
+    font_manager->registerFont("r_type", "../assets/fonts/r-type.ttf");
+    text_manager->registerText("quit_button", "QUIT", font_manager->getFont("r_type"), 50);
+    text_manager->registerText("play_button", "PLAY", font_manager->getFont("r_type"), 50);
 }
 
 void RType::Client::sendMovementsKeys(std::unique_ptr<ECS::Coordinator>& coordinator,
@@ -109,12 +126,20 @@ RType::Client::MenuState RType::Client::display_menu(std::unique_ptr<ECS::Coordi
     auto sprite_manager = coordinator->getResource<SFML::SpriteManager>();
     auto window = coordinator->registerResource<SFML::Window>(1920, 1080, "Le R-Type", SFML::Window::Style::Default);
     auto draw_sprite = coordinator->getSystem<SFML::DrawSprite>();
+    auto draw_text = coordinator->getSystem<SFML::DrawText>();
     auto transform_sprite = coordinator->getSystem<SFML::TransformSprite>();
+    auto transform_text = coordinator->getSystem<SFML::TransformText>();
     auto logo = coordinator->createEntity();
+    auto quit_button = coordinator->createEntity();
+    auto play_button = coordinator->createEntity();
     SFML::Event event;
 
     coordinator->addComponent<SFML::SpriteReference>(logo, SFML::SpriteReference("logo"));
     coordinator->addComponent<SFML::Transform>(logo, SFML::Transform({ 600, 100 }, 0, { 1.5, 1.5 }));
+    coordinator->addComponent<SFML::TextReference>(quit_button, SFML::TextReference("quit_button"));
+    coordinator->addComponent<SFML::Transform>(quit_button, SFML::Transform({ 850, 700 }, 0, { 1, 1 }));
+    coordinator->addComponent<SFML::TextReference>(play_button, SFML::TextReference("play_button"));
+    coordinator->addComponent<SFML::Transform>(play_button, SFML::Transform({ 850, 600 }, 0, { 1, 1 }));
     window->setFramerateLimit(60);
     while (window->isOpen()) {
         while (window->pollEvent(event))
@@ -122,7 +147,9 @@ RType::Client::MenuState RType::Client::display_menu(std::unique_ptr<ECS::Coordi
         if (event_manager->quitEventRegistered())
             window->close();
         transform_sprite->update(coordinator);
+        transform_text->update(coordinator);
         window->clear();
+        draw_text->update(coordinator);
         draw_sprite->update(coordinator);
         window->display();
         event_manager->clear();
