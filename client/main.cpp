@@ -80,10 +80,12 @@ void RType::Client::loadAssets(std::unique_ptr<ECS::Coordinator>& coordinator)
     texture_manager->registerTexture("player_red", "../assets/textures/player-red.png");
     texture_manager->registerTexture("player_green", "../assets/textures/player-green.png");
     texture_manager->registerTexture("player_orange", "../assets/textures/player-orange.png");
+    texture_manager->registerTexture("logo", "../assets/textures/logo.png");
     sprite_manager->registerSprite("player_1", texture_manager->getTexture("player_blue"));
     sprite_manager->registerSprite("player_2", texture_manager->getTexture("player_red"));
     sprite_manager->registerSprite("player_3", texture_manager->getTexture("player_green"));
     sprite_manager->registerSprite("player_4", texture_manager->getTexture("player_orange"));
+    sprite_manager->registerSprite("logo", texture_manager->getTexture("logo"));
 }
 
 void RType::Client::sendMovementsKeys(std::unique_ptr<ECS::Coordinator>& coordinator,
@@ -99,6 +101,35 @@ void RType::Client::sendMovementsKeys(std::unique_ptr<ECS::Coordinator>& coordin
     RType::Packet::PlayerInputs inputs(keys.key_left_pressed, keys.key_right_pressed, keys.key_up_pressed, keys.key_down_pressed, keys.key_shoot_pressed);
     auto packet = package_manager->createPacket(inputs, player_id->id);
     udp_handler->send(&packet, sizeof(packet), server.getIpAddress(), server.getPort());
+}
+
+RType::Client::MenuState RType::Client::display_menu(std::unique_ptr<ECS::Coordinator>& coordinator)
+{
+    auto event_manager = coordinator->getResource<SFML::EventManager>();
+    auto sprite_manager = coordinator->getResource<SFML::SpriteManager>();
+    auto window = coordinator->registerResource<SFML::Window>(1920, 1080, "Le R-Type", SFML::Window::Style::Default);
+    auto draw_sprite = coordinator->getSystem<SFML::DrawSprite>();
+    auto transform_sprite = coordinator->getSystem<SFML::TransformSprite>();
+    auto logo = coordinator->createEntity();
+    SFML::Event event;
+
+    coordinator->addComponent<SFML::SpriteReference>(logo, SFML::SpriteReference("logo"));
+    coordinator->addComponent<SFML::Transform>(logo, SFML::Transform({ 600, 100 }, 0, { 1.5, 1.5 }));
+    window->setFramerateLimit(60);
+    while (window->isOpen()) {
+        while (window->pollEvent(event))
+            event_manager->newEvent(event.getEvent());
+        if (event_manager->quitEventRegistered())
+            window->close();
+        transform_sprite->update(coordinator);
+        window->clear();
+        draw_sprite->update(coordinator);
+        window->display();
+        event_manager->clear();
+    }
+    if (!window->isOpen())
+        return RType::Client::MenuState::QUIT;
+    return RType::Client::MenuState::PLAY;
 }
 
 void RType::Client::waiting_game_to_start(std::unique_ptr<ECS::Coordinator>& coordinator)
@@ -136,16 +167,15 @@ void RType::Client::game_loop(std::unique_ptr<ECS::Coordinator>& coordinator, co
     auto package_manager = coordinator->getResource<RType::Network::PackageManager>();
     auto udp_handler = coordinator->getResource<RType::Network::UDPHandler>();
     auto event_manager = coordinator->getResource<SFML::EventManager>();
-    auto window = coordinator->registerResource<SFML::Window>(1920, 1080, "Le R-Type", SFML::Window::Style::Default);
     auto server_entity_manager = coordinator->registerResource<RType::Client::ServerEntityManager>();
     auto draw_sprite = coordinator->getSystem<SFML::DrawSprite>();
     auto transform_sprite = coordinator->getSystem<SFML::TransformSprite>();
     auto update_movement_keys = coordinator->getSystem<SFML::UpdateKeysInput>();
     auto keyChecker = coordinator->createEntity();
+    auto window = coordinator->getResource<SFML::Window>();
     coordinator->addComponent<SFML::InputKeys>(keyChecker, SFML::InputKeys());
     SFML::Event event;
 
-    window->setFramerateLimit(60);
     while (window->isOpen()) {
         while (window->pollEvent(event))
             event_manager->newEvent(event.getEvent());
@@ -196,6 +226,10 @@ int main(int ac, char** av)
         RType::Client::registerPackets(coordinator);
         RType::Client::registerComponents(coordinator);
         RType::Client::registerSystems(coordinator);
+        RType::Client::loadAssets(coordinator);
+
+        if (RType::Client::display_menu(coordinator) == RType::Client::MenuState::QUIT)
+            return (0);
 
         auto package_manager = coordinator->getResource<RType::Network::PackageManager>();
         auto udp_handler = coordinator->getResource<RType::Network::UDPHandler>();
@@ -205,7 +239,6 @@ int main(int ac, char** av)
 
         udp_handler->startHandler();
         udp_handler->send(&packet, sizeof(packet), server_infos.getIpAddress(), server_infos.getPort());
-        RType::Client::loadAssets(coordinator);
         RType::Client::waiting_game_to_start(coordinator);
         RType::Client::game_loop(coordinator, server_infos);
         udp_handler->stopHandler();

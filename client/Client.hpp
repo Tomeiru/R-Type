@@ -4,6 +4,12 @@
 #include "../ecs/Coordinator.hpp"
 
 namespace RType::Client {
+
+enum MenuState {
+    PLAY,
+    QUIT
+};
+
 /**
  * @brief waiting_game_to_start is a function that waits for a packet indicating that the game starts
  * @param coordinator Reference to the ECS' Coordinator
@@ -63,4 +69,10 @@ std::pair<RType::Network::UDPClient, std::uint16_t> parseArguments(int ac, char*
  * @param server_infos Reference to the UDPClient containing the server's informations
  */
 void game_loop(std::unique_ptr<ECS::Coordinator>& coordinator, const RType::Network::UDPClient& server_infos);
+
+/**
+ * @brief display_menu is a function that displays the menu
+ * @param coordinator Reference to the ECS' Coordinator
+ */
+MenuState display_menu(std::unique_ptr<ECS::Coordinator>& coordinator);
 }
