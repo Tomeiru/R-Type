@@ -18,11 +18,11 @@ set(SRC_ENCAPSULATION
 
 set (SRC_COMMON
         common/PackageManager.hpp common/RuntimeException.hpp common/ThreadSafeQueue.hpp common/UDPHandler.hpp
-        common/packet/PlayerName.hpp common/ReceivedPacket.hpp common/packet/GameStart.hpp)
+        common/packet/PlayerName.hpp common/ReceivedPacket.hpp common/packet/GameStart.hpp common/packet/PlayerInputs.hpp common/packet/EntityPosition.hpp)
 
 set(SRC_CLIENT
         client/main.cpp
-        client/Client.hpp)
+        client/Client.hpp client/PlayerID.hpp client/ServerEntityManager.hpp)
 
 set(SRC_SERVER
         server/main.cpp
@@ -80,6 +80,9 @@ if (MSVC OR MSYS OR MINGW OR WIN32)
     file(GLOB debug_dll "${VCPKG_LIBRARY_DIR}/debug/bin/*.dll")
     file(COPY ${release_dll} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
     file(COPY ${debug_dll} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+    file(GLOB assets_file "${VCPKG_LIBRARY_DIR}/debug/bin/*.dll")
+    file(COPY ./assets DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/..
+        PATTERN "*")
     set(CMAKE_PREFIX_PATH ${VCPKG_ROOT_DIR}\\installed\\${VCPKG_TARGET_TRIPLET})
 endif()
 

@@ -1,0 +1,13 @@
+name: Clang format checker
+
+on:
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: clang-format Check
+        uses: jidicula/clang-format-action@v4.10.1
