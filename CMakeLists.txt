@@ -11,7 +11,7 @@ set(SRC_ECS
 set(SRC_ENCAPSULATION
         sfml/Clock.hpp sfml/Color.hpp sfml/ColorManager.hpp sfml/Event.hpp sfml/EventManager.hpp sfml/Font.hpp
         sfml/FontManager.hpp sfml/Image.hpp sfml/ImageManager.hpp sfml/IpAddress.hpp sfml/Joystick.hpp sfml/Keyboard.hpp
-        sfml/Mouse.hpp sfml/Music.hpp sfml/MusicManager.hpp sfml/Rect.hpp sfml/RuntimeException.hpp sfml/SoundBuffer.hpp
+        sfml/Mouse.hpp sfml/Mouse.cpp sfml/Music.hpp sfml/MusicManager.hpp sfml/Rect.hpp sfml/RuntimeException.hpp sfml/SoundBuffer.hpp
         sfml/SoundBufferManager.hpp sfml/Sound.hpp sfml/SoundManager.hpp sfml/Sprite.hpp sfml/SpriteManager.hpp sfml/Text.hpp
         sfml/TextManager.hpp sfml/Texture.hpp sfml/TextureManager.hpp sfml/Time.hpp sfml/UDPSocket.hpp sfml/Vector2.hpp sfml/Window.hpp
         )
