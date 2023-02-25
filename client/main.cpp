@@ -21,11 +21,13 @@
 #include "./component/Hover.hpp"
 #include "./component/HoverTint.hpp"
 #include "./component/Tint.hpp"
+#include "./component/Clickable.hpp"
 #include "./system/DrawSprite.hpp"
 #include "./system/TransformSprite.hpp"
 #include "./system/TransformText.hpp"
 #include "./system/DrawText.hpp"
 #include "./system/TintText.hpp"
+#include "./system/UpdateClick.hpp"
 #include "./system/UpdateKeysInput.hpp"
 #include "./system/UpdateHoverTint.hpp"
 #include "./system/UpdateHover.hpp"
@@ -45,6 +47,18 @@ std::pair<RType::Network::UDPClient, std::uint16_t> RType::Client::parseArgument
     return std::make_pair<RType::Network::UDPClient, std::uint16_t>(RType::Network::UDPClient(address, port), client_port);
 }
 
+void quitButtonCallback(std::unique_ptr<ECS::Coordinator>& coordinator, ECS::Entity entity)
+{
+    auto window = coordinator->getResource<SFML::Window>();
+    window->close();
+}
+
+void playButtonCallback(std::unique_ptr<ECS::Coordinator>& coordinator, ECS::Entity entity)
+{
+    auto scene_manager = coordinator->getResource<RType::Client::SceneManager>();
+    scene_manager->setCurrentScene(RType::Client::SceneManager::Scene::LOBBY);
+}
+
 void RType::Client::registerComponents(std::unique_ptr<ECS::Coordinator>& coordinator)
 {
     coordinator->registerComponent<SFML::SpriteReference>();
@@ -55,17 +69,20 @@ void RType::Client::registerComponents(std::unique_ptr<ECS::Coordinator>& coordi
     coordinator->registerComponent<SFML::HoverTint>();
     coordinator->registerComponent<SFML::Hover>();
     coordinator->registerComponent<SFML::Tint>();
+    coordinator->registerComponent<SFML::Clickable>();
 }
 
 void RType::Client::registerResources(std::unique_ptr<ECS::Coordinator>& coordinator, std::uint16_t port)
 {
     auto package_manager = coordinator->registerResource<RType::Network::PackageManager>();
+    coordinator->registerResource<SFML::Window>(1920, 1080, "Le R-Type", SFML::Window::Style::Default);
     coordinator->registerResource<RType::Network::UDPHandler>(port, package_manager);
     coordinator->registerResource<SFML::EventManager>();
     coordinator->registerResource<SFML::TextureManager>();
     coordinator->registerResource<SFML::SpriteManager>();
     coordinator->registerResource<SFML::FontManager>();
     coordinator->registerResource<SFML::TextManager>();
+    coordinator->registerResource<RType::Client::SceneManager>();
     coordinator->registerResource<SFML::ColorManager>();
 }
 
@@ -98,6 +115,8 @@ void RType::Client::registerSystems(std::unique_ptr<ECS::Coordinator>& coordinat
     coordinator->setSignatureBits<SFML::TintText, SFML::TextReference, SFML::Tint>();
     coordinator->registerSystem<SFML::UpdateHover>();
     coordinator->setSignatureBits<SFML::UpdateHover, SFML::Hover, SFML::Hitbox>();
+    coordinator->registerSystem<SFML::UpdateClick>();
+    coordinator->setSignatureBits<SFML::UpdateClick, SFML::Hitbox, SFML::Clickable>();
 }
 
 void RType::Client::loadAssets(std::unique_ptr<ECS::Coordinator>& coordinator)
@@ -121,6 +140,7 @@ void RType::Client::loadAssets(std::unique_ptr<ECS::Coordinator>& coordinator)
     font_manager->registerFont("r_type", "../assets/fonts/r-type.ttf");
     text_manager->registerText("quit_button", "QUIT", font_manager->getFont("r_type"), 50);
     text_manager->registerText("play_button", "PLAY", font_manager->getFont("r_type"), 50);
+    text_manager->registerText("waiting_text", "Waiting for other players...", font_manager->getFont("r_type"), 50);
     color_manager->registerRGBColor("purple", 255, 0, 255);
     color_manager->registerHexColor("white", 0xffffffff);
 }
@@ -140,16 +160,18 @@ void RType::Client::sendMovementsKeys(std::unique_ptr<ECS::Coordinator>& coordin
     udp_handler->send(&packet, sizeof(packet), server.getIpAddress(), server.getPort());
 }
 
-RType::Client::MenuState RType::Client::display_menu(std::unique_ptr<ECS::Coordinator>& coordinator)
+RType::Client::SceneManager::Scene RType::Client::display_menu(std::unique_ptr<ECS::Coordinator>& coordinator)
 {
     auto event_manager = coordinator->getResource<SFML::EventManager>();
     auto sprite_manager = coordinator->getResource<SFML::SpriteManager>();
-    auto window = coordinator->registerResource<SFML::Window>(1920, 1080, "Le R-Type", SFML::Window::Style::Default);
+    auto scene_manager = coordinator->getResource<RType::Client::SceneManager>();
+    auto window = coordinator->getResource<SFML::Window>();
     auto draw_sprite = coordinator->getSystem<SFML::DrawSprite>();
     auto draw_text = coordinator->getSystem<SFML::DrawText>();
     auto transform_sprite = coordinator->getSystem<SFML::TransformSprite>();
     auto transform_text = coordinator->getSystem<SFML::TransformText>();
     auto update_hover_tint = coordinator->getSystem<SFML::UpdateHoverTint>();
+    auto update_click = coordinator->getSystem<SFML::UpdateClick>();
     auto tint_text = coordinator->getSystem<SFML::TintText>();
     auto update_hover = coordinator->getSystem<SFML::UpdateHover>();
     auto logo = coordinator->createEntity();
@@ -165,22 +187,26 @@ RType::Client::MenuState RType::Client::display_menu(std::unique_ptr<ECS::Coordi
     coordinator->addComponent(quit_button, SFML::Hover());
     coordinator->addComponent(quit_button, SFML::Tint("white"));
     coordinator->addComponent(quit_button, SFML::HoverTint("purple", "white"));
+    coordinator->addComponent<SFML::Clickable>(quit_button, SFML::Clickable(quitButtonCallback));
     coordinator->addComponent<SFML::TextReference>(play_button, SFML::TextReference("play_button"));
     coordinator->addComponent<SFML::Transform>(play_button, SFML::Transform({ 850, 600 }, 0, { 1, 1 }));
     coordinator->addComponent(play_button, SFML::Hitbox());
     coordinator->addComponent(play_button, SFML::Hover());
     coordinator->addComponent(play_button, SFML::Tint("white"));
     coordinator->addComponent(play_button, SFML::HoverTint("purple", "white"));
+    coordinator->addComponent<SFML::Clickable>(play_button, SFML::Clickable(playButtonCallback));
     window->setFramerateLimit(60);
-    while (window->isOpen()) {
+    while (window->isOpen() && scene_manager->getCurrentScene() == RType::Client::SceneManager::Scene::MAIN_MENU) {
         while (window->pollEvent(event))
             event_manager->newEvent(event.getEvent());
         if (event_manager->quitEventRegistered())
             window->close();
+        std::cout << "Scene: " << scene_manager->getCurrentScene() << std::endl;
         transform_sprite->update(coordinator);
         transform_text->update(coordinator);
         update_hover->update(coordinator);
         update_hover_tint->update(coordinator);
+        update_click->update(coordinator);
         tint_text->update(coordinator);
         window->clear();
         draw_text->update(coordinator);
@@ -188,9 +214,12 @@ RType::Client::MenuState RType::Client::display_menu(std::unique_ptr<ECS::Coordi
         window->display();
         event_manager->clear();
     }
+    coordinator->destroyEntity(logo);
+    coordinator->destroyEntity(quit_button);
+    coordinator->destroyEntity(play_button);
     if (!window->isOpen())
-        return RType::Client::MenuState::QUIT;
-    return RType::Client::MenuState::PLAY;
+        return RType::Client::SceneManager::Scene::QUIT;
+    return RType::Client::SceneManager::Scene::LOBBY;
 }
 
 void RType::Client::waiting_game_to_start(std::unique_ptr<ECS::Coordinator>& coordinator)
@@ -198,10 +227,20 @@ void RType::Client::waiting_game_to_start(std::unique_ptr<ECS::Coordinator>& coo
     bool game_started = false;
     auto package_manager = coordinator->getResource<RType::Network::PackageManager>();
     auto udp_handler = coordinator->getResource<RType::Network::UDPHandler>();
+    auto window = coordinator->getResource<SFML::Window>();
+    auto transform_text = coordinator->getSystem<SFML::TransformText>();
+    auto draw_text = coordinator->getSystem<SFML::DrawText>();
+    auto event_manager = coordinator->getResource<SFML::EventManager>();
+    auto waiting_message = coordinator->createEntity();
     std::queue<RType::Network::ReceivedPacket> tmp_queue;
+    SFML::Event event;
 
     std::cout << "Waiting for the game to start!" << std::endl;
-    while (!game_started) {
+    coordinator->addComponent<SFML::TextReference>(waiting_message, SFML::TextReference("waiting_text"));
+    coordinator->addComponent<SFML::Transform>(waiting_message, SFML::Transform({ 300, 400 }, 0, { 1, 1 }));
+    while (!game_started && window->isOpen()) {
+        while (window->pollEvent(event))
+            event_manager->newEvent(event.getEvent());
         while (!udp_handler->isQueueEmpty()) {
             RType::Network::ReceivedPacket packet_received = udp_handler->popElement();
             std::shared_ptr<RType::Network::Header> header = package_manager->decodeHeader(packet_received.packet_data);
@@ -219,6 +258,13 @@ void RType::Client::waiting_game_to_start(std::unique_ptr<ECS::Coordinator>& coo
             udp_handler->pushQueue(tmp_queue.front());
             tmp_queue.pop();
         }
+        if (event_manager->quitEventRegistered())
+            window->close();
+        transform_text->update(coordinator);
+        window->clear();
+        draw_text->update(coordinator);
+        window->display();
+        event_manager->clear();
     }
     std::cout << "Everyone joined! The game can finally start!" << std::endl;
 }
@@ -289,7 +335,7 @@ int main(int ac, char** av)
         RType::Client::registerSystems(coordinator);
         RType::Client::loadAssets(coordinator);
 
-        if (RType::Client::display_menu(coordinator) == RType::Client::MenuState::QUIT)
+        if (RType::Client::display_menu(coordinator) == RType::Client::SceneManager::Scene::QUIT)
             return (0);
 
         auto package_manager = coordinator->getResource<RType::Network::PackageManager>();

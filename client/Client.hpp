@@ -2,13 +2,9 @@
 
 #include "../common/UDPClient.hpp"
 #include "../ecs/Coordinator.hpp"
+#include "SceneManager.hpp"
 
 namespace RType::Client {
-
-enum MenuState {
-    PLAY,
-    QUIT
-};
 
 /**
  * @brief waiting_game_to_start is a function that waits for a packet indicating that the game starts
@@ -74,5 +70,5 @@ void game_loop(std::unique_ptr<ECS::Coordinator>& coordinator, const RType::Netw
  * @brief display_menu is a function that displays the menu
  * @param coordinator Reference to the ECS' Coordinator
  */
-MenuState display_menu(std::unique_ptr<ECS::Coordinator>& coordinator);
+RType::Client::SceneManager::Scene display_menu(std::unique_ptr<ECS::Coordinator>& coordinator);
 }
