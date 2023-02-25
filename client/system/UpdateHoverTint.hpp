@@ -1,10 +1,10 @@
 #pragma once
 
+#include "../../ecs/Coordinator.hpp"
+#include "../../ecs/System.hpp"
 #include "../component/Hover.hpp"
 #include "../component/HoverTint.hpp"
 #include "../component/Tint.hpp"
-#include "../../ecs/Coordinator.hpp"
-#include "../../ecs/System.hpp"
 
 namespace SFML {
 /**

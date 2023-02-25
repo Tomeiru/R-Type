@@ -1,10 +1,10 @@
 #pragma once
 
-#include "../component/Hitbox.hpp"
-#include "../component/Hover.hpp"
 #include "../../ecs/Coordinator.hpp"
 #include "../../ecs/System.hpp"
 #include "../../sfml/Mouse.hpp"
+#include "../component/Hitbox.hpp"
+#include "../component/Hover.hpp"
 
 namespace SFML {
 /**
@@ -26,8 +26,7 @@ public:
             auto& hover = coordinator->getComponent<Hover>(entity);
             if (hitbox.rect.contains(mouse_pos.getX(), mouse_pos.getY())) {
                 hover.hovered = true;
-            }
-            else
+            } else
                 hover.hovered = false;
         }
     }
