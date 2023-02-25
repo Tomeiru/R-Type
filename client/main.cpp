@@ -121,7 +121,7 @@ void RType::Client::loadAssets(std::unique_ptr<ECS::Coordinator>& coordinator)
     font_manager->registerFont("r_type", "../assets/fonts/r-type.ttf");
     text_manager->registerText("quit_button", "QUIT", font_manager->getFont("r_type"), 50);
     text_manager->registerText("play_button", "PLAY", font_manager->getFont("r_type"), 50);
-    color_manager->registerHexColor("purple", 0xFF00FF);
+    color_manager->registerRGBColor("purple", 255, 0, 255);
     color_manager->registerHexColor("white", 0xffffffff);
 }
 
@@ -163,10 +163,14 @@ RType::Client::MenuState RType::Client::display_menu(std::unique_ptr<ECS::Coordi
     coordinator->addComponent<SFML::Transform>(quit_button, SFML::Transform({ 850, 700 }, 0, { 1, 1 }));
     coordinator->addComponent(quit_button, SFML::Hitbox());
     coordinator->addComponent(quit_button, SFML::Hover());
-    coordinator->addComponent(quit_button, SFML::Tint("purple"));
-    coordinator->addComponent(quit_button, SFML::HoverTint("white", "purple"));
+    coordinator->addComponent(quit_button, SFML::Tint("white"));
+    coordinator->addComponent(quit_button, SFML::HoverTint("purple", "white"));
     coordinator->addComponent<SFML::TextReference>(play_button, SFML::TextReference("play_button"));
     coordinator->addComponent<SFML::Transform>(play_button, SFML::Transform({ 850, 600 }, 0, { 1, 1 }));
+    coordinator->addComponent(play_button, SFML::Hitbox());
+    coordinator->addComponent(play_button, SFML::Hover());
+    coordinator->addComponent(play_button, SFML::Tint("white"));
+    coordinator->addComponent(play_button, SFML::HoverTint("purple", "white"));
     window->setFramerateLimit(60);
     while (window->isOpen()) {
         while (window->pollEvent(event))
