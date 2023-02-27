@@ -101,7 +101,7 @@ $(function() {
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>            sprite-&gt;setScale(transform.scale);</div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>            sprite-&gt;setOrigin(transform.origin);</div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>            <span class="keywordflow">if</span> (coordinator-&gt;hasComponent&lt;<a class="code hl_struct" href="struct_s_f_m_l_1_1_hitbox.html">Hitbox</a>&gt;(entity)) {</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>                <span class="keyword">auto</span> &amp;hitbox = coordinator-&gt;getComponent&lt;<a class="code hl_struct" href="struct_s_f_m_l_1_1_hitbox.html">Hitbox</a>&gt;(entity);</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>                <span class="keyword">auto</span>&amp; hitbox = coordinator-&gt;getComponent&lt;<a class="code hl_struct" href="struct_s_f_m_l_1_1_hitbox.html">Hitbox</a>&gt;(entity);</div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>                hitbox.rect = sprite-&gt;getGlobalBounds();</div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>            }</div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        }</div>

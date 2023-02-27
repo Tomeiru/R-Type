@@ -82,18 +82,26 @@ $(function() {
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;utility&gt;</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">namespace </span>SFML {</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">enum</span> AttackType {NormalAttack, FastAttack, VeryFastAttack, SlowAttack};</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="struct_s_f_m_l_1_1_attack.html">   14</a></span><span class="keyword">struct </span><a class="code hl_struct" href="struct_s_f_m_l_1_1_attack.html">Attack</a> {</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="struct_s_f_m_l_1_1_attack.html#a2779b47499e3e1b2316f391efd17cbc7">   23</a></span>    <a class="code hl_function" href="struct_s_f_m_l_1_1_attack.html#a2779b47499e3e1b2316f391efd17cbc7">Attack</a>(<span class="keywordtype">bool</span> attack = <span class="keyword">true</span>, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> attackSpeed = 0, AttackType type = AttackType::NormalAttack, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> attackAngle = 180) : attack(attack), attackSpeed(attackSpeed) , type(type), attackValue(0), attackAngle(attackAngle) {};</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keywordtype">bool</span> attack;</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> attackSpeed;</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> attackValue;</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> attackAngle;</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    AttackType type;</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>};</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>}</div>
-<div class="ttc" id="astruct_s_f_m_l_1_1_attack_html"><div class="ttname"><a href="struct_s_f_m_l_1_1_attack.html">SFML::Attack</a></div><div class="ttdoc">Component that allows an entity to attack.</div><div class="ttdef"><b>Definition:</b> Attack.hpp:14</div></div>
-<div class="ttc" id="astruct_s_f_m_l_1_1_attack_html_a2779b47499e3e1b2316f391efd17cbc7"><div class="ttname"><a href="struct_s_f_m_l_1_1_attack.html#a2779b47499e3e1b2316f391efd17cbc7">SFML::Attack::Attack</a></div><div class="ttdeci">Attack(bool attack=true, unsigned int attackSpeed=0, AttackType type=AttackType::NormalAttack, unsigned int attackAngle=180)</div><div class="ttdoc">Construct a new Attack Component.</div><div class="ttdef"><b>Definition:</b> Attack.hpp:23</div></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">enum</span> AttackType { NormalAttack,</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    FastAttack,</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    VeryFastAttack,</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    SlowAttack };</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="struct_s_f_m_l_1_1_attack.html">   17</a></span><span class="keyword">struct </span><a class="code hl_struct" href="struct_s_f_m_l_1_1_attack.html">Attack</a> {</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="struct_s_f_m_l_1_1_attack.html#a2779b47499e3e1b2316f391efd17cbc7">   26</a></span>    <a class="code hl_function" href="struct_s_f_m_l_1_1_attack.html#a2779b47499e3e1b2316f391efd17cbc7">Attack</a>(<span class="keywordtype">bool</span> attack = <span class="keyword">true</span>, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> attackSpeed = 0, AttackType type = AttackType::NormalAttack, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> attackAngle = 180)</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        : attack(attack)</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        , attackSpeed(attackSpeed)</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        , type(type)</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        , attackValue(0)</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>        , attackAngle(attackAngle) {};</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keywordtype">bool</span> attack;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> attackSpeed;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> attackValue;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> attackAngle;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    AttackType type;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>};</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>}</div>
+<div class="ttc" id="astruct_s_f_m_l_1_1_attack_html"><div class="ttname"><a href="struct_s_f_m_l_1_1_attack.html">SFML::Attack</a></div><div class="ttdoc">Component that allows an entity to attack.</div><div class="ttdef"><b>Definition:</b> Attack.hpp:17</div></div>
+<div class="ttc" id="astruct_s_f_m_l_1_1_attack_html_a2779b47499e3e1b2316f391efd17cbc7"><div class="ttname"><a href="struct_s_f_m_l_1_1_attack.html#a2779b47499e3e1b2316f391efd17cbc7">SFML::Attack::Attack</a></div><div class="ttdeci">Attack(bool attack=true, unsigned int attackSpeed=0, AttackType type=AttackType::NormalAttack, unsigned int attackAngle=180)</div><div class="ttdoc">Construct a new Attack Component.</div><div class="ttdef"><b>Definition:</b> Attack.hpp:26</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
