@@ -1,11 +1,11 @@
 #pragma once
 
+#include "../../common/component/Tint.hpp"
 #include "../../ecs/Coordinator.hpp"
 #include "../../ecs/System.hpp"
 #include "../../sfml/ColorManager.hpp"
 #include "../../sfml/TextManager.hpp"
 #include "../component/TextReference.hpp"
-#include "../../common/component/Tint.hpp"
 
 namespace SFML {
 /**

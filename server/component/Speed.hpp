@@ -12,7 +12,9 @@ struct Speed {
      *
      * @param speed Speed of the entity
      */
-    Speed(float speed = 0) : speed(speed), speedValue(0) {};
+    Speed(float speed = 0)
+        : speed(speed)
+        , speedValue(0) {};
     float speed;
     unsigned int speedValue;
 };

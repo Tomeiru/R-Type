@@ -32,7 +32,7 @@ public:
             sprite->setScale(transform.scale);
             sprite->setOrigin(transform.origin);
             if (coordinator->hasComponent<Hitbox>(entity)) {
-                auto &hitbox = coordinator->getComponent<Hitbox>(entity);
+                auto& hitbox = coordinator->getComponent<Hitbox>(entity);
                 hitbox.rect = sprite->getGlobalBounds();
             }
         }

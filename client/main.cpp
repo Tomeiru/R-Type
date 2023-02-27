@@ -1,6 +1,7 @@
 #include "../common/PackageManager.hpp"
 #include "../common/UDPHandler.hpp"
 #include "../common/component/SpriteReference.hpp"
+#include "../common/component/Tint.hpp"
 #include "../common/component/Transform.hpp"
 #include "../common/packet/CreateSpriteReference.hpp"
 #include "../common/packet/DestroyEntity.hpp"
@@ -24,7 +25,6 @@
 #include "./component/HoverTint.hpp"
 #include "./component/InputKeys.hpp"
 #include "./component/TextReference.hpp"
-#include "../common/component/Tint.hpp"
 #include "./system/DrawSprite.hpp"
 #include "./system/DrawText.hpp"
 #include "./system/TintText.hpp"
@@ -51,12 +51,25 @@ std::pair<RType::Network::UDPClient, std::uint16_t> RType::Client::parseArgument
     return std::make_pair<RType::Network::UDPClient, std::uint16_t>(RType::Network::UDPClient(address, port), client_port);
 }
 
+
+/**
+ * @brief Function which is used as callback for the quit button
+ * 
+ * @param coordinator Reference to the ecs coordinator
+ * @param entity Entity of the button
+ */
 void quitButtonCallback(std::unique_ptr<ECS::Coordinator>& coordinator, ECS::Entity entity)
 {
     auto window = coordinator->getResource<SFML::Window>();
     window->close();
 }
 
+/**
+ * @brief Function which is used as callback for the play button
+ * 
+ * @param coordinator Reference to the ecs coordinator
+ * @param entity Entity of the button
+ */
 void playButtonCallback(std::unique_ptr<ECS::Coordinator>& coordinator, ECS::Entity entity)
 {
     auto scene_manager = coordinator->getResource<RType::Client::SceneManager>();
@@ -362,8 +375,7 @@ int main(int ac, char** av)
         std::cerr << "An exception appeared in the ECS part of the code: "
                   << e.what() << std::endl;
         return (84);
-    }
-    catch (...) {
+    } catch (...) {
         std::cerr << "An unknown exception appeared" << std::endl;
         return (84);
     }

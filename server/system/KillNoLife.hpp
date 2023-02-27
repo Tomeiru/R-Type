@@ -7,9 +7,10 @@
 namespace SFML {
 class KillNoLife : public ECS::System {
 public:
-    void update(std::unique_ptr<ECS::Coordinator>& coordinator) {
+    void update(std::unique_ptr<ECS::Coordinator>& coordinator)
+    {
         std::queue<ECS::Entity> toKill;
-        for (const auto &entity : entities) {
+        for (const auto& entity : entities) {
             auto health = coordinator->getComponent<SFML::Health>(entity).healthPoints;
 
             if (health <= 0)

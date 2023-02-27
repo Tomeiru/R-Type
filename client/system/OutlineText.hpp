@@ -1,11 +1,11 @@
 #pragma once
 
-#include "../component/Outline.hpp"
-#include "../component/TextReference.hpp"
 #include "../../ecs/Coordinator.hpp"
 #include "../../ecs/System.hpp"
 #include "../../sfml/ColorManager.hpp"
 #include "../../sfml/TextManager.hpp"
+#include "../component/Outline.hpp"
+#include "../component/TextReference.hpp"
 
 namespace SFML {
 /**
