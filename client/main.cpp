@@ -51,10 +51,9 @@ std::pair<RType::Network::UDPClient, std::uint16_t> RType::Client::parseArgument
     return std::make_pair<RType::Network::UDPClient, std::uint16_t>(RType::Network::UDPClient(address, port), client_port);
 }
 
-
 /**
  * @brief Function which is used as callback for the quit button
- * 
+ *
  * @param coordinator Reference to the ecs coordinator
  * @param entity Entity of the button
  */
@@ -66,7 +65,7 @@ void quitButtonCallback(std::unique_ptr<ECS::Coordinator>& coordinator, ECS::Ent
 
 /**
  * @brief Function which is used as callback for the play button
- * 
+ *
  * @param coordinator Reference to the ecs coordinator
  * @param entity Entity of the button
  */
