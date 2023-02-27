@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../sfml/Music.hpp"
+#include "../../sfml/Music.hpp"
 #include <string>
 
 namespace SFML {

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../ecs/Coordinator.hpp"
+#include "../../ecs/Coordinator.hpp"
 #include <functional>
 
 namespace SFML {
@@ -13,10 +13,10 @@ struct Clickable {
      *
      * @param callback Callback function to be called when the entity is clicked
      */
-    Clickable(const std::function<void(ECS::Coordinator&, ECS::Entity)>& callback = nullptr)
+    Clickable(const std::function<void(std::unique_ptr<ECS::Coordinator>&, ECS::Entity)>& callback = nullptr)
         : callback(callback)
     {
     }
-    std::function<void(ECS::Coordinator&, ECS::Entity)> callback;
+    std::function<void(std::unique_ptr<ECS::Coordinator>&, ECS::Entity)> callback;
 };
 }
