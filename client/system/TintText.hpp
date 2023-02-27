@@ -5,7 +5,7 @@
 #include "../../sfml/ColorManager.hpp"
 #include "../../sfml/TextManager.hpp"
 #include "../component/TextReference.hpp"
-#include "../component/Tint.hpp"
+#include "../../common/component/Tint.hpp"
 
 namespace SFML {
 /**

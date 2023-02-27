@@ -4,7 +4,7 @@
 #include "../../ecs/System.hpp"
 #include "../component/Hover.hpp"
 #include "../component/HoverTint.hpp"
-#include "../component/Tint.hpp"
+#include "../../common/component/Tint.hpp"
 
 namespace SFML {
 /**

@@ -1,8 +1,8 @@
 #include "../component/MovementJoystick.hpp"
-#include "../component/Transform.hpp"
-#include "../ecs/Coordinator.hpp"
-#include "../ecs/System.hpp"
-#include "../sfml/Joystick.hpp"
+#include "../../common/component/Transform.hpp"
+#include "../../ecs/Coordinator.hpp"
+#include "../../ecs/System.hpp"
+#include "../../sfml/Joystick.hpp"
 
 namespace SFML {
 /**
@@ -15,11 +15,11 @@ public:
      *
      * @param coordinator Reference to the ecs coordinator
      */
-    void update(ECS::Coordinator& coordinator)
+    void update(std::unique_ptr<ECS::Coordinator>& coordinator)
     {
         for (const auto& entity : entities) {
-            auto& transform = coordinator.getComponent<Transform>(entity);
-            auto& movementKeys = coordinator.getComponent<MovementJoystick>(entity);
+            auto& transform = coordinator->getComponent<Transform>(entity);
+            auto& movementKeys = coordinator->getComponent<MovementJoystick>(entity);
             auto pos = transform.position.getVector2();
 
             if (SFML::Joystick::isConnected(0) == true) {

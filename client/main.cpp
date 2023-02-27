@@ -2,11 +2,14 @@
 #include "../common/UDPHandler.hpp"
 #include "../common/component/SpriteReference.hpp"
 #include "../common/component/Transform.hpp"
+#include "../common/packet/CreateSpriteReference.hpp"
+#include "../common/packet/DestroyEntity.hpp"
 #include "../common/packet/EntityPosition.hpp"
 #include "../common/packet/GameStart.hpp"
 #include "../common/packet/PlayerInputs.hpp"
 #include "../common/packet/PlayerName.hpp"
 #include "../common/packet/SpawnEntity.hpp"
+#include "../common/packet/TransformEntity.hpp"
 #include "../ecs/Coordinator.hpp"
 #include "../sfml/ColorManager.hpp"
 #include "../sfml/Event.hpp"
@@ -21,7 +24,7 @@
 #include "./component/HoverTint.hpp"
 #include "./component/InputKeys.hpp"
 #include "./component/TextReference.hpp"
-#include "./component/Tint.hpp"
+#include "../common/component/Tint.hpp"
 #include "./system/DrawSprite.hpp"
 #include "./system/DrawText.hpp"
 #include "./system/TintText.hpp"
@@ -32,6 +35,7 @@
 #include "./system/UpdateHoverTint.hpp"
 #include "./system/UpdateKeysInput.hpp"
 #include "Client.hpp"
+#include "PacketManager.hpp"
 #include "PlayerID.hpp"
 #include "ServerEntityManager.hpp"
 
@@ -95,6 +99,9 @@ void RType::Client::registerPackets(std::unique_ptr<ECS::Coordinator>& coordinat
     package_manager->registerPacket<RType::Packet::SpawnEntity>();
     package_manager->registerPacket<RType::Packet::PlayerInputs>();
     package_manager->registerPacket<RType::Packet::EntityPosition>();
+    package_manager->registerPacket<RType::Packet::TransformEntity>();
+    package_manager->registerPacket<RType::Packet::DestroyEntity>();
+    package_manager->registerPacket<RType::Packet::CreateSpriteReference>();
 }
 
 void RType::Client::registerSystems(std::unique_ptr<ECS::Coordinator>& coordinator)
@@ -132,6 +139,8 @@ void RType::Client::loadAssets(std::unique_ptr<ECS::Coordinator>& coordinator)
     texture_manager->registerTexture("player_green", "../assets/textures/player-green.png");
     texture_manager->registerTexture("player_orange", "../assets/textures/player-orange.png");
     texture_manager->registerTexture("logo", "../assets/textures/logo.png");
+    texture_manager->registerTexture("bulletTexture", "../assets/textures/player-green.png");
+    texture_manager->registerTexture("enemyTexture", "../assets/textures/player-red.png");
     sprite_manager->registerSprite("player_1", texture_manager->getTexture("player_blue"));
     sprite_manager->registerSprite("player_2", texture_manager->getTexture("player_red"));
     sprite_manager->registerSprite("player_3", texture_manager->getTexture("player_green"));
@@ -280,6 +289,7 @@ void RType::Client::game_loop(std::unique_ptr<ECS::Coordinator>& coordinator, co
     auto update_movement_keys = coordinator->getSystem<SFML::UpdateKeysInput>();
     auto keyChecker = coordinator->createEntity();
     auto window = coordinator->getResource<SFML::Window>();
+    RType::PacketManager packetManager;
     coordinator->addComponent<SFML::InputKeys>(keyChecker, SFML::InputKeys());
     SFML::Event event;
 
@@ -291,19 +301,7 @@ void RType::Client::game_loop(std::unique_ptr<ECS::Coordinator>& coordinator, co
             std::shared_ptr<RType::Network::Header> header = package_manager->decodeHeader(packet_received.packet_data);
             if (!header)
                 continue;
-            if (header->id == package_manager->getTypeId<RType::Packet::SpawnEntity>()) {
-                auto packet = package_manager->decodeContent<RType::Packet::SpawnEntity>(packet_received.packet_data);
-                auto player = coordinator->createEntity();
-                server_entity_manager->registerServerEntity(packet->_entity, player);
-                coordinator->addComponent<SFML::SpriteReference>(player, SFML::SpriteReference(packet->_sprite_id));
-                coordinator->addComponent<SFML::Transform>(player, SFML::Transform({ packet->_x, packet->_y }, 0, { 3, 3 }));
-            }
-            if (header->id == package_manager->getTypeId<RType::Packet::EntityPosition>()) {
-                auto packet = package_manager->decodeContent<RType::Packet::EntityPosition>(packet_received.packet_data);
-                auto player = server_entity_manager->getClientEntity(packet->_entity);
-                auto& transform = coordinator->getComponent<SFML::Transform>(player);
-                transform.position = SFML::Vector2f { packet->_x, packet->_y };
-            }
+            packetManager.choosePacket(coordinator, header->id, packet_received, server_entity_manager);
         }
         if (event_manager->quitEventRegistered())
             window->close();
@@ -363,6 +361,10 @@ int main(int ac, char** av)
     } catch (ECS::RuntimeException& e) {
         std::cerr << "An exception appeared in the ECS part of the code: "
                   << e.what() << std::endl;
+        return (84);
+    }
+    catch (...) {
+        std::cerr << "An unknown exception appeared" << std::endl;
         return (84);
     }
     return (0);
