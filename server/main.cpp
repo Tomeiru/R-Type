@@ -167,6 +167,7 @@ void RType::Server::game_loop(std::unique_ptr<ECS::Coordinator>& coordinator)
                     packet_received.packet_data);
                 auto player = player_manager->getEntityFromPlayerID(header->player_id);
                 auto& transform = coordinator->getComponent<SFML::Transform>(player);
+                auto& attack = coordinator->getComponent<SFML::Attack>(player);
                 float movement_x = 0;
                 float movement_y = 0;
                 float speed = 10;
@@ -179,6 +180,10 @@ void RType::Server::game_loop(std::unique_ptr<ECS::Coordinator>& coordinator)
                     movement_y -= speed;
                 if (decoded_player_inputs->down == 1)
                     movement_y += speed;
+                if (decoded_player_inputs->shoot == 1)
+                    attack.attack = true;
+                else
+                    attack.attack = false;
                 transform.position = sf::Vector2f(transform.position.getX() + movement_x,
                     transform.position.getY() + movement_y);
                 RType::Packet::EntityPosition entity_position(

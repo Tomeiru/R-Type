@@ -7,6 +7,7 @@
 #include "../common/packet/SpawnEntity.hpp"
 #include "../sfml/IpAddress.hpp"
 #include "Types.hpp"
+#include "component/Attack.hpp"
 #include <cstdint>
 #include <unordered_map>
 
@@ -90,6 +91,7 @@ public:
             coordinator->addComponent(
                 player,
                 SFML::Transform({ 0, static_cast<float>(200 * id) }, 0, { 3, 3 }));
+            coordinator->addComponent(player, SFML::Attack(false, 200, SFML::AttackType::NormalAttack, 0));
 
             RType::Packet::SpawnEntity entity_payload(player, name, 0,
                 static_cast<float>(200 * id));
