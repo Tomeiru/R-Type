@@ -1,8 +1,8 @@
 #pragma once
 
+#include "../../common/UDPHandler.hpp"
 #include "../../common/component/Transform.hpp"
 #include "../../common/packet/DestroyEntity.hpp"
-#include "../../common/UDPHandler.hpp"
 #include "../../ecs/Coordinator.hpp"
 #include "../../ecs/System.hpp"
 #include "../component/DestroyEntity.hpp"
@@ -18,11 +18,12 @@ public:
      *
      * @param coordinator Reference to the ecs coordinator
      */
-    void update(std::unique_ptr<ECS::Coordinator>& coordinator) {
+    void update(std::unique_ptr<ECS::Coordinator>& coordinator)
+    {
         std::queue<std::pair<ECS::Entity, bool>> toDestroy;
-        for (const auto &entity: entities) {
-            auto &destroyStat = coordinator->getComponent<SFML::DestroyEntity>(entity);
-            auto &transform = coordinator->getComponent<SFML::Transform>(entity);
+        for (const auto& entity : entities) {
+            auto& destroyStat = coordinator->getComponent<SFML::DestroyEntity>(entity);
+            auto& transform = coordinator->getComponent<SFML::Transform>(entity);
             if (!destroyStat.destroyable)
                 continue;
             if (destroyStat.outWindow) {
@@ -42,7 +43,7 @@ public:
             coordinator->getResource<RType::PlayerManager>()->sendPacketToAllPlayer(&packet, sizeof(packet), udp_handler);
             if (tmp.second)
                 std::cout << "TempCode: Destroy the sprite" << std::endl;
-            //TODO Destroy sprite
+            // TODO Destroy sprite
         }
     }
 };

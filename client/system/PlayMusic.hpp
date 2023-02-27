@@ -1,9 +1,9 @@
 #pragma once
 
-#include "../component/MusicReference.hpp"
 #include "../../ecs/Coordinator.hpp"
 #include "../../ecs/System.hpp"
 #include "../../sfml/MusicManager.hpp"
+#include "../component/MusicReference.hpp"
 
 namespace SFML {
 /**

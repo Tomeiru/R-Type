@@ -10,7 +10,8 @@ struct Health {
      *
      * @param healthPoints Health point of the entity
      */
-    Health(unsigned int healthPoints = 1) : healthPoints(healthPoints) {};
+    Health(unsigned int healthPoints = 1)
+        : healthPoints(healthPoints) {};
     unsigned int healthPoints;
 };
 }

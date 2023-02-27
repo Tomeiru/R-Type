@@ -14,9 +14,9 @@ class UpdateEntityPositions : public ECS::System {
 public:
     void update(std::unique_ptr<ECS::Coordinator>& coordinator, std::shared_ptr<RType::Network::UDPHandler>& udp_handler)
     {
-        for (const auto &entity : entities) {
-            auto &transform = coordinator->getComponent<SFML::Transform>(entity);
-            auto &backup_transform = coordinator->getComponent<SFML::BackupTransform>(entity);
+        for (const auto& entity : entities) {
+            auto& transform = coordinator->getComponent<SFML::Transform>(entity);
+            auto& backup_transform = coordinator->getComponent<SFML::BackupTransform>(entity);
 
             if (!isSameTransform(transform, backup_transform)) {
                 RType::Packet::TransformEntity entity_transform(entity, transform);
@@ -27,8 +27,9 @@ public:
             }
         }
     }
+
 private:
-    void transformToBackup(SFML::Transform transform, SFML::BackupTransform &backup)
+    void transformToBackup(SFML::Transform transform, SFML::BackupTransform& backup)
     {
         backup.position = transform.position;
         backup.scale = transform.scale;
