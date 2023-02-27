@@ -3,26 +3,31 @@
 #include <string>
 
 namespace RType::Network {
+/**
+ * @brief RuntimeException is a class that represents an exception for the network
+ */
+class RuntimeException : public std::exception {
+public:
+    /**
+     * @brief Constructs a new RuntimeException object
+     * @param where The place where the exception was thrown
+     * @param error_msg The error message
+     */
+    RuntimeException(const std::string& where, const std::string& error_msg)
+        : error_msg(where + std::string(": ") + error_msg)
+    {
+    }
 
     /**
-     * @brief Class which is used to throw runtime exceptions for the network
+     * @brief Get the error message
+     * @return The error message
      */
-    class RuntimeException : public std::exception {
-    public:
-        /**
-         * @brief Constructor of the exception
-         * @param where Where the exception has been thrown
-         * @param error_msg Error message
-         */
-        RuntimeException(const std::string &where, const std::string &error_msg) : error_msg(where + std::string(": ") + error_msg) {}
-        /**
-         * @brief Get the error message
-         * @return Error message
-         */
-        const char *what() const noexcept override {
-            return (error_msg.c_str());
-        }
-    private:
-        std::string error_msg;
-    };
+    const char* what() const noexcept override
+    {
+        return (error_msg.c_str());
+    }
+
+private:
+    std::string error_msg;
+};
 }
