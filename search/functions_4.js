@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['hitbox_0',['Hitbox',['../struct_s_f_m_l_1_1_hitbox.html#a49967ce990ff5821f08d01443e9268bd',1,'SFML::Hitbox']]],
-  ['hover_1',['Hover',['../struct_s_f_m_l_1_1_hover.html#a888f9b47c66300b9a8dd6a2c155d5264',1,'SFML::Hover']]],
-  ['hovertint_2',['HoverTint',['../struct_s_f_m_l_1_1_hover_tint.html#ae55ad6ef5373c69acd1990d1d5fe2849',1,'SFML::HoverTint']]]
+  ['empty_0',['empty',['../class_r_type_1_1_network_1_1_thread_safe_queue.html#ad8bb00d593830af651ee0efbad0128f3',1,'RType::Network::ThreadSafeQueue']]],
+  ['enemymanager_1',['EnemyManager',['../class_r_type_1_1_enemy_manager.html#a6890e6362310d660919ed7e566367f8e',1,'RType::EnemyManager']]],
+  ['entityposition_2',['EntityPosition',['../struct_r_type_1_1_packet_1_1_entity_position.html#a4da9d3059b5d0084586189ed37f8d661',1,'RType::Packet::EntityPosition']]]
 ];

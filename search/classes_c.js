@@ -1,10 +1,12 @@
 var searchData=
 [
-  ['udpclient_0',['UDPClient',['../class_r_type_1_1_network_1_1_u_d_p_client.html',1,'RType::Network']]],
-  ['udphandler_1',['UDPHandler',['../class_r_type_1_1_network_1_1_u_d_p_handler.html',1,'RType::Network']]],
-  ['updateclick_2',['UpdateClick',['../class_s_f_m_l_1_1_update_click.html',1,'SFML']]],
-  ['updatehover_3',['UpdateHover',['../class_s_f_m_l_1_1_update_hover.html',1,'SFML']]],
-  ['updatehovertint_4',['UpdateHoverTint',['../class_s_f_m_l_1_1_update_hover_tint.html',1,'SFML']]],
-  ['updatejoystickmovements_5',['UpdateJoystickMovements',['../class_s_f_m_l_1_1_update_joystick_movements.html',1,'SFML']]],
-  ['updatekeysinput_6',['UpdateKeysInput',['../class_s_f_m_l_1_1_update_keys_input.html',1,'SFML']]]
+  ['packagemanager_0',['PackageManager',['../class_r_type_1_1_network_1_1_package_manager.html',1,'RType::Network']]],
+  ['packet_1',['Packet',['../struct_r_type_1_1_network_1_1_packet.html',1,'RType::Network']]],
+  ['packetmanager_2',['PacketManager',['../class_r_type_1_1_packet_manager.html',1,'RType']]],
+  ['playerid_3',['PlayerID',['../struct_r_type_1_1_client_1_1_player_i_d.html',1,'RType::Client']]],
+  ['playerinputs_4',['PlayerInputs',['../struct_r_type_1_1_packet_1_1_player_inputs.html',1,'RType::Packet']]],
+  ['playermanager_5',['PlayerManager',['../class_r_type_1_1_player_manager.html',1,'RType']]],
+  ['playername_6',['PlayerName',['../struct_r_type_1_1_packet_1_1_player_name.html',1,'RType::Packet']]],
+  ['playmusic_7',['PlayMusic',['../class_s_f_m_l_1_1_play_music.html',1,'SFML']]],
+  ['playsound_8',['PlaySound',['../class_s_f_m_l_1_1_play_sound.html',1,'SFML']]]
 ];

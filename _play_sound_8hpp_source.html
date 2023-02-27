@@ -79,21 +79,21 @@ $(function() {
 <div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;../component/SoundReference.hpp&quot;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;../ecs/Coordinator.hpp&quot;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;../ecs/System.hpp&quot;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;../sfml/SoundManager.hpp&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;../../ecs/Coordinator.hpp&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;../../ecs/System.hpp&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;../../sfml/SoundManager.hpp&quot;</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">namespace </span>SFML {</div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="class_s_f_m_l_1_1_play_sound.html">   12</a></span><span class="keyword">class </span><a class="code hl_class" href="class_s_f_m_l_1_1_play_sound.html">PlaySound</a> : <span class="keyword">public</span> ECS::System {</div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="class_s_f_m_l_1_1_play_sound.html#a115f649a39b7fd3f0fa94387c3bcb8a0">   19</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_s_f_m_l_1_1_play_sound.html#a115f649a39b7fd3f0fa94387c3bcb8a0">update</a>(ECS::Coordinator&amp; coordinator)</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="class_s_f_m_l_1_1_play_sound.html#a040d33c513d32775679e72c09a346081">   19</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_s_f_m_l_1_1_play_sound.html#a040d33c513d32775679e72c09a346081">update</a>(std::unique_ptr&lt;ECS::Coordinator&gt;&amp; coordinator)</div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    {</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        <span class="keyword">auto</span> sound_manager = coordinator.getResource&lt;SFML::SoundManager&gt;();</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        <span class="keyword">auto</span> sound_manager = coordinator-&gt;getResource&lt;SFML::SoundManager&gt;();</div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        <span class="keywordflow">if</span> (!sound_manager-&gt;isEnabled())</div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>            <span class="keywordflow">return</span>;</div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; entity : entities) {</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>            <span class="keyword">auto</span>&amp; sound_ref = coordinator.getComponent&lt;<a class="code hl_struct" href="struct_s_f_m_l_1_1_sound_reference.html">SoundReference</a>&gt;(entity);</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>            <span class="keyword">auto</span>&amp; sound_ref = coordinator-&gt;getComponent&lt;<a class="code hl_struct" href="struct_s_f_m_l_1_1_sound_reference.html">SoundReference</a>&gt;(entity);</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>            <span class="keyword">auto</span> sound = sound_manager-&gt;getSound(sound_ref.id);</div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>            <span class="keywordflow">if</span> (!sound_ref.first || sound-&gt;getStatus() == sound_ref.status) {</div>
@@ -116,7 +116,7 @@ $(function() {
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>};</div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>}</div>
 <div class="ttc" id="aclass_s_f_m_l_1_1_play_sound_html"><div class="ttname"><a href="class_s_f_m_l_1_1_play_sound.html">SFML::PlaySound</a></div><div class="ttdoc">System that plays all sounds.</div><div class="ttdef"><b>Definition:</b> PlaySound.hpp:12</div></div>
-<div class="ttc" id="aclass_s_f_m_l_1_1_play_sound_html_a115f649a39b7fd3f0fa94387c3bcb8a0"><div class="ttname"><a href="class_s_f_m_l_1_1_play_sound.html#a115f649a39b7fd3f0fa94387c3bcb8a0">SFML::PlaySound::update</a></div><div class="ttdeci">void update(ECS::Coordinator &amp;coordinator)</div><div class="ttdoc">Function that plays all sounds.</div><div class="ttdef"><b>Definition:</b> PlaySound.hpp:19</div></div>
+<div class="ttc" id="aclass_s_f_m_l_1_1_play_sound_html_a040d33c513d32775679e72c09a346081"><div class="ttname"><a href="class_s_f_m_l_1_1_play_sound.html#a040d33c513d32775679e72c09a346081">SFML::PlaySound::update</a></div><div class="ttdeci">void update(std::unique_ptr&lt; ECS::Coordinator &gt; &amp;coordinator)</div><div class="ttdoc">Function that plays all sounds.</div><div class="ttdef"><b>Definition:</b> PlaySound.hpp:19</div></div>
 <div class="ttc" id="astruct_s_f_m_l_1_1_sound_reference_html"><div class="ttname"><a href="struct_s_f_m_l_1_1_sound_reference.html">SFML::SoundReference</a></div><div class="ttdoc">Component that allows an entity to play a sound.</div><div class="ttdef"><b>Definition:</b> SoundReference.hpp:10</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

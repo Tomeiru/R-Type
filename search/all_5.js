@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['inputkeys_0',['InputKeys',['../struct_s_f_m_l_1_1_input_keys.html#a0fb97fdf57ed8c3776e97d5b2b1561f1',1,'SFML::InputKeys::InputKeys()'],['../struct_s_f_m_l_1_1_input_keys.html',1,'SFML::InputKeys']]],
-  ['isqueueempty_1',['isQueueEmpty',['../class_r_type_1_1_network_1_1_u_d_p_handler.html#a63461f2275831b2f286e30f53e37fc13',1,'RType::Network::UDPHandler']]]
+  ['empty_0',['empty',['../class_r_type_1_1_network_1_1_thread_safe_queue.html#ad8bb00d593830af651ee0efbad0128f3',1,'RType::Network::ThreadSafeQueue']]],
+  ['enemymanager_1',['EnemyManager',['../class_r_type_1_1_enemy_manager.html#a6890e6362310d660919ed7e566367f8e',1,'RType::EnemyManager::EnemyManager()'],['../class_r_type_1_1_enemy_manager.html',1,'RType::EnemyManager']]],
+  ['entityposition_2',['EntityPosition',['../struct_r_type_1_1_packet_1_1_entity_position.html#a4da9d3059b5d0084586189ed37f8d661',1,'RType::Packet::EntityPosition::EntityPosition()'],['../struct_r_type_1_1_packet_1_1_entity_position.html',1,'RType::Packet::EntityPosition']]]
 ];

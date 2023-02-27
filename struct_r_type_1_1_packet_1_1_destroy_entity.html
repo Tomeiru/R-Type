@@ -84,25 +84,28 @@ $(function() {
 <p><a class="el" href="struct_r_type_1_1_packet_1_1_destroy_entity.html" title="DestroyEntity is a class that represents a destroy entity packet.">DestroyEntity</a> is a class that represents a destroy entity packet.  
  <a href="struct_r_type_1_1_packet_1_1_destroy_entity.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_destroy_entity_8hpp_source.html">DestroyEntity.hpp</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="common_2packet_2_destroy_entity_8hpp_source.html">DestroyEntity.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a3975218757fd27566cb2f7441092f15f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_r_type_1_1_packet_1_1_destroy_entity.html#a3975218757fd27566cb2f7441092f15f">DestroyEntity</a> (std::string id=&quot;&quot;)</td></tr>
-<tr class="memdesc:a3975218757fd27566cb2f7441092f15f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="struct_r_type_1_1_packet_1_1_destroy_entity.html" title="DestroyEntity is a class that represents a destroy entity packet.">DestroyEntity</a> object.  <br /></td></tr>
-<tr class="separator:a3975218757fd27566cb2f7441092f15f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8381973241c3b1a4ea351cd311f16404"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_r_type_1_1_packet_1_1_destroy_entity.html#a8381973241c3b1a4ea351cd311f16404">DestroyEntity</a> (ECS::Entity entity=0, std::string spriteId=&quot;&quot;)</td></tr>
+<tr class="memdesc:a8381973241c3b1a4ea351cd311f16404"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="struct_r_type_1_1_packet_1_1_destroy_entity.html" title="DestroyEntity is a class that represents a destroy entity packet.">DestroyEntity</a> object.  <br /></td></tr>
+<tr class="separator:a8381973241c3b1a4ea351cd311f16404"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a70b6343cb550d05a7ee5e146559b1b12"><td class="memItemLeft" align="right" valign="top"><a id="a70b6343cb550d05a7ee5e146559b1b12" name="a70b6343cb550d05a7ee5e146559b1b12"></a>
 char&#160;</td><td class="memItemRight" valign="bottom"><b>sprite_id</b> [16]</td></tr>
 <tr class="separator:a70b6343cb550d05a7ee5e146559b1b12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6deec53187aa00f9ec933dfc0f4073b4"><td class="memItemLeft" align="right" valign="top"><a id="a6deec53187aa00f9ec933dfc0f4073b4" name="a6deec53187aa00f9ec933dfc0f4073b4"></a>
+ECS::Entity&#160;</td><td class="memItemRight" valign="bottom"><b>_entity</b></td></tr>
+<tr class="separator:a6deec53187aa00f9ec933dfc0f4073b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="struct_r_type_1_1_packet_1_1_destroy_entity.html" title="DestroyEntity is a class that represents a destroy entity packet.">DestroyEntity</a> is a class that represents a destroy entity packet. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a3975218757fd27566cb2f7441092f15f" name="a3975218757fd27566cb2f7441092f15f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3975218757fd27566cb2f7441092f15f">&#9670;&#160;</a></span>DestroyEntity()</h2>
+<a id="a8381973241c3b1a4ea351cd311f16404" name="a8381973241c3b1a4ea351cd311f16404"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8381973241c3b1a4ea351cd311f16404">&#9670;&#160;</a></span>DestroyEntity()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -113,9 +116,19 @@ char&#160;</td><td class="memItemRight" valign="bottom"><b>sprite_id</b> [16]</t
         <tr>
           <td class="memname">RType::Packet::DestroyEntity::DestroyEntity </td>
           <td>(</td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>id</em> = <code>&quot;&quot;</code></td><td>)</td>
+          <td class="paramtype">ECS::Entity&#160;</td>
+          <td class="paramname"><em>entity</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>spriteId</em> = <code>&quot;&quot;</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -136,7 +149,7 @@ char&#160;</td><td class="memItemRight" valign="bottom"><b>sprite_id</b> [16]</t
 </div>
 </div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
-<li>common/packet/<a class="el" href="_destroy_entity_8hpp_source.html">DestroyEntity.hpp</a></li>
+<li>common/packet/<a class="el" href="common_2packet_2_destroy_entity_8hpp_source.html">DestroyEntity.hpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

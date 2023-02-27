@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>R-TYPE: common/packet/DestroyEntity.hpp Source File</title>
+<title>R-TYPE: server/component/Speed.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,32 +69,26 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_bdd9a5d540de89e9fe90efdfc6973a4f.html">common</a></li><li class="navelem"><a class="el" href="dir_62aa88e8b27c8a3bd1b90253d1f9b2a7.html">packet</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_41e1742e44e2de38b3bc91f993fed282.html">server</a></li><li class="navelem"><a class="el" href="dir_606f9615642af4265707e76dde32628f.html">component</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="headertitle"><div class="title">DestroyEntity.hpp</div></div>
+  <div class="headertitle"><div class="title">Speed.hpp</div></div>
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;string&gt;</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">namespace </span>RType::Packet {</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="struct_r_type_1_1_packet_1_1_destroy_entity.html">    9</a></span><span class="keyword">struct </span><a class="code hl_struct" href="struct_r_type_1_1_packet_1_1_destroy_entity.html">DestroyEntity</a> {</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="struct_r_type_1_1_packet_1_1_destroy_entity.html#a3975218757fd27566cb2f7441092f15f">   14</a></span>    <a class="code hl_function" href="struct_r_type_1_1_packet_1_1_destroy_entity.html#a3975218757fd27566cb2f7441092f15f">DestroyEntity</a>(std::string <span class="keywordtype">id</span> = <span class="stringliteral">&quot;&quot;</span>)</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    {</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 15; i++) {</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>            sprite_id[i] = (i &lt; <span class="keywordtype">id</span>.size() ? <span class="keywordtype">id</span>[i] : <span class="charliteral">&#39;\0&#39;</span>);</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        }</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        sprite_id[15] = <span class="charliteral">&#39;\0&#39;</span>;</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    };</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keywordtype">char</span> sprite_id[16];</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>};</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>};</div>
-<div class="ttc" id="astruct_r_type_1_1_packet_1_1_destroy_entity_html"><div class="ttname"><a href="struct_r_type_1_1_packet_1_1_destroy_entity.html">RType::Packet::DestroyEntity</a></div><div class="ttdoc">DestroyEntity is a class that represents a destroy entity packet.</div><div class="ttdef"><b>Definition:</b> DestroyEntity.hpp:9</div></div>
-<div class="ttc" id="astruct_r_type_1_1_packet_1_1_destroy_entity_html_a3975218757fd27566cb2f7441092f15f"><div class="ttname"><a href="struct_r_type_1_1_packet_1_1_destroy_entity.html#a3975218757fd27566cb2f7441092f15f">RType::Packet::DestroyEntity::DestroyEntity</a></div><div class="ttdeci">DestroyEntity(std::string id=&quot;&quot;)</div><div class="ttdoc">Constructs a new DestroyEntity object.</div><div class="ttdef"><b>Definition:</b> DestroyEntity.hpp:14</div></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">namespace </span>SFML {</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="struct_s_f_m_l_1_1_speed.html">    9</a></span><span class="keyword">struct </span><a class="code hl_struct" href="struct_s_f_m_l_1_1_speed.html">Speed</a> {</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="struct_s_f_m_l_1_1_speed.html#ad671dce04db3373add9ffb2b3ad2e4cc">   15</a></span>    <a class="code hl_function" href="struct_s_f_m_l_1_1_speed.html#ad671dce04db3373add9ffb2b3ad2e4cc">Speed</a>(<span class="keywordtype">float</span> speed = 0) : speed(speed), speedValue(0) {};</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <span class="keywordtype">float</span> speed;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> speedValue;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>};</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>}</div>
+<div class="ttc" id="astruct_s_f_m_l_1_1_speed_html"><div class="ttname"><a href="struct_s_f_m_l_1_1_speed.html">SFML::Speed</a></div><div class="ttdoc">Component that gives a speed to an entity.</div><div class="ttdef"><b>Definition:</b> Speed.hpp:9</div></div>
+<div class="ttc" id="astruct_s_f_m_l_1_1_speed_html_ad671dce04db3373add9ffb2b3ad2e4cc"><div class="ttname"><a href="struct_s_f_m_l_1_1_speed.html#ad671dce04db3373add9ffb2b3ad2e4cc">SFML::Speed::Speed</a></div><div class="ttdeci">Speed(float speed=0)</div><div class="ttdoc">Construct a new Speed Component.</div><div class="ttdef"><b>Definition:</b> Speed.hpp:15</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

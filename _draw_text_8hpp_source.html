@@ -79,20 +79,20 @@ $(function() {
 <div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;../component/TextReference.hpp&quot;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;../ecs/Coordinator.hpp&quot;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;../ecs/System.hpp&quot;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;../sfml/TextManager.hpp&quot;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;../sfml/Window.hpp&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;../../ecs/Coordinator.hpp&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;../../ecs/System.hpp&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;../../sfml/TextManager.hpp&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;../../sfml/Window.hpp&quot;</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">namespace </span>SFML {</div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="class_s_f_m_l_1_1_draw_text.html">   13</a></span><span class="keyword">class </span><a class="code hl_class" href="class_s_f_m_l_1_1_draw_text.html">DrawText</a> : <span class="keyword">public</span> ECS::System {</div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="class_s_f_m_l_1_1_draw_text.html#a7fc67725f35e354e8ebccc2683243797">   20</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_s_f_m_l_1_1_draw_text.html#a7fc67725f35e354e8ebccc2683243797">update</a>(ECS::Coordinator&amp; coordinator)</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="class_s_f_m_l_1_1_draw_text.html#aa97c09c3275cba915a907babf73fedeb">   20</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_s_f_m_l_1_1_draw_text.html#aa97c09c3275cba915a907babf73fedeb">update</a>(std::unique_ptr&lt;ECS::Coordinator&gt;&amp; coordinator)</div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    {</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        <span class="keyword">auto</span> text_manager = coordinator.getResource&lt;SFML::TextManager&gt;();</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        <span class="keyword">auto</span> window = coordinator.getResource&lt;SFML::Window&gt;();</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        <span class="keyword">auto</span> text_manager = coordinator-&gt;getResource&lt;SFML::TextManager&gt;();</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        <span class="keyword">auto</span> window = coordinator-&gt;getResource&lt;SFML::Window&gt;();</div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; entity : entities) {</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>            <span class="keyword">auto</span>&amp; text_ref = coordinator.getComponent&lt;<a class="code hl_struct" href="struct_s_f_m_l_1_1_text_reference.html">TextReference</a>&gt;(entity);</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>            <span class="keyword">auto</span>&amp; text_ref = coordinator-&gt;getComponent&lt;<a class="code hl_struct" href="struct_s_f_m_l_1_1_text_reference.html">TextReference</a>&gt;(entity);</div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>            <span class="keyword">auto</span> text = text_manager-&gt;getText(text_ref.id);</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>            <span class="keywordflow">if</span> (text-&gt;isVisible())</div>
@@ -102,7 +102,7 @@ $(function() {
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>};</div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>}</div>
 <div class="ttc" id="aclass_s_f_m_l_1_1_draw_text_html"><div class="ttname"><a href="class_s_f_m_l_1_1_draw_text.html">SFML::DrawText</a></div><div class="ttdoc">System that draws all texts.</div><div class="ttdef"><b>Definition:</b> DrawText.hpp:13</div></div>
-<div class="ttc" id="aclass_s_f_m_l_1_1_draw_text_html_a7fc67725f35e354e8ebccc2683243797"><div class="ttname"><a href="class_s_f_m_l_1_1_draw_text.html#a7fc67725f35e354e8ebccc2683243797">SFML::DrawText::update</a></div><div class="ttdeci">void update(ECS::Coordinator &amp;coordinator)</div><div class="ttdoc">Function that draws all texts.</div><div class="ttdef"><b>Definition:</b> DrawText.hpp:20</div></div>
+<div class="ttc" id="aclass_s_f_m_l_1_1_draw_text_html_aa97c09c3275cba915a907babf73fedeb"><div class="ttname"><a href="class_s_f_m_l_1_1_draw_text.html#aa97c09c3275cba915a907babf73fedeb">SFML::DrawText::update</a></div><div class="ttdeci">void update(std::unique_ptr&lt; ECS::Coordinator &gt; &amp;coordinator)</div><div class="ttdoc">Function that draws all texts.</div><div class="ttdef"><b>Definition:</b> DrawText.hpp:20</div></div>
 <div class="ttc" id="astruct_s_f_m_l_1_1_text_reference_html"><div class="ttname"><a href="struct_s_f_m_l_1_1_text_reference.html">SFML::TextReference</a></div><div class="ttdoc">Component that allows an entity to have a text.</div><div class="ttdef"><b>Definition:</b> TextReference.hpp:9</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

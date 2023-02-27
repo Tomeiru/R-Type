@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['destroyentity_0',['DestroyEntity',['../struct_r_type_1_1_packet_1_1_destroy_entity.html',1,'RType::Packet']]],
-  ['drawsprite_1',['DrawSprite',['../class_s_f_m_l_1_1_draw_sprite.html',1,'SFML']]],
-  ['drawtext_2',['DrawText',['../class_s_f_m_l_1_1_draw_text.html',1,'SFML']]]
+  ['backuptransform_0',['BackupTransform',['../struct_s_f_m_l_1_1_backup_transform.html',1,'SFML']]],
+  ['bulletmanager_1',['BulletManager',['../class_r_type_1_1_bullet_manager.html',1,'RType']]]
 ];

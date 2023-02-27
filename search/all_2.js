@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['empty_0',['empty',['../class_r_type_1_1_network_1_1_thread_safe_queue.html#ad8bb00d593830af651ee0efbad0128f3',1,'RType::Network::ThreadSafeQueue']]],
-  ['entityposition_1',['EntityPosition',['../struct_r_type_1_1_packet_1_1_entity_position.html#a4da9d3059b5d0084586189ed37f8d661',1,'RType::Packet::EntityPosition::EntityPosition()'],['../struct_r_type_1_1_packet_1_1_entity_position.html',1,'RType::Packet::EntityPosition']]]
+  ['backuptransform_0',['BackupTransform',['../struct_s_f_m_l_1_1_backup_transform.html#a0e04b05b5621d80108143aeecbab5e18',1,'SFML::BackupTransform::BackupTransform()'],['../struct_s_f_m_l_1_1_backup_transform.html',1,'SFML::BackupTransform']]],
+  ['bulletmanager_1',['BulletManager',['../class_r_type_1_1_bullet_manager.html#ad5710a955ce6e38da29a32e9db2b2393',1,'RType::BulletManager::BulletManager()'],['../class_r_type_1_1_bullet_manager.html',1,'RType::BulletManager']]]
 ];

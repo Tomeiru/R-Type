@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['decodecontent_0',['decodeContent',['../class_r_type_1_1_network_1_1_package_manager.html#a0ce4f31a2a3ea03d57d537057cb9a51f',1,'RType::Network::PackageManager']]],
-  ['decodeheader_1',['decodeHeader',['../class_r_type_1_1_network_1_1_package_manager.html#a7c9d4ac8b57a317bf40f2e498e9ebac0',1,'RType::Network::PackageManager']]],
-  ['destroyentity_2',['DestroyEntity',['../struct_r_type_1_1_packet_1_1_destroy_entity.html#a3975218757fd27566cb2f7441092f15f',1,'RType::Packet::DestroyEntity']]]
+  ['backuptransform_0',['BackupTransform',['../struct_s_f_m_l_1_1_backup_transform.html#a0e04b05b5621d80108143aeecbab5e18',1,'SFML::BackupTransform']]],
+  ['bulletmanager_1',['BulletManager',['../class_r_type_1_1_bullet_manager.html#ad5710a955ce6e38da29a32e9db2b2393',1,'RType::BulletManager']]]
 ];
