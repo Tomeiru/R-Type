@@ -23,7 +23,7 @@ struct Transform {
     {
     }
 
-    Transform(SFML::Transform const &transform)
+    Transform(SFML::Transform const& transform)
         : position(transform.position)
         , rotation(transform.rotation)
         , scale(transform.scale)

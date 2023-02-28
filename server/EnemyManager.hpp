@@ -24,7 +24,8 @@ public:
     /**
      * @brief Constructs a new EnemyManager object
      */
-    EnemyManager() : enemy_nbr(0) {};
+    EnemyManager()
+        : enemy_nbr(0) {};
 
     EnemyID spawnEnemy(std::shared_ptr<Network::UDPHandler>& udp_handler, std::unique_ptr<ECS::Coordinator>& coordinator)
     {
@@ -32,11 +33,11 @@ public:
             return 0;
         std::string name = "enemy_" + std::to_string(enemy_nbr);
         auto enemy = coordinator->createEntity();
-        coordinator->addComponent(enemy, SFML::Transform({1000.0, 800.0}, 0, {4, 4}));
+        coordinator->addComponent(enemy, SFML::Transform({ 1000.0, 800.0 }, 0, { 4, 4 }));
         coordinator->addComponent(enemy, SFML::BackupTransform(coordinator->getComponent<SFML::Transform>(enemy)));
         coordinator->addComponent(enemy, SFML::SpriteReference(name));
-        //coordinator->addComponent(enemy, SFML::Speed(1));
-        //coordinator->addComponent(enemy, SFML::Direction(225));
+        // coordinator->addComponent(enemy, SFML::Speed(1));
+        // coordinator->addComponent(enemy, SFML::Direction(225));
         coordinator->addComponent(enemy, SFML::Attack(true, (500), SFML::AttackType::SlowAttack, 135));
         coordinator->addComponent(enemy, SFML::DestroyEntity(true, true, true));
         coordinator->addComponent(enemy, SFML::Health(2));
@@ -58,7 +59,7 @@ public:
      * @param id The EnemyID
      * @return The Entity associated with the EnemyID
      */
-    ECS::Entity getEntityFromEnemyId(EnemyID id) {return id_to_entity[id];}
+    ECS::Entity getEntityFromEnemyId(EnemyID id) { return id_to_entity[id]; }
 
 private:
     std::unordered_map<EnemyID, ECS::Entity> id_to_entity;

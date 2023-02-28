@@ -1,10 +1,10 @@
 #pragma once
 
 #include "../../common/component/Tint.hpp"
-#include "../component/Hover.hpp"
-#include "../component/HoverTint.hpp"
 #include "../../ecs/Coordinator.hpp"
 #include "../../ecs/System.hpp"
+#include "../component/Hover.hpp"
+#include "../component/HoverTint.hpp"
 
 namespace SFML {
 /**

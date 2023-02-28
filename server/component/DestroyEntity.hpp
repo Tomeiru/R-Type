@@ -12,7 +12,10 @@ struct DestroyEntity {
      * @param outWindow Do we destroy the entity when it gets out of the window
      * @param destroySprite Does the entity have a sprite to destroy
      */
-    DestroyEntity(bool destroyable = false, bool outWindow = false, bool destroySprite = false) : destroyable(destroyable), outWindow(outWindow), sprite(destroySprite){};
+    DestroyEntity(bool destroyable = false, bool outWindow = false, bool destroySprite = false)
+        : destroyable(destroyable)
+        , outWindow(outWindow)
+        , sprite(destroySprite) {};
     bool destroyable;
     bool outWindow;
     bool sprite;
