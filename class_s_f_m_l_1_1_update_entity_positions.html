@@ -79,6 +79,11 @@ $(function() {
   <div class="headertitle"><div class="title">SFML::UpdateEntityPositions Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>System to update entity transform if it changed.  
+ <a href="class_s_f_m_l_1_1_update_entity_positions.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_update_entity_positions_8hpp_source.html">UpdateEntityPositions.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for SFML::UpdateEntityPositions:</div>
 <div class="dyncontent">
@@ -88,10 +93,65 @@ Inheritance diagram for SFML::UpdateEntityPositions:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a829ed287d3885ddc5aa31c99e0865c01"><td class="memItemLeft" align="right" valign="top"><a id="a829ed287d3885ddc5aa31c99e0865c01" name="a829ed287d3885ddc5aa31c99e0865c01"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>update</b> (std::unique_ptr&lt; ECS::Coordinator &gt; &amp;coordinator, std::shared_ptr&lt; <a class="el" href="class_r_type_1_1_network_1_1_u_d_p_handler.html">RType::Network::UDPHandler</a> &gt; &amp;udp_handler, std::int32_t elapsed_time)</td></tr>
+<tr class="memitem:a829ed287d3885ddc5aa31c99e0865c01"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_s_f_m_l_1_1_update_entity_positions.html#a829ed287d3885ddc5aa31c99e0865c01">update</a> (std::unique_ptr&lt; ECS::Coordinator &gt; &amp;coordinator, std::shared_ptr&lt; <a class="el" href="class_r_type_1_1_network_1_1_u_d_p_handler.html">RType::Network::UDPHandler</a> &gt; &amp;udp_handler, std::int32_t elapsed_time)</td></tr>
+<tr class="memdesc:a829ed287d3885ddc5aa31c99e0865c01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that send a packet to all player to call them to update the transform if it changed from the last call of this function.  <br /></td></tr>
 <tr class="separator:a829ed287d3885ddc5aa31c99e0865c01"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>System to update entity transform if it changed. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a829ed287d3885ddc5aa31c99e0865c01" name="a829ed287d3885ddc5aa31c99e0865c01"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a829ed287d3885ddc5aa31c99e0865c01">&#9670;&#160;</a></span>update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SFML::UpdateEntityPositions::update </td>
+          <td>(</td>
+          <td class="paramtype">std::unique_ptr&lt; ECS::Coordinator &gt; &amp;&#160;</td>
+          <td class="paramname"><em>coordinator</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="class_r_type_1_1_network_1_1_u_d_p_handler.html">RType::Network::UDPHandler</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>udp_handler</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::int32_t&#160;</td>
+          <td class="paramname"><em>elapsed_time</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function that send a packet to all player to call them to update the transform if it changed from the last call of this function. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">coordinator</td><td>Reference to the ecs coordinator </td></tr>
+    <tr><td class="paramname">udp_handler</td><td>The class that handles sending packet to other UDPClients </td></tr>
+    <tr><td class="paramname">elapsed_time</td><td>Time in milliseconds you get from the restart member of the clock </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>server/system/<a class="el" href="_update_entity_positions_8hpp_source.html">UpdateEntityPositions.hpp</a></li>
 </ul>

@@ -87,13 +87,73 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a4a1a1dd46abc29de5557126d80eae758"><td class="memItemLeft" align="right" valign="top"><a id="a4a1a1dd46abc29de5557126d80eae758" name="a4a1a1dd46abc29de5557126d80eae758"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>choosePacket</b> (std::unique_ptr&lt; ECS::Coordinator &gt; &amp;coordinator, char headerId, const <a class="el" href="struct_r_type_1_1_network_1_1_received_packet.html">RType::Network::ReceivedPacket</a> &amp;packet_received, const std::shared_ptr&lt; <a class="el" href="class_r_type_1_1_client_1_1_server_entity_manager.html">RType::Client::ServerEntityManager</a> &gt; &amp;server_entity_manager)</td></tr>
+<tr class="memitem:a4a1a1dd46abc29de5557126d80eae758"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_type_1_1_packet_manager.html#a4a1a1dd46abc29de5557126d80eae758">choosePacket</a> (std::unique_ptr&lt; ECS::Coordinator &gt; &amp;coordinator, char headerId, const <a class="el" href="struct_r_type_1_1_network_1_1_received_packet.html">RType::Network::ReceivedPacket</a> &amp;packet_received, const std::shared_ptr&lt; <a class="el" href="class_r_type_1_1_client_1_1_server_entity_manager.html">RType::Client::ServerEntityManager</a> &gt; &amp;server_entity_manager)</td></tr>
+<tr class="memdesc:a4a1a1dd46abc29de5557126d80eae758"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that choose the right packet.  <br /></td></tr>
 <tr class="separator:a4a1a1dd46abc29de5557126d80eae758"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Class that manages the received packets and their actions. </p>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a4a1a1dd46abc29de5557126d80eae758" name="a4a1a1dd46abc29de5557126d80eae758"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a1a1dd46abc29de5557126d80eae758">&#9670;&#160;</a></span>choosePacket()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RType::PacketManager::choosePacket </td>
+          <td>(</td>
+          <td class="paramtype">std::unique_ptr&lt; ECS::Coordinator &gt; &amp;&#160;</td>
+          <td class="paramname"><em>coordinator</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>headerId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_r_type_1_1_network_1_1_received_packet.html">RType::Network::ReceivedPacket</a> &amp;&#160;</td>
+          <td class="paramname"><em>packet_received</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::shared_ptr&lt; <a class="el" href="class_r_type_1_1_client_1_1_server_entity_manager.html">RType::Client::ServerEntityManager</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>server_entity_manager</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function that choose the right packet. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">coordinator</td><td>Reference to the ECS coordinator </td></tr>
+    <tr><td class="paramname">headerId</td><td>Char that corresponds to a packet type </td></tr>
+    <tr><td class="paramname">packet_received</td><td>Packet that got received (not casted) </td></tr>
+    <tr><td class="paramname">server_entity_manager</td><td>Manager dealing with the server to find the great entity </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li>client/<a class="el" href="_packet_manager_8hpp_source.html">PacketManager.hpp</a></li>
 </ul>
 </div><!-- contents -->

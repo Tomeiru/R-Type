@@ -83,23 +83,23 @@ $(function() {
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">namespace </span>RType::Network {</div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="class_r_type_1_1_network_1_1_runtime_exception.html">    9</a></span><span class="keyword">class </span><a class="code hl_class" href="class_r_type_1_1_network_1_1_runtime_exception.html">RuntimeException</a> : <span class="keyword">public</span> std::exception {</div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="class_r_type_1_1_network_1_1_runtime_exception.html#a6f2ceb258e2fc10885981e99b086e323">   16</a></span>    <a class="code hl_function" href="class_r_type_1_1_network_1_1_runtime_exception.html#a6f2ceb258e2fc10885981e99b086e323">RuntimeException</a>(<span class="keyword">const</span> std::string&amp; where, <span class="keyword">const</span> std::string&amp; error_msg)</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        : error_msg(where + std::string(<span class="stringliteral">&quot;: &quot;</span>) + error_msg)</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    {</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    }</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="class_r_type_1_1_network_1_1_runtime_exception.html#a60fa2e1fec4b3cb934720201e8c4fe8b">   25</a></span>    <span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code hl_function" href="class_r_type_1_1_network_1_1_runtime_exception.html#a60fa2e1fec4b3cb934720201e8c4fe8b">what</a>() const noexcept<span class="keyword"> override</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="keyword">    </span>{</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        <span class="keywordflow">return</span> (error_msg.c_str());</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    }</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    std::string error_msg;</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>};</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>}</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="class_r_type_1_1_network_1_1_runtime_exception.html#a6f2ceb258e2fc10885981e99b086e323">   17</a></span>    <a class="code hl_function" href="class_r_type_1_1_network_1_1_runtime_exception.html#a6f2ceb258e2fc10885981e99b086e323">RuntimeException</a>(<span class="keyword">const</span> std::string&amp; where, <span class="keyword">const</span> std::string&amp; error_msg)</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        : error_msg(where + std::string(<span class="stringliteral">&quot;: &quot;</span>) + error_msg)</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    {</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    }</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="class_r_type_1_1_network_1_1_runtime_exception.html#a60fa2e1fec4b3cb934720201e8c4fe8b">   27</a></span>    <span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code hl_function" href="class_r_type_1_1_network_1_1_runtime_exception.html#a60fa2e1fec4b3cb934720201e8c4fe8b">what</a>() const noexcept<span class="keyword"> override</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        <span class="keywordflow">return</span> (error_msg.c_str());</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    }</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    std::string error_msg;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>};</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>}</div>
 <div class="ttc" id="aclass_r_type_1_1_network_1_1_runtime_exception_html"><div class="ttname"><a href="class_r_type_1_1_network_1_1_runtime_exception.html">RType::Network::RuntimeException</a></div><div class="ttdoc">RuntimeException is a class that represents an exception for the network.</div><div class="ttdef"><b>Definition:</b> RuntimeException.hpp:9</div></div>
-<div class="ttc" id="aclass_r_type_1_1_network_1_1_runtime_exception_html_a60fa2e1fec4b3cb934720201e8c4fe8b"><div class="ttname"><a href="class_r_type_1_1_network_1_1_runtime_exception.html#a60fa2e1fec4b3cb934720201e8c4fe8b">RType::Network::RuntimeException::what</a></div><div class="ttdeci">const char * what() const noexcept override</div><div class="ttdoc">Get the error message.</div><div class="ttdef"><b>Definition:</b> RuntimeException.hpp:25</div></div>
-<div class="ttc" id="aclass_r_type_1_1_network_1_1_runtime_exception_html_a6f2ceb258e2fc10885981e99b086e323"><div class="ttname"><a href="class_r_type_1_1_network_1_1_runtime_exception.html#a6f2ceb258e2fc10885981e99b086e323">RType::Network::RuntimeException::RuntimeException</a></div><div class="ttdeci">RuntimeException(const std::string &amp;where, const std::string &amp;error_msg)</div><div class="ttdoc">Constructs a new RuntimeException object.</div><div class="ttdef"><b>Definition:</b> RuntimeException.hpp:16</div></div>
+<div class="ttc" id="aclass_r_type_1_1_network_1_1_runtime_exception_html_a60fa2e1fec4b3cb934720201e8c4fe8b"><div class="ttname"><a href="class_r_type_1_1_network_1_1_runtime_exception.html#a60fa2e1fec4b3cb934720201e8c4fe8b">RType::Network::RuntimeException::what</a></div><div class="ttdeci">const char * what() const noexcept override</div><div class="ttdoc">Get the error message.</div><div class="ttdef"><b>Definition:</b> RuntimeException.hpp:27</div></div>
+<div class="ttc" id="aclass_r_type_1_1_network_1_1_runtime_exception_html_a6f2ceb258e2fc10885981e99b086e323"><div class="ttname"><a href="class_r_type_1_1_network_1_1_runtime_exception.html#a6f2ceb258e2fc10885981e99b086e323">RType::Network::RuntimeException::RuntimeException</a></div><div class="ttdeci">RuntimeException(const std::string &amp;where, const std::string &amp;error_msg)</div><div class="ttdoc">Constructs a new RuntimeException object.</div><div class="ttdef"><b>Definition:</b> RuntimeException.hpp:17</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

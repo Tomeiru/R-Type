@@ -83,21 +83,21 @@ $(function() {
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">namespace </span>RType::Packet {</div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="struct_r_type_1_1_packet_1_1_destroy_entity.html">   10</a></span><span class="keyword">struct </span><a class="code hl_struct" href="struct_r_type_1_1_packet_1_1_destroy_entity.html">DestroyEntity</a> {</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="struct_r_type_1_1_packet_1_1_destroy_entity.html#a8381973241c3b1a4ea351cd311f16404">   15</a></span>    <a class="code hl_function" href="struct_r_type_1_1_packet_1_1_destroy_entity.html#a8381973241c3b1a4ea351cd311f16404">DestroyEntity</a>(ECS::Entity entity = 0, std::string spriteId = <span class="stringliteral">&quot;&quot;</span>)</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>        : _entity(entity)</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    {</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 15; i++) {</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>            sprite_id[i] = (i &lt; spriteId.size() ? spriteId[i] : <span class="charliteral">&#39;\0&#39;</span>);</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        }</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        sprite_id[15] = <span class="charliteral">&#39;\0&#39;</span>;</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    };</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keywordtype">char</span> sprite_id[16];</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    ECS::Entity _entity;</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>};</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>};</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="struct_r_type_1_1_packet_1_1_destroy_entity.html#a8381973241c3b1a4ea351cd311f16404">   17</a></span>    <a class="code hl_function" href="struct_r_type_1_1_packet_1_1_destroy_entity.html#a8381973241c3b1a4ea351cd311f16404">DestroyEntity</a>(ECS::Entity entity = 0, std::string spriteId = <span class="stringliteral">&quot;&quot;</span>)</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        : _entity(entity)</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    {</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 15; i++) {</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>            sprite_id[i] = (i &lt; spriteId.size() ? spriteId[i] : <span class="charliteral">&#39;\0&#39;</span>);</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        }</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        sprite_id[15] = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    };</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keywordtype">char</span> sprite_id[16];</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    ECS::Entity _entity;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>};</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>};</div>
 <div class="ttc" id="astruct_r_type_1_1_packet_1_1_destroy_entity_html"><div class="ttname"><a href="struct_r_type_1_1_packet_1_1_destroy_entity.html">RType::Packet::DestroyEntity</a></div><div class="ttdoc">DestroyEntity is a class that represents a destroy entity packet.</div><div class="ttdef"><b>Definition:</b> DestroyEntity.hpp:10</div></div>
-<div class="ttc" id="astruct_r_type_1_1_packet_1_1_destroy_entity_html_a8381973241c3b1a4ea351cd311f16404"><div class="ttname"><a href="struct_r_type_1_1_packet_1_1_destroy_entity.html#a8381973241c3b1a4ea351cd311f16404">RType::Packet::DestroyEntity::DestroyEntity</a></div><div class="ttdeci">DestroyEntity(ECS::Entity entity=0, std::string spriteId=&quot;&quot;)</div><div class="ttdoc">Constructs a new DestroyEntity object.</div><div class="ttdef"><b>Definition:</b> DestroyEntity.hpp:15</div></div>
+<div class="ttc" id="astruct_r_type_1_1_packet_1_1_destroy_entity_html_a8381973241c3b1a4ea351cd311f16404"><div class="ttname"><a href="struct_r_type_1_1_packet_1_1_destroy_entity.html#a8381973241c3b1a4ea351cd311f16404">RType::Packet::DestroyEntity::DestroyEntity</a></div><div class="ttdeci">DestroyEntity(ECS::Entity entity=0, std::string spriteId=&quot;&quot;)</div><div class="ttdoc">Constructs a new DestroyEntity object.</div><div class="ttdef"><b>Definition:</b> DestroyEntity.hpp:17</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

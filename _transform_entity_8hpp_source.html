@@ -84,28 +84,30 @@ $(function() {
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">namespace </span>RType::Packet {</div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="struct_r_type_1_1_packet_1_1_transform_entity.html">   11</a></span><span class="keyword">struct </span><a class="code hl_struct" href="struct_r_type_1_1_packet_1_1_transform_entity.html">TransformEntity</a> {</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    <a class="code hl_struct" href="struct_r_type_1_1_packet_1_1_transform_entity.html">TransformEntity</a>(ECS::Entity entity = 0, SFML::Vector2f position = { 0.0, 0.0 }, <span class="keywordtype">float</span> rotation = 0.0, SFML::Vector2f scale = { 0.0, 0.0 }, SFML::Vector2f origin = { 0.0, 0.0 })</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>        : _entity(entity)</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>        , _position(position)</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>        , _rotation(rotation)</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>        , _scale(scale)</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        , _origin(origin) {};</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <a class="code hl_struct" href="struct_r_type_1_1_packet_1_1_transform_entity.html">TransformEntity</a>(ECS::Entity entity, <a class="code hl_struct" href="struct_s_f_m_l_1_1_transform.html">SFML::Transform</a> transform)</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        : _entity(entity)</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        , _position(transform.position)</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        , _rotation(transform.rotation)</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        , _scale(transform.scale)</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        , _origin(transform.origin) {};</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    ECS::Entity _entity;</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    SFML::Vector2f _position;</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keywordtype">float</span> _rotation;</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    SFML::Vector2f _scale;</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    SFML::Vector2f _origin;</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>};</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>}</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="struct_r_type_1_1_packet_1_1_transform_entity.html#adb1f5cd17925b96f24ee266d6c04abf9">   21</a></span>    <a class="code hl_function" href="struct_r_type_1_1_packet_1_1_transform_entity.html#adb1f5cd17925b96f24ee266d6c04abf9">TransformEntity</a>(ECS::Entity entity = 0, SFML::Vector2f position = { 0.0, 0.0 }, <span class="keywordtype">float</span> rotation = 0.0, SFML::Vector2f scale = { 0.0, 0.0 }, SFML::Vector2f origin = { 0.0, 0.0 })</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        : _entity(entity)</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        , _position(position)</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        , _rotation(rotation)</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        , _scale(scale)</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        , _origin(origin) {};</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="struct_r_type_1_1_packet_1_1_transform_entity.html#a092fc154739d6ea366dcee21ae3c67ca">   34</a></span>    <a class="code hl_function" href="struct_r_type_1_1_packet_1_1_transform_entity.html#a092fc154739d6ea366dcee21ae3c67ca">TransformEntity</a>(ECS::Entity entity, <a class="code hl_struct" href="struct_s_f_m_l_1_1_transform.html">SFML::Transform</a> transform)</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        : _entity(entity)</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        , _position(transform.position)</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        , _rotation(transform.rotation)</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        , _scale(transform.scale)</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        , _origin(transform.origin) {};</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    ECS::Entity _entity;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    SFML::Vector2f _position;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keywordtype">float</span> _rotation;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    SFML::Vector2f _scale;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    SFML::Vector2f _origin;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>};</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>}</div>
 <div class="ttc" id="astruct_r_type_1_1_packet_1_1_transform_entity_html"><div class="ttname"><a href="struct_r_type_1_1_packet_1_1_transform_entity.html">RType::Packet::TransformEntity</a></div><div class="ttdoc">TransformEntity is a class that represents a transform packet.</div><div class="ttdef"><b>Definition:</b> TransformEntity.hpp:11</div></div>
+<div class="ttc" id="astruct_r_type_1_1_packet_1_1_transform_entity_html_a092fc154739d6ea366dcee21ae3c67ca"><div class="ttname"><a href="struct_r_type_1_1_packet_1_1_transform_entity.html#a092fc154739d6ea366dcee21ae3c67ca">RType::Packet::TransformEntity::TransformEntity</a></div><div class="ttdeci">TransformEntity(ECS::Entity entity, SFML::Transform transform)</div><div class="ttdoc">Creates a new TransformEntity class.</div><div class="ttdef"><b>Definition:</b> TransformEntity.hpp:34</div></div>
+<div class="ttc" id="astruct_r_type_1_1_packet_1_1_transform_entity_html_adb1f5cd17925b96f24ee266d6c04abf9"><div class="ttname"><a href="struct_r_type_1_1_packet_1_1_transform_entity.html#adb1f5cd17925b96f24ee266d6c04abf9">RType::Packet::TransformEntity::TransformEntity</a></div><div class="ttdeci">TransformEntity(ECS::Entity entity=0, SFML::Vector2f position={ 0.0, 0.0 }, float rotation=0.0, SFML::Vector2f scale={ 0.0, 0.0 }, SFML::Vector2f origin={ 0.0, 0.0 })</div><div class="ttdoc">Creates a new TransformEntity class.</div><div class="ttdef"><b>Definition:</b> TransformEntity.hpp:21</div></div>
 <div class="ttc" id="astruct_s_f_m_l_1_1_transform_html"><div class="ttname"><a href="struct_s_f_m_l_1_1_transform.html">SFML::Transform</a></div><div class="ttdoc">Component that allows an entity to be transformed (position, rotation, scale, origin)</div><div class="ttdef"><b>Definition:</b> Transform.hpp:9</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

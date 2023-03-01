@@ -90,8 +90,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a15c95c20a88cf2f869951cda932dba7f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_type_1_1_player_manager.html#a15c95c20a88cf2f869951cda932dba7f">PlayerManager</a> (std::uint16_t nb_player_max=4)</td></tr>
 <tr class="memdesc:a15c95c20a88cf2f869951cda932dba7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="class_r_type_1_1_player_manager.html" title="PlayerManager is the container that handles player registration.">PlayerManager</a> object.  <br /></td></tr>
 <tr class="separator:a15c95c20a88cf2f869951cda932dba7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a76270169ecdc129d2432d025313573b9"><td class="memItemLeft" align="right" valign="top"><a id="a76270169ecdc129d2432d025313573b9" name="a76270169ecdc129d2432d025313573b9"></a>
-PlayerID&#160;</td><td class="memItemRight" valign="bottom"><b>addNewPlayer</b> (const PlayerName &amp;name, const <a class="el" href="class_r_type_1_1_network_1_1_u_d_p_client.html">Network::UDPClient</a> &amp;client)</td></tr>
+<tr class="memitem:a76270169ecdc129d2432d025313573b9"><td class="memItemLeft" align="right" valign="top">PlayerID&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_type_1_1_player_manager.html#a76270169ecdc129d2432d025313573b9">addNewPlayer</a> (const PlayerName &amp;name, const <a class="el" href="class_r_type_1_1_network_1_1_u_d_p_client.html">Network::UDPClient</a> &amp;client)</td></tr>
+<tr class="memdesc:a76270169ecdc129d2432d025313573b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a new player the <a class="el" href="class_r_type_1_1_player_manager.html" title="PlayerManager is the container that handles player registration.">PlayerManager</a>.  <br /></td></tr>
 <tr class="separator:a76270169ecdc129d2432d025313573b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa7509188aa4409eb49d923c61e6c5c8a"><td class="memItemLeft" align="right" valign="top">std::uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_type_1_1_player_manager.html#aa7509188aa4409eb49d923c61e6c5c8a">getNbPlayerConnected</a> () const</td></tr>
 <tr class="memdesc:aa7509188aa4409eb49d923c61e6c5c8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current number of connected player.  <br /></td></tr>
@@ -99,11 +99,11 @@ PlayerID&#160;</td><td class="memItemRight" valign="bottom"><b>addNewPlayer</b> 
 <tr class="memitem:a61a23a56439790226a15d9a2cb334630"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_type_1_1_player_manager.html#a61a23a56439790226a15d9a2cb334630">sendPacketToAllPlayer</a> (const void *data, size_t size, std::shared_ptr&lt; <a class="el" href="class_r_type_1_1_network_1_1_u_d_p_handler.html">Network::UDPHandler</a> &gt; &amp;udp_handler)</td></tr>
 <tr class="memdesc:a61a23a56439790226a15d9a2cb334630"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends a packet to all the connected player.  <br /></td></tr>
 <tr class="separator:a61a23a56439790226a15d9a2cb334630"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af40ebff7e6c6671b5d3cc9f426d0734c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_type_1_1_player_manager.html#af40ebff7e6c6671b5d3cc9f426d0734c">sendGamestartToAllPlayers</a> (std::shared_ptr&lt; <a class="el" href="class_r_type_1_1_network_1_1_u_d_p_handler.html">Network::UDPHandler</a> &gt; &amp;udp_handler, std::shared_ptr&lt; <a class="el" href="class_r_type_1_1_network_1_1_package_manager.html">RType::Network::PackageManager</a> &gt; &amp;package_manager)</td></tr>
-<tr class="memdesc:af40ebff7e6c6671b5d3cc9f426d0734c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends a GameStart packet to all the connected player.  <br /></td></tr>
-<tr class="separator:af40ebff7e6c6671b5d3cc9f426d0734c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae61fa09dc37fa9b5b0756b2115060c00"><td class="memItemLeft" align="right" valign="top"><a id="ae61fa09dc37fa9b5b0756b2115060c00" name="ae61fa09dc37fa9b5b0756b2115060c00"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>spawnPlayers</b> (std::shared_ptr&lt; <a class="el" href="class_r_type_1_1_network_1_1_u_d_p_handler.html">Network::UDPHandler</a> &gt; &amp;udp_handler, std::shared_ptr&lt; <a class="el" href="class_r_type_1_1_network_1_1_package_manager.html">RType::Network::PackageManager</a> &gt; &amp;package_manager, std::unique_ptr&lt; ECS::Coordinator &gt; &amp;coordinator)</td></tr>
+<tr class="memitem:a0a16c85e0756d2f1027cb9b0e398590f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_type_1_1_player_manager.html#a0a16c85e0756d2f1027cb9b0e398590f">sendGameStartToAllPlayers</a> (std::shared_ptr&lt; <a class="el" href="class_r_type_1_1_network_1_1_u_d_p_handler.html">Network::UDPHandler</a> &gt; &amp;udp_handler, std::shared_ptr&lt; <a class="el" href="class_r_type_1_1_network_1_1_package_manager.html">RType::Network::PackageManager</a> &gt; &amp;package_manager)</td></tr>
+<tr class="memdesc:a0a16c85e0756d2f1027cb9b0e398590f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends a GameStart packet to all the connected player.  <br /></td></tr>
+<tr class="separator:a0a16c85e0756d2f1027cb9b0e398590f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae61fa09dc37fa9b5b0756b2115060c00"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_type_1_1_player_manager.html#ae61fa09dc37fa9b5b0756b2115060c00">spawnPlayers</a> (std::shared_ptr&lt; <a class="el" href="class_r_type_1_1_network_1_1_u_d_p_handler.html">Network::UDPHandler</a> &gt; &amp;udp_handler, std::shared_ptr&lt; <a class="el" href="class_r_type_1_1_network_1_1_package_manager.html">RType::Network::PackageManager</a> &gt; &amp;package_manager, std::unique_ptr&lt; ECS::Coordinator &gt; &amp;coordinator)</td></tr>
+<tr class="memdesc:ae61fa09dc37fa9b5b0756b2115060c00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Spawn a new player in the game.  <br /></td></tr>
 <tr class="separator:ae61fa09dc37fa9b5b0756b2115060c00"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d8ce42b4f67e754c1bd5fffdf4bffec"><td class="memItemLeft" align="right" valign="top">ECS::Entity&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_type_1_1_player_manager.html#a0d8ce42b4f67e754c1bd5fffdf4bffec">getEntityFromPlayerID</a> (PlayerID id)</td></tr>
 <tr class="memdesc:a0d8ce42b4f67e754c1bd5fffdf4bffec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Entity from a PlayerID.  <br /></td></tr>
@@ -147,6 +147,52 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>spawnPlayers</b> (std
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a76270169ecdc129d2432d025313573b9" name="a76270169ecdc129d2432d025313573b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76270169ecdc129d2432d025313573b9">&#9670;&#160;</a></span>addNewPlayer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">PlayerID RType::PlayerManager::addNewPlayer </td>
+          <td>(</td>
+          <td class="paramtype">const PlayerName &amp;&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="class_r_type_1_1_network_1_1_u_d_p_client.html">Network::UDPClient</a> &amp;&#160;</td>
+          <td class="paramname"><em>client</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Add a new player the <a class="el" href="class_r_type_1_1_player_manager.html" title="PlayerManager is the container that handles player registration.">PlayerManager</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>Name to give to the player </td></tr>
+    <tr><td class="paramname">client</td><td>Information about the client containing the ip adress etc </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>ID of the player </dd></dl>
+
+</div>
+</div>
 <a id="a0d8ce42b4f67e754c1bd5fffdf4bffec" name="a0d8ce42b4f67e754c1bd5fffdf4bffec"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0d8ce42b4f67e754c1bd5fffdf4bffec">&#9670;&#160;</a></span>getEntityFromPlayerID()</h2>
 
@@ -210,8 +256,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>spawnPlayers</b> (std
 
 </div>
 </div>
-<a id="af40ebff7e6c6671b5d3cc9f426d0734c" name="af40ebff7e6c6671b5d3cc9f426d0734c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af40ebff7e6c6671b5d3cc9f426d0734c">&#9670;&#160;</a></span>sendGamestartToAllPlayers()</h2>
+<a id="a0a16c85e0756d2f1027cb9b0e398590f" name="a0a16c85e0756d2f1027cb9b0e398590f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a16c85e0756d2f1027cb9b0e398590f">&#9670;&#160;</a></span>sendGameStartToAllPlayers()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -220,7 +266,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>spawnPlayers</b> (std
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void RType::PlayerManager::sendGamestartToAllPlayers </td>
+          <td class="memname">void RType::PlayerManager::sendGameStartToAllPlayers </td>
           <td>(</td>
           <td class="paramtype">std::shared_ptr&lt; <a class="el" href="class_r_type_1_1_network_1_1_u_d_p_handler.html">Network::UDPHandler</a> &gt; &amp;&#160;</td>
           <td class="paramname"><em>udp_handler</em>, </td>
@@ -248,6 +294,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>spawnPlayers</b> (std
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">udp_handler</td><td>The class that handles sending packet to other UDPClients </td></tr>
+    <tr><td class="paramname">package_manager</td><td>Package manager, used to create and send packets </td></tr>
   </table>
   </dd>
 </dl>
@@ -300,6 +347,58 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>spawnPlayers</b> (std
     <tr><td class="paramname">data</td><td>The packet to send </td></tr>
     <tr><td class="paramname">size</td><td>The size of the packet </td></tr>
     <tr><td class="paramname">udp_handler</td><td>The class that handles sending packet to other UDPClients </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ae61fa09dc37fa9b5b0756b2115060c00" name="ae61fa09dc37fa9b5b0756b2115060c00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae61fa09dc37fa9b5b0756b2115060c00">&#9670;&#160;</a></span>spawnPlayers()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RType::PlayerManager::spawnPlayers </td>
+          <td>(</td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="class_r_type_1_1_network_1_1_u_d_p_handler.html">Network::UDPHandler</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>udp_handler</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="class_r_type_1_1_network_1_1_package_manager.html">RType::Network::PackageManager</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>package_manager</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::unique_ptr&lt; ECS::Coordinator &gt; &amp;&#160;</td>
+          <td class="paramname"><em>coordinator</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Spawn a new player in the game. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">udp_handler</td><td>Network manager using UDP to communicate </td></tr>
+    <tr><td class="paramname">package_manager</td><td>Package manager, used to create and send packets </td></tr>
+    <tr><td class="paramname">coordinator</td><td>Reference to the ecs coordinator </td></tr>
   </table>
   </dd>
 </dl>

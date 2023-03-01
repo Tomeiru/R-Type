@@ -91,8 +91,8 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><b>EnemyManager</b> ()</td></tr>
 <tr class="memdesc:a6890e6362310d660919ed7e566367f8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="class_r_type_1_1_enemy_manager.html" title="EnemyManager is the container that handles enemy registration.">EnemyManager</a> object. <br /></td></tr>
 <tr class="separator:a6890e6362310d660919ed7e566367f8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a27ec21a04fb9b278cfccda30bb9dc2a4"><td class="memItemLeft" align="right" valign="top"><a id="a27ec21a04fb9b278cfccda30bb9dc2a4" name="a27ec21a04fb9b278cfccda30bb9dc2a4"></a>
-EnemyID&#160;</td><td class="memItemRight" valign="bottom"><b>spawnEnemy</b> (std::shared_ptr&lt; <a class="el" href="class_r_type_1_1_network_1_1_u_d_p_handler.html">Network::UDPHandler</a> &gt; &amp;udp_handler, std::unique_ptr&lt; ECS::Coordinator &gt; &amp;coordinator)</td></tr>
+<tr class="memitem:a27ec21a04fb9b278cfccda30bb9dc2a4"><td class="memItemLeft" align="right" valign="top">EnemyID&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_type_1_1_enemy_manager.html#a27ec21a04fb9b278cfccda30bb9dc2a4">spawnEnemy</a> (std::shared_ptr&lt; <a class="el" href="class_r_type_1_1_network_1_1_u_d_p_handler.html">Network::UDPHandler</a> &gt; &amp;udp_handler, std::unique_ptr&lt; ECS::Coordinator &gt; &amp;coordinator)</td></tr>
+<tr class="memdesc:a27ec21a04fb9b278cfccda30bb9dc2a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Spawn a new enemy on the game.  <br /></td></tr>
 <tr class="separator:a27ec21a04fb9b278cfccda30bb9dc2a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad3e6232cf465192bd37d5a6645602ccc"><td class="memItemLeft" align="right" valign="top">ECS::Entity&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_type_1_1_enemy_manager.html#ad3e6232cf465192bd37d5a6645602ccc">getEntityFromEnemyId</a> (EnemyID id)</td></tr>
 <tr class="memdesc:ad3e6232cf465192bd37d5a6645602ccc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Entity from the EnemyID.  <br /></td></tr>
@@ -133,6 +133,52 @@ EnemyID&#160;</td><td class="memItemRight" valign="bottom"><b>spawnEnemy</b> (st
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The Entity associated with the EnemyID </dd></dl>
+
+</div>
+</div>
+<a id="a27ec21a04fb9b278cfccda30bb9dc2a4" name="a27ec21a04fb9b278cfccda30bb9dc2a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27ec21a04fb9b278cfccda30bb9dc2a4">&#9670;&#160;</a></span>spawnEnemy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">EnemyID RType::EnemyManager::spawnEnemy </td>
+          <td>(</td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="class_r_type_1_1_network_1_1_u_d_p_handler.html">Network::UDPHandler</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>udp_handler</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::unique_ptr&lt; ECS::Coordinator &gt; &amp;&#160;</td>
+          <td class="paramname"><em>coordinator</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Spawn a new enemy on the game. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">udp_handler</td><td>The class that handles sending packet to other UDPClients </td></tr>
+    <tr><td class="paramname">coordinator</td><td>Reference to the ecs coordinator </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>ID of the enemy that you spawned </dd></dl>
 
 </div>
 </div>

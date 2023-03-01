@@ -83,29 +83,29 @@ $(function() {
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">namespace </span>RType::Network {</div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="class_r_type_1_1_network_1_1_u_d_p_client.html">    9</a></span><span class="keyword">class </span><a class="code hl_class" href="class_r_type_1_1_network_1_1_u_d_p_client.html">UDPClient</a> {</div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="class_r_type_1_1_network_1_1_u_d_p_client.html#af88b04a9cfd2fac6f7599bd0c323f033">   16</a></span>    <a class="code hl_function" href="class_r_type_1_1_network_1_1_u_d_p_client.html#af88b04a9cfd2fac6f7599bd0c323f033">UDPClient</a>(<span class="keyword">const</span> SFML::IpAddress&amp; ip, std::uint16_t port)</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        : address(ip)</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        , port(port) {};</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="class_r_type_1_1_network_1_1_u_d_p_client.html#a732f5c0a90c5403cbfaa95c5d7be507b">   24</a></span>    <span class="keyword">const</span> SFML::IpAddress&amp; <a class="code hl_function" href="class_r_type_1_1_network_1_1_u_d_p_client.html#a732f5c0a90c5403cbfaa95c5d7be507b">getIpAddress</a>()<span class="keyword"> const</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keyword">    </span>{</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        <span class="keywordflow">return</span> (address);</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    }</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="class_r_type_1_1_network_1_1_u_d_p_client.html#aac08f0119c58f751345b743bb512705a">   33</a></span>    <span class="keyword">const</span> std::uint16_t&amp; <a class="code hl_function" href="class_r_type_1_1_network_1_1_u_d_p_client.html#aac08f0119c58f751345b743bb512705a">getPort</a>()<span class="keyword"> const</span></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="keyword">    </span>{</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        <span class="keywordflow">return</span> (port);</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    }</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    SFML::IpAddress address;</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    std::uint16_t port;</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>};</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>}</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="class_r_type_1_1_network_1_1_u_d_p_client.html#af88b04a9cfd2fac6f7599bd0c323f033">   17</a></span>    <a class="code hl_function" href="class_r_type_1_1_network_1_1_u_d_p_client.html#af88b04a9cfd2fac6f7599bd0c323f033">UDPClient</a>(<span class="keyword">const</span> SFML::IpAddress&amp; ip, std::uint16_t port)</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        : address(ip)</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        , port(port) {};</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="class_r_type_1_1_network_1_1_u_d_p_client.html#a732f5c0a90c5403cbfaa95c5d7be507b">   26</a></span>    <span class="keyword">const</span> SFML::IpAddress&amp; <a class="code hl_function" href="class_r_type_1_1_network_1_1_u_d_p_client.html#a732f5c0a90c5403cbfaa95c5d7be507b">getIpAddress</a>()<span class="keyword"> const</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        <span class="keywordflow">return</span> (address);</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    }</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="class_r_type_1_1_network_1_1_u_d_p_client.html#aac08f0119c58f751345b743bb512705a">   36</a></span>    <span class="keyword">const</span> std::uint16_t&amp; <a class="code hl_function" href="class_r_type_1_1_network_1_1_u_d_p_client.html#aac08f0119c58f751345b743bb512705a">getPort</a>()<span class="keyword"> const</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        <span class="keywordflow">return</span> (port);</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    }</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    SFML::IpAddress address;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    std::uint16_t port;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>};</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>}</div>
 <div class="ttc" id="aclass_r_type_1_1_network_1_1_u_d_p_client_html"><div class="ttname"><a href="class_r_type_1_1_network_1_1_u_d_p_client.html">RType::Network::UDPClient</a></div><div class="ttdoc">UDPClient is a class that represents an UDP client.</div><div class="ttdef"><b>Definition:</b> UDPClient.hpp:9</div></div>
-<div class="ttc" id="aclass_r_type_1_1_network_1_1_u_d_p_client_html_a732f5c0a90c5403cbfaa95c5d7be507b"><div class="ttname"><a href="class_r_type_1_1_network_1_1_u_d_p_client.html#a732f5c0a90c5403cbfaa95c5d7be507b">RType::Network::UDPClient::getIpAddress</a></div><div class="ttdeci">const SFML::IpAddress &amp; getIpAddress() const</div><div class="ttdoc">Get the IP address of the client.</div><div class="ttdef"><b>Definition:</b> UDPClient.hpp:24</div></div>
-<div class="ttc" id="aclass_r_type_1_1_network_1_1_u_d_p_client_html_aac08f0119c58f751345b743bb512705a"><div class="ttname"><a href="class_r_type_1_1_network_1_1_u_d_p_client.html#aac08f0119c58f751345b743bb512705a">RType::Network::UDPClient::getPort</a></div><div class="ttdeci">const std::uint16_t &amp; getPort() const</div><div class="ttdoc">Get the port of the client.</div><div class="ttdef"><b>Definition:</b> UDPClient.hpp:33</div></div>
-<div class="ttc" id="aclass_r_type_1_1_network_1_1_u_d_p_client_html_af88b04a9cfd2fac6f7599bd0c323f033"><div class="ttname"><a href="class_r_type_1_1_network_1_1_u_d_p_client.html#af88b04a9cfd2fac6f7599bd0c323f033">RType::Network::UDPClient::UDPClient</a></div><div class="ttdeci">UDPClient(const SFML::IpAddress &amp;ip, std::uint16_t port)</div><div class="ttdoc">Constructs a new UDPClient object.</div><div class="ttdef"><b>Definition:</b> UDPClient.hpp:16</div></div>
+<div class="ttc" id="aclass_r_type_1_1_network_1_1_u_d_p_client_html_a732f5c0a90c5403cbfaa95c5d7be507b"><div class="ttname"><a href="class_r_type_1_1_network_1_1_u_d_p_client.html#a732f5c0a90c5403cbfaa95c5d7be507b">RType::Network::UDPClient::getIpAddress</a></div><div class="ttdeci">const SFML::IpAddress &amp; getIpAddress() const</div><div class="ttdoc">Get the IP address of the client.</div><div class="ttdef"><b>Definition:</b> UDPClient.hpp:26</div></div>
+<div class="ttc" id="aclass_r_type_1_1_network_1_1_u_d_p_client_html_aac08f0119c58f751345b743bb512705a"><div class="ttname"><a href="class_r_type_1_1_network_1_1_u_d_p_client.html#aac08f0119c58f751345b743bb512705a">RType::Network::UDPClient::getPort</a></div><div class="ttdeci">const std::uint16_t &amp; getPort() const</div><div class="ttdoc">Get the port of the client.</div><div class="ttdef"><b>Definition:</b> UDPClient.hpp:36</div></div>
+<div class="ttc" id="aclass_r_type_1_1_network_1_1_u_d_p_client_html_af88b04a9cfd2fac6f7599bd0c323f033"><div class="ttname"><a href="class_r_type_1_1_network_1_1_u_d_p_client.html#af88b04a9cfd2fac6f7599bd0c323f033">RType::Network::UDPClient::UDPClient</a></div><div class="ttdeci">UDPClient(const SFML::IpAddress &amp;ip, std::uint16_t port)</div><div class="ttdoc">Constructs a new UDPClient object.</div><div class="ttdef"><b>Definition:</b> UDPClient.hpp:17</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

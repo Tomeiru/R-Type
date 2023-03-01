@@ -79,6 +79,11 @@ $(function() {
   <div class="headertitle"><div class="title">SFML::KillNoLife Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>System that kills no life entities.  
+ <a href="class_s_f_m_l_1_1_kill_no_life.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_kill_no_life_8hpp_source.html">KillNoLife.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for SFML::KillNoLife:</div>
 <div class="dyncontent">
@@ -88,10 +93,47 @@ Inheritance diagram for SFML::KillNoLife:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ae042b50cfb3f11604eca10bae0f797e1"><td class="memItemLeft" align="right" valign="top"><a id="ae042b50cfb3f11604eca10bae0f797e1" name="ae042b50cfb3f11604eca10bae0f797e1"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>update</b> (std::unique_ptr&lt; ECS::Coordinator &gt; &amp;coordinator)</td></tr>
+<tr class="memitem:ae042b50cfb3f11604eca10bae0f797e1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_s_f_m_l_1_1_kill_no_life.html#ae042b50cfb3f11604eca10bae0f797e1">update</a> (std::unique_ptr&lt; ECS::Coordinator &gt; &amp;coordinator)</td></tr>
+<tr class="memdesc:ae042b50cfb3f11604eca10bae0f797e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that kills every entity with a health component equals or lower than 0.  <br /></td></tr>
 <tr class="separator:ae042b50cfb3f11604eca10bae0f797e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>System that kills no life entities. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="ae042b50cfb3f11604eca10bae0f797e1" name="ae042b50cfb3f11604eca10bae0f797e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae042b50cfb3f11604eca10bae0f797e1">&#9670;&#160;</a></span>update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SFML::KillNoLife::update </td>
+          <td>(</td>
+          <td class="paramtype">std::unique_ptr&lt; ECS::Coordinator &gt; &amp;&#160;</td>
+          <td class="paramname"><em>coordinator</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function that kills every entity with a health component equals or lower than 0. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">coordinator</td><td>Reference to the ecs coordinator </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>server/system/<a class="el" href="_kill_no_life_8hpp_source.html">KillNoLife.hpp</a></li>
 </ul>

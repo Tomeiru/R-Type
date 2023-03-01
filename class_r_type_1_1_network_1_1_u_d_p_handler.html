@@ -79,14 +79,20 @@ $(function() {
   <div class="headertitle"><div class="title">RType::Network::UDPHandler Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Class handling the udp communication system.  
+ <a href="class_r_type_1_1_network_1_1_u_d_p_handler.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_u_d_p_handler_8hpp_source.html">UDPHandler.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a365a380f933bd187b64c8f9879191474"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_type_1_1_network_1_1_u_d_p_handler.html#a365a380f933bd187b64c8f9879191474">UDPHandler</a> (std::uint16_t port, std::shared_ptr&lt; <a class="el" href="class_r_type_1_1_network_1_1_package_manager.html">Network::PackageManager</a> &gt; &amp;package_manager)</td></tr>
-<tr class="memdesc:a365a380f933bd187b64c8f9879191474"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="class_r_type_1_1_network_1_1_u_d_p_handler.html">UDPHandler</a> object.  <br /></td></tr>
+<tr class="memdesc:a365a380f933bd187b64c8f9879191474"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="class_r_type_1_1_network_1_1_u_d_p_handler.html" title="Class handling the udp communication system.">UDPHandler</a> object.  <br /></td></tr>
 <tr class="separator:a365a380f933bd187b64c8f9879191474"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a669f02053a5812632dce6b13e2227568"><td class="memItemLeft" align="right" valign="top"><a id="a669f02053a5812632dce6b13e2227568" name="a669f02053a5812632dce6b13e2227568"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>startHandler</b> ()</td></tr>
+<tr class="memdesc:a669f02053a5812632dce6b13e2227568"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the handler. <br /></td></tr>
 <tr class="separator:a669f02053a5812632dce6b13e2227568"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aefce9f7c8b435fcabf8abb1369f2a96e"><td class="memItemLeft" align="right" valign="top"><a id="aefce9f7c8b435fcabf8abb1369f2a96e" name="aefce9f7c8b435fcabf8abb1369f2a96e"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>stopHandler</b> ()</td></tr>
@@ -112,11 +118,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>stopHandler</b> ()</t
 <tr class="memitem:a105dc422583f7423ebb8a3d75c66924e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_r_type_1_1_network_1_1_received_packet.html">ReceivedPacket</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_type_1_1_network_1_1_u_d_p_handler.html#a105dc422583f7423ebb8a3d75c66924e">popElement</a> ()</td></tr>
 <tr class="memdesc:a105dc422583f7423ebb8a3d75c66924e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pops an element from the queue.  <br /></td></tr>
 <tr class="separator:a105dc422583f7423ebb8a3d75c66924e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a578f9bbba09da10c8786e66a9d46bf64"><td class="memItemLeft" align="right" valign="top"><a id="a578f9bbba09da10c8786e66a9d46bf64" name="a578f9bbba09da10c8786e66a9d46bf64"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>pushQueue</b> (<a class="el" href="struct_r_type_1_1_network_1_1_received_packet.html">ReceivedPacket</a> &amp;packet)</td></tr>
+<tr class="memitem:a578f9bbba09da10c8786e66a9d46bf64"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_type_1_1_network_1_1_u_d_p_handler.html#a578f9bbba09da10c8786e66a9d46bf64">pushQueue</a> (<a class="el" href="struct_r_type_1_1_network_1_1_received_packet.html">ReceivedPacket</a> &amp;packet)</td></tr>
+<tr class="memdesc:a578f9bbba09da10c8786e66a9d46bf64"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a new packet in the list.  <br /></td></tr>
 <tr class="separator:a578f9bbba09da10c8786e66a9d46bf64"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Class handling the udp communication system. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a365a380f933bd187b64c8f9879191474" name="a365a380f933bd187b64c8f9879191474"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a365a380f933bd187b64c8f9879191474">&#9670;&#160;</a></span>UDPHandler()</h2>
 
@@ -151,7 +159,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>pushQueue</b> (<a cla
 </table>
 </div><div class="memdoc">
 
-<p>Constructs a new <a class="el" href="class_r_type_1_1_network_1_1_u_d_p_handler.html">UDPHandler</a> object. </p>
+<p>Constructs a new <a class="el" href="class_r_type_1_1_network_1_1_u_d_p_handler.html" title="Class handling the udp communication system.">UDPHandler</a> object. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">port</td><td>The port to bind the handler to </td></tr>
@@ -259,6 +267,40 @@ template&lt;typename PayloadT &gt; </div>
 
 <p>Pops an element from the queue. </p>
 <dl class="section return"><dt>Returns</dt><dd>The element </dd></dl>
+
+</div>
+</div>
+<a id="a578f9bbba09da10c8786e66a9d46bf64" name="a578f9bbba09da10c8786e66a9d46bf64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a578f9bbba09da10c8786e66a9d46bf64">&#9670;&#160;</a></span>pushQueue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RType::Network::UDPHandler::pushQueue </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_r_type_1_1_network_1_1_received_packet.html">ReceivedPacket</a> &amp;&#160;</td>
+          <td class="paramname"><em>packet</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Add a new packet in the list. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">packet</td><td><a class="el" href="struct_r_type_1_1_network_1_1_packet.html" title="Packet is a struct that represents a packet.">Packet</a> to add </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
