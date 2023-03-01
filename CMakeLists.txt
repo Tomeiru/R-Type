@@ -115,7 +115,7 @@ if(UNIX)
 endif()
 
 find_package(SFML 2.5 COMPONENTS audio graphics network system window REQUIRED)
-find_package(rapidjson REQUIRED)
+find_package(RapidJSON REQUIRED)
 set(SFML_LIBS
         sfml-audio
         sfml-graphics

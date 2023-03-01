@@ -27,6 +27,7 @@
 #include "system/Shoot.hpp"
 #include "system/UpdateEntityPositions.hpp"
 
+
 std::uint16_t RType::Server::parseArguments(int ac, char** av)
 {
     if (ac != 2)
@@ -155,7 +156,8 @@ void RType::Server::game_loop(std::unique_ptr<ECS::Coordinator>& coordinator)
 
     std::cout << "Game loop started!" << std::endl;
     player_manager->spawnPlayers(udp_handler, package_manager, coordinator);
-    enemy_manager->spawnEnemy(udp_handler, coordinator);
+    enemy_manager->spawnEnemy(udp_handler, coordinator, 0);
+    enemy_manager->spawnEnemy(udp_handler, coordinator, 1);
     while (player_manager->getNbPlayerConnected() > 0) {
         while (!udp_handler->isQueueEmpty()) {
             RType::Network::ReceivedPacket packet_received = udp_handler->popElement();
