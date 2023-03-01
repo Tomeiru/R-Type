@@ -20,11 +20,12 @@ public:
      * @param coordinator Reference to the ecs coordinator
      * @param elapsed_time Time in milliseconds you get from the restart member of the clock
      */
-    void update(std::unique_ptr<ECS::Coordinator>& coordinator, std::int32_t elapsed_time) {
+    void update(std::unique_ptr<ECS::Coordinator>& coordinator, std::int32_t elapsed_time)
+    {
         _lastTime += elapsed_time+coordinator->getResource<SFML::Clock>()->getElapsedTime().asMilliseconds();
         if (_lastTime < 50)
             return;
-        for (const auto &entity: entities) {
+        for (const auto& entity: entities) {
             auto &transform = coordinator->getComponent<SFML::Transform>(entity);
             auto &speed = coordinator->getComponent<SFML::Speed>(entity);
             auto direction = coordinator->getComponent<SFML::Direction>(entity).angle;

@@ -27,13 +27,14 @@ public:
     /**
      * @brief Construct a new BulletManager
      */
-    BulletManager() : _bulletNumber(0){};
+    BulletManager()
+        : _bulletNumber(0) {};
 
     /**
      * @brief Get the number of bullets created
      * @return the number of bullets
      */
-    std::uint64_t getBulletNumber() {return _bulletNumber;}
+    std::uint64_t getBulletNumber() { return _bulletNumber; }
 
     /**
      * @brief Create a bullet with all the components
@@ -47,7 +48,7 @@ public:
             return;
         auto udp_handler = coordinator->getResource<RType::Network::UDPHandler>();
         auto bullet = coordinator->createEntity();
-        std::string bulletId = "bullet_"+std::to_string(_bulletNumber);
+        std::string bulletId = "bullet_" + std::to_string(_bulletNumber);
         coordinator->addComponent(bullet, SFML::Direction(attack.attackAngle));
         coordinator->addComponent(bullet, SFML::SpriteReference(bulletId));
         coordinator->addComponent(bullet, SFML::Transform(bulletTransform));
@@ -72,7 +73,7 @@ public:
      * @param id The bullet ID
      * @return The entity containing the bullet
      */
-    ECS::Entity getEntityFromBulletId(BulletID id) {return _id_to_entity[id];}
+    ECS::Entity getEntityFromBulletId(BulletID id) { return _id_to_entity[id]; }
 
 private:
     /**
@@ -81,8 +82,10 @@ private:
      * @param coordinator Reference to the ecs coordinator
      * @param bullet Bullet entity to speed up
      * @param type Type of bullet to shoot
+     * @return Speed of the bullet
      */
-    float setBulletSpeed(std::unique_ptr<ECS::Coordinator>&coordinator, ECS::Entity bullet, SFML::AttackType type) {
+    float setBulletSpeed(std::unique_ptr<ECS::Coordinator>&coordinator, ECS::Entity bullet, SFML::AttackType type)
+    {
         switch (type) {
         case SFML::AttackType::NormalAttack:
             coordinator->addComponent(bullet, SFML::Speed(2));

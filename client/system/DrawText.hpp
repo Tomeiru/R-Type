@@ -1,10 +1,10 @@
 #pragma once
 
-#include "../component/TextReference.hpp"
 #include "../../ecs/Coordinator.hpp"
 #include "../../ecs/System.hpp"
 #include "../../sfml/TextManager.hpp"
 #include "../../sfml/Window.hpp"
+#include "../component/TextReference.hpp"
 
 namespace SFML {
 /**
