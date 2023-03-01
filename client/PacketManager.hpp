@@ -20,6 +20,7 @@ class PacketManager {
 private:
     /**
      * @brief Function that receive the SpawnEntity packet and manage it
+     *
      * @param coordinator Reference to the ECS coordinator
      * @param package_manager Package manager that is used to deal with received packet
      * @param packet_received Packet that got received (not casted)
@@ -121,7 +122,6 @@ private:
     }
 
 public:
-
     /**
      * @brief Function that choose the right packet
      *

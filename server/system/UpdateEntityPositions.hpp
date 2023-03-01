@@ -44,7 +44,6 @@ public:
     }
 
 private:
-
     /**
      * @brief Function that copy the transform
      *
