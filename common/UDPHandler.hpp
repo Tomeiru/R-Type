@@ -12,12 +12,13 @@
 
 namespace RType::Network {
 /**
- * @brief
+ * @brief Class handling the udp communication system
  */
 class UDPHandler {
 public:
     /**
      * @brief Constructs a new UDPHandler object
+     *
      * @param port The port to bind the handler to
      * @param package_manager The package manager that will handle the packet registration and creation
      */
@@ -27,6 +28,10 @@ public:
         , _package_manager(package_manager)
     {
     }
+
+    /**
+     * @brief Starts the handler
+     */
     void startHandler()
     {
         if (_started)
@@ -37,6 +42,7 @@ public:
         _started = true;
         _thread = std::thread([this] {while (_started) {receive();} });
     }
+
     /**
      * @brief Stops the handler
      */
@@ -51,6 +57,7 @@ public:
 
     /**
      * @brief Registers a packet to the package manager
+     *
      * @tparam PayloadT The type of the packet
      */
     template<typename PayloadT>
@@ -61,6 +68,7 @@ public:
 
     /**
      * @brief Receives a packet from the network
+     *
      * @return The status of the reception or the size received
      */
     std::uint32_t receive()
@@ -84,6 +92,7 @@ public:
 
     /**
      * @brief Sends a packet to the network
+     *
      * @tparam PayloadT The type of the packet
      * @param payload The payload of the packet
      * @param address The address to send the packet to
@@ -97,6 +106,7 @@ public:
 
     /**
      * @brief Creates a packet
+     *
      * @tparam PayloadT The type of the packet
      * @param payload The payload of the packet
      * @return The packet
@@ -109,6 +119,7 @@ public:
 
     /**
      * @brief Checks if the queue is empty
+     *
      * @return If the queue is empty
      */
     bool isQueueEmpty()
@@ -118,6 +129,7 @@ public:
 
     /**
      * @brief Pops an element from the queue
+     *
      * @return The element
      */
     ReceivedPacket popElement()
@@ -125,6 +137,11 @@ public:
         return (_queue.pop());
     }
 
+    /**
+     * @brief Add a new packet in the list
+     *
+     * @param packet Packet to add
+     */
     void pushQueue(ReceivedPacket& packet)
     {
         _queue.push(packet);

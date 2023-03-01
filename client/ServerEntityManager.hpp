@@ -11,6 +11,7 @@ class ServerEntityManager {
 public:
     /**
      * @brief Register a server Entity corresponding to a Client Entity
+     *
      * @param server_entity Server Entity
      * @param client_entity Client Entity
      */
@@ -21,6 +22,7 @@ public:
     }
     /**
      * @brief Get the Client Entity corresponding to a Server Entity
+     *
      * @param server_entity Server Entity
      * @return Client Entity
      */
@@ -30,6 +32,7 @@ public:
     }
     /**
      * @brief Get the Server Entity corresponding to a Client Entity
+     *
      * @param client_entity Client Entity
      * @return Server Entity
      */

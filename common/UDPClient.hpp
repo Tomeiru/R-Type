@@ -10,6 +10,7 @@ class UDPClient {
 public:
     /**
      * @brief Constructs a new UDPClient object
+     *
      * @param ip The IP address of the client
      * @param port The port of the client
      */
@@ -19,6 +20,7 @@ public:
 
     /**
      * @brief Get the IP address of the client
+     *
      * @return The IP address of the client
      */
     const SFML::IpAddress& getIpAddress() const
@@ -28,6 +30,7 @@ public:
 
     /**
      * @brief Get the port of the client
+     *
      * @return The port of the client
      */
     const std::uint16_t& getPort() const

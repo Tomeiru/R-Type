@@ -10,6 +10,7 @@ class RuntimeException : public std::exception {
 public:
     /**
      * @brief Constructs a new RuntimeException object
+     *
      * @param where The place where the exception was thrown
      * @param error_msg The error message
      */
@@ -20,6 +21,7 @@ public:
 
     /**
      * @brief Get the error message
+     *
      * @return The error message
      */
     const char* what() const noexcept override

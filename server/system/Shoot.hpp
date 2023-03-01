@@ -49,9 +49,6 @@ public:
     }
 
 private:
-    /**
-     * @brief Number of bullets created from the beginning of the game. Resets to 0 when it overflows.
-     */
     unsigned long long int _bulletNumber = 0;
     std::int32_t _lastTime = 0;
 };
