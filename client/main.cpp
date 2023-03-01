@@ -20,6 +20,9 @@
 #include "../sfml/TextureManager.hpp"
 #include "../sfml/Window.hpp"
 #include "./component/Clickable.hpp"
+#include "./component/MusicReference.hpp"
+#include "./system/PlayMusic.hpp"
+#include "../sfml/MusicManager.hpp"
 #include "./component/Hitbox.hpp"
 #include "./component/Hover.hpp"
 #include "./component/HoverTint.hpp"
@@ -86,6 +89,7 @@ void RType::Client::registerComponents(std::unique_ptr<ECS::Coordinator>& coordi
     coordinator->registerComponent<SFML::Hover>();
     coordinator->registerComponent<SFML::Tint>();
     coordinator->registerComponent<SFML::Clickable>();
+    coordinator->registerComponent<SFML::MusicReference>();
 }
 
 void RType::Client::registerResources(std::unique_ptr<ECS::Coordinator>& coordinator, std::uint16_t port)
@@ -136,6 +140,8 @@ void RType::Client::registerSystems(std::unique_ptr<ECS::Coordinator>& coordinat
     coordinator->setSignatureBits<SFML::UpdateHover, SFML::Hover, SFML::Hitbox>();
     coordinator->registerSystem<SFML::UpdateClick>();
     coordinator->setSignatureBits<SFML::UpdateClick, SFML::Hitbox, SFML::Clickable>();
+    coordinator->registerSystem<SFML::PlayMusic>();
+    coordinator->setSignatureBits<SFML::PlayMusic, SFML::MusicReference>();
 }
 
 void RType::Client::loadAssets(std::unique_ptr<ECS::Coordinator>& coordinator)
@@ -145,7 +151,9 @@ void RType::Client::loadAssets(std::unique_ptr<ECS::Coordinator>& coordinator)
     auto font_manager = coordinator->getResource<SFML::FontManager>();
     auto text_manager = coordinator->getResource<SFML::TextManager>();
     auto color_manager = coordinator->getResource<SFML::ColorManager>();
+    auto backgroundMusic = coordinator->registerResource<SFML::MusicManager>();
 
+    backgroundMusic->registerMusic("background_music", "../assets/audio/rtype.ogg", true);
     texture_manager->registerTexture("player_blue", "../assets/textures/player-blue.png");
     texture_manager->registerTexture("player_red", "../assets/textures/player-red.png");
     texture_manager->registerTexture("player_green", "../assets/textures/player-green.png");
@@ -198,8 +206,10 @@ RType::Client::SceneManager::Scene RType::Client::display_menu(std::unique_ptr<E
     auto logo = coordinator->createEntity();
     auto quit_button = coordinator->createEntity();
     auto play_button = coordinator->createEntity();
+    auto background_music = coordinator->createEntity();
     SFML::Event event;
 
+    coordinator->addComponent(background_music, SFML::MusicReference("background_music", SFML::Music::Playing));
     coordinator->addComponent<SFML::SpriteReference>(logo, SFML::SpriteReference("logo"));
     coordinator->addComponent<SFML::Transform>(logo, SFML::Transform({ 600, 100 }, 0, { 1.5, 1.5 }));
     coordinator->addComponent<SFML::TextReference>(quit_button, SFML::TextReference("quit_button"));
@@ -305,6 +315,7 @@ void RType::Client::game_loop(std::unique_ptr<ECS::Coordinator>& coordinator, co
     coordinator->addComponent<SFML::InputKeys>(keyChecker, SFML::InputKeys());
     SFML::Event event;
 
+    window->setFramerateLimit(60);
     while (window->isOpen()) {
         while (window->pollEvent(event))
             event_manager->newEvent(event.getEvent());
