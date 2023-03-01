@@ -10,7 +10,9 @@
 #include "../common/packet/GameStart.hpp"
 #include "../common/packet/PlayerInputs.hpp"
 #include "../common/packet/PlayerName.hpp"
+#include "../common/packet/SetEntityLinearMove.hpp"
 #include "../common/packet/SpawnEntity.hpp"
+#include "../common/system/LinearMove.hpp"
 #include "../ecs/Coordinator.hpp"
 #include "../server/PlayerManager.hpp"
 #include "../sfml/Clock.hpp"
@@ -23,7 +25,6 @@
 #include "component/Health.hpp"
 #include "system/DestroyEntityOutWindow.hpp"
 #include "system/KillNoLife.hpp"
-#include "system/LinearMove.hpp"
 #include "system/Shoot.hpp"
 #include "system/UpdateEntityPositions.hpp"
 
@@ -95,6 +96,7 @@ void RType::Server::registerPackets(
     package_manager->registerPacket<RType::Packet::TransformEntity>();
     package_manager->registerPacket<RType::Packet::DestroyEntity>();
     package_manager->registerPacket<RType::Packet::CreateSpriteReference>();
+    package_manager->registerPacket<RType::Packet::SetEntityLinearMove>();
 }
 
 void RType::Server::loadAssets(std::unique_ptr<ECS::Coordinator>& coordinator)
@@ -158,6 +160,7 @@ void RType::Server::game_loop(std::unique_ptr<ECS::Coordinator>& coordinator)
     player_manager->spawnPlayers(udp_handler, package_manager, coordinator);
     enemy_manager->spawnEnemy(udp_handler, coordinator, 0);
     enemy_manager->spawnEnemy(udp_handler, coordinator, 1);
+    coordinator->getResource<SFML::Clock>()->restart();
     while (player_manager->getNbPlayerConnected() > 0) {
         while (!udp_handler->isQueueEmpty()) {
             RType::Network::ReceivedPacket packet_received = udp_handler->popElement();
@@ -202,7 +205,7 @@ void RType::Server::game_loop(std::unique_ptr<ECS::Coordinator>& coordinator)
         coordinator->getSystem<SFML::KillNoLife>()->update(coordinator);
         coordinator->getSystem<SFML::Shoot>()->update(coordinator, elapsed_time.asMilliseconds());
         coordinator->getSystem<SFML::DestroyEntityOutWindow>()->update(coordinator);
-        coordinator->getSystem<SFML::UpdateEntityPositions>()->update(coordinator, udp_handler);
+        coordinator->getSystem<SFML::UpdateEntityPositions>()->update(coordinator, udp_handler, elapsed_time.asMilliseconds());
     }
 }
 

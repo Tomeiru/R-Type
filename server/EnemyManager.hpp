@@ -25,7 +25,8 @@ public:
     /**
      * @brief Constructs a new EnemyManager object
      */
-    EnemyManager() : enemy_nbr(0) {};
+    EnemyManager()
+        : enemy_nbr(0) {};
 
     EnemyID spawnEnemy(std::shared_ptr<Network::UDPHandler>& udp_handler, std::unique_ptr<ECS::Coordinator>& coordinator, std::uint64_t id)
     {
@@ -60,7 +61,7 @@ public:
      * @param id The EnemyID
      * @return The Entity associated with the EnemyID
      */
-    ECS::Entity getEntityFromEnemyId(EnemyID id) {return id_to_entity[id];}
+    ECS::Entity getEntityFromEnemyId(EnemyID id) { return id_to_entity[id]; }
 
 private:
     std::unordered_map<EnemyID, ECS::Entity> id_to_entity;

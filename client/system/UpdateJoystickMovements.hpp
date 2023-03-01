@@ -1,8 +1,8 @@
-#include "../component/MovementJoystick.hpp"
 #include "../../common/component/Transform.hpp"
 #include "../../ecs/Coordinator.hpp"
 #include "../../ecs/System.hpp"
 #include "../../sfml/Joystick.hpp"
+#include "../component/MovementJoystick.hpp"
 
 namespace SFML {
 /**

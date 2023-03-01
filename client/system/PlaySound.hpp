@@ -1,9 +1,9 @@
 #pragma once
 
-#include "../component/SoundReference.hpp"
 #include "../../ecs/Coordinator.hpp"
 #include "../../ecs/System.hpp"
 #include "../../sfml/SoundManager.hpp"
+#include "../component/SoundReference.hpp"
 
 namespace SFML {
 /**

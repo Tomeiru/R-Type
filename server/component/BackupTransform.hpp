@@ -23,7 +23,11 @@ struct BackupTransform {
     {
     }
 
-    BackupTransform(SFML::Transform transform) : position(transform.position), rotation(transform.rotation), scale(transform.scale), origin(transform.origin) {};
+    BackupTransform(SFML::Transform transform)
+        : position(transform.position)
+        , rotation(transform.rotation)
+        , scale(transform.scale)
+        , origin(transform.origin) {};
 
     Vector2f position;
     float rotation;

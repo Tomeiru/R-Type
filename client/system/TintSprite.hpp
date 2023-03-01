@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../../common/component/Tint.hpp"
 #include "../../common/component/SpriteReference.hpp"
+#include "../../common/component/Tint.hpp"
 #include "../../ecs/Coordinator.hpp"
 #include "../../ecs/System.hpp"
 #include "../../sfml/ColorManager.hpp"

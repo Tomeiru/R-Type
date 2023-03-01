@@ -12,7 +12,8 @@ struct Direction {
      *
      * @param angle Angle aof the direction (0 to 360)
      */
-    Direction(unsigned int angle = 0) : angle(angle) {};
+    Direction(unsigned int angle = 0)
+        : angle(angle) {};
     unsigned int angle;
 };
 }
