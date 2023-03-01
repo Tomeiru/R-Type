@@ -25,7 +25,8 @@ public:
 
     /**
      * @brief Set the current scene
-     * @return Scene
+     *
+     * @param scene Current scene
      */
     void setCurrentScene(Scene scene)
     {
@@ -34,6 +35,7 @@ public:
 
     /**
      * @brief Get the current scene
+     *
      * @return Scene
      */
     Scene getCurrentScene() const

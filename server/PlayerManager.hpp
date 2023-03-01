@@ -27,6 +27,13 @@ public:
         , nb_player_max(nb_player_max)
     {
     }
+
+    /**
+     * @brief Add a new player the PlayerManager
+     * @param name Name to give to the player
+     * @param client Information about the client containing the ip adress etc
+     * @return ID of the player
+     */
     PlayerID addNewPlayer(const PlayerName& name,
         const Network::UDPClient& client)
     {
@@ -64,8 +71,9 @@ public:
      * @brief Sends a GameStart packet to all the connected player
      * @param udp_handler The class that handles sending packet to other
      * UDPClients
+     * @param package_manager Package manager, used to create and send packets
      */
-    void sendGamestartToAllPlayers(
+    void sendGameStartToAllPlayers(
         std::shared_ptr<Network::UDPHandler>& udp_handler,
         std::shared_ptr<RType::Network::PackageManager>& package_manager)
     {
@@ -78,6 +86,12 @@ public:
         }
     }
 
+    /**
+     * @brief Spawn a new player in the game
+     * @param udp_handler Network manager using UDP to communicate
+     * @param package_manager Package manager, used to create and send packets
+     * @param coordinator Reference to the ecs coordinator
+     */
     void
     spawnPlayers(std::shared_ptr<Network::UDPHandler>& udp_handler,
         std::shared_ptr<RType::Network::PackageManager>& package_manager,
@@ -101,6 +115,7 @@ public:
         }
         std::cout << "All players spawned" << std::endl;
     }
+
     /**
      * @brief Get the Entity from a PlayerID
      * @param id The PlayerID

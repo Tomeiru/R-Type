@@ -28,6 +28,13 @@ public:
     EnemyManager()
         : enemy_nbr(0) {};
 
+    /**
+     * @brief Spawn a new enemy on the game
+     * @param udp_handler The class that handles sending packet to other
+     * UDPClients
+     * @param coordinator Reference to the ecs coordinator
+     * @return ID of the enemy that you spawned
+     */
     EnemyID spawnEnemy(std::shared_ptr<Network::UDPHandler>& udp_handler, std::unique_ptr<ECS::Coordinator>& coordinator, std::uint64_t id)
     {
         if (enemy_nbr == UINT64_MAX)

@@ -12,8 +12,6 @@
 #include "../common/packet/SpawnEntity.hpp"
 #include "../common/packet/TransformEntity.hpp"
 #include "../common/system/LinearMove.hpp"
-#include "../ecs/Coordinator.hpp"
-#include "../sfml/Clock.hpp"
 #include "../sfml/ColorManager.hpp"
 #include "../sfml/Event.hpp"
 #include "../sfml/FontManager.hpp"
@@ -41,6 +39,13 @@
 #include "PlayerID.hpp"
 #include "ServerEntityManager.hpp"
 
+/**
+ * @brief Function that parse arguments
+ *
+ * @param ac Number of argument
+ * @param av arguments
+ * @return Pair containing the IP address and port of the server and the client port
+ */
 std::pair<RType::Network::UDPClient, std::uint16_t> RType::Client::parseArguments(int ac, char** av)
 {
     if (ac != 4)
@@ -77,6 +82,11 @@ void playButtonCallback(std::unique_ptr<ECS::Coordinator>& coordinator, ECS::Ent
     scene_manager->setCurrentScene(RType::Client::SceneManager::Scene::LOBBY);
 }
 
+/**
+ * @brief Function that register every component used in the client to the ecs
+ *
+ * @param coordinator Reference to the ecs coordinator
+ */
 void RType::Client::registerComponents(std::unique_ptr<ECS::Coordinator>& coordinator)
 {
     coordinator->registerComponent<SFML::SpriteReference>();
@@ -92,6 +102,12 @@ void RType::Client::registerComponents(std::unique_ptr<ECS::Coordinator>& coordi
     coordinator->registerComponent<SFML::Clickable>();
 }
 
+/**
+ * @brief Function that register every resource used in the client to the ecs
+ *
+ * @param coordinator Reference to the ecs coordinator
+ * @param port Port of the client, used to create the UDPHandler
+ */
 void RType::Client::registerResources(std::unique_ptr<ECS::Coordinator>& coordinator, std::uint16_t port)
 {
     auto package_manager = coordinator->registerResource<RType::Network::PackageManager>();
@@ -107,6 +123,11 @@ void RType::Client::registerResources(std::unique_ptr<ECS::Coordinator>& coordin
     coordinator->registerResource<SFML::ColorManager>();
 }
 
+/**
+ * @brief Function that register every packet used in the client to the ecs
+ *
+ * @param coordinator Reference to the ecs coordinator
+ */
 void RType::Client::registerPackets(std::unique_ptr<ECS::Coordinator>& coordinator)
 {
     auto package_manager = coordinator->getResource<RType::Network::PackageManager>();
@@ -122,6 +143,11 @@ void RType::Client::registerPackets(std::unique_ptr<ECS::Coordinator>& coordinat
     package_manager->registerPacket<RType::Packet::SetEntityLinearMove>();
 }
 
+/**
+ * @brief Function that register every systems used in the client to the ecs
+ *
+ * @param coordinator Reference to the ecs coordinator
+ */
 void RType::Client::registerSystems(std::unique_ptr<ECS::Coordinator>& coordinator)
 {
     coordinator->registerSystem<SFML::TransformSprite>();
@@ -146,6 +172,11 @@ void RType::Client::registerSystems(std::unique_ptr<ECS::Coordinator>& coordinat
     coordinator->setSignatureBits<SFML::UpdateClick, SFML::Hitbox, SFML::Clickable>();
 }
 
+/**
+ * @brief Function that loads the assets (textures, sprites, texts, ...)
+ *
+ * @param coordinator Reference to the ecs coordinator
+ */
 void RType::Client::loadAssets(std::unique_ptr<ECS::Coordinator>& coordinator)
 {
     auto texture_manager = coordinator->getResource<SFML::TextureManager>();
@@ -175,6 +206,13 @@ void RType::Client::loadAssets(std::unique_ptr<ECS::Coordinator>& coordinator)
     color_manager->registerHexColor("white", 0xffffffff);
 }
 
+/**
+ * @brief Function that sends a packet of the client inputs to the server
+ *
+ * @param coordinator Reference to the ecs coordinator
+ * @param server IP address and port of the server
+ * @param key_checker Entity that corresponds to the key checker (multiple is useless)
+ */
 void RType::Client::sendMovementsKeys(std::unique_ptr<ECS::Coordinator>& coordinator,
     const RType::Network::UDPClient& server, ECS::Entity key_checker)
 {
@@ -190,6 +228,12 @@ void RType::Client::sendMovementsKeys(std::unique_ptr<ECS::Coordinator>& coordin
     udp_handler->send(&packet, sizeof(packet), server.getIpAddress(), server.getPort());
 }
 
+/**
+ * @brief Display and manage the menu
+ *
+ * @param coordinator Reference to the ecs coordinator
+ * @return Scene to change to
+ */
 RType::Client::SceneManager::Scene RType::Client::display_menu(std::unique_ptr<ECS::Coordinator>& coordinator)
 {
     auto event_manager = coordinator->getResource<SFML::EventManager>();
@@ -252,6 +296,11 @@ RType::Client::SceneManager::Scene RType::Client::display_menu(std::unique_ptr<E
     return RType::Client::SceneManager::Scene::LOBBY;
 }
 
+/**
+ * @brief Player connection system, waiting for other players to connect to the game
+ *
+ * @param coordinator Reference to the ecs coordinator
+ */
 void RType::Client::waiting_game_to_start(std::unique_ptr<ECS::Coordinator>& coordinator)
 {
     bool game_started = false;
@@ -299,6 +348,12 @@ void RType::Client::waiting_game_to_start(std::unique_ptr<ECS::Coordinator>& coo
     std::cout << "Everyone joined! The game can finally start!" << std::endl;
 }
 
+/**
+ * @brief Main loop of the game, once the game starts
+ *
+ * @param coordinator Reference to the ecs coordinator
+ * @param server_infos IP address and port of the server
+ */
 void RType::Client::game_loop(std::unique_ptr<ECS::Coordinator>& coordinator, const RType::Network::UDPClient& server_infos)
 {
     auto package_manager = coordinator->getResource<RType::Network::PackageManager>();

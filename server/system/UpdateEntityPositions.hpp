@@ -10,9 +10,20 @@
 #include <memory>
 
 namespace SFML {
+/**
+ * @brief System to update entity transform if it changed
+ */
 class UpdateEntityPositions : public ECS::System {
 public:
-    void update(std::unique_ptr<ECS::Coordinator>& coordinator, std::shared_ptr<RType::Network::UDPHandler>& udp_handler, std::int64_t elapsed_time)
+    /**
+     * @brief Function that send a packet to all player to call them to update the transform if it changed from the last call of this function
+     *
+     * @param coordinator Reference to the ecs coordinator
+     * @param udp_handler The class that handles sending packet to other
+     * UDPClients
+     * @param elapsed_time Time in milliseconds you get from the restart member of the clock
+     */
+    void update(std::unique_ptr<ECS::Coordinator>& coordinator, std::shared_ptr<RType::Network::UDPHandler>& udp_handler, std::int32_t elapsed_time)
     {
         _lastTime += elapsed_time;
         //std::cerr << _lastTime << " " << 5000 << std::endl;
@@ -33,6 +44,12 @@ public:
     }
 
 private:
+    /**
+     * @brief Function that copy the transform
+     *
+     * @param transform Transform component to copy
+     * @param backup Backup component to copy to
+     */
     void transformToBackup(SFML::Transform transform, SFML::BackupTransform& backup)
     {
         backup.position = transform.position;
@@ -41,6 +58,13 @@ private:
         backup.origin = transform.origin;
     }
 
+    /**
+     * @brief Function that checks if two transform components are the same
+     *
+     * @param transform Transform component to check
+     * @param backupTransform Backup of a transform to check
+     * @return True if both transforms are the same, false otherwise
+     */
     bool isSameTransform(SFML::Transform transform, SFML::BackupTransform backupTransform)
     {
         if (transform.position.getVector2() == backupTransform.position.getVector2()
