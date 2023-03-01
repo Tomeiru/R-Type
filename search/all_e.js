@@ -1,8 +1,19 @@
 var searchData=
 [
-  ['receive_0',['receive',['../class_r_type_1_1_network_1_1_u_d_p_handler.html#ad07941346b2da68a840bcf5eb9545e13',1,'RType::Network::UDPHandler']]],
-  ['receivedpacket_1',['ReceivedPacket',['../struct_r_type_1_1_network_1_1_received_packet.html#a2b5d5597a256de2103278f6fec890b37',1,'RType::Network::ReceivedPacket::ReceivedPacket(const SFML::IpAddress &amp;ip, std::uint16_t port, const std::string &amp;packet_data)'],['../struct_r_type_1_1_network_1_1_received_packet.html#add5b47a9b45d8107e9aae6a61759ab33',1,'RType::Network::ReceivedPacket::ReceivedPacket(const UDPClient &amp;sender, const std::string &amp;packet_data)'],['../struct_r_type_1_1_network_1_1_received_packet.html',1,'RType::Network::ReceivedPacket']]],
-  ['registerpacket_2',['registerPacket',['../class_r_type_1_1_network_1_1_package_manager.html#aeaab1176d55148c80296c71dbc393198',1,'RType::Network::PackageManager::registerPacket()'],['../class_r_type_1_1_network_1_1_u_d_p_handler.html#a38e668daec2cd74701d50a4f866384a6',1,'RType::Network::UDPHandler::registerPacket()']]],
-  ['registerserverentity_3',['registerServerEntity',['../class_r_type_1_1_client_1_1_server_entity_manager.html#a795b0e7285da12f653dd65873780ec00',1,'RType::Client::ServerEntityManager']]],
-  ['runtimeexception_4',['RuntimeException',['../class_r_type_1_1_network_1_1_runtime_exception.html',1,'RType::Network::RuntimeException'],['../class_r_type_1_1_network_1_1_runtime_exception.html#a6f2ceb258e2fc10885981e99b086e323',1,'RType::Network::RuntimeException::RuntimeException()']]]
+  ['scene_0',['Scene',['../class_r_type_1_1_client_1_1_scene_manager.html#abe8e374bc18f80cfd61092114ca0f581',1,'RType::Client::SceneManager']]],
+  ['scenemanager_1',['SceneManager',['../class_r_type_1_1_client_1_1_scene_manager.html',1,'RType::Client::SceneManager'],['../class_r_type_1_1_client_1_1_scene_manager.html#a98a50ba44ad44b564b10bb284558e3b3',1,'RType::Client::SceneManager::SceneManager()']]],
+  ['send_2',['send',['../class_r_type_1_1_network_1_1_u_d_p_handler.html#a21ba82bd3706efb6f69ebd4ffeab6fa4',1,'RType::Network::UDPHandler']]],
+  ['sendgamestarttoallplayers_3',['sendGamestartToAllPlayers',['../class_r_type_1_1_player_manager.html#af40ebff7e6c6671b5d3cc9f426d0734c',1,'RType::PlayerManager']]],
+  ['sendpackettoallplayer_4',['sendPacketToAllPlayer',['../class_r_type_1_1_player_manager.html#a61a23a56439790226a15d9a2cb334630',1,'RType::PlayerManager']]],
+  ['serverentitymanager_5',['ServerEntityManager',['../class_r_type_1_1_client_1_1_server_entity_manager.html',1,'RType::Client']]],
+  ['setcurrentscene_6',['setCurrentScene',['../class_r_type_1_1_client_1_1_scene_manager.html#a04d47e789e6d5013a67499e8c14a7a9a',1,'RType::Client::SceneManager']]],
+  ['setentitylinearmove_7',['SetEntityLinearMove',['../struct_r_type_1_1_packet_1_1_set_entity_linear_move.html',1,'RType::Packet']]],
+  ['shoot_8',['Shoot',['../class_s_f_m_l_1_1_shoot.html',1,'SFML']]],
+  ['soundreference_9',['SoundReference',['../struct_s_f_m_l_1_1_sound_reference.html',1,'SFML::SoundReference'],['../struct_s_f_m_l_1_1_sound_reference.html#aa1bb1eeeeabd1a6560130b40cca4b0c5',1,'SFML::SoundReference::SoundReference()']]],
+  ['spawnentity_10',['SpawnEntity',['../struct_r_type_1_1_packet_1_1_spawn_entity.html',1,'RType::Packet::SpawnEntity'],['../struct_r_type_1_1_packet_1_1_spawn_entity.html#afba03708d7f865570eab085e087efcbb',1,'RType::Packet::SpawnEntity::SpawnEntity()']]],
+  ['speed_11',['Speed',['../struct_s_f_m_l_1_1_speed.html',1,'SFML::Speed'],['../struct_s_f_m_l_1_1_speed.html#ad671dce04db3373add9ffb2b3ad2e4cc',1,'SFML::Speed::Speed()']]],
+  ['spin_12',['Spin',['../struct_s_f_m_l_1_1_spin.html',1,'SFML::Spin'],['../struct_s_f_m_l_1_1_spin.html#a251cfa456a75fa5821eae4dc5566e19e',1,'SFML::Spin::Spin()']]],
+  ['spinsprite_13',['SpinSprite',['../class_s_f_m_l_1_1_spin_sprite.html',1,'SFML']]],
+  ['spritereference_14',['SpriteReference',['../struct_s_f_m_l_1_1_sprite_reference.html',1,'SFML::SpriteReference'],['../struct_s_f_m_l_1_1_sprite_reference.html#a1107e802ae2fac2e15cde047659c001d',1,'SFML::SpriteReference::SpriteReference()']]],
+  ['stophandler_15',['stopHandler',['../class_r_type_1_1_network_1_1_u_d_p_handler.html#aefce9f7c8b435fcabf8abb1369f2a96e',1,'RType::Network::UDPHandler']]]
 ];

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>R-TYPE: SFML::UpdateEntityPositions Class Reference</title>
+<title>R-TYPE: RType::Packet::SetEntityLinearMove Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,31 +69,41 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><b>SFML</b></li><li class="navelem"><a class="el" href="class_s_f_m_l_1_1_update_entity_positions.html">UpdateEntityPositions</a></li>  </ul>
+<li class="navelem"><b>RType</b></li><li class="navelem"><b>Packet</b></li><li class="navelem"><a class="el" href="struct_r_type_1_1_packet_1_1_set_entity_linear_move.html">SetEntityLinearMove</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="class_s_f_m_l_1_1_update_entity_positions-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">SFML::UpdateEntityPositions Class Reference</div></div>
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="struct_r_type_1_1_packet_1_1_set_entity_linear_move-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">RType::Packet::SetEntityLinearMove Struct Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="dynheader">
-Inheritance diagram for SFML::UpdateEntityPositions:</div>
-<div class="dyncontent">
- <div class="center">
-  <img src="class_s_f_m_l_1_1_update_entity_positions.png" alt=""/>
- </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a829ed287d3885ddc5aa31c99e0865c01"><td class="memItemLeft" align="right" valign="top"><a id="a829ed287d3885ddc5aa31c99e0865c01" name="a829ed287d3885ddc5aa31c99e0865c01"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>update</b> (std::unique_ptr&lt; ECS::Coordinator &gt; &amp;coordinator, std::shared_ptr&lt; <a class="el" href="class_r_type_1_1_network_1_1_u_d_p_handler.html">RType::Network::UDPHandler</a> &gt; &amp;udp_handler, std::int32_t elapsed_time)</td></tr>
-<tr class="separator:a829ed287d3885ddc5aa31c99e0865c01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21cef28e96dee69d861840fee86e0bd6"><td class="memItemLeft" align="right" valign="top"><a id="a21cef28e96dee69d861840fee86e0bd6" name="a21cef28e96dee69d861840fee86e0bd6"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>SetEntityLinearMove</b> (ECS::Entity entity=0, float speed=0.0, unsigned int direction=0, bool newComps=true)</td></tr>
+<tr class="separator:a21cef28e96dee69d861840fee86e0bd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a2ffba1f724aded14046bb475ff661c8f"><td class="memItemLeft" align="right" valign="top"><a id="a2ffba1f724aded14046bb475ff661c8f" name="a2ffba1f724aded14046bb475ff661c8f"></a>
+ECS::Entity&#160;</td><td class="memItemRight" valign="bottom"><b>_entity</b></td></tr>
+<tr class="separator:a2ffba1f724aded14046bb475ff661c8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a54190a90ac9b2792ba9a60be4fbf33"><td class="memItemLeft" align="right" valign="top"><a id="a1a54190a90ac9b2792ba9a60be4fbf33" name="a1a54190a90ac9b2792ba9a60be4fbf33"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>_speed</b></td></tr>
+<tr class="separator:a1a54190a90ac9b2792ba9a60be4fbf33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade8888b54072b1c7824a37503d39fa7c"><td class="memItemLeft" align="right" valign="top"><a id="ade8888b54072b1c7824a37503d39fa7c" name="ade8888b54072b1c7824a37503d39fa7c"></a>
+unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>_direction</b></td></tr>
+<tr class="separator:ade8888b54072b1c7824a37503d39fa7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6edd4cdb41e4046a48af52368c37651"><td class="memItemLeft" align="right" valign="top"><a id="ab6edd4cdb41e4046a48af52368c37651" name="ab6edd4cdb41e4046a48af52368c37651"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>_newComps</b></td></tr>
+<tr class="separator:ab6edd4cdb41e4046a48af52368c37651"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this class was generated from the following file:<ul>
-<li>server/system/<a class="el" href="_update_entity_positions_8hpp_source.html">UpdateEntityPositions.hpp</a></li>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>common/packet/<a class="el" href="_set_entity_linear_move_8hpp_source.html">SetEntityLinearMove.hpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

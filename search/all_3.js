@@ -1,7 +1,10 @@
 var searchData=
 [
-  ['clickable_0',['Clickable',['../struct_s_f_m_l_1_1_clickable.html#a98fdf5a9f1d7947aa903d3dec562a870',1,'SFML::Clickable::Clickable()'],['../struct_s_f_m_l_1_1_clickable.html',1,'SFML::Clickable']]],
-  ['createbullet_1',['createBullet',['../class_r_type_1_1_bullet_manager.html#aba0d1414f40c0689a1f6c694b72a5d86',1,'RType::BulletManager']]],
-  ['createpacket_2',['createPacket',['../class_r_type_1_1_network_1_1_package_manager.html#af6eb6e09c1841ec20a55a52e7cdb5d64',1,'RType::Network::PackageManager::createPacket()'],['../class_r_type_1_1_network_1_1_u_d_p_handler.html#ab25dd57f54ce3e9e781199107b08f0c4',1,'RType::Network::UDPHandler::createPacket()']]],
-  ['createspritereference_3',['CreateSpriteReference',['../struct_r_type_1_1_packet_1_1_create_sprite_reference.html#a32c3117a8aec157e4db79c6336d0b0c7',1,'RType::Packet::CreateSpriteReference::CreateSpriteReference()'],['../struct_r_type_1_1_packet_1_1_create_sprite_reference.html',1,'RType::Packet::CreateSpriteReference']]]
+  ['decodecontent_0',['decodeContent',['../class_r_type_1_1_network_1_1_package_manager.html#a0ce4f31a2a3ea03d57d537057cb9a51f',1,'RType::Network::PackageManager']]],
+  ['decodeheader_1',['decodeHeader',['../class_r_type_1_1_network_1_1_package_manager.html#a7c9d4ac8b57a317bf40f2e498e9ebac0',1,'RType::Network::PackageManager']]],
+  ['destroyentity_2',['DestroyEntity',['../struct_r_type_1_1_packet_1_1_destroy_entity.html#a8381973241c3b1a4ea351cd311f16404',1,'RType::Packet::DestroyEntity::DestroyEntity()'],['../struct_s_f_m_l_1_1_destroy_entity.html#a5d0a79698e39336f042aa7300c4a8fbf',1,'SFML::DestroyEntity::DestroyEntity()'],['../struct_r_type_1_1_packet_1_1_destroy_entity.html',1,'RType::Packet::DestroyEntity'],['../struct_s_f_m_l_1_1_destroy_entity.html',1,'SFML::DestroyEntity']]],
+  ['destroyentityoutwindow_3',['DestroyEntityOutWindow',['../class_s_f_m_l_1_1_destroy_entity_out_window.html',1,'SFML']]],
+  ['direction_4',['Direction',['../struct_s_f_m_l_1_1_direction.html#abe65d3248ba03d5a612f4d7d1f5e67e3',1,'SFML::Direction::Direction()'],['../struct_s_f_m_l_1_1_direction.html',1,'SFML::Direction']]],
+  ['drawsprite_5',['DrawSprite',['../class_s_f_m_l_1_1_draw_sprite.html',1,'SFML']]],
+  ['drawtext_6',['DrawText',['../class_s_f_m_l_1_1_draw_text.html',1,'SFML']]]
 ];

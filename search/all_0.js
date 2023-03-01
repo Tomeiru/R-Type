@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['_5fbulletnumber_0',['_bulletNumber',['../class_s_f_m_l_1_1_shoot.html#a4e7ad223b64abc75b2406262af59d30f',1,'SFML::Shoot']]]
+  ['attack_0',['Attack',['../struct_s_f_m_l_1_1_attack.html#a2779b47499e3e1b2316f391efd17cbc7',1,'SFML::Attack::Attack()'],['../struct_s_f_m_l_1_1_attack.html',1,'SFML::Attack']]]
 ];

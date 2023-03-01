@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['attack_0',['Attack',['../struct_s_f_m_l_1_1_attack.html#a2779b47499e3e1b2316f391efd17cbc7',1,'SFML::Attack::Attack()'],['../struct_s_f_m_l_1_1_attack.html',1,'SFML::Attack']]]
+  ['backuptransform_0',['BackupTransform',['../struct_s_f_m_l_1_1_backup_transform.html#a0e04b05b5621d80108143aeecbab5e18',1,'SFML::BackupTransform::BackupTransform()'],['../struct_s_f_m_l_1_1_backup_transform.html',1,'SFML::BackupTransform']]],
+  ['bulletmanager_1',['BulletManager',['../class_r_type_1_1_bullet_manager.html#ad5710a955ce6e38da29a32e9db2b2393',1,'RType::BulletManager::BulletManager()'],['../class_r_type_1_1_bullet_manager.html',1,'RType::BulletManager']]]
 ];
