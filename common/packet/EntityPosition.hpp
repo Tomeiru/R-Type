@@ -10,6 +10,7 @@ namespace RType::Packet {
 struct EntityPosition {
     /**
      * @brief Constructs a new EntityPosition packet
+     *
      * @param id The server id of the entity
      * @param x The x position of the entity
      * @param y The y position of the entity

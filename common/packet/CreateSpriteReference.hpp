@@ -8,6 +8,7 @@ namespace RType::Packet {
 struct CreateSpriteReference {
     /**
      * @brief Construct a new CreateSpriteReference object
+     *
      * @param spriteId The sprite to create
      * @param linkSprite The sprite to refer to
      */

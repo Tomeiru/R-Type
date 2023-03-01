@@ -19,7 +19,6 @@ public:
      * @brief Function that spins all sprites with a Spin component and a Transform component
      *
      * @param coordinator Reference to the ecs coordinator
-     *
      */
     void update(std::unique_ptr<ECS::Coordinator>& coordinator)
     {

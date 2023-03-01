@@ -23,6 +23,11 @@ struct BackupTransform {
     {
     }
 
+    /**
+     * @brief Construct a new BackupTransform Component
+     *
+     * @param transform Transform component of an entity
+     */
     BackupTransform(SFML::Transform transform)
         : position(transform.position)
         , rotation(transform.rotation)

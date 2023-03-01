@@ -5,8 +5,16 @@
 #include "../component/Health.hpp"
 
 namespace SFML {
+/**
+ * @brief System that kills no life entities
+ */
 class KillNoLife : public ECS::System {
 public:
+    /**
+     * @brief Function that kills every entity with a health component equals or lower than 0
+     *
+     * @param coordinator Reference to the ecs coordinator
+     */
     void update(std::unique_ptr<ECS::Coordinator>& coordinator)
     {
         std::queue<ECS::Entity> toKill;

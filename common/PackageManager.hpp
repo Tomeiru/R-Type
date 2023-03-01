@@ -21,6 +21,7 @@ struct Header {
 
 /**
  * @brief Packet is a struct that represents a packet
+ *
  * @tparam PayloadT The type of the payload
  */
 template<typename PayloadT>
@@ -36,6 +37,7 @@ class PackageManager {
 public:
     /**
      * @brief Creates a packet of PayloadT type
+     *
      * @tparam PayloadT The type of the payload
      * @param payload The payload of the packet
      * @return The packet
@@ -54,6 +56,7 @@ public:
 
     /**
      * @brief Registers a packet Type to the package manager
+     *
      * @tparam PayloadT The type of the payload
      */
     template<typename PayloadT>
@@ -70,6 +73,7 @@ public:
 
     /**
      * @brief Gets the type name of a packet from its TypeId
+     *
      * @param id The id of the packet
      * @return The type name of the packet
      */
@@ -83,6 +87,7 @@ public:
 
     /**
      * @brief Gets the TypeId of a packet from its type
+     *
      * @tparam PayloadT The type of the payload
      * @return The id of the packet
      */
@@ -98,6 +103,7 @@ public:
 
     /**
      * @brief Gets the TypeId of a packet from its type name
+     *
      * @param name The name of the packet
      * @return The id of the packet
      */
@@ -111,6 +117,7 @@ public:
 
     /**
      * @brief Decodes the packet header from its data in string
+     *
      * @param data The data of the packet
      * @return The header of the packet
      */
@@ -127,6 +134,7 @@ public:
 
     /**
      * @brief Decodes the packet payload from its data in string
+     *
      * @tparam PayloadT The type of the payload
      * @param data The data of the packet
      * @return The payload of the packet

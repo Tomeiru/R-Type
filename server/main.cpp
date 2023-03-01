@@ -28,6 +28,13 @@
 #include "system/Shoot.hpp"
 #include "system/UpdateEntityPositions.hpp"
 
+/**
+ * @brief Function that parse arguments
+ *
+ * @param ac Number of arguments
+ * @param av Arguments
+ * @return Port of the server
+ */
 std::uint16_t RType::Server::parseArguments(int ac, char** av)
 {
     if (ac != 2)
@@ -40,6 +47,12 @@ std::uint16_t RType::Server::parseArguments(int ac, char** av)
     return (port);
 }
 
+/**
+ * @brief Function that register every resource used in the server to the ecs
+ *
+ * @param coordinator Reference to the ecs coordinator
+ * @param port Port of the server, used to create the UDPHandler
+ */
 void RType::Server::registerResources(
     std::unique_ptr<ECS::Coordinator>& coordinator, std::uint16_t port)
 {
@@ -54,6 +67,11 @@ void RType::Server::registerResources(
     coordinator->registerResource<SFML::Clock>();
 }
 
+/**
+ * @brief Function that register every components used in the server to the ecs
+ *
+ * @param coordinator Reference to the ecs coordinator
+ */
 void RType::Server::registerComponents(
     std::unique_ptr<ECS::Coordinator>& coordinator)
 {
@@ -67,6 +85,11 @@ void RType::Server::registerComponents(
     coordinator->registerComponent<SFML::BackupTransform>();
 }
 
+/**
+ * @brief Function that register every systems used in the server to the ecs
+ *
+ * @param coordinator Reference to the ecs coordinator
+ */
 void RType::Server::registerSystems(
     std::unique_ptr<ECS::Coordinator>& coordinator)
 {
@@ -82,6 +105,11 @@ void RType::Server::registerSystems(
     coordinator->setSignatureBits<SFML::UpdateEntityPositions, SFML::Transform, SFML::BackupTransform>();
 }
 
+/**
+ * @brief Function that register every packet types to the ecs
+ *
+ * @param coordinator Reference to the ecs coordinator
+ */
 void RType::Server::registerPackets(
     std::unique_ptr<ECS::Coordinator>& coordinator)
 {
@@ -98,6 +126,11 @@ void RType::Server::registerPackets(
     package_manager->registerPacket<RType::Packet::SetEntityLinearMove>();
 }
 
+/**
+ * @brief Function that loads the assets of the game (textures and sprites)
+ *
+ * @param coordinator Reference of the ecs coordinator
+ */
 void RType::Server::loadAssets(std::unique_ptr<ECS::Coordinator>& coordinator)
 {
     auto texture_manager = coordinator->getResource<SFML::TextureManager>();
@@ -121,6 +154,11 @@ void RType::Server::loadAssets(std::unique_ptr<ECS::Coordinator>& coordinator)
         texture_manager->getTexture("player_orange"));
 }
 
+/**
+ * @brief Player connection system, waiting for players to connect to the server
+ *
+ * @param coordinator Reference to the ecs coordinator
+ */
 void RType::Server::waiting_for_players(
     std::unique_ptr<ECS::Coordinator>& coordinator)
 {
@@ -144,9 +182,14 @@ void RType::Server::waiting_for_players(
         }
     }
     std::cout << "Everyone joined! The game can finally start!" << std::endl;
-    player_manager->sendGamestartToAllPlayers(udp_handler, package_manager);
+    player_manager->sendGameStartToAllPlayers(udp_handler, package_manager);
 }
 
+/**
+ * @brief Main loop of the game, once every player is connected
+ *
+ * @param coordinator Reference to the ecs coordinator
+ */
 void RType::Server::game_loop(std::unique_ptr<ECS::Coordinator>& coordinator)
 {
     auto package_manager = coordinator->getResource<RType::Network::PackageManager>();

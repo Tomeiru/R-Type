@@ -23,6 +23,11 @@ struct Transform {
     {
     }
 
+    /**
+     * @brief Construct a new Transform Component
+     *
+     * @param transform Transform to copy it in a new transform component
+     */
     Transform(SFML::Transform const& transform)
         : position(transform.position)
         , rotation(transform.rotation)
