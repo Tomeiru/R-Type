@@ -20,10 +20,10 @@ struct Attack {
      * @param type Type of attack (its speed, ...)
      * @param attackAngle Direction of the bullet shot
      */
-    Attack(bool attack = true, unsigned int attackSpeed = 0, AttackType type = AttackType::NormalAttack, unsigned int attackAngle = 180) : attack(attack), attackSpeed(attackSpeed) , type(type), attackValue(0), attackAngle(attackAngle) {};
+    Attack(bool attack = true, unsigned int attackSpeed = 0, AttackType type = AttackType::NormalAttack, unsigned int attackAngle = 180) : attack(attack), attackSpeed(attackSpeed) , type(type), attackAngle(attackAngle), attackValue(0) {};
     bool attack;
+    std::int32_t attackValue;
     unsigned int attackSpeed;
-    unsigned int attackValue;
     unsigned int attackAngle;
     AttackType type;
 };

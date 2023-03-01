@@ -12,8 +12,12 @@
 namespace SFML {
 class UpdateEntityPositions : public ECS::System {
 public:
-    void update(std::unique_ptr<ECS::Coordinator>& coordinator, std::shared_ptr<RType::Network::UDPHandler>& udp_handler)
+    void update(std::unique_ptr<ECS::Coordinator>& coordinator, std::shared_ptr<RType::Network::UDPHandler>& udp_handler, std::int32_t elapsed_time)
     {
+        _lastTime += elapsed_time+coordinator->getResource<SFML::Clock>()->getElapsedTime().asMilliseconds();
+        std::cerr << _lastTime << " " << 5000 << std::endl;
+        if (_lastTime < 5000)
+            return;
         for (const auto &entity : entities) {
             auto &transform = coordinator->getComponent<SFML::Transform>(entity);
             auto &backup_transform = coordinator->getComponent<SFML::BackupTransform>(entity);
@@ -26,6 +30,7 @@ public:
                 transformToBackup(transform, backup_transform);
             }
         }
+        _lastTime = 0;
     }
 private:
     void transformToBackup(SFML::Transform transform, SFML::BackupTransform &backup)
@@ -45,5 +50,7 @@ private:
             return true;
         return false;
     }
+
+    std::int32_t _lastTime = 0;
 };
 }

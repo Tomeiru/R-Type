@@ -7,6 +7,7 @@
 #include "../common/component/SpriteReference.hpp"
 #include "../common/packet/DestroyEntity.hpp"
 #include "../common/packet/EntityPosition.hpp"
+#include "../common/packet/SetEntityLinearMove.hpp"
 #include "../common/packet/SpawnEntity.hpp"
 #include "../common/packet/TransformEntity.hpp"
 #include "../ecs/Coordinator.hpp"
@@ -52,12 +53,25 @@ private:
         coordinator->destroyEntity(entity);
     }
 
-    static void createSpriteReference(std::unique_ptr<ECS::Coordinator>& coordinator, std::shared_ptr<Network::PackageManager> &package_manager, const RType::Network::ReceivedPacket& packet_received, const std::shared_ptr<RType::Client::ServerEntityManager>& server_entity_manager)
+    static void createSpriteReference(std::unique_ptr<ECS::Coordinator>& coordinator, std::shared_ptr<Network::PackageManager> &package_manager, const RType::Network::ReceivedPacket& packet_received)
     {
         auto texture_manager = coordinator->getResource<SFML::TextureManager>();
         auto sprite_manager = coordinator->getResource<SFML::SpriteManager>();
         auto packet = package_manager->decodeContent<RType::Packet::CreateSpriteReference>(packet_received.packet_data);
         sprite_manager->registerSprite(packet->_spriteId, texture_manager->getTexture(packet->_linkSprite));
+    }
+
+    static void setEntityLinearMove(std::unique_ptr<ECS::Coordinator>& coordinator, std::shared_ptr<Network::PackageManager> &package_manager, const RType::Network::ReceivedPacket& packet_received, const std::shared_ptr<RType::Client::ServerEntityManager>& server_entity_manager)
+    {
+        auto packet = package_manager->decodeContent<RType::Packet::SetEntityLinearMove>(packet_received.packet_data);
+        auto entity = server_entity_manager->getClientEntity(packet->_entity);
+        if (packet->_newComps) {
+            coordinator->addComponent(entity, SFML::Speed(packet->_speed));
+            coordinator->addComponent(entity, SFML::Direction(packet->_direction));
+        } else {
+            coordinator->getComponent<SFML::Speed>(entity).speed = packet->_speed;
+            coordinator->getComponent<SFML::Direction>(entity).angle = packet->_direction;
+        }
     }
 
 public:
@@ -81,7 +95,11 @@ public:
         }
         if (headerId == package_manager->getTypeId<RType::Packet::CreateSpriteReference>()) {
             std::cerr << "It's a CreateSpriteReference packet" << std::endl;
-            createSpriteReference(coordinator, package_manager, packet_received, server_entity_manager);
+            createSpriteReference(coordinator, package_manager, packet_received);
+        }
+        if (headerId == package_manager->getTypeId<RType::Packet::SetEntityLinearMove>()) {
+            std::cerr << "It's a SetEntityLinearMove packet" << std::endl;
+            setEntityLinearMove(coordinator, package_manager, packet_received, server_entity_manager);
         }
     }
 };
