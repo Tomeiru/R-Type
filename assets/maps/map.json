@@ -3,9 +3,9 @@
         "easy": {
             "0": {
                 "attack": {
-                    "speed": 1,
-                    "bullet_speed": 1,
-                    "dir": 135
+                    "speed": 5000,
+                    "bullet_speed": 3,
+                    "dir": 90
                 },
                 "dir": 90,
                 "speed": 2,
@@ -13,24 +13,24 @@
                 "texture_ref": "enemy_A",
                 "transform": {
                     "x": 800,
-                    "y": 400,
+                    "y": 500,
                     "rotation": 0,
                     "scale": 1
                 }
             },
             "1": {
                 "attack": {
-                    "speed": 1,
-                    "bullet_speed": 1,
+                    "speed": 5000,
+                    "bullet_speed": 2,
                     "dir": 90
                 },
-                "dir": 20,
+                "dir": 90,
                 "speed": 2,
                 "life": 3,
                 "texture_ref": "enemy_B",
                 "transform": {
                     "x": 500,
-                    "y": 400,
+                    "y": 500,
                     "rotation": 0,
                     "scale": 1
                 }

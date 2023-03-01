@@ -53,6 +53,10 @@ public:
         RType::Packet::TransformEntity entity_transform(enemy, coordinator->getComponent<SFML::Transform>(enemy));
         auto packetThree = coordinator->getResource<RType::Network::PackageManager>()->createPacket<RType::Packet::TransformEntity>(entity_transform);
         coordinator->getResource<PlayerManager>()->sendPacketToAllPlayer(&packetThree, sizeof(packetThree), udp_handler);
+        RType::Packet::SetEntityLinearMove linear_move(enemy, mapManager.getEnemyInfosById(id).speed, mapManager.getEnemyInfosById(id).dir, true);
+        auto packetFour = coordinator->getResource<RType::Network::PackageManager>()->createPacket<RType::Packet::SetEntityLinearMove>(linear_move);
+        coordinator->getResource<PlayerManager>()->sendPacketToAllPlayer(&packetFour, sizeof(packetFour), udp_handler);
+
         return ++enemy_nbr;
     }
 

@@ -161,7 +161,7 @@ void RType::Client::loadAssets(std::unique_ptr<ECS::Coordinator>& coordinator)
     texture_manager->registerTexture("logo", "../assets/textures/logo.png");
     texture_manager->registerTexture("bulletTexture", "../assets/textures/player-green.png");
     texture_manager->registerTexture("enemy_A", "../assets/textures/player-red.png");
-    texture_manager->registerTexture("enemy_B", "../assets/textures/player-green.png");
+    texture_manager->registerTexture("enemy_B", "../assets/textures/player-blue.png");
     sprite_manager->registerSprite("player_1", texture_manager->getTexture("player_blue"));
     sprite_manager->registerSprite("player_2", texture_manager->getTexture("player_red"));
     sprite_manager->registerSprite("player_3", texture_manager->getTexture("player_green"));
@@ -317,9 +317,10 @@ void RType::Client::game_loop(std::unique_ptr<ECS::Coordinator>& coordinator, co
     SFML::Event event;
 
     window->setFramerateLimit(60);
+    int32_t gameTm = 0;
+    int32_t prevTm = 0;
     clock->restart();
     while (window->isOpen()) {
-        auto elapsed_time = clock->restart();
         while (window->pollEvent(event))
             event_manager->newEvent(event.getEvent());
         while (!udp_handler->isQueueEmpty()) {
@@ -335,7 +336,12 @@ void RType::Client::game_loop(std::unique_ptr<ECS::Coordinator>& coordinator, co
         update_movement_keys->update(coordinator);
         sendMovementsKeys(coordinator, server_infos, keyChecker);
         window->clear();
-        linear_move->update(coordinator, elapsed_time.asMilliseconds());
+        int32_t tm = clock->getElapsedTime().asMilliseconds();
+        int32_t elapsed = tm - prevTm;
+        prevTm = tm;
+        gameTm += elapsed;
+        std::cout << gameTm << std::endl;
+        linear_move->update(coordinator, elapsed);
         draw_sprite->update(coordinator);
         window->display();
         event_manager->clear();
