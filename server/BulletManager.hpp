@@ -53,7 +53,7 @@ public:
         coordinator->addComponent(bullet, SFML::SpriteReference(bulletId));
         coordinator->addComponent(bullet, SFML::Transform(bulletTransform));
         coordinator->addComponent(bullet, SFML::BackupTransform(bulletTransform));
-        setBulletSpeed(coordinator, bullet, attack.type);
+        float speed = setBulletSpeed(coordinator, bullet, attack.type);
         coordinator->addComponent(bullet, SFML::DestroyEntity(true, true, true));
         RType::Packet::CreateSpriteReference create_sprite(bulletId, "bulletTexture");
         auto packet = coordinator->getResource<Network::PackageManager>()->createPacket<RType::Packet::CreateSpriteReference>(create_sprite);
@@ -61,6 +61,9 @@ public:
         RType::Packet::SpawnEntity entity_spawn(bullet, bulletId, bulletTransform.position.getVector2().x, bulletTransform.position.getVector2().y);
         auto packetTwo = coordinator->getResource<RType::Network::PackageManager>()->createPacket<RType::Packet::SpawnEntity>(entity_spawn);
         coordinator->getResource<PlayerManager>()->sendPacketToAllPlayer(&packetTwo, sizeof(packetTwo), udp_handler);
+        RType::Packet::SetEntityLinearMove linear_move(bullet, speed, attack.attackAngle, true);
+        auto packetThree = coordinator->getResource<RType::Network::PackageManager>()->createPacket<RType::Packet::SetEntityLinearMove>(linear_move);
+        coordinator->getResource<PlayerManager>()->sendPacketToAllPlayer(&packetThree, sizeof(packetThree), udp_handler);
         _id_to_entity.emplace(_bulletNumber, bullet);
         _bulletNumber++;
     }
@@ -79,25 +82,26 @@ private:
      * @param coordinator Reference to the ecs coordinator
      * @param bullet Bullet entity to speed up
      * @param type Type of bullet to shoot
+     * @return Speed of the bullet
      */
-    void setBulletSpeed(std::unique_ptr<ECS::Coordinator>& coordinator, ECS::Entity bullet, SFML::AttackType type)
+    float setBulletSpeed(std::unique_ptr<ECS::Coordinator>& coordinator, ECS::Entity bullet, SFML::AttackType type)
     {
         switch (type) {
         case SFML::AttackType::NormalAttack:
             coordinator->addComponent(bullet, SFML::Speed(2));
-            break;
+            return 2;
         case SFML::AttackType::FastAttack:
             coordinator->addComponent(bullet, SFML::Speed(4));
-            break;
+            return 4;
         case SFML::AttackType::VeryFastAttack:
             coordinator->addComponent(bullet, SFML::Speed(3));
-            break;
+            return 3;
         case SFML::AttackType::SlowAttack:
             coordinator->addComponent(bullet, SFML::Speed(1));
-            break;
+            return 1;
         default:
             coordinator->addComponent(bullet, SFML::Speed(2));
-            break;
+            return 2;
         }
     }
 

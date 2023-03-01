@@ -27,11 +27,11 @@ struct Attack {
         : attack(attack)
         , attackSpeed(attackSpeed)
         , type(type)
-        , attackValue(0)
-        , attackAngle(attackAngle) {};
+        , attackAngle(attackAngle)
+        , attackValue(0) {};
     bool attack;
+    std::int32_t attackValue;
     unsigned int attackSpeed;
-    unsigned int attackValue;
     unsigned int attackAngle;
     AttackType type;
 };
