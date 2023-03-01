@@ -14,13 +14,13 @@ class UpdateEntityPositions : public ECS::System {
 public:
     void update(std::unique_ptr<ECS::Coordinator>& coordinator, std::shared_ptr<RType::Network::UDPHandler>& udp_handler, std::int32_t elapsed_time)
     {
-        _lastTime += elapsed_time+coordinator->getResource<SFML::Clock>()->getElapsedTime().asMilliseconds();
+        _lastTime += elapsed_time + coordinator->getResource<SFML::Clock>()->getElapsedTime().asMilliseconds();
         std::cerr << _lastTime << " " << 5000 << std::endl;
         if (_lastTime < 5000)
             return;
         for (const auto& entity : entities) {
-            auto &transform = coordinator->getComponent<SFML::Transform>(entity);
-            auto &backup_transform = coordinator->getComponent<SFML::BackupTransform>(entity);
+            auto& transform = coordinator->getComponent<SFML::Transform>(entity);
+            auto& backup_transform = coordinator->getComponent<SFML::BackupTransform>(entity);
             if (!isSameTransform(transform, backup_transform)) {
                 RType::Packet::TransformEntity entity_transform(entity, transform);
                 std::cout << "Moving from " << backup_transform.position.getVector2().x << " " << backup_transform.position.getVector2().y << " to " << transform.position.getVector2().x << " " << transform.position.getVector2().y << std::endl;

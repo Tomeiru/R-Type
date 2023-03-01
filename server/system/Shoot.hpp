@@ -24,16 +24,16 @@ public:
      */
     void update(std::unique_ptr<ECS::Coordinator>& coordinator, std::int32_t elapsed_time)
     {
-        _lastTime += elapsed_time+coordinator->getResource<SFML::Clock>()->getElapsedTime().asMilliseconds();
-        for (const auto& entity: entities) {
-            auto &attack = coordinator->getComponent<Attack>(entity);
-            auto &entityTransform = coordinator->getComponent<Transform>(entity);
+        _lastTime += elapsed_time + coordinator->getResource<SFML::Clock>()->getElapsedTime().asMilliseconds();
+        for (const auto& entity : entities) {
+            auto& attack = coordinator->getComponent<Attack>(entity);
+            auto& entityTransform = coordinator->getComponent<Transform>(entity);
             auto sprite_man = coordinator->getResource<SFML::SpriteManager>();
             auto texture_man = coordinator->getResource<SFML::TextureManager>();
-            attack.attackValue+=_lastTime;
+            attack.attackValue += _lastTime;
             if (!attack.attack)
                 continue;
-            //std::cerr << attack.attackValue << " " << attack.attackSpeed << std::endl;
+            // std::cerr << attack.attackValue << " " << attack.attackSpeed << std::endl;
             if (attack.attackValue >= attack.attackSpeed) {
                 attack.attackValue = 0;
                 auto bulletTransform = SFML::Transform(entityTransform.position, 0, { 1.0, 1.0 });
@@ -47,6 +47,7 @@ public:
         }
         _lastTime = 0;
     }
+
 private:
     /**
      * @brief Number of bullets created from the beginning of the game. Resets to 0 when it overflows.

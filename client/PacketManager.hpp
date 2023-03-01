@@ -53,7 +53,7 @@ private:
         coordinator->destroyEntity(entity);
     }
 
-    static void createSpriteReference(std::unique_ptr<ECS::Coordinator>& coordinator, std::shared_ptr<Network::PackageManager> &package_manager, const RType::Network::ReceivedPacket& packet_received)
+    static void createSpriteReference(std::unique_ptr<ECS::Coordinator>& coordinator, std::shared_ptr<Network::PackageManager>& package_manager, const RType::Network::ReceivedPacket& packet_received)
     {
         auto texture_manager = coordinator->getResource<SFML::TextureManager>();
         auto sprite_manager = coordinator->getResource<SFML::SpriteManager>();
@@ -61,7 +61,7 @@ private:
         sprite_manager->registerSprite(packet->_spriteId, texture_manager->getTexture(packet->_linkSprite));
     }
 
-    static void setEntityLinearMove(std::unique_ptr<ECS::Coordinator>& coordinator, std::shared_ptr<Network::PackageManager> &package_manager, const RType::Network::ReceivedPacket& packet_received, const std::shared_ptr<RType::Client::ServerEntityManager>& server_entity_manager)
+    static void setEntityLinearMove(std::unique_ptr<ECS::Coordinator>& coordinator, std::shared_ptr<Network::PackageManager>& package_manager, const RType::Network::ReceivedPacket& packet_received, const std::shared_ptr<RType::Client::ServerEntityManager>& server_entity_manager)
     {
         auto packet = package_manager->decodeContent<RType::Packet::SetEntityLinearMove>(packet_received.packet_data);
         auto entity = server_entity_manager->getClientEntity(packet->_entity);

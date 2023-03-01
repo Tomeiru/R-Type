@@ -84,7 +84,7 @@ private:
      * @param type Type of bullet to shoot
      * @return Speed of the bullet
      */
-    float setBulletSpeed(std::unique_ptr<ECS::Coordinator>&coordinator, ECS::Entity bullet, SFML::AttackType type)
+    float setBulletSpeed(std::unique_ptr<ECS::Coordinator>& coordinator, ECS::Entity bullet, SFML::AttackType type)
     {
         switch (type) {
         case SFML::AttackType::NormalAttack:

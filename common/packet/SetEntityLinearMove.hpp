@@ -7,8 +7,7 @@ struct SetEntityLinearMove {
         : _entity(entity)
         , _speed(speed)
         , _direction(direction)
-        , _newComps(newComps)
-    {};
+        , _newComps(newComps) {};
 
     ECS::Entity _entity;
     float _speed;

@@ -22,19 +22,20 @@ public:
      */
     void update(std::unique_ptr<ECS::Coordinator>& coordinator, std::int32_t elapsed_time)
     {
-        _lastTime += elapsed_time+coordinator->getResource<SFML::Clock>()->getElapsedTime().asMilliseconds();
+        _lastTime += elapsed_time + coordinator->getResource<SFML::Clock>()->getElapsedTime().asMilliseconds();
         if (_lastTime < 50)
             return;
-        for (const auto& entity: entities) {
-            auto &transform = coordinator->getComponent<SFML::Transform>(entity);
-            auto &speed = coordinator->getComponent<SFML::Speed>(entity);
+        for (const auto& entity : entities) {
+            auto& transform = coordinator->getComponent<SFML::Transform>(entity);
+            auto& speed = coordinator->getComponent<SFML::Speed>(entity);
             auto direction = coordinator->getComponent<SFML::Direction>(entity).angle;
             float rad = direction * M_PI / 180;
 
-            transform.position = {static_cast<float>(transform.position.getVector2().x + std::cos(rad) * speed.speed),static_cast<float>(transform.position.getVector2().y + std::sin(rad) * speed.speed)};
+            transform.position = { static_cast<float>(transform.position.getVector2().x + std::cos(rad) * speed.speed), static_cast<float>(transform.position.getVector2().y + std::sin(rad) * speed.speed) };
         }
         _lastTime = 0;
     }
+
 private:
     std::int32_t _lastTime = 0;
 };
