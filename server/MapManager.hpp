@@ -14,8 +14,14 @@
 
 using namespace rapidjson;
 namespace RType {
+/**
+ * @brief MapManager is the container used to fetch the enemy informations containend in a json
+ */
     class MapManager {
         public:
+        /**
+         * @brief Construct a new Map Manager object to get and store the enemies informations contained in a json
+         */
             MapManager() {
                 std::ifstream ifs("../assets/maps/map.json");
                 IStreamWrapper isw(ifs);
@@ -41,7 +47,11 @@ namespace RType {
                     enemy_type.emplace(i, _enemy);
                 }
             };
-
+            /**
+             * @brief Set the Enemies object
+             * 
+             * @param enemy Enemy structure with all the fields needed to spawn an enemy
+             */
             void setEnemies (Enemy enemy) {
                 _enemy.attack.speed = enemy.attack.speed;
                 _enemy.attack.bullet_speed = enemy.attack.bullet_speed;
@@ -56,6 +66,12 @@ namespace RType {
                 _enemy.transform.scale = enemy.transform.scale;
             }
 
+            /**
+             * @brief Get the Enemy Infos By Id object
+             * 
+             * @param id Id of an enemy stored in a map of enemies
+             * @return RType::Enemy
+             */
             RType::Enemy getEnemyInfosById(std::uint64_t id) {return enemy_type[id];}
         private:
             std::unordered_map<std::uint64_t, Enemy> enemy_type;

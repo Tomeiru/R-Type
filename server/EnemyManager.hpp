@@ -33,6 +33,7 @@ public:
      * @param udp_handler The class that handles sending packet to other
      * UDPClients
      * @param coordinator Reference to the ecs coordinator
+     * @param id Id of the enemy you want to spawn (json)
      * @return ID of the enemy that you spawned
      */
     EnemyID spawnEnemy(std::shared_ptr<Network::UDPHandler>& udp_handler, std::unique_ptr<ECS::Coordinator>& coordinator, std::uint64_t id)
