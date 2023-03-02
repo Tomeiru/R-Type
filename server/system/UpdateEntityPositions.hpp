@@ -26,7 +26,7 @@ public:
     void update(std::unique_ptr<ECS::Coordinator>& coordinator, std::shared_ptr<RType::Network::UDPHandler>& udp_handler, std::int32_t elapsed_time)
     {
         _lastTime += elapsed_time;
-        //std::cerr << _lastTime << " " << 5000 << std::endl;
+        // std::cerr << _lastTime << " " << 5000 << std::endl;
         if (_lastTime < 200)
             return;
         for (const auto& entity : entities) {
