@@ -44,7 +44,7 @@ struct Enemy_s {
     unsigned int dir;
     unsigned int speed;
     unsigned int life;
-    const char *texture_ref;
+    const char* texture_ref;
     Enemy_Transform transform;
 };
 using Enemy = Enemy_s;
