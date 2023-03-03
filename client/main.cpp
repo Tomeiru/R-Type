@@ -11,7 +11,9 @@
 #include "../common/packet/PlayerName.hpp"
 #include "../common/packet/SpawnEntity.hpp"
 #include "../common/packet/TransformEntity.hpp"
+#include "../common/system/LinearMove.hpp"
 #include "../ecs/Coordinator.hpp"
+#include "../sfml/Clock.hpp"
 #include "../sfml/ColorManager.hpp"
 #include "../sfml/Event.hpp"
 #include "../sfml/FontManager.hpp"
@@ -84,6 +86,8 @@ void RType::Client::registerComponents(std::unique_ptr<ECS::Coordinator>& coordi
     coordinator->registerComponent<SFML::Transform>();
     coordinator->registerComponent<SFML::Hitbox>();
     coordinator->registerComponent<SFML::InputKeys>();
+    coordinator->registerComponent<SFML::Direction>();
+    coordinator->registerComponent<SFML::Speed>();
     coordinator->registerComponent<SFML::TextReference>();
     coordinator->registerComponent<SFML::HoverTint>();
     coordinator->registerComponent<SFML::Hover>();
@@ -100,6 +104,7 @@ void RType::Client::registerResources(std::unique_ptr<ECS::Coordinator>& coordin
     coordinator->registerResource<SFML::EventManager>();
     coordinator->registerResource<SFML::TextureManager>();
     coordinator->registerResource<SFML::SpriteManager>();
+    coordinator->registerResource<SFML::Clock>();
     coordinator->registerResource<SFML::FontManager>();
     coordinator->registerResource<SFML::TextManager>();
     coordinator->registerResource<RType::Client::SceneManager>();
@@ -118,6 +123,7 @@ void RType::Client::registerPackets(std::unique_ptr<ECS::Coordinator>& coordinat
     package_manager->registerPacket<RType::Packet::TransformEntity>();
     package_manager->registerPacket<RType::Packet::DestroyEntity>();
     package_manager->registerPacket<RType::Packet::CreateSpriteReference>();
+    package_manager->registerPacket<RType::Packet::SetEntityLinearMove>();
 }
 
 void RType::Client::registerSystems(std::unique_ptr<ECS::Coordinator>& coordinator)
@@ -128,6 +134,8 @@ void RType::Client::registerSystems(std::unique_ptr<ECS::Coordinator>& coordinat
     coordinator->setSignatureBits<SFML::DrawSprite, SFML::SpriteReference, SFML::Transform>();
     coordinator->registerSystem<SFML::UpdateKeysInput>();
     coordinator->setSignatureBits<SFML::UpdateKeysInput, SFML::InputKeys>();
+    coordinator->registerSystem<SFML::LinearMove>();
+    coordinator->setSignatureBits<SFML::LinearMove, SFML::Speed, SFML::Direction, SFML::Transform>();
     coordinator->registerSystem<SFML::DrawText>();
     coordinator->setSignatureBits<SFML::DrawText, SFML::TextReference, SFML::Transform>();
     coordinator->registerSystem<SFML::TransformText>();
@@ -309,6 +317,8 @@ void RType::Client::game_loop(std::unique_ptr<ECS::Coordinator>& coordinator, co
     auto draw_sprite = coordinator->getSystem<SFML::DrawSprite>();
     auto transform_sprite = coordinator->getSystem<SFML::TransformSprite>();
     auto update_movement_keys = coordinator->getSystem<SFML::UpdateKeysInput>();
+    auto linear_move = coordinator->getSystem<SFML::LinearMove>();
+    auto clock = coordinator->getResource<SFML::Clock>();
     auto keyChecker = coordinator->createEntity();
     auto window = coordinator->getResource<SFML::Window>();
     RType::PacketManager packetManager;
@@ -316,7 +326,9 @@ void RType::Client::game_loop(std::unique_ptr<ECS::Coordinator>& coordinator, co
     SFML::Event event;
 
     window->setFramerateLimit(60);
+    clock->restart();
     while (window->isOpen()) {
+        auto elapsed_time = clock->restart();
         while (window->pollEvent(event))
             event_manager->newEvent(event.getEvent());
         while (!udp_handler->isQueueEmpty()) {
@@ -332,6 +344,7 @@ void RType::Client::game_loop(std::unique_ptr<ECS::Coordinator>& coordinator, co
         update_movement_keys->update(coordinator);
         sendMovementsKeys(coordinator, server_infos, keyChecker);
         window->clear();
+        linear_move->update(coordinator, elapsed_time.asMilliseconds());
         draw_sprite->update(coordinator);
         window->display();
         event_manager->clear();
