@@ -43,7 +43,7 @@ public:
         MapManager mapManager;
         std::string name = "enemy_" + std::to_string(enemy_nbr);
         auto enemy = coordinator->createEntity();
-        coordinator->addComponent(enemy, SFML::Transform({ mapManager.getEnemyInfosById(id).transform.x, mapManager.getEnemyInfosById(id).transform.y }, mapManager.getEnemyInfosById(id).transform.rotation, { 4, 4 }));
+        coordinator->addComponent(enemy, SFML::Transform({ mapManager.getEnemyInfosById(id).transform.x, float(50 + (rand() % 1000)) }, mapManager.getEnemyInfosById(id).transform.rotation, { 4, 4 }));
         coordinator->addComponent(enemy, SFML::BackupTransform(coordinator->getComponent<SFML::Transform>(enemy)));
         coordinator->addComponent(enemy, SFML::SpriteReference(name));
         coordinator->addComponent(enemy, SFML::Speed(mapManager.getEnemyInfosById(id).speed));

@@ -4,15 +4,15 @@
             "0": {
                 "attack": {
                     "speed": 5000,
-                    "bullet_speed": 3,
-                    "dir": 90
+                    "bullet_speed": 2,
+                    "dir": 180
                 },
-                "dir": 90,
+                "dir": 180,
                 "speed": 2,
-                "life": 3,
+                "life": 7,
                 "texture_ref": "enemy_A",
                 "transform": {
-                    "x": 800,
+                    "x": 1960,
                     "y": 500,
                     "rotation": 0,
                     "scale": 1
@@ -21,16 +21,16 @@
             "1": {
                 "attack": {
                     "speed": 5000,
-                    "bullet_speed": 2,
-                    "dir": 90
+                    "bullet_speed": 0,
+                    "dir": 180
                 },
-                "dir": 90,
-                "speed": 2,
-                "life": 3,
+                "dir": 180,
+                "speed": 1,
+                "life": 20,
                 "texture_ref": "enemy_B",
                 "transform": {
-                    "x": 500,
-                    "y": 500,
+                    "x": 1960,
+                    "y": 800,
                     "rotation": 0,
                     "scale": 1
                 }

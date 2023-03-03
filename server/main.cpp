@@ -201,10 +201,11 @@ void RType::Server::game_loop(std::unique_ptr<ECS::Coordinator>& coordinator)
 
     std::cout << "Game loop started!" << std::endl;
     player_manager->spawnPlayers(udp_handler, package_manager, coordinator);
-    enemy_manager->spawnEnemy(udp_handler, coordinator, 0);
-    enemy_manager->spawnEnemy(udp_handler, coordinator, 1);
     int32_t gameTm = 0;
     int32_t prevTm = 0;
+    int32_t spawnEnemies = 0;
+    srand(clock->getElapsedTime().asMicroseconds());
+    std::cout << clock->getElapsedTime().asMicroseconds() << std::endl;
     clock->restart();
     while (player_manager->getNbPlayerConnected() > 0) {
         while (!udp_handler->isQueueEmpty()) {
@@ -248,7 +249,11 @@ void RType::Server::game_loop(std::unique_ptr<ECS::Coordinator>& coordinator)
         int32_t elapsed = tm - prevTm;
         prevTm = tm;
         gameTm += elapsed;
-        std::cout << gameTm << std::endl;
+        spawnEnemies += elapsed;
+        if (spawnEnemies > 5000) {
+            enemy_manager->spawnEnemy(udp_handler, coordinator, rand() % 2);
+            spawnEnemies = 0;
+        }
         coordinator->getSystem<SFML::LinearMove>()->update(coordinator, elapsed);
         coordinator->getSystem<SFML::KillNoLife>()->update(coordinator);
         coordinator->getSystem<SFML::Shoot>()->update(coordinator, elapsed);
