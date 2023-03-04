@@ -415,6 +415,12 @@ void RType::Client::game_loop(std::unique_ptr<ECS::Coordinator>& coordinator, co
         update_movement_keys->update(coordinator);
         sendMovementsKeys(coordinator, server_infos, keyChecker);
         window->clear();
+        if (coordinator->getComponent<SFML::Transform>(parallax1).position.getX() <= -1920)
+            coordinator->getComponent<SFML::Transform>(parallax1).position = { 0, 0 };
+        if (coordinator->getComponent<SFML::Transform>(parallax2).position.getX() <= -1920)
+            coordinator->getComponent<SFML::Transform>(parallax2).position = { 0, 0 };
+        if (coordinator->getComponent<SFML::Transform>(parallax3).position.getX() <= -1920)
+            coordinator->getComponent<SFML::Transform>(parallax3).position = { 0, 0 };
         linear_move->update(coordinator, elapsed_time.asMilliseconds());
         draw_sprite->update(coordinator);
         window->display();
