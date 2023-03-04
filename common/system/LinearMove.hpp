@@ -22,7 +22,7 @@ public:
      */
     void update(std::unique_ptr<ECS::Coordinator>& coordinator, std::int32_t elapsed_time)
     {
-        _lastTime += elapsed_time + coordinator->getResource<SFML::Clock>()->getElapsedTime().asMilliseconds();
+        _lastTime += elapsed_time;
         if (_lastTime < 50)
             return;
         for (const auto& entity : entities) {

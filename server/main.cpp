@@ -199,11 +199,16 @@ void RType::Server::game_loop(std::unique_ptr<ECS::Coordinator>& coordinator)
     auto player_manager = coordinator->getResource<RType::PlayerManager>();
     auto enemy_manager = coordinator->getResource<RType::EnemyManager>();
     auto bullet_manager = coordinator->getResource<RType::BulletManager>();
+    auto clock = coordinator->getResource<SFML::Clock>();
 
     std::cout << "Game loop started!" << std::endl;
     player_manager->spawnPlayers(udp_handler, package_manager, coordinator);
-    enemy_manager->spawnEnemy(udp_handler, coordinator);
-    coordinator->getResource<SFML::Clock>()->restart();
+    int32_t gameTm = 0;
+    int32_t prevTm = 0;
+    int32_t spawnEnemies = 0;
+    srand(clock->getElapsedTime().asMicroseconds());
+    std::cout << clock->getElapsedTime().asMicroseconds() << std::endl;
+    clock->restart();
     while (player_manager->getNbPlayerConnected() > 0) {
         while (!udp_handler->isQueueEmpty()) {
             RType::Network::ReceivedPacket packet_received = udp_handler->popElement();
@@ -242,13 +247,20 @@ void RType::Server::game_loop(std::unique_ptr<ECS::Coordinator>& coordinator)
                     udp_handler);
             }
         }
-        auto elapsed_time(coordinator->getResource<SFML::Clock>()->restart());
-
-        coordinator->getSystem<SFML::LinearMove>()->update(coordinator, elapsed_time.asMilliseconds());
+        int32_t tm = clock->getElapsedTime().asMilliseconds();
+        int32_t elapsed = tm - prevTm;
+        prevTm = tm;
+        gameTm += elapsed;
+        spawnEnemies += elapsed;
+        if (spawnEnemies > 5000) {
+            enemy_manager->spawnEnemy(udp_handler, coordinator, rand() % 2);
+            spawnEnemies = 0;
+        }
+        coordinator->getSystem<SFML::LinearMove>()->update(coordinator, elapsed);
         coordinator->getSystem<SFML::KillNoLife>()->update(coordinator);
-        coordinator->getSystem<SFML::Shoot>()->update(coordinator, elapsed_time.asMilliseconds());
+        coordinator->getSystem<SFML::Shoot>()->update(coordinator, elapsed);
         coordinator->getSystem<SFML::DestroyEntityOutWindow>()->update(coordinator);
-        coordinator->getSystem<SFML::UpdateEntityPositions>()->update(coordinator, udp_handler, elapsed_time.asMilliseconds());
+        coordinator->getSystem<SFML::UpdateEntityPositions>()->update(coordinator, udp_handler, elapsed);
     }
 }
 
