@@ -206,7 +206,8 @@ void RType::Client::loadAssets(std::unique_ptr<ECS::Coordinator>& coordinator)
     texture_manager->registerTexture("player_green", "../assets/textures/player-green.png");
     texture_manager->registerTexture("player_orange", "../assets/textures/player-orange.png");
     texture_manager->registerTexture("logo", "../assets/textures/logo.png");
-    texture_manager->registerTexture("bulletTexture", "../assets/textures/player-green.png");
+    texture_manager->registerTexture("bulletTexturePlayer", "../assets/textures/bulletPlayer.png");
+    texture_manager->registerTexture("bulletTextureEnemie", "../assets/textures/bulletEnnemie.png");
     texture_manager->registerTexture("enemy_A", "../assets/textures/player-red.png");
     texture_manager->registerTexture("enemy_B", "../assets/textures/player-blue.png");
     sprite_manager->registerSprite("player_1", texture_manager->getTexture("player_blue"));
@@ -416,7 +417,6 @@ void RType::Client::game_loop(std::unique_ptr<ECS::Coordinator>& coordinator, co
         sendMovementsKeys(coordinator, server_infos, keyChecker);
         window->clear();
         player_bullet->update(coordinator);
-        linear_move->update(coordinator, elapsed_time.asMilliseconds());
         int32_t tm = clock->getElapsedTime().asMilliseconds();
         int32_t elapsed = tm - prevTm;
         prevTm = tm;

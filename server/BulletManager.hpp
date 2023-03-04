@@ -6,6 +6,7 @@
 #include "../common/component/Transform.hpp"
 #include "../common/packet/SpawnEntity.hpp"
 #include "../common/packet/TransformEntity.hpp"
+#include "../common/component/EntityType.hpp"
 #include "../ecs/Coordinator.hpp"
 #include "../ecs/Types.hpp"
 #include "PlayerManager.hpp"
@@ -55,9 +56,15 @@ public:
         coordinator->addComponent(bullet, SFML::BackupTransform(bulletTransform));
         float speed = setBulletSpeed(coordinator, bullet, attack.type);
         coordinator->addComponent(bullet, SFML::DestroyEntity(true, true, true));
-        RType::Packet::CreateSpriteReference create_sprite(bulletId, "bulletTexture");
-        auto packet = coordinator->getResource<Network::PackageManager>()->createPacket<RType::Packet::CreateSpriteReference>(create_sprite);
-        coordinator->getResource<PlayerManager>()->sendPacketToAllPlayer(&packet, sizeof(packet), udp_handler);
+        if (type.type == SFML::EntityTypeEnum::Player) {
+            RType::Packet::CreateSpriteReference create_sprite(bulletId, "bulletTexturePlayer");
+            auto packet = coordinator->getResource<Network::PackageManager>()->createPacket<RType::Packet::CreateSpriteReference>(create_sprite);
+            coordinator->getResource<PlayerManager>()->sendPacketToAllPlayer(&packet, sizeof(packet), udp_handler);
+        } else {
+            RType::Packet::CreateSpriteReference create_sprite(bulletId, "bulletTextureEnemie");
+            auto packet = coordinator->getResource<Network::PackageManager>()->createPacket<RType::Packet::CreateSpriteReference>(create_sprite);
+            coordinator->getResource<PlayerManager>()->sendPacketToAllPlayer(&packet, sizeof(packet), udp_handler);
+        }
         RType::Packet::SpawnEntity entity_spawn(bullet, bulletId, bulletTransform.position.getVector2().x, bulletTransform.position.getVector2().y, type);
         auto packetTwo = coordinator->getResource<RType::Network::PackageManager>()->createPacket<RType::Packet::SpawnEntity>(entity_spawn);
         coordinator->getResource<PlayerManager>()->sendPacketToAllPlayer(&packetTwo, sizeof(packetTwo), udp_handler);
