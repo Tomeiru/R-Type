@@ -2,11 +2,11 @@
 
 #include "../common/PackageManager.hpp"
 #include "../common/UDPHandler.hpp"
+#include "../common/component/EntityType.hpp"
 #include "../common/component/SpriteReference.hpp"
 #include "../common/component/Transform.hpp"
 #include "../common/packet/SpawnEntity.hpp"
 #include "../common/packet/TransformEntity.hpp"
-#include "../common/component/EntityType.hpp"
 #include "../ecs/Coordinator.hpp"
 #include "../ecs/Types.hpp"
 #include "PlayerManager.hpp"
