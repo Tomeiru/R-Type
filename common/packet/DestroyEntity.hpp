@@ -10,7 +10,9 @@ namespace RType::Packet {
 struct DestroyEntity {
     /**
      * @brief Constructs a new DestroyEntity object
-     * @param id The id of the entity
+     *
+     * @param entity Entity ID to destroy
+     * @param spriteId Sprite ID to destroy with if it has one
      */
     DestroyEntity(ECS::Entity entity = 0, std::string spriteId = "")
         : _entity(entity)

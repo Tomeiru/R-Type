@@ -13,6 +13,11 @@ namespace SFML {
  */
 class TintText : public ECS::System {
 public:
+    /**
+     * @brief Function that tint all texts with a color
+     *
+     * @param coordinator Reference to the ecs coordinator
+     */
     void update(std::unique_ptr<ECS::Coordinator>& coordinator)
     {
         auto text_manager = coordinator->getResource<SFML::TextManager>();

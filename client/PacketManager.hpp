@@ -23,6 +23,14 @@ namespace RType {
  */
 class PacketManager {
 private:
+    /**
+     * @brief Function that receive the SpawnEntity packet and manage it
+     *
+     * @param coordinator Reference to the ECS coordinator
+     * @param package_manager Package manager that is used to deal with received packet
+     * @param packet_received Packet that got received (not casted)
+     * @param server_entity_manager Manager dealing with the server to find the great entity
+     */
     static void spawnEntity(std::unique_ptr<ECS::Coordinator>& coordinator, std::shared_ptr<Network::PackageManager>& package_manager, const RType::Network::ReceivedPacket& packet_received, const std::shared_ptr<RType::Client::ServerEntityManager>& server_entity_manager)
     {
         auto packet = package_manager->decodeContent<RType::Packet::SpawnEntity>(packet_received.packet_data);
@@ -37,6 +45,14 @@ private:
         }
     }
 
+    /**
+     * @brief Function that receive the EntityPosition packet and manage it
+     *
+     * @param coordinator Reference to the ECS coordinator
+     * @param package_manager Package manager that is used to deal with received packet
+     * @param packet_received Packet that got received (not casted)
+     * @param server_entity_manager Manager dealing with the server to find the great entity
+     */
     static void entityPosition(std::unique_ptr<ECS::Coordinator>& coordinator, std::shared_ptr<Network::PackageManager>& package_manager, const RType::Network::ReceivedPacket& packet_received, const std::shared_ptr<RType::Client::ServerEntityManager>& server_entity_manager)
     {
         auto packet = package_manager->decodeContent<RType::Packet::EntityPosition>(packet_received.packet_data);
@@ -45,6 +61,14 @@ private:
         transform.position = SFML::Vector2f { packet->_x, packet->_y };
     }
 
+    /**
+     * @brief Function that receive the TransformEntity packet and manage it
+     *
+     * @param coordinator Reference to the ECS coordinator
+     * @param package_manager Package manager that is used to deal with received packet
+     * @param packet_received Packet that got received (not casted)
+     * @param server_entity_manager Manager dealing with the server to find the great entity
+     */
     static void transformEntity(std::unique_ptr<ECS::Coordinator>& coordinator, std::shared_ptr<Network::PackageManager>& package_manager, const RType::Network::ReceivedPacket& packet_received, const std::shared_ptr<RType::Client::ServerEntityManager>& server_entity_manager)
     {
         auto packet = package_manager->decodeContent<RType::Packet::TransformEntity>(packet_received.packet_data);
@@ -56,6 +80,14 @@ private:
         transform.origin = packet->_origin;
     }
 
+    /**
+     * @brief Function that receive the DestroyEntity packet and manage it
+     *
+     * @param coordinator Reference to the ECS coordinator
+     * @param package_manager Package manager that is used to deal with received packet
+     * @param packet_received Packet that got received (not casted)
+     * @param server_entity_manager Manager dealing with the server to find the great entity
+     */
     static void destroyEntity(std::unique_ptr<ECS::Coordinator>& coordinator, std::shared_ptr<Network::PackageManager>& package_manager, const RType::Network::ReceivedPacket& packet_received, const std::shared_ptr<RType::Client::ServerEntityManager>& server_entity_manager)
     {
         auto packet = package_manager->decodeContent<RType::Packet::DestroyEntity>(packet_received.packet_data);
@@ -63,6 +95,13 @@ private:
         coordinator->destroyEntity(entity);
     }
 
+    /**
+     * @brief Function that receive the CreateSpriteReference packet and manage it
+     *
+     * @param coordinator Reference to the ECS coordinator
+     * @param package_manager Package manager that is used to deal with received packet
+     * @param packet_received Packet that got received (not casted)
+     */
     static void createSpriteReference(std::unique_ptr<ECS::Coordinator>& coordinator, std::shared_ptr<Network::PackageManager>& package_manager, const RType::Network::ReceivedPacket& packet_received)
     {
         auto texture_manager = coordinator->getResource<SFML::TextureManager>();
@@ -71,6 +110,14 @@ private:
         sprite_manager->registerSprite(packet->_spriteId, texture_manager->getTexture(packet->_linkSprite));
     }
 
+    /**
+     * @brief Function that receive the SetEntityLinearMove packet and manages it
+     *
+     * @param coordinator Reference to the ECS coordinator
+     * @param package_manager Package manager that is used to deal with received packet
+     * @param packet_received Packet that got received (not casted)
+     * @param server_entity_manager Manager dealing with the server to find the great entity
+     */
     static void setEntityLinearMove(std::unique_ptr<ECS::Coordinator>& coordinator, std::shared_ptr<Network::PackageManager>& package_manager, const RType::Network::ReceivedPacket& packet_received, const std::shared_ptr<RType::Client::ServerEntityManager>& server_entity_manager)
     {
         auto packet = package_manager->decodeContent<RType::Packet::SetEntityLinearMove>(packet_received.packet_data);
@@ -85,6 +132,14 @@ private:
     }
 
 public:
+    /**
+     * @brief Function that choose the right packet
+     *
+     * @param coordinator Reference to the ECS coordinator
+     * @param headerId Char that corresponds to a packet type
+     * @param packet_received Packet that got received (not casted)
+     * @param server_entity_manager Manager dealing with the server to find the great entity
+     */
     void choosePacket(std::unique_ptr<ECS::Coordinator>& coordinator, char headerId, const RType::Network::ReceivedPacket& packet_received, const std::shared_ptr<RType::Client::ServerEntityManager>& server_entity_manager)
     {
         auto package_manager = coordinator->getResource<RType::Network::PackageManager>();

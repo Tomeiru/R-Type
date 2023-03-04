@@ -9,6 +9,7 @@ namespace RType::Packet {
 struct PlayerName {
     /**
      * @brief Constructs a new PlayerName object
+     *
      * @param name The name of the player
      */
     PlayerName(std::string name = "")

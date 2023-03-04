@@ -7,12 +7,12 @@ namespace RType::Packet {
 /**
  * @brief SpawnEntity is a class that represents a spawn entity packet
  */
-
 struct SpawnEntity {
     /**
      * @brief Constructs a new SpawnEntity object
-     * @param id The id of the entity
-     * @param type The type of the entity
+     *
+     * @param entity The id of the entity
+     * @param sprite_id The reference to the sprite of the entity
      * @param x The x position of the entity
      * @param y The y position of the entity
      */

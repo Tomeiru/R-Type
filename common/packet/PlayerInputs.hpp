@@ -7,6 +7,7 @@ namespace RType::Packet {
 struct PlayerInputs {
     /**
      * @brief Constructs a new PlayerInputs object
+     *
      * @param left The left input
      * @param right The right input
      * @param up The up input
