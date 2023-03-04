@@ -192,10 +192,18 @@ void RType::Client::loadAssets(std::unique_ptr<ECS::Coordinator>& coordinator)
     texture_manager->registerTexture("logo", "../assets/textures/logo.png");
     texture_manager->registerTexture("bulletTexture", "../assets/textures/player-green.png");
     texture_manager->registerTexture("enemyTexture", "../assets/textures/player-red.png");
+    texture_manager->registerTexture("blue", "../assets/textures/sky_lightened.png");
+    texture_manager->registerTexture("clouds_bg", "../assets/textures/clouds_bg.png");
+    texture_manager->registerTexture("mountains", "../assets/textures/glacial_mountains.png");
+    texture_manager->registerTexture("clouds", "../assets/textures/clouds_mg_2.png");
     sprite_manager->registerSprite("player_1", texture_manager->getTexture("player_blue"));
     sprite_manager->registerSprite("player_2", texture_manager->getTexture("player_red"));
     sprite_manager->registerSprite("player_3", texture_manager->getTexture("player_green"));
     sprite_manager->registerSprite("player_4", texture_manager->getTexture("player_orange"));
+    sprite_manager->registerSprite("background", texture_manager->getTexture("blue"));
+    sprite_manager->registerSprite("parallax3", texture_manager->getTexture("clouds_bg"));
+    sprite_manager->registerSprite("parallax2", texture_manager->getTexture("mountains"));
+    sprite_manager->registerSprite("parallax1", texture_manager->getTexture("clouds"));
     sprite_manager->registerSprite("logo", texture_manager->getTexture("logo"));
     font_manager->registerFont("r_type", "../assets/fonts/r-type.ttf");
     text_manager->registerText("quit_button", "QUIT", font_manager->getFont("r_type"), 50);
@@ -366,10 +374,28 @@ void RType::Client::game_loop(std::unique_ptr<ECS::Coordinator>& coordinator, co
     auto clock = coordinator->getResource<SFML::Clock>();
     auto keyChecker = coordinator->createEntity();
     auto window = coordinator->getResource<SFML::Window>();
+    auto background = coordinator->createEntity();
+    auto parallax3 = coordinator->createEntity();
+    auto parallax2 = coordinator->createEntity();
+    auto parallax1 = coordinator->createEntity();
     RType::PacketManager packetManager;
     coordinator->addComponent<SFML::InputKeys>(keyChecker, SFML::InputKeys());
     SFML::Event event;
 
+    coordinator->addComponent<SFML::SpriteReference>(background, SFML::SpriteReference("background"));
+    coordinator->addComponent<SFML::Transform>(background, SFML::Transform({ 0, 0 }, 0, { 5, 5 }));
+    coordinator->addComponent<SFML::SpriteReference>(parallax3, SFML::SpriteReference("parallax3"));
+    coordinator->addComponent<SFML::Transform>(parallax3, SFML::Transform({ 0, 0 }, 0, { 5, 5 }));
+    coordinator->addComponent<SFML::Direction>(parallax3, 0);
+    coordinator->addComponent<SFML::Speed>(parallax3, -1);
+    coordinator->addComponent<SFML::SpriteReference>(parallax2, SFML::SpriteReference("parallax2"));
+    coordinator->addComponent<SFML::Transform>(parallax2, SFML::Transform({ 0, 0 }, 0, { 5, 5 }));
+    coordinator->addComponent<SFML::Direction>(parallax2, 0);
+    coordinator->addComponent<SFML::Speed>(parallax2, -2.5);
+    coordinator->addComponent<SFML::SpriteReference>(parallax1, SFML::SpriteReference("parallax1"));
+    coordinator->addComponent<SFML::Transform>(parallax1, SFML::Transform({ 0, 0 }, 0, { 5, 5 }));
+    coordinator->addComponent<SFML::Direction>(parallax1, 0);
+    coordinator->addComponent<SFML::Speed>(parallax1, -4);
     window->setFramerateLimit(60);
     clock->restart();
     while (window->isOpen()) {
@@ -394,6 +420,10 @@ void RType::Client::game_loop(std::unique_ptr<ECS::Coordinator>& coordinator, co
         window->display();
         event_manager->clear();
     }
+    coordinator->destroyEntity(background);
+    coordinator->destroyEntity(parallax3);
+    coordinator->destroyEntity(parallax2);
+    coordinator->destroyEntity(parallax1);
 }
 
 /**
