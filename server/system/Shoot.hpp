@@ -1,8 +1,8 @@
 #pragma once
 
+#include "../../common/component/EntityType.hpp"
 #include "../../common/component/SpriteReference.hpp"
 #include "../../common/component/Transform.hpp"
-#include "../../common/component/EntityType.hpp"
 #include "../../ecs/Coordinator.hpp"
 #include "../../sfml/SpriteManager.hpp"
 #include "../../sfml/TextureManager.hpp"

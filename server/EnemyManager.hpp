@@ -1,9 +1,9 @@
 #pragma once
 
 #include "../common/UDPHandler.hpp"
+#include "../common/component/EntityType.hpp"
 #include "../common/packet/SpawnEntity.hpp"
 #include "../common/packet/TransformEntity.hpp"
-#include "../common/component/EntityType.hpp"
 #include "../ecs/Coordinator.hpp"
 #include "../ecs/Types.hpp"
 #include "Types.hpp"

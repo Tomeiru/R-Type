@@ -1,9 +1,11 @@
 #include <iostream>
 
+#include "../common/PackageManager.hpp"
+#include "../common/UDPHandler.hpp"
+#include "../common/component/EntityType.hpp"
 #include "../common/component/SpriteReference.hpp"
 #include "../common/component/Tint.hpp"
 #include "../common/component/Transform.hpp"
-#include "../common/component/EntityType.hpp"
 #include "../common/packet/CreateSpriteReference.hpp"
 #include "../common/packet/EntityPosition.hpp"
 #include "../common/packet/GameStart.hpp"
@@ -12,8 +14,6 @@
 #include "../common/packet/SetEntityLinearMove.hpp"
 #include "../common/packet/SpawnEntity.hpp"
 #include "../common/system/LinearMove.hpp"
-#include "../common/PackageManager.hpp"
-#include "../common/UDPHandler.hpp"
 #include "../ecs/Coordinator.hpp"
 #include "../server/PlayerManager.hpp"
 #include "../sfml/Clock.hpp"

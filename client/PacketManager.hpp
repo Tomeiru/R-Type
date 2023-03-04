@@ -4,19 +4,19 @@
 
 #include "../common/PackageManager.hpp"
 #include "../common/ReceivedPacket.hpp"
-#include "../common/component/SpriteReference.hpp"
 #include "../common/component/EntityType.hpp"
+#include "../common/component/SpriteReference.hpp"
 #include "../common/packet/DestroyEntity.hpp"
 #include "../common/packet/EntityPosition.hpp"
 #include "../common/packet/SetEntityLinearMove.hpp"
 #include "../common/packet/SpawnEntity.hpp"
 #include "../common/packet/TransformEntity.hpp"
 #include "../ecs/Coordinator.hpp"
-#include "ServerEntityManager.hpp"
 #include "../sfml/SoundBufferManager.hpp"
 #include "../sfml/SoundManager.hpp"
 #include "./component/SoundReference.hpp"
 #include "./system/PlaySound.hpp"
+#include "ServerEntityManager.hpp"
 namespace RType {
 /**
  * @brief Class that manages the received packets and their actions
