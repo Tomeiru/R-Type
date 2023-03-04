@@ -12,7 +12,7 @@ var searchData=
   ['shoot_9',['Shoot',['../class_s_f_m_l_1_1_shoot.html',1,'SFML']]],
   ['soundreference_10',['SoundReference',['../struct_s_f_m_l_1_1_sound_reference.html',1,'SFML::SoundReference'],['../struct_s_f_m_l_1_1_sound_reference.html#aa1bb1eeeeabd1a6560130b40cca4b0c5',1,'SFML::SoundReference::SoundReference()']]],
   ['spawnenemy_11',['spawnEnemy',['../class_r_type_1_1_enemy_manager.html#a3d1ae3235ba4f0d421d5afbe4ba02495',1,'RType::EnemyManager']]],
-  ['spawnentity_12',['SpawnEntity',['../struct_r_type_1_1_packet_1_1_spawn_entity.html',1,'RType::Packet::SpawnEntity'],['../struct_r_type_1_1_packet_1_1_spawn_entity.html#afba03708d7f865570eab085e087efcbb',1,'RType::Packet::SpawnEntity::SpawnEntity()']]],
+  ['spawnentity_12',['SpawnEntity',['../struct_r_type_1_1_packet_1_1_spawn_entity.html',1,'RType::Packet::SpawnEntity'],['../struct_r_type_1_1_packet_1_1_spawn_entity.html#ab823a1053b8f4dbf7345d504e592612a',1,'RType::Packet::SpawnEntity::SpawnEntity()']]],
   ['spawnplayers_13',['spawnPlayers',['../class_r_type_1_1_player_manager.html#ae61fa09dc37fa9b5b0756b2115060c00',1,'RType::PlayerManager']]],
   ['speed_14',['Speed',['../struct_s_f_m_l_1_1_speed.html',1,'SFML::Speed'],['../struct_s_f_m_l_1_1_speed.html#ad671dce04db3373add9ffb2b3ad2e4cc',1,'SFML::Speed::Speed()']]],
   ['spin_15',['Spin',['../struct_s_f_m_l_1_1_spin.html',1,'SFML::Spin'],['../struct_s_f_m_l_1_1_spin.html#a251cfa456a75fa5821eae4dc5566e19e',1,'SFML::Spin::Spin()']]],

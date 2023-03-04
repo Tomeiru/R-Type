@@ -78,54 +78,57 @@ $(function() {
 <div class="contents">
 <div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;../../common/component/SpriteReference.hpp&quot;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;../../common/component/Transform.hpp&quot;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;../../ecs/Coordinator.hpp&quot;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;../../sfml/SpriteManager.hpp&quot;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;../../sfml/TextureManager.hpp&quot;</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;../component/Attack.hpp&quot;</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;../component/DestroyEntity.hpp&quot;</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;../component/Direction.hpp&quot;</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;../component/Speed.hpp&quot;</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">namespace </span>SFML {</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="class_s_f_m_l_1_1_shoot.html">   17</a></span><span class="keyword">class </span><a class="code hl_class" href="class_s_f_m_l_1_1_shoot.html">Shoot</a> : <span class="keyword">public</span> ECS::System {</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="class_s_f_m_l_1_1_shoot.html#ac342acaf32c80985f7bc9b7cb469d4a6">   25</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_s_f_m_l_1_1_shoot.html#ac342acaf32c80985f7bc9b7cb469d4a6">update</a>(std::unique_ptr&lt;ECS::Coordinator&gt;&amp; coordinator, std::int32_t elapsed_time)</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    {</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        _lastTime += elapsed_time;</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; entity : entities) {</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>            <span class="keyword">auto</span>&amp; attack = coordinator-&gt;getComponent&lt;<a class="code hl_struct" href="struct_s_f_m_l_1_1_attack.html">Attack</a>&gt;(entity);</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>            <span class="keyword">auto</span>&amp; entityTransform = coordinator-&gt;getComponent&lt;<a class="code hl_struct" href="struct_s_f_m_l_1_1_transform.html">Transform</a>&gt;(entity);</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>            <span class="keyword">auto</span> sprite_man = coordinator-&gt;getResource&lt;SFML::SpriteManager&gt;();</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>            <span class="keyword">auto</span> texture_man = coordinator-&gt;getResource&lt;SFML::TextureManager&gt;();</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>            attack.attackValue += _lastTime;</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>            <span class="keywordflow">if</span> (!attack.attack)</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>                <span class="keywordflow">continue</span>;</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>            <span class="comment">// std::cerr &lt;&lt; attack.attackValue &lt;&lt; &quot; &quot; &lt;&lt; attack.attackSpeed &lt;&lt; std::endl;</span></div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>            <span class="keywordflow">if</span> (attack.attackValue &gt;= attack.attackSpeed) {</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>                attack.attackValue = 0;</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>                <span class="keyword">auto</span> bulletTransform = <a class="code hl_struct" href="struct_s_f_m_l_1_1_transform.html">SFML::Transform</a>(entityTransform.position, 0, { 1.0, 1.0 });</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>                std::cerr &lt;&lt; <span class="stringliteral">&quot;Shooting&quot;</span> &lt;&lt; std::endl;</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>                coordinator-&gt;getResource&lt;<a class="code hl_class" href="class_r_type_1_1_bullet_manager.html">RType::BulletManager</a>&gt;()-&gt;createBullet(coordinator, attack, bulletTransform);</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>                <span class="keywordflow">if</span> (_bulletNumber == ULLONG_MAX)</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>                    _bulletNumber = 0;</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>                <span class="keywordflow">else</span></div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>                    _bulletNumber++;</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>            }</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        }</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        _lastTime = 0;</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    }</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <span class="keywordtype">long</span> <span class="keywordtype">int</span> _bulletNumber = 0;</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    std::int32_t _lastTime = 0;</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>};</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>}</div>
-<div class="ttc" id="aclass_r_type_1_1_bullet_manager_html"><div class="ttname"><a href="class_r_type_1_1_bullet_manager.html">RType::BulletManager</a></div><div class="ttdoc">Class to manage bullets.</div><div class="ttdef"><b>Definition:</b> BulletManager.hpp:25</div></div>
-<div class="ttc" id="aclass_s_f_m_l_1_1_shoot_html"><div class="ttname"><a href="class_s_f_m_l_1_1_shoot.html">SFML::Shoot</a></div><div class="ttdoc">System that shoot bullets from the entity that have an Attack Component.</div><div class="ttdef"><b>Definition:</b> Shoot.hpp:17</div></div>
-<div class="ttc" id="aclass_s_f_m_l_1_1_shoot_html_ac342acaf32c80985f7bc9b7cb469d4a6"><div class="ttname"><a href="class_s_f_m_l_1_1_shoot.html#ac342acaf32c80985f7bc9b7cb469d4a6">SFML::Shoot::update</a></div><div class="ttdeci">void update(std::unique_ptr&lt; ECS::Coordinator &gt; &amp;coordinator, std::int32_t elapsed_time)</div><div class="ttdoc">Function that shoot bullets from the entity that have an Attack Component.</div><div class="ttdef"><b>Definition:</b> Shoot.hpp:25</div></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;../../common/component/EntityType.hpp&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;../../common/component/SpriteReference.hpp&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;../../common/component/Transform.hpp&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;../../ecs/Coordinator.hpp&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;../../sfml/SpriteManager.hpp&quot;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;../../sfml/TextureManager.hpp&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;../component/Attack.hpp&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;../component/DestroyEntity.hpp&quot;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;../component/Direction.hpp&quot;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;../component/Speed.hpp&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">namespace </span>SFML {</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="class_s_f_m_l_1_1_shoot.html">   18</a></span><span class="keyword">class </span><a class="code hl_class" href="class_s_f_m_l_1_1_shoot.html">Shoot</a> : <span class="keyword">public</span> ECS::System {</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="class_s_f_m_l_1_1_shoot.html#ac342acaf32c80985f7bc9b7cb469d4a6">   26</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_s_f_m_l_1_1_shoot.html#ac342acaf32c80985f7bc9b7cb469d4a6">update</a>(std::unique_ptr&lt;ECS::Coordinator&gt;&amp; coordinator, std::int32_t elapsed_time)</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    {</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        _lastTime += elapsed_time;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; entity : entities) {</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>            <span class="keyword">auto</span>&amp; attack = coordinator-&gt;getComponent&lt;<a class="code hl_struct" href="struct_s_f_m_l_1_1_attack.html">Attack</a>&gt;(entity);</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>            <span class="keyword">auto</span>&amp; entityTransform = coordinator-&gt;getComponent&lt;<a class="code hl_struct" href="struct_s_f_m_l_1_1_transform.html">Transform</a>&gt;(entity);</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>            <span class="keyword">auto</span> sprite_man = coordinator-&gt;getResource&lt;SFML::SpriteManager&gt;();</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>            <span class="keyword">auto</span> texture_man = coordinator-&gt;getResource&lt;SFML::TextureManager&gt;();</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>            <span class="keyword">auto</span> type = coordinator-&gt;getComponent&lt;<a class="code hl_struct" href="struct_s_f_m_l_1_1_entity_type.html">SFML::EntityType</a>&gt;(entity);</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>            attack.attackValue += _lastTime;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>            <span class="keywordflow">if</span> (!attack.attack)</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>                <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>            <span class="comment">// std::cerr &lt;&lt; attack.attackValue &lt;&lt; &quot; &quot; &lt;&lt; attack.attackSpeed &lt;&lt; std::endl;</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>            <span class="keywordflow">if</span> (attack.attackValue &gt;= attack.attackSpeed) {</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>                attack.attackValue = 0;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>                <span class="keyword">auto</span> bulletTransform = <a class="code hl_struct" href="struct_s_f_m_l_1_1_transform.html">SFML::Transform</a>(entityTransform.position, 0, { 1.0, 1.0 });</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>                std::cerr &lt;&lt; <span class="stringliteral">&quot;Shooting&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>                coordinator-&gt;getResource&lt;<a class="code hl_class" href="class_r_type_1_1_bullet_manager.html">RType::BulletManager</a>&gt;()-&gt;createBullet(coordinator, attack, bulletTransform, type);</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>                <span class="keywordflow">if</span> (_bulletNumber == ULLONG_MAX)</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>                    _bulletNumber = 0;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>                <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>                    _bulletNumber++;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>            }</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        }</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        _lastTime = 0;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    }</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <span class="keywordtype">long</span> <span class="keywordtype">int</span> _bulletNumber = 0;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    std::int32_t _lastTime = 0;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>};</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>}</div>
+<div class="ttc" id="aclass_r_type_1_1_bullet_manager_html"><div class="ttname"><a href="class_r_type_1_1_bullet_manager.html">RType::BulletManager</a></div><div class="ttdoc">Class to manage bullets.</div><div class="ttdef"><b>Definition:</b> BulletManager.hpp:26</div></div>
+<div class="ttc" id="aclass_s_f_m_l_1_1_shoot_html"><div class="ttname"><a href="class_s_f_m_l_1_1_shoot.html">SFML::Shoot</a></div><div class="ttdoc">System that shoot bullets from the entity that have an Attack Component.</div><div class="ttdef"><b>Definition:</b> Shoot.hpp:18</div></div>
+<div class="ttc" id="aclass_s_f_m_l_1_1_shoot_html_ac342acaf32c80985f7bc9b7cb469d4a6"><div class="ttname"><a href="class_s_f_m_l_1_1_shoot.html#ac342acaf32c80985f7bc9b7cb469d4a6">SFML::Shoot::update</a></div><div class="ttdeci">void update(std::unique_ptr&lt; ECS::Coordinator &gt; &amp;coordinator, std::int32_t elapsed_time)</div><div class="ttdoc">Function that shoot bullets from the entity that have an Attack Component.</div><div class="ttdef"><b>Definition:</b> Shoot.hpp:26</div></div>
 <div class="ttc" id="astruct_s_f_m_l_1_1_attack_html"><div class="ttname"><a href="struct_s_f_m_l_1_1_attack.html">SFML::Attack</a></div><div class="ttdoc">Component that allows an entity to attack.</div><div class="ttdef"><b>Definition:</b> Attack.hpp:17</div></div>
+<div class="ttc" id="astruct_s_f_m_l_1_1_entity_type_html"><div class="ttname"><a href="struct_s_f_m_l_1_1_entity_type.html">SFML::EntityType</a></div><div class="ttdoc">Component that set the entity type.</div><div class="ttdef"><b>Definition:</b> EntityType.hpp:16</div></div>
 <div class="ttc" id="astruct_s_f_m_l_1_1_transform_html"><div class="ttname"><a href="struct_s_f_m_l_1_1_transform.html">SFML::Transform</a></div><div class="ttdoc">Component that allows an entity to be transformed (position, rotation, scale, origin)</div><div class="ttdef"><b>Definition:</b> Transform.hpp:9</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
