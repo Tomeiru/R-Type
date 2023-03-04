@@ -91,7 +91,7 @@ $(function() {
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">public</span>:</div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="class_s_f_m_l_1_1_linear_move.html#abe3c9b6071097ee22ef5d4388935b65f">   23</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_s_f_m_l_1_1_linear_move.html#abe3c9b6071097ee22ef5d4388935b65f">update</a>(std::unique_ptr&lt;ECS::Coordinator&gt;&amp; coordinator, std::int32_t elapsed_time)</div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    {</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        _lastTime += elapsed_time + coordinator-&gt;getResource&lt;SFML::Clock&gt;()-&gt;getElapsedTime().asMilliseconds();</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        _lastTime += elapsed_time;</div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        <span class="keywordflow">if</span> (_lastTime &lt; 50)</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>            <span class="keywordflow">return</span>;</div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; entity : entities) {</div>
