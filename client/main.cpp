@@ -15,6 +15,9 @@
 #include "../sfml/ColorManager.hpp"
 #include "../sfml/Event.hpp"
 #include "../sfml/FontManager.hpp"
+#include "../sfml/MusicManager.hpp"
+#include "../sfml/SoundBufferManager.hpp"
+#include "../sfml/SoundManager.hpp"
 #include "../sfml/SpriteManager.hpp"
 #include "../sfml/TextManager.hpp"
 #include "../sfml/TextureManager.hpp"
@@ -24,9 +27,13 @@
 #include "./component/Hover.hpp"
 #include "./component/HoverTint.hpp"
 #include "./component/InputKeys.hpp"
+#include "./component/MusicReference.hpp"
+#include "./component/SoundReference.hpp"
 #include "./component/TextReference.hpp"
 #include "./system/DrawSprite.hpp"
 #include "./system/DrawText.hpp"
+#include "./system/PlayMusic.hpp"
+#include "./system/PlaySound.hpp"
 #include "./system/TintText.hpp"
 #include "./system/TransformSprite.hpp"
 #include "./system/TransformText.hpp"
@@ -100,6 +107,8 @@ void RType::Client::registerComponents(std::unique_ptr<ECS::Coordinator>& coordi
     coordinator->registerComponent<SFML::Hover>();
     coordinator->registerComponent<SFML::Tint>();
     coordinator->registerComponent<SFML::Clickable>();
+    coordinator->registerComponent<SFML::MusicReference>();
+    coordinator->registerComponent<SFML::SoundReference>();
 }
 
 /**
@@ -170,6 +179,10 @@ void RType::Client::registerSystems(std::unique_ptr<ECS::Coordinator>& coordinat
     coordinator->setSignatureBits<SFML::UpdateHover, SFML::Hover, SFML::Hitbox>();
     coordinator->registerSystem<SFML::UpdateClick>();
     coordinator->setSignatureBits<SFML::UpdateClick, SFML::Hitbox, SFML::Clickable>();
+    coordinator->registerSystem<SFML::PlayMusic>();
+    coordinator->setSignatureBits<SFML::PlayMusic, SFML::MusicReference>();
+    coordinator->registerSystem<SFML::PlaySound>();
+    coordinator->setSignatureBits<SFML::PlaySound, SFML::SoundReference>();
 }
 
 /**
@@ -184,13 +197,17 @@ void RType::Client::loadAssets(std::unique_ptr<ECS::Coordinator>& coordinator)
     auto font_manager = coordinator->getResource<SFML::FontManager>();
     auto text_manager = coordinator->getResource<SFML::TextManager>();
     auto color_manager = coordinator->getResource<SFML::ColorManager>();
+    auto backgroundMusic = coordinator->registerResource<SFML::MusicManager>();
+    auto player_bullet_buffer = coordinator->registerResource<SFML::SoundBufferManager>();
+    auto player_bullet = coordinator->registerResource<SFML::SoundManager>();
 
     texture_manager->registerTexture("player_blue", "../assets/textures/player-blue.png");
     texture_manager->registerTexture("player_red", "../assets/textures/player-red.png");
     texture_manager->registerTexture("player_green", "../assets/textures/player-green.png");
     texture_manager->registerTexture("player_orange", "../assets/textures/player-orange.png");
     texture_manager->registerTexture("logo", "../assets/textures/logo.png");
-    texture_manager->registerTexture("bulletTexture", "../assets/textures/player-green.png");
+    texture_manager->registerTexture("bulletTexturePlayer", "../assets/textures/bulletPlayer.png");
+    texture_manager->registerTexture("bulletTextureEnemie", "../assets/textures/bulletEnnemie.png");
     texture_manager->registerTexture("enemy_A", "../assets/textures/player-red.png");
     texture_manager->registerTexture("enemy_B", "../assets/textures/player-blue.png");
     sprite_manager->registerSprite("player_1", texture_manager->getTexture("player_blue"));
@@ -204,6 +221,9 @@ void RType::Client::loadAssets(std::unique_ptr<ECS::Coordinator>& coordinator)
     text_manager->registerText("waiting_text", "Waiting for other players...", font_manager->getFont("r_type"), 50);
     color_manager->registerRGBColor("purple", 255, 0, 255);
     color_manager->registerHexColor("white", 0xffffffff);
+    backgroundMusic->registerMusic("background_music", "../assets/audio/rtype.ogg", true);
+    player_bullet_buffer->registerSoundBuffer("player_bullet", "../assets/audio/player_bullet.ogg");
+    player_bullet->registerSound("player_bullet", player_bullet_buffer->getSoundBuffer("player_bullet"), false);
 }
 
 /**
@@ -248,11 +268,14 @@ RType::Client::SceneManager::Scene RType::Client::display_menu(std::unique_ptr<E
     auto update_click = coordinator->getSystem<SFML::UpdateClick>();
     auto tint_text = coordinator->getSystem<SFML::TintText>();
     auto update_hover = coordinator->getSystem<SFML::UpdateHover>();
+    auto play_music = coordinator->getSystem<SFML::PlayMusic>();
     auto logo = coordinator->createEntity();
     auto quit_button = coordinator->createEntity();
     auto play_button = coordinator->createEntity();
+    auto background_music = coordinator->createEntity();
     SFML::Event event;
 
+    coordinator->addComponent(background_music, SFML::MusicReference("background_music", SFML::Music::Playing));
     coordinator->addComponent<SFML::SpriteReference>(logo, SFML::SpriteReference("logo"));
     coordinator->addComponent<SFML::Transform>(logo, SFML::Transform({ 600, 100 }, 0, { 1.5, 1.5 }));
     coordinator->addComponent<SFML::TextReference>(quit_button, SFML::TextReference("quit_button"));
@@ -278,6 +301,7 @@ RType::Client::SceneManager::Scene RType::Client::display_menu(std::unique_ptr<E
         std::cout << "Scene: " << scene_manager->getCurrentScene() << std::endl;
         transform_sprite->update(coordinator);
         transform_text->update(coordinator);
+        play_music->update(coordinator);
         update_hover->update(coordinator);
         update_hover_tint->update(coordinator);
         update_click->update(coordinator);
@@ -364,6 +388,7 @@ void RType::Client::game_loop(std::unique_ptr<ECS::Coordinator>& coordinator, co
     auto transform_sprite = coordinator->getSystem<SFML::TransformSprite>();
     auto update_movement_keys = coordinator->getSystem<SFML::UpdateKeysInput>();
     auto linear_move = coordinator->getSystem<SFML::LinearMove>();
+    auto player_bullet = coordinator->getSystem<SFML::PlaySound>();
     auto clock = coordinator->getResource<SFML::Clock>();
     auto keyChecker = coordinator->createEntity();
     auto window = coordinator->getResource<SFML::Window>();
@@ -391,6 +416,7 @@ void RType::Client::game_loop(std::unique_ptr<ECS::Coordinator>& coordinator, co
         update_movement_keys->update(coordinator);
         sendMovementsKeys(coordinator, server_infos, keyChecker);
         window->clear();
+        player_bullet->update(coordinator);
         int32_t tm = clock->getElapsedTime().asMilliseconds();
         int32_t elapsed = tm - prevTm;
         prevTm = tm;

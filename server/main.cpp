@@ -2,6 +2,7 @@
 
 #include "../common/PackageManager.hpp"
 #include "../common/UDPHandler.hpp"
+#include "../common/component/EntityType.hpp"
 #include "../common/component/SpriteReference.hpp"
 #include "../common/component/Tint.hpp"
 #include "../common/component/Transform.hpp"
@@ -83,6 +84,7 @@ void RType::Server::registerComponents(
     coordinator->registerComponent<SFML::Health>();
     coordinator->registerComponent<SFML::Speed>();
     coordinator->registerComponent<SFML::BackupTransform>();
+    coordinator->registerComponent<SFML::EntityType>();
 }
 
 /**
@@ -98,7 +100,7 @@ void RType::Server::registerSystems(
     coordinator->registerSystem<SFML::LinearMove>();
     coordinator->setSignatureBits<SFML::LinearMove, SFML::Speed, SFML::Direction, SFML::Transform>();
     coordinator->registerSystem<SFML::Shoot>();
-    coordinator->setSignatureBits<SFML::Shoot, SFML::Attack>();
+    coordinator->setSignatureBits<SFML::Shoot, SFML::Attack, SFML::EntityType>();
     coordinator->registerSystem<SFML::KillNoLife>();
     coordinator->setSignatureBits<SFML::KillNoLife, SFML::Health>();
     coordinator->registerSystem<SFML::UpdateEntityPositions>();
