@@ -47,6 +47,13 @@ if (MSVC OR MSYS OR MINGW OR WIN32)
     if(result)
         message(FATAL_ERROR "Echec de l'installation de la SFML: ${output}")
     endif()
+    execute_process(COMMAND ${CMAKE_BINARY_DIR}/vcpkg-2023.01.09/vcpkg install rapidjson --triplet x64-windows
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/vcpkg-2023.01.09
+        RESULT_VARIABLE result
+        OUTPUT_VARIABLE output)
+    if(result)
+    message(FATAL_ERROR "Echec de l'installation de la rapidjson: ${output}")
+    endif()
 endif()
 
 #CMake for Linux and Apple
@@ -66,6 +73,13 @@ if (UNIX)
             OUTPUT_VARIABLE output)
     if(result)
         message(FATAL_ERROR "Echec de l'installation de la SFML: ${output}")
+    endif()
+    execute_process(COMMAND ${CMAKE_BINARY_DIR}/vcpkg-2023.01.09/vcpkg install rapidjson
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/vcpkg-2023.01.09
+        RESULT_VARIABLE result
+        OUTPUT_VARIABLE output)
+    if(result)
+    message(FATAL_ERROR "Echec de l'installation de la rapidjson: ${output}")
     endif()
 endif()
 
@@ -101,6 +115,7 @@ if(UNIX)
 endif()
 
 find_package(SFML 2.5 COMPONENTS audio graphics network system window REQUIRED)
+find_package(RapidJSON REQUIRED)
 set(SFML_LIBS
         sfml-audio
         sfml-graphics
@@ -110,4 +125,4 @@ set(SFML_LIBS
         freetype
         )
 target_link_libraries(client ${SFML_LIBS})
-target_link_libraries(server ${SFML_LIBS})
+target_link_libraries(server ${SFML_LIBS} rapidjson)

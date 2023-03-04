@@ -24,7 +24,7 @@ public:
      */
     void update(std::unique_ptr<ECS::Coordinator>& coordinator, std::int32_t elapsed_time)
     {
-        _lastTime += elapsed_time + coordinator->getResource<SFML::Clock>()->getElapsedTime().asMilliseconds();
+        _lastTime += elapsed_time;
         for (const auto& entity : entities) {
             auto& attack = coordinator->getComponent<Attack>(entity);
             auto& entityTransform = coordinator->getComponent<Transform>(entity);
