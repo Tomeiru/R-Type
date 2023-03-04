@@ -3,6 +3,7 @@
 #include "../common/UDPHandler.hpp"
 #include "../common/packet/SpawnEntity.hpp"
 #include "../common/packet/TransformEntity.hpp"
+#include "../common/component/EntityType.hpp"
 #include "../ecs/Coordinator.hpp"
 #include "../ecs/Types.hpp"
 #include "Types.hpp"
@@ -41,11 +42,12 @@ public:
         coordinator->addComponent(enemy, SFML::Attack(true, (500), SFML::AttackType::SlowAttack, 135));
         coordinator->addComponent(enemy, SFML::DestroyEntity(true, true, true));
         coordinator->addComponent(enemy, SFML::Health(2));
+        coordinator->addComponent(enemy, SFML::EntityType(SFML::EntityTypeEnum::Ennemie));
         id_to_entity.emplace(enemy_nbr, enemy);
         RType::Packet::CreateSpriteReference create_sprite(name, "enemyTexture");
         auto packet = coordinator->getResource<Network::PackageManager>()->createPacket<RType::Packet::CreateSpriteReference>(create_sprite);
         coordinator->getResource<PlayerManager>()->sendPacketToAllPlayer(&packet, sizeof(packet), udp_handler);
-        RType::Packet::SpawnEntity entity_payload(enemy, name, 1000.0, 800.0);
+        RType::Packet::SpawnEntity entity_payload(enemy, name, 1000.0, 800.0, SFML::EntityTypeEnum::Ennemie);
         auto packetTwo = coordinator->getResource<RType::Network::PackageManager>()->createPacket<RType::Packet::SpawnEntity>(entity_payload);
         coordinator->getResource<PlayerManager>()->sendPacketToAllPlayer(&packetTwo, sizeof(packetTwo), udp_handler);
         RType::Packet::TransformEntity entity_transform(enemy, coordinator->getComponent<SFML::Transform>(enemy));

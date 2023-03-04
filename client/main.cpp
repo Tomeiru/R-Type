@@ -25,6 +25,10 @@
 #include "./component/MusicReference.hpp"
 #include "./system/PlayMusic.hpp"
 #include "../sfml/MusicManager.hpp"
+#include "../sfml/SoundBufferManager.hpp"
+#include "../sfml/SoundManager.hpp"
+#include "./component/SoundReference.hpp"
+#include "./system/PlaySound.hpp"
 #include "./component/Hitbox.hpp"
 #include "./component/Hover.hpp"
 #include "./component/HoverTint.hpp"
@@ -94,6 +98,7 @@ void RType::Client::registerComponents(std::unique_ptr<ECS::Coordinator>& coordi
     coordinator->registerComponent<SFML::Tint>();
     coordinator->registerComponent<SFML::Clickable>();
     coordinator->registerComponent<SFML::MusicReference>();
+    coordinator->registerComponent<SFML::SoundReference>();
 }
 
 void RType::Client::registerResources(std::unique_ptr<ECS::Coordinator>& coordinator, std::uint16_t port)
@@ -150,6 +155,8 @@ void RType::Client::registerSystems(std::unique_ptr<ECS::Coordinator>& coordinat
     coordinator->setSignatureBits<SFML::UpdateClick, SFML::Hitbox, SFML::Clickable>();
     coordinator->registerSystem<SFML::PlayMusic>();
     coordinator->setSignatureBits<SFML::PlayMusic, SFML::MusicReference>();
+    coordinator->registerSystem<SFML::PlaySound>();
+    coordinator->setSignatureBits<SFML::PlaySound, SFML::SoundReference>();
 }
 
 void RType::Client::loadAssets(std::unique_ptr<ECS::Coordinator>& coordinator)
@@ -160,8 +167,9 @@ void RType::Client::loadAssets(std::unique_ptr<ECS::Coordinator>& coordinator)
     auto text_manager = coordinator->getResource<SFML::TextManager>();
     auto color_manager = coordinator->getResource<SFML::ColorManager>();
     auto backgroundMusic = coordinator->registerResource<SFML::MusicManager>();
+    auto player_bullet_buffer = coordinator->registerResource<SFML::SoundBufferManager>();
+    auto player_bullet = coordinator->registerResource<SFML::SoundManager>();
 
-    backgroundMusic->registerMusic("background_music", "../assets/audio/rtype.ogg", true);
     texture_manager->registerTexture("player_blue", "../assets/textures/player-blue.png");
     texture_manager->registerTexture("player_red", "../assets/textures/player-red.png");
     texture_manager->registerTexture("player_green", "../assets/textures/player-green.png");
@@ -180,6 +188,9 @@ void RType::Client::loadAssets(std::unique_ptr<ECS::Coordinator>& coordinator)
     text_manager->registerText("waiting_text", "Waiting for other players...", font_manager->getFont("r_type"), 50);
     color_manager->registerRGBColor("purple", 255, 0, 255);
     color_manager->registerHexColor("white", 0xffffffff);
+    backgroundMusic->registerMusic("background_music", "../assets/audio/rtype.ogg", true);
+    player_bullet_buffer->registerSoundBuffer("player_bullet", "../assets/audio/player_bullet.ogg");
+    player_bullet->registerSound("player_bullet", player_bullet_buffer->getSoundBuffer("player_bullet"), false);
 }
 
 void RType::Client::sendMovementsKeys(std::unique_ptr<ECS::Coordinator>& coordinator,

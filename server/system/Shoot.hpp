@@ -2,6 +2,7 @@
 
 #include "../../common/component/SpriteReference.hpp"
 #include "../../common/component/Transform.hpp"
+#include "../../common/component/EntityType.hpp"
 #include "../../ecs/Coordinator.hpp"
 #include "../../sfml/SpriteManager.hpp"
 #include "../../sfml/TextureManager.hpp"
@@ -30,6 +31,7 @@ public:
             auto& entityTransform = coordinator->getComponent<Transform>(entity);
             auto sprite_man = coordinator->getResource<SFML::SpriteManager>();
             auto texture_man = coordinator->getResource<SFML::TextureManager>();
+            auto type = coordinator->getComponent<SFML::EntityType>(entity);
             attack.attackValue += _lastTime;
             if (!attack.attack)
                 continue;
@@ -38,7 +40,7 @@ public:
                 attack.attackValue = 0;
                 auto bulletTransform = SFML::Transform(entityTransform.position, 0, { 1.0, 1.0 });
                 std::cerr << "Shooting" << std::endl;
-                coordinator->getResource<RType::BulletManager>()->createBullet(coordinator, attack, bulletTransform);
+                coordinator->getResource<RType::BulletManager>()->createBullet(coordinator, attack, bulletTransform, type);
                 if (_bulletNumber == ULLONG_MAX)
                     _bulletNumber = 0;
                 else

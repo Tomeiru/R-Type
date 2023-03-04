@@ -42,7 +42,7 @@ public:
      * @param attack Attack component contained in the entity that shoots
      * @param bulletTransform Transform to apply to the bullet
      */
-    void createBullet(std::unique_ptr<ECS::Coordinator>& coordinator, SFML::Attack attack, const SFML::Transform& bulletTransform)
+    void createBullet(std::unique_ptr<ECS::Coordinator>& coordinator, SFML::Attack attack, const SFML::Transform& bulletTransform, SFML::EntityType type)
     {
         if (_bulletNumber == UINT64_MAX)
             return;
@@ -58,7 +58,7 @@ public:
         RType::Packet::CreateSpriteReference create_sprite(bulletId, "bulletTexture");
         auto packet = coordinator->getResource<Network::PackageManager>()->createPacket<RType::Packet::CreateSpriteReference>(create_sprite);
         coordinator->getResource<PlayerManager>()->sendPacketToAllPlayer(&packet, sizeof(packet), udp_handler);
-        RType::Packet::SpawnEntity entity_spawn(bullet, bulletId, bulletTransform.position.getVector2().x, bulletTransform.position.getVector2().y);
+        RType::Packet::SpawnEntity entity_spawn(bullet, bulletId, bulletTransform.position.getVector2().x, bulletTransform.position.getVector2().y, type);
         auto packetTwo = coordinator->getResource<RType::Network::PackageManager>()->createPacket<RType::Packet::SpawnEntity>(entity_spawn);
         coordinator->getResource<PlayerManager>()->sendPacketToAllPlayer(&packetTwo, sizeof(packetTwo), udp_handler);
         RType::Packet::SetEntityLinearMove linear_move(bullet, speed, attack.attackAngle, true);

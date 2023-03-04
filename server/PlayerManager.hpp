@@ -5,6 +5,7 @@
 #include "../common/component/Transform.hpp"
 #include "../common/packet/GameStart.hpp"
 #include "../common/packet/SpawnEntity.hpp"
+#include "../common/component/EntityType.hpp"
 #include "../sfml/IpAddress.hpp"
 #include "Types.hpp"
 #include "component/Attack.hpp"
@@ -92,9 +93,10 @@ public:
                 player,
                 SFML::Transform({ 0, static_cast<float>(200 * id) }, 0, { 3, 3 }));
             coordinator->addComponent(player, SFML::Attack(false, 200, SFML::AttackType::NormalAttack, 0));
+            coordinator->addComponent(player, SFML::EntityType(SFML::EntityTypeEnum::Player));
 
             RType::Packet::SpawnEntity entity_payload(player, name, 0,
-                static_cast<float>(200 * id));
+                static_cast<float>(200 * id), SFML::EntityTypeEnum::Player);
             auto packet = package_manager->createPacket<RType::Packet::SpawnEntity>(
                 entity_payload);
             sendPacketToAllPlayer(&packet, sizeof(packet), udp_handler);

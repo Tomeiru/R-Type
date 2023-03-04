@@ -5,6 +5,7 @@
 #include "../common/PackageManager.hpp"
 #include "../common/ReceivedPacket.hpp"
 #include "../common/component/SpriteReference.hpp"
+#include "../common/component/EntityType.hpp"
 #include "../common/packet/DestroyEntity.hpp"
 #include "../common/packet/EntityPosition.hpp"
 #include "../common/packet/SetEntityLinearMove.hpp"
@@ -12,6 +13,10 @@
 #include "../common/packet/TransformEntity.hpp"
 #include "../ecs/Coordinator.hpp"
 #include "ServerEntityManager.hpp"
+#include "../sfml/SoundBufferManager.hpp"
+#include "../sfml/SoundManager.hpp"
+#include "./component/SoundReference.hpp"
+#include "./system/PlaySound.hpp"
 namespace RType {
 /**
  * @brief Class that manages the received packets and their actions
@@ -25,6 +30,11 @@ private:
         server_entity_manager->registerServerEntity(packet->_entity, entity);
         coordinator->addComponent<SFML::SpriteReference>(entity, SFML::SpriteReference(packet->_sprite_id));
         coordinator->addComponent<SFML::Transform>(entity, SFML::Transform({ packet->_x, packet->_y }, 0, { 3, 3 }));
+        if (packet->_type.type == SFML::EntityTypeEnum::Player) {
+            printf("testttttttt");
+            auto player_bullet = coordinator->createEntity();
+            coordinator->addComponent(player_bullet, SFML::SoundReference("player_bullet", SFML::Sound::Playing));
+        }
     }
 
     static void entityPosition(std::unique_ptr<ECS::Coordinator>& coordinator, std::shared_ptr<Network::PackageManager>& package_manager, const RType::Network::ReceivedPacket& packet_received, const std::shared_ptr<RType::Client::ServerEntityManager>& server_entity_manager)
