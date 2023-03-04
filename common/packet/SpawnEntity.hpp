@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+
 #include "../component/EntityType.hpp"
 
 namespace RType::Packet {

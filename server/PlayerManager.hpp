@@ -1,16 +1,17 @@
 #pragma once
 
-#include "../common/UDPClient.hpp"
+#include <cstdint>
+#include <unordered_map>
+
 #include "../common/component/SpriteReference.hpp"
 #include "../common/component/Transform.hpp"
 #include "../common/packet/GameStart.hpp"
 #include "../common/packet/SpawnEntity.hpp"
 #include "../common/component/EntityType.hpp"
+#include "../common/UDPClient.hpp"
 #include "../sfml/IpAddress.hpp"
 #include "Types.hpp"
 #include "component/Attack.hpp"
-#include <cstdint>
-#include <unordered_map>
 
 namespace RType {
 /**
