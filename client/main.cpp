@@ -266,6 +266,7 @@ RType::Client::SceneManager::Scene RType::Client::display_menu(std::unique_ptr<E
     auto update_click = coordinator->getSystem<SFML::UpdateClick>();
     auto tint_text = coordinator->getSystem<SFML::TintText>();
     auto update_hover = coordinator->getSystem<SFML::UpdateHover>();
+    auto play_music = coordinator->getSystem<SFML::PlayMusic>();
     auto logo = coordinator->createEntity();
     auto quit_button = coordinator->createEntity();
     auto play_button = coordinator->createEntity();
@@ -298,6 +299,7 @@ RType::Client::SceneManager::Scene RType::Client::display_menu(std::unique_ptr<E
         std::cout << "Scene: " << scene_manager->getCurrentScene() << std::endl;
         transform_sprite->update(coordinator);
         transform_text->update(coordinator);
+        play_music->update(coordinator);
         update_hover->update(coordinator);
         update_hover_tint->update(coordinator);
         update_click->update(coordinator);
@@ -384,6 +386,7 @@ void RType::Client::game_loop(std::unique_ptr<ECS::Coordinator>& coordinator, co
     auto transform_sprite = coordinator->getSystem<SFML::TransformSprite>();
     auto update_movement_keys = coordinator->getSystem<SFML::UpdateKeysInput>();
     auto linear_move = coordinator->getSystem<SFML::LinearMove>();
+    auto player_bullet = coordinator->getSystem<SFML::PlaySound>();
     auto clock = coordinator->getResource<SFML::Clock>();
     auto keyChecker = coordinator->createEntity();
     auto window = coordinator->getResource<SFML::Window>();
@@ -410,6 +413,7 @@ void RType::Client::game_loop(std::unique_ptr<ECS::Coordinator>& coordinator, co
         update_movement_keys->update(coordinator);
         sendMovementsKeys(coordinator, server_infos, keyChecker);
         window->clear();
+        player_bullet->update(coordinator);
         linear_move->update(coordinator, elapsed_time.asMilliseconds());
         draw_sprite->update(coordinator);
         window->display();

@@ -39,7 +39,6 @@ private:
         coordinator->addComponent<SFML::SpriteReference>(entity, SFML::SpriteReference(packet->_sprite_id));
         coordinator->addComponent<SFML::Transform>(entity, SFML::Transform({ packet->_x, packet->_y }, 0, { 3, 3 }));
         if (packet->_type.type == SFML::EntityTypeEnum::Player) {
-            printf("testttttttt");
             auto player_bullet = coordinator->createEntity();
             coordinator->addComponent(player_bullet, SFML::SoundReference("player_bullet", SFML::Sound::Playing));
         }
