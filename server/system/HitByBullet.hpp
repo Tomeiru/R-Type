@@ -25,8 +25,8 @@ class HitByBullet: public ECS::System {
     void update(std::unique_ptr<ECS::Coordinator>& coordinator, int32_t elapsed)
     {
         lastTm += elapsed;
-        if (lastTm < 500)
-            return;
+        //if (lastTm < 500)
+            //return;
         lastTm = 0;
         auto sprite_manager = coordinator->getResource<SFML::SpriteManager>();
         std::queue<ECS::Entity> toKill;
@@ -36,8 +36,11 @@ class HitByBullet: public ECS::System {
             auto sprite = sprite_manager->getSprite(sprite_ref.id);
 
             auto &hitbox = coordinator->getComponent<Hitbox>(entity);
+            sprite->setPosition(transform.position);
+            sprite->setRotation(transform.rotation);
+            sprite->setScale(transform.scale);
+            sprite->setOrigin(transform.origin);
             hitbox.rect = sprite->getGlobalBounds();
-            hitbox.rect.setTopLeft(transform.position.getX(), transform.position.getY());
 
             for (const auto &entity2 : entities) {
                 if (entity2 == entity)
@@ -47,33 +50,23 @@ class HitByBullet: public ECS::System {
                 auto sprite2 = sprite_manager->getSprite(sprite_ref2.id);
 
                 auto &hitbox2 = coordinator->getComponent<Hitbox>(entity2);
+                sprite2->setPosition(transform2.position);
+                sprite2->setRotation(transform2.rotation);
+                sprite2->setScale(transform2.scale);
+                sprite2->setOrigin(transform2.origin);
                 hitbox2.rect = sprite2->getGlobalBounds();
-                hitbox2.rect.setTopLeft(transform2.position.getX(), transform2.position.getY());
-                //std::cout << sprite_ref2.id << " : " << hitbox2.rect._rect.left << "-" << hitbox2.rect._rect.width << " " << hitbox2.rect._rect.top << "-" << hitbox2.rect._rect.height << std::endl;
-                //std::cout << sprite_ref.id << " : " << hitbox.rect._rect.left << "-" << hitbox.rect._rect.width << " " << hitbox.rect._rect.top << "-" << hitbox.rect._rect.height << std::endl;
                 if (hitbox2.rect.intersects(hitbox.rect)) {
                     if (coordinator->hasComponent<Health>(entity2) && !coordinator->hasComponent<Health>(entity)) {
+                        if ((sprite_ref2.id.rfind("enemy") != std::string::npos && sprite_ref.id.find("bullet_enemy") == std::string::npos) || (sprite_ref2.id.rfind("player") != std::string::npos && sprite_ref.id.find("bullet_player") == std::string::npos)) {
+                            std::cout << sprite_ref2.id << " " << sprite_ref.id << std::endl;
                             auto &health2 = coordinator->getComponent<Health>(entity2);
 
-                        std::cout << sprite_ref2.id << "(" << health2.healthPoints << ")" << " " << sprite_ref.id << std::endl;
-                        health2.healthPoints -= 1;
-                        toKill.push(entity);
+                            //std::cout << sprite_ref2.id << "(" << health2.healthPoints << ")" << " " << sprite_ref.id << std::endl;
+                            health2.healthPoints -= 1;
+                            toKill.push(entity);
+                        }
                     }
                 }
-                /*if (coordinator->hasComponent<Health>(entity2)) {
-                    if (!coordinator->hasComponent<Health>(entity)) {
-                        auto &health2 = coordinator->getComponent<Health>(entity2);
-
-                        health2.healthPoints -= 1;
-                        auto& destroyStat = coordinator->getComponent<SFML::DestroyEntity>(entity);
-
-                        toDestroy.push(std::pair(entity, destroyStat.sprite));
-                    }
-                } else if (coordinator->hasComponent<Health>(entity)) {
-                    auto &health = coordinator->getComponent<Health>(entity);
-
-                    health.healthPoints -= 1;
-                }*/
             }
         }
         while (!toKill.empty()) {

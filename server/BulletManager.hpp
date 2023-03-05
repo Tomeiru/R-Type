@@ -52,7 +52,12 @@ public:
         auto bullet = coordinator->createEntity();
         auto texture_man = coordinator->getResource<SFML::TextureManager>();
         auto sprite_man = coordinator->getResource<SFML::SpriteManager>();
-        std::string bulletId = "bullet_" + std::to_string(_bulletNumber);
+        std::string bulletId;
+        if (attack.attackAngle == 180) {
+            bulletId = "bullet_enemy_" + std::to_string(_bulletNumber);
+        } else {
+            bulletId = "bullet_player_" + std::to_string(_bulletNumber);
+        }
         coordinator->addComponent(bullet, SFML::Direction(attack.attackAngle));
         coordinator->addComponent(bullet, SFML::SpriteReference(bulletId));
         coordinator->addComponent(bullet, SFML::Transform(bulletTransform));
