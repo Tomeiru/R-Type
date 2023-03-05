@@ -24,7 +24,6 @@ public:
         for (const auto& entity : entities) {
             auto& sprite_ref = coordinator->getComponent<SpriteReference>(entity);
             auto sprite = sprite_manager->getSprite(sprite_ref.id);
-            std::cout << sprite_ref.id << std::endl;
 
             if (sprite->isVisible())
                 window->drawSprite(sprite);

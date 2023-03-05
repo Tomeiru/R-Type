@@ -57,7 +57,6 @@ public:
             bulletId = "bullet_en_" + std::to_string(_bulletNumber);
         } else {
             bulletId = "bullet_pl_" + std::to_string(_bulletNumber);
-            std::cout << bulletId << std::endl;
         }
         coordinator->addComponent(bullet, SFML::Direction(attack.attackAngle));
         coordinator->addComponent(bullet, SFML::SpriteReference(bulletId));

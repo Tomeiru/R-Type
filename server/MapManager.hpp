@@ -31,7 +31,6 @@ public:
         d.ParseStream(isw);
         for (int i = 0; d["enemies"]["easy"].HasMember(std::to_string(i).c_str()); i++) {
             auto enemy_infos = d["enemies"]["easy"][std::to_string(i).c_str()].GetObject();
-            std::cout << d["enemies"]["easy"][std::to_string(i).c_str()]["dir"].GetInt() << std::endl;
             setEnemies({
                 enemy_infos["attack"]["speed"].GetUint(),
                 enemy_infos["attack"]["bullet_speed"].GetUint(),
