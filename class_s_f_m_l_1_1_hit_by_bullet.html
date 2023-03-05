@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>R-TYPE: SFML::Hitbox Struct Reference</title>
+<title>R-TYPE: SFML::HitByBullet Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,43 +69,39 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><b>SFML</b></li><li class="navelem"><a class="el" href="struct_s_f_m_l_1_1_hitbox.html">Hitbox</a></li>  </ul>
+<li class="navelem"><b>SFML</b></li><li class="navelem"><a class="el" href="class_s_f_m_l_1_1_hit_by_bullet.html">HitByBullet</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="struct_s_f_m_l_1_1_hitbox-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">SFML::Hitbox Struct Reference</div></div>
+<a href="class_s_f_m_l_1_1_hit_by_bullet-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">SFML::HitByBullet Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Component that give a hitbox to an entity.  
- <a href="struct_s_f_m_l_1_1_hitbox.html#details">More...</a></p>
+<p>System that detect's collisions between bullets and player/enemy's.  
+ <a href="class_s_f_m_l_1_1_hit_by_bullet.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_hitbox_8hpp_source.html">Hitbox.hpp</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_hit_by_bullet_8hpp_source.html">HitByBullet.hpp</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for SFML::HitByBullet:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="class_s_f_m_l_1_1_hit_by_bullet.png" alt=""/>
+ </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a49967ce990ff5821f08d01443e9268bd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_s_f_m_l_1_1_hitbox.html#a49967ce990ff5821f08d01443e9268bd">Hitbox</a> ()</td></tr>
-<tr class="memdesc:a49967ce990ff5821f08d01443e9268bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="struct_s_f_m_l_1_1_hitbox.html" title="Component that give a hitbox to an entity.">Hitbox</a> Component.  <br /></td></tr>
-<tr class="separator:a49967ce990ff5821f08d01443e9268bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a985cb7160c3b7a29e67a0b39c1cbc6f9"><td class="memItemLeft" align="right" valign="top"><a id="a985cb7160c3b7a29e67a0b39c1cbc6f9" name="a985cb7160c3b7a29e67a0b39c1cbc6f9"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Hitbox</b> (FloatRect rect)</td></tr>
-<tr class="separator:a985cb7160c3b7a29e67a0b39c1cbc6f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr class="memitem:a119ae7d1b1650a578232062f4d036743"><td class="memItemLeft" align="right" valign="top"><a id="a119ae7d1b1650a578232062f4d036743" name="a119ae7d1b1650a578232062f4d036743"></a>
-FloatRect&#160;</td><td class="memItemRight" valign="bottom"><b>rect</b></td></tr>
-<tr class="separator:a119ae7d1b1650a578232062f4d036743"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0cf8b149589b416e8137cb28fedb241"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_s_f_m_l_1_1_hit_by_bullet.html#aa0cf8b149589b416e8137cb28fedb241">update</a> (std::unique_ptr&lt; ECS::Coordinator &gt; &amp;coordinator, int32_t elapsed)</td></tr>
+<tr class="memdesc:aa0cf8b149589b416e8137cb28fedb241"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that checks collisions between enetities.  <br /></td></tr>
+<tr class="separator:aa0cf8b149589b416e8137cb28fedb241"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Component that give a hitbox to an entity. </p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a49967ce990ff5821f08d01443e9268bd" name="a49967ce990ff5821f08d01443e9268bd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a49967ce990ff5821f08d01443e9268bd">&#9670;&#160;</a></span>Hitbox()</h2>
+<div class="textblock"><p>System that detect's collisions between bullets and player/enemy's. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="aa0cf8b149589b416e8137cb28fedb241" name="aa0cf8b149589b416e8137cb28fedb241"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0cf8b149589b416e8137cb28fedb241">&#9670;&#160;</a></span>update()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -114,10 +110,21 @@ FloatRect&#160;</td><td class="memItemRight" valign="bottom"><b>rect</b></td></t
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">SFML::Hitbox::Hitbox </td>
+          <td class="memname">void SFML::HitByBullet::update </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">std::unique_ptr&lt; ECS::Coordinator &gt; &amp;&#160;</td>
+          <td class="paramname"><em>coordinator</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">int32_t&#160;</td>
+          <td class="paramname"><em>elapsed</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -127,18 +134,18 @@ FloatRect&#160;</td><td class="memItemRight" valign="bottom"><b>rect</b></td></t
 </table>
 </div><div class="memdoc">
 
-<p>Construct a new <a class="el" href="struct_s_f_m_l_1_1_hitbox.html" title="Component that give a hitbox to an entity.">Hitbox</a> Component. </p>
+<p>Function that checks collisions between enetities. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">rect</td><td>Rectangle that represents the hitbox </td></tr>
+    <tr><td class="paramname">coordinator</td><td>Reference to the ecs coordinator </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<hr/>The documentation for this struct was generated from the following file:<ul>
-<li>common/component/<a class="el" href="_hitbox_8hpp_source.html">Hitbox.hpp</a></li>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li>server/system/<a class="el" href="_hit_by_bullet_8hpp_source.html">HitByBullet.hpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
