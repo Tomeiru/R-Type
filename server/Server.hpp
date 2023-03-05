@@ -10,11 +10,6 @@ namespace RType::Server {
 void waiting_for_players(std::unique_ptr<ECS::Coordinator>& coordinator);
 
 /**
- * @brief Function that print the network IPV4 address
- */
-void getIpAddress();
-
-/**
  * @brief Function that loads all the assets used by the RType Server
  * @param coordinator Reference to the ECS' Coordinator
  */
