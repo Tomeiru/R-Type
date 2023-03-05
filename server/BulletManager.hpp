@@ -2,8 +2,8 @@
 
 #include "../common/PackageManager.hpp"
 #include "../common/UDPHandler.hpp"
-#include "../common/component/Hitbox.hpp"
 #include "../common/component/EntityType.hpp"
+#include "../common/component/Hitbox.hpp"
 #include "../common/component/SpriteReference.hpp"
 #include "../common/component/Transform.hpp"
 #include "../common/packet/SpawnEntity.hpp"

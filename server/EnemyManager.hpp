@@ -1,8 +1,8 @@
 #pragma once
 
 #include "../common/UDPHandler.hpp"
-#include "../common/component/Hitbox.hpp"
 #include "../common/component/EntityType.hpp"
+#include "../common/component/Hitbox.hpp"
 #include "../common/packet/SpawnEntity.hpp"
 #include "../common/packet/TransformEntity.hpp"
 #include "../ecs/Coordinator.hpp"
