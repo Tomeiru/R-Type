@@ -31,6 +31,7 @@
 #include "component/BackupTransform.hpp"
 #include "component/Health.hpp"
 #include "system/DestroyEntityOutWindow.hpp"
+#include "system/HitByBullet.hpp"
 #include "system/KillNoLife.hpp"
 #include "system/Shoot.hpp"
 #include "system/UpdateEntityPositions.hpp"
@@ -84,6 +85,7 @@ void RType::Server::registerComponents(
 {
     coordinator->registerComponent<SFML::SpriteReference>();
     coordinator->registerComponent<SFML::Transform>();
+    coordinator->registerComponent<SFML::Hitbox>();
     coordinator->registerComponent<SFML::Attack>();
     coordinator->registerComponent<SFML::DestroyEntity>();
     coordinator->registerComponent<SFML::Direction>();
@@ -111,6 +113,8 @@ void RType::Server::registerSystems(
     coordinator->setSignatureBits<SFML::KillNoLife, SFML::Health>();
     coordinator->registerSystem<SFML::UpdateEntityPositions>();
     coordinator->setSignatureBits<SFML::UpdateEntityPositions, SFML::Transform, SFML::BackupTransform>();
+    coordinator->registerSystem<SFML::HitByBullet>();
+    coordinator->setSignatureBits<SFML::HitByBullet, SFML::Hitbox, SFML::Transform>();
 }
 
 /**
@@ -152,6 +156,14 @@ void RType::Server::loadAssets(std::unique_ptr<ECS::Coordinator>& coordinator)
         "../assets/textures/player-green.png");
     texture_manager->registerTexture("player_orange",
         "../assets/textures/player-orange.png");
+    texture_manager->registerTexture("bulletTexturePlayer",
+        "../assets/textures/bulletPlayer.png");
+    texture_manager->registerTexture("bulletTextureEnemie",
+        "../assets/textures/bulletEnnemie.png");
+    texture_manager->registerTexture("enemy_A",
+        "../assets/textures/enemy.png");
+    texture_manager->registerTexture("enemy_B",
+        "../assets/textures/enemy2.png");
     sprite_manager->registerSprite("player_1",
         texture_manager->getTexture("player_blue"));
     sprite_manager->registerSprite("player_2",
@@ -227,30 +239,34 @@ void RType::Server::game_loop(std::unique_ptr<ECS::Coordinator>& coordinator)
                 auto player = player_manager->getEntityFromPlayerID(header->player_id);
                 auto& transform = coordinator->getComponent<SFML::Transform>(player);
                 auto& attack = coordinator->getComponent<SFML::Attack>(player);
-                float movement_x = 0;
-                float movement_y = 0;
-                float speed = 10;
+                auto& health = coordinator->getComponent<SFML::Health>(player);
 
-                if (decoded_player_inputs->left == 1)
-                    movement_x -= speed;
-                if (decoded_player_inputs->right == 1)
-                    movement_x += speed;
-                if (decoded_player_inputs->up == 1)
-                    movement_y -= speed;
-                if (decoded_player_inputs->down == 1)
-                    movement_y += speed;
-                if (decoded_player_inputs->shoot == 1)
-                    attack.attack = true;
-                else
-                    attack.attack = false;
-                transform.position = sf::Vector2f(transform.position.getX() + movement_x,
-                    transform.position.getY() + movement_y);
-                RType::Packet::EntityPosition entity_position(
-                    player, transform.position.getX(), transform.position.getY());
-                auto packet = package_manager->createPacket<RType::Packet::EntityPosition>(
-                    entity_position);
-                player_manager->sendPacketToAllPlayer(&packet, sizeof(packet),
-                    udp_handler);
+                if (health.healthPoints > 0) {
+                    float movement_x = 0;
+                    float movement_y = 0;
+                    float speed = 10;
+
+                    if (decoded_player_inputs->left == 1)
+                        movement_x -= speed;
+                    if (decoded_player_inputs->right == 1)
+                        movement_x += speed;
+                    if (decoded_player_inputs->up == 1)
+                        movement_y -= speed;
+                    if (decoded_player_inputs->down == 1)
+                        movement_y += speed;
+                    if (decoded_player_inputs->shoot == 1)
+                        attack.attack = true;
+                    else
+                        attack.attack = false;
+                    transform.position = sf::Vector2f(transform.position.getX() + movement_x,
+                        transform.position.getY() + movement_y);
+                    RType::Packet::EntityPosition entity_position(
+                        player, transform.position.getX(), transform.position.getY());
+                    auto packet = package_manager->createPacket<RType::Packet::EntityPosition>(
+                        entity_position);
+                    player_manager->sendPacketToAllPlayer(&packet, sizeof(packet),
+                        udp_handler);
+                }
             }
         }
         int32_t tm = clock->getElapsedTime().asMilliseconds();
@@ -267,6 +283,7 @@ void RType::Server::game_loop(std::unique_ptr<ECS::Coordinator>& coordinator)
         coordinator->getSystem<SFML::Shoot>()->update(coordinator, elapsed);
         coordinator->getSystem<SFML::DestroyEntityOutWindow>()->update(coordinator);
         coordinator->getSystem<SFML::UpdateEntityPositions>()->update(coordinator, udp_handler, elapsed);
+        coordinator->getSystem<SFML::HitByBullet>()->update(coordinator, elapsed);
     }
 }
 

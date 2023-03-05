@@ -13,6 +13,7 @@ namespace SFML {
 /**
  * @brief System to update entity transform if it changed
  */
+
 class UpdateEntityPositions : public ECS::System {
 public:
     /**

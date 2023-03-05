@@ -1,10 +1,10 @@
 #pragma once
 
+#include "../../common/component/Hitbox.hpp"
 #include "../../ecs/Coordinator.hpp"
 #include "../../ecs/System.hpp"
 #include "../../sfml/Mouse.hpp"
 #include "../component/Clickable.hpp"
-#include "../component/Hitbox.hpp"
 
 namespace SFML {
 /**

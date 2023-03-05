@@ -5,6 +5,7 @@
 
 #include "../common/UDPClient.hpp"
 #include "../common/component/EntityType.hpp"
+#include "../common/component/Hitbox.hpp"
 #include "../common/component/SpriteReference.hpp"
 #include "../common/component/Transform.hpp"
 #include "../common/packet/GameStart.hpp"
@@ -12,6 +13,9 @@
 #include "../sfml/IpAddress.hpp"
 #include "Types.hpp"
 #include "component/Attack.hpp"
+#include "component/Health.hpp"
+#include <cstdint>
+#include <unordered_map>
 
 namespace RType {
 /**
@@ -108,6 +112,8 @@ public:
                 player,
                 SFML::Transform({ 0, static_cast<float>(200 * id) }, 0, { 3, 3 }));
             coordinator->addComponent(player, SFML::Attack(false, 200, SFML::AttackType::NormalAttack, 0));
+            coordinator->addComponent(player, SFML::Hitbox());
+            coordinator->addComponent(player, SFML::Health(2));
             coordinator->addComponent(player, SFML::EntityType(SFML::EntityTypeEnum::Player));
 
             RType::Packet::SpawnEntity entity_payload(player, name, 0,

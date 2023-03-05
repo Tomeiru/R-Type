@@ -165,6 +165,7 @@ public:
         if (headerId == package_manager->getTypeId<RType::Packet::SetEntityLinearMove>()) {
             std::cerr << "It's a SetEntityLinearMove packet" << std::endl;
             setEntityLinearMove(coordinator, package_manager, packet_received, server_entity_manager);
+            std::cerr << "Crash after setEntityLinearMove ?" << std::endl;
         }
     }
 };

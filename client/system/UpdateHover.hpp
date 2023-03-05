@@ -1,9 +1,9 @@
 #pragma once
 
+#include "../../common/component/Hitbox.hpp"
 #include "../../ecs/Coordinator.hpp"
 #include "../../ecs/System.hpp"
 #include "../../sfml/Mouse.hpp"
-#include "../component/Hitbox.hpp"
 #include "../component/Hover.hpp"
 
 namespace SFML {

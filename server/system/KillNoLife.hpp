@@ -20,8 +20,9 @@ public:
         std::queue<ECS::Entity> toKill;
         for (const auto& entity : entities) {
             auto health = coordinator->getComponent<SFML::Health>(entity).healthPoints;
+            auto& sprite_ref = coordinator->getComponent<SpriteReference>(entity);
 
-            if (health <= 0)
+            if (health <= 0 && sprite_ref.id.find("player") != 0)
                 toKill.push(entity);
         }
         while (!toKill.empty()) {

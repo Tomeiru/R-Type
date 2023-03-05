@@ -1,11 +1,11 @@
 #pragma once
 
+#include "../../common/component/Hitbox.hpp"
 #include "../../common/component/SpriteReference.hpp"
 #include "../../common/component/Transform.hpp"
 #include "../../ecs/Coordinator.hpp"
 #include "../../ecs/System.hpp"
 #include "../../sfml/SpriteManager.hpp"
-#include "../component/Hitbox.hpp"
 
 namespace SFML {
 /**
