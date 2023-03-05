@@ -80,7 +80,7 @@ public:
         RType::Packet::SpawnEntity entity_spawn(bullet, bulletId, bulletTransform.position.getVector2().x, bulletTransform.position.getVector2().y, type);
         auto packetTwo = coordinator->getResource<RType::Network::PackageManager>()->createPacket<RType::Packet::SpawnEntity>(entity_spawn);
         coordinator->getResource<PlayerManager>()->sendPacketToAllPlayer(&packetTwo, sizeof(packetTwo), udp_handler);
-        RType::Packet::SetEntityLinearMove linear_move(bullet, speed*10, attack.attackAngle, true);
+        RType::Packet::SetEntityLinearMove linear_move(bullet, speed * 10, attack.attackAngle, true);
         auto packetThree = coordinator->getResource<RType::Network::PackageManager>()->createPacket<RType::Packet::SetEntityLinearMove>(linear_move);
         coordinator->getResource<PlayerManager>()->sendPacketToAllPlayer(&packetThree, sizeof(packetThree), udp_handler);
         _id_to_entity.emplace(_bulletNumber, bullet);
@@ -107,19 +107,19 @@ private:
     {
         switch (type) {
         case SFML::AttackType::NormalAttack:
-            coordinator->addComponent(bullet, SFML::Speed(2*10));
+            coordinator->addComponent(bullet, SFML::Speed(2 * 10));
             return 2;
         case SFML::AttackType::FastAttack:
-            coordinator->addComponent(bullet, SFML::Speed(4*10));
+            coordinator->addComponent(bullet, SFML::Speed(4 * 10));
             return 4;
         case SFML::AttackType::VeryFastAttack:
-            coordinator->addComponent(bullet, SFML::Speed(3*10));
+            coordinator->addComponent(bullet, SFML::Speed(3 * 10));
             return 3;
         case SFML::AttackType::SlowAttack:
-            coordinator->addComponent(bullet, SFML::Speed(1*10));
+            coordinator->addComponent(bullet, SFML::Speed(1 * 10));
             return 1;
         default:
-            coordinator->addComponent(bullet, SFML::Speed(2*10));
+            coordinator->addComponent(bullet, SFML::Speed(2 * 10));
             return 2;
         }
     }
