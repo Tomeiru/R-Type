@@ -56,7 +56,7 @@ public:
                 hitbox2.rect = sprite2->getGlobalBounds();
                 if (hitbox2.rect.intersects(hitbox.rect)) {
                     if (coordinator->hasComponent<Health>(entity2) && !coordinator->hasComponent<Health>(entity)) {
-                        if ((sprite_ref2.id.rfind("enemy") != std::string::npos && sprite_ref.id.find("bullet_enemy") == std::string::npos) || (sprite_ref2.id.rfind("player") != std::string::npos && sprite_ref.id.find("bullet_player") == std::string::npos)) {
+                        if ((sprite_ref2.id.rfind("enemy") != std::string::npos && sprite_ref.id.find("bullet_en") == std::string::npos) || (sprite_ref2.id.rfind("player") != std::string::npos && sprite_ref.id.find("bullet_pl") == std::string::npos)) {
                             std::cout << sprite_ref2.id << " " << sprite_ref.id << std::endl;
                             auto& health2 = coordinator->getComponent<Health>(entity2);
 

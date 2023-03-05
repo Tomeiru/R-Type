@@ -25,17 +25,21 @@ public:
         for (const auto& entity : entities) {
             auto& sprite_ref = coordinator->getComponent<SpriteReference>(entity);
             auto& transform = coordinator->getComponent<Transform>(entity);
+            std::cout << "Get transfo" << std::endl;
+            std::cout << sprite_ref.id << std::endl;
             auto sprite = sprite_manager->getSprite(sprite_ref.id);
 
             sprite->setPosition(transform.position);
             sprite->setRotation(transform.rotation);
             sprite->setScale(transform.scale);
             sprite->setOrigin(transform.origin);
+            std::cout << "Transform sprite done" << std::endl;
             if (coordinator->hasComponent<Hitbox>(entity)) {
                 auto& hitbox = coordinator->getComponent<Hitbox>(entity);
                 hitbox.rect = sprite->getGlobalBounds();
             }
         }
+        std::cout << "Leave update"<< std::endl;
     }
 };
 }
