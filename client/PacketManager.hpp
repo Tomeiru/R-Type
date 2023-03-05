@@ -4,6 +4,7 @@
 
 #include "../common/PackageManager.hpp"
 #include "../common/ReceivedPacket.hpp"
+#include "../common/component/EntityType.hpp"
 #include "../common/component/SpriteReference.hpp"
 #include "../common/packet/DestroyEntity.hpp"
 #include "../common/packet/EntityPosition.hpp"
@@ -11,6 +12,10 @@
 #include "../common/packet/SpawnEntity.hpp"
 #include "../common/packet/TransformEntity.hpp"
 #include "../ecs/Coordinator.hpp"
+#include "../sfml/SoundBufferManager.hpp"
+#include "../sfml/SoundManager.hpp"
+#include "./component/SoundReference.hpp"
+#include "./system/PlaySound.hpp"
 #include "ServerEntityManager.hpp"
 namespace RType {
 /**
@@ -33,6 +38,10 @@ private:
         server_entity_manager->registerServerEntity(packet->_entity, entity);
         coordinator->addComponent<SFML::SpriteReference>(entity, SFML::SpriteReference(packet->_sprite_id));
         coordinator->addComponent<SFML::Transform>(entity, SFML::Transform({ packet->_x, packet->_y }, 0, { 3, 3 }));
+        if (packet->_type.type == SFML::EntityTypeEnum::Player) {
+            auto player_bullet = coordinator->createEntity();
+            coordinator->addComponent(player_bullet, SFML::SoundReference("player_bullet", SFML::Sound::Playing));
+        }
     }
 
     /**

@@ -3,6 +3,7 @@
 #include "../common/PackageManager.hpp"
 #include "../common/UDPHandler.hpp"
 #include "../common/component/Hitbox.hpp"
+#include "../common/component/EntityType.hpp"
 #include "../common/component/SpriteReference.hpp"
 #include "../common/component/Transform.hpp"
 #include "../common/packet/SpawnEntity.hpp"
@@ -43,7 +44,7 @@ public:
      * @param attack Attack component contained in the entity that shoots
      * @param bulletTransform Transform to apply to the bullet
      */
-    void createBullet(std::unique_ptr<ECS::Coordinator>& coordinator, SFML::Attack attack, const SFML::Transform& bulletTransform)
+    void createBullet(std::unique_ptr<ECS::Coordinator>& coordinator, SFML::Attack attack, const SFML::Transform& bulletTransform, SFML::EntityType type)
     {
         if (_bulletNumber == UINT64_MAX)
             return;
@@ -59,11 +60,18 @@ public:
         coordinator->addComponent(bullet, SFML::Hitbox());
         float speed = setBulletSpeed(coordinator, bullet, attack.type);
         coordinator->addComponent(bullet, SFML::DestroyEntity(true, true, true));
-        RType::Packet::CreateSpriteReference create_sprite(bulletId, "bulletTexture");
-        sprite_man->registerSprite(bulletId, texture_man->getTexture("bulletTexture"));
-        auto packet = coordinator->getResource<Network::PackageManager>()->createPacket<RType::Packet::CreateSpriteReference>(create_sprite);
-        coordinator->getResource<PlayerManager>()->sendPacketToAllPlayer(&packet, sizeof(packet), udp_handler);
-        RType::Packet::SpawnEntity entity_spawn(bullet, bulletId, bulletTransform.position.getVector2().x, bulletTransform.position.getVector2().y);
+        if (type.type == SFML::EntityTypeEnum::Player) {
+            RType::Packet::CreateSpriteReference create_sprite(bulletId, "bulletTexturePlayer");
+            sprite_man->registerSprite(bulletId, texture_man->getTexture("bulletTexturePlayer"));
+            auto packet = coordinator->getResource<Network::PackageManager>()->createPacket<RType::Packet::CreateSpriteReference>(create_sprite);
+            coordinator->getResource<PlayerManager>()->sendPacketToAllPlayer(&packet, sizeof(packet), udp_handler);
+        } else {
+            RType::Packet::CreateSpriteReference create_sprite(bulletId, "bulletTextureEnemie");
+            sprite_man->registerSprite(bulletId, texture_man->getTexture("bulletTextureEnemie"));
+            auto packet = coordinator->getResource<Network::PackageManager>()->createPacket<RType::Packet::CreateSpriteReference>(create_sprite);
+            coordinator->getResource<PlayerManager>()->sendPacketToAllPlayer(&packet, sizeof(packet), udp_handler);
+        }
+        RType::Packet::SpawnEntity entity_spawn(bullet, bulletId, bulletTransform.position.getVector2().x, bulletTransform.position.getVector2().y, type);
         auto packetTwo = coordinator->getResource<RType::Network::PackageManager>()->createPacket<RType::Packet::SpawnEntity>(entity_spawn);
         coordinator->getResource<PlayerManager>()->sendPacketToAllPlayer(&packetTwo, sizeof(packetTwo), udp_handler);
         RType::Packet::SetEntityLinearMove linear_move(bullet, speed, attack.attackAngle, true);

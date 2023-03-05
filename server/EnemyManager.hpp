@@ -2,6 +2,7 @@
 
 #include "../common/UDPHandler.hpp"
 #include "../common/component/Hitbox.hpp"
+#include "../common/component/EntityType.hpp"
 #include "../common/packet/SpawnEntity.hpp"
 #include "../common/packet/TransformEntity.hpp"
 #include "../ecs/Coordinator.hpp"
@@ -53,6 +54,7 @@ public:
         coordinator->addComponent(enemy, SFML::Direction(mapManager.getEnemyInfosById(id).dir));
         coordinator->addComponent(enemy, SFML::Attack(true, mapManager.getEnemyInfosById(id).attack.speed, static_cast<SFML::AttackType>(mapManager.getEnemyInfosById(id).attack.bullet_speed), mapManager.getEnemyInfosById(id).attack.dir));
         coordinator->addComponent(enemy, SFML::DestroyEntity(true, true, true));
+        coordinator->addComponent(enemy, SFML::EntityType(SFML::EntityTypeEnum::Ennemie));
         coordinator->addComponent(enemy, SFML::Health(mapManager.getEnemyInfosById(id).life));
         coordinator->addComponent(enemy, SFML::Hitbox());
         id_to_entity.emplace(enemy_nbr, enemy);
@@ -61,7 +63,7 @@ public:
         sprite_man->registerSprite(name, texture_man->getTexture(mapManager.getEnemyInfosById(id).texture_ref));
         auto packet = coordinator->getResource<Network::PackageManager>()->createPacket<RType::Packet::CreateSpriteReference>(create_sprite);
         coordinator->getResource<PlayerManager>()->sendPacketToAllPlayer(&packet, sizeof(packet), udp_handler);
-        RType::Packet::SpawnEntity entity_payload(enemy, name, 1000.0, 800.0);
+        RType::Packet::SpawnEntity entity_payload(enemy, name, 1000.0, 800.0, SFML::EntityTypeEnum::Ennemie);
         auto packetTwo = coordinator->getResource<RType::Network::PackageManager>()->createPacket<RType::Packet::SpawnEntity>(entity_payload);
         coordinator->getResource<PlayerManager>()->sendPacketToAllPlayer(&packetTwo, sizeof(packetTwo), udp_handler);
         RType::Packet::TransformEntity entity_transform(enemy, coordinator->getComponent<SFML::Transform>(enemy));

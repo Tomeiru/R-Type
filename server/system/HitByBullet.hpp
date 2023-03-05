@@ -49,8 +49,8 @@ class HitByBullet: public ECS::System {
                 auto &hitbox2 = coordinator->getComponent<Hitbox>(entity2);
                 hitbox2.rect = sprite2->getGlobalBounds();
                 hitbox2.rect.setTopLeft(transform2.position.getX(), transform2.position.getY());
-                std::cout << sprite_ref2.id << " : " << hitbox2.rect._rect.left << "-" << hitbox2.rect._rect.width << " " << hitbox2.rect._rect.top << "-" << hitbox2.rect._rect.height << std::endl;
-                std::cout << sprite_ref.id << " : " << hitbox.rect._rect.left << "-" << hitbox.rect._rect.width << " " << hitbox.rect._rect.top << "-" << hitbox.rect._rect.height << std::endl;
+                //std::cout << sprite_ref2.id << " : " << hitbox2.rect._rect.left << "-" << hitbox2.rect._rect.width << " " << hitbox2.rect._rect.top << "-" << hitbox2.rect._rect.height << std::endl;
+                //std::cout << sprite_ref.id << " : " << hitbox.rect._rect.left << "-" << hitbox.rect._rect.width << " " << hitbox.rect._rect.top << "-" << hitbox.rect._rect.height << std::endl;
                 if (hitbox2.rect.intersects(hitbox.rect)) {
                     if (coordinator->hasComponent<Health>(entity2) && !coordinator->hasComponent<Health>(entity)) {
                             auto &health2 = coordinator->getComponent<Health>(entity2);

@@ -1,7 +1,11 @@
 #pragma once
 
+#include <cstdint>
+#include <unordered_map>
+
 #include "../common/UDPClient.hpp"
 #include "../common/component/Hitbox.hpp"
+#include "../common/component/EntityType.hpp"
 #include "../common/component/SpriteReference.hpp"
 #include "../common/component/Transform.hpp"
 #include "../common/packet/GameStart.hpp"
@@ -110,9 +114,10 @@ public:
             coordinator->addComponent(player, SFML::Attack(false, 200, SFML::AttackType::NormalAttack, 0));
             coordinator->addComponent(player, SFML::Hitbox());
             coordinator->addComponent(player, SFML::Health(20));
+            coordinator->addComponent(player, SFML::EntityType(SFML::EntityTypeEnum::Player));
 
             RType::Packet::SpawnEntity entity_payload(player, name, 0,
-                static_cast<float>(200 * id));
+                static_cast<float>(200 * id), SFML::EntityTypeEnum::Player);
             auto packet = package_manager->createPacket<RType::Packet::SpawnEntity>(
                 entity_payload);
             sendPacketToAllPlayer(&packet, sizeof(packet), udp_handler);
