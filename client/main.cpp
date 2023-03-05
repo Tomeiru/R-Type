@@ -213,8 +213,8 @@ void RType::Client::loadAssets(std::unique_ptr<ECS::Coordinator>& coordinator)
     texture_manager->registerTexture("clouds", "../assets/textures/clouds_mg_2.png");
     texture_manager->registerTexture("bulletTexturePlayer", "../assets/textures/bulletPlayer.png");
     texture_manager->registerTexture("bulletTextureEnemie", "../assets/textures/bulletEnnemie.png");
-    texture_manager->registerTexture("enemy_A", "../assets/textures/player-red.png");
-    texture_manager->registerTexture("enemy_B", "../assets/textures/player-blue.png");
+    texture_manager->registerTexture("enemy_A", "../assets/textures/enemy.png");
+    texture_manager->registerTexture("enemy_B", "../assets/textures/enemy.png");
     sprite_manager->registerSprite("player_1", texture_manager->getTexture("player_blue"));
     sprite_manager->registerSprite("player_2", texture_manager->getTexture("player_red"));
     sprite_manager->registerSprite("player_3", texture_manager->getTexture("player_green"));
