@@ -1,10 +1,10 @@
 #pragma once
 
+#include "../../common/component/Hitbox.hpp"
 #include "../../common/component/Transform.hpp"
 #include "../../ecs/Coordinator.hpp"
 #include "../../ecs/System.hpp"
 #include "../../sfml/TextManager.hpp"
-#include "../component/Hitbox.hpp"
 #include "../component/TextReference.hpp"
 
 namespace SFML {

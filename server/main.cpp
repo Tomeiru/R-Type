@@ -27,6 +27,7 @@
 #include "system/KillNoLife.hpp"
 #include "system/Shoot.hpp"
 #include "system/UpdateEntityPositions.hpp"
+#include "system/HitByBullet.hpp"
 
 /**
  * @brief Function that parse arguments
@@ -77,6 +78,7 @@ void RType::Server::registerComponents(
 {
     coordinator->registerComponent<SFML::SpriteReference>();
     coordinator->registerComponent<SFML::Transform>();
+    coordinator->registerComponent<SFML::Hitbox>();
     coordinator->registerComponent<SFML::Attack>();
     coordinator->registerComponent<SFML::DestroyEntity>();
     coordinator->registerComponent<SFML::Direction>();
@@ -103,6 +105,8 @@ void RType::Server::registerSystems(
     coordinator->setSignatureBits<SFML::KillNoLife, SFML::Health>();
     coordinator->registerSystem<SFML::UpdateEntityPositions>();
     coordinator->setSignatureBits<SFML::UpdateEntityPositions, SFML::Transform, SFML::BackupTransform>();
+    coordinator->registerSystem<SFML::HitByBullet>();
+    coordinator->setSignatureBits<SFML::HitByBullet, SFML::Hitbox, SFML::Transform>();
 }
 
 /**
@@ -144,6 +148,12 @@ void RType::Server::loadAssets(std::unique_ptr<ECS::Coordinator>& coordinator)
         "../assets/textures/player-green.png");
     texture_manager->registerTexture("player_orange",
         "../assets/textures/player-orange.png");
+    texture_manager->registerTexture("bulletTexture",
+        "../assets/textures/player-green.png");
+    texture_manager->registerTexture("enemy_A",
+        "../assets/textures/player-red.png");
+    texture_manager->registerTexture("enemy_B",
+        "../assets/textures/player-blue.png");
     sprite_manager->registerSprite("player_1",
         texture_manager->getTexture("player_blue"));
     sprite_manager->registerSprite("player_2",
@@ -259,6 +269,7 @@ void RType::Server::game_loop(std::unique_ptr<ECS::Coordinator>& coordinator)
         coordinator->getSystem<SFML::Shoot>()->update(coordinator, elapsed);
         coordinator->getSystem<SFML::DestroyEntityOutWindow>()->update(coordinator);
         coordinator->getSystem<SFML::UpdateEntityPositions>()->update(coordinator, udp_handler, elapsed);
+        coordinator->getSystem<SFML::HitByBullet>()->update(coordinator, elapsed);
     }
 }
 

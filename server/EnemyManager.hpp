@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../common/UDPHandler.hpp"
+#include "../common/component/Hitbox.hpp"
 #include "../common/packet/SpawnEntity.hpp"
 #include "../common/packet/TransformEntity.hpp"
 #include "../ecs/Coordinator.hpp"
@@ -43,6 +44,8 @@ public:
         MapManager mapManager;
         std::string name = "enemy_" + std::to_string(enemy_nbr);
         auto enemy = coordinator->createEntity();
+        auto texture_man = coordinator->getResource<SFML::TextureManager>();
+        auto sprite_man = coordinator->getResource<SFML::SpriteManager>();
         coordinator->addComponent(enemy, SFML::Transform({ mapManager.getEnemyInfosById(id).transform.x, float(50 + (rand() % 1000)) }, mapManager.getEnemyInfosById(id).transform.rotation, { 4, 4 }));
         coordinator->addComponent(enemy, SFML::BackupTransform(coordinator->getComponent<SFML::Transform>(enemy)));
         coordinator->addComponent(enemy, SFML::SpriteReference(name));
@@ -51,8 +54,11 @@ public:
         coordinator->addComponent(enemy, SFML::Attack(true, mapManager.getEnemyInfosById(id).attack.speed, static_cast<SFML::AttackType>(mapManager.getEnemyInfosById(id).attack.bullet_speed), mapManager.getEnemyInfosById(id).attack.dir));
         coordinator->addComponent(enemy, SFML::DestroyEntity(true, true, true));
         coordinator->addComponent(enemy, SFML::Health(mapManager.getEnemyInfosById(id).life));
+        coordinator->addComponent(enemy, SFML::Hitbox());
         id_to_entity.emplace(enemy_nbr, enemy);
         RType::Packet::CreateSpriteReference create_sprite(name, mapManager.getEnemyInfosById(id).texture_ref);
+        std::cout << mapManager.getEnemyInfosById(id).texture_ref << std::endl;
+        sprite_man->registerSprite(name, texture_man->getTexture(mapManager.getEnemyInfosById(id).texture_ref));
         auto packet = coordinator->getResource<Network::PackageManager>()->createPacket<RType::Packet::CreateSpriteReference>(create_sprite);
         coordinator->getResource<PlayerManager>()->sendPacketToAllPlayer(&packet, sizeof(packet), udp_handler);
         RType::Packet::SpawnEntity entity_payload(enemy, name, 1000.0, 800.0);
