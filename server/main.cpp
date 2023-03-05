@@ -1,4 +1,10 @@
+#include <arpa/inet.h>
+#include <ifaddrs.h>
 #include <iostream>
+#include <net/if.h>
+#include <netdb.h>
+#include <string.h>
+#include <sys/socket.h>
 
 #include "../common/PackageManager.hpp"
 #include "../common/UDPHandler.hpp"
@@ -265,6 +271,28 @@ void RType::Server::game_loop(std::unique_ptr<ECS::Coordinator>& coordinator)
 }
 
 /**
+ * @brief Function that get the network IPV4 address
+ */
+void RType::Server::getIpAddress()
+{
+    struct ifaddrs *ifaddr, *ifa;
+    if (getifaddrs(&ifaddr) == -1)
+        return;
+
+    for (ifa = ifaddr; ifa != nullptr; ifa = ifa->ifa_next) {
+        if (ifa->ifa_addr == nullptr)
+            continue;
+        if (ifa->ifa_addr->sa_family != AF_INET)
+            continue;
+        void* addr = &reinterpret_cast<sockaddr_in*>(ifa->ifa_addr)->sin_addr;
+        char ipstr[INET_ADDRSTRLEN];
+        inet_ntop(AF_INET, addr, ipstr, INET_ADDRSTRLEN);
+        std::cout << "IPv4 address: " << ipstr << std::endl;
+    }
+    freeifaddrs(ifaddr);
+}
+
+/**
  * @brief Main function of the RType Server
  * @param ac Number of command-line arguments
  * @param av Content of command-line arguments
@@ -283,6 +311,7 @@ int main(int ac, char** av)
 
         auto udp_handler = coordinator->getResource<RType::Network::UDPHandler>();
 
+        RType::Server::getIpAddress();
         udp_handler->startHandler();
         RType::Server::waiting_for_players(coordinator);
         RType::Server::loadAssets(coordinator);
