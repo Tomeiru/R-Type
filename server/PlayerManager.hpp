@@ -1,12 +1,19 @@
 #pragma once
 
+#include <cstdint>
+#include <unordered_map>
+
 #include "../common/UDPClient.hpp"
+#include "../common/component/EntityType.hpp"
+#include "../common/component/Hitbox.hpp"
 #include "../common/component/SpriteReference.hpp"
 #include "../common/component/Transform.hpp"
 #include "../common/packet/GameStart.hpp"
 #include "../common/packet/SpawnEntity.hpp"
 #include "../sfml/IpAddress.hpp"
 #include "Types.hpp"
+#include "component/Attack.hpp"
+#include "component/Health.hpp"
 #include <cstdint>
 #include <unordered_map>
 
@@ -26,6 +33,13 @@ public:
         , nb_player_max(nb_player_max)
     {
     }
+
+    /**
+     * @brief Add a new player the PlayerManager
+     * @param name Name to give to the player
+     * @param client Information about the client containing the ip adress etc
+     * @return ID of the player
+     */
     PlayerID addNewPlayer(const PlayerName& name,
         const Network::UDPClient& client)
     {
@@ -63,8 +77,9 @@ public:
      * @brief Sends a GameStart packet to all the connected player
      * @param udp_handler The class that handles sending packet to other
      * UDPClients
+     * @param package_manager Package manager, used to create and send packets
      */
-    void sendGamestartToAllPlayers(
+    void sendGameStartToAllPlayers(
         std::shared_ptr<Network::UDPHandler>& udp_handler,
         std::shared_ptr<RType::Network::PackageManager>& package_manager)
     {
@@ -77,6 +92,12 @@ public:
         }
     }
 
+    /**
+     * @brief Spawn a new player in the game
+     * @param udp_handler Network manager using UDP to communicate
+     * @param package_manager Package manager, used to create and send packets
+     * @param coordinator Reference to the ecs coordinator
+     */
     void
     spawnPlayers(std::shared_ptr<Network::UDPHandler>& udp_handler,
         std::shared_ptr<RType::Network::PackageManager>& package_manager,
@@ -90,15 +111,20 @@ public:
             coordinator->addComponent(
                 player,
                 SFML::Transform({ 0, static_cast<float>(200 * id) }, 0, { 3, 3 }));
+            coordinator->addComponent(player, SFML::Attack(false, 200, SFML::AttackType::NormalAttack, 0));
+            coordinator->addComponent(player, SFML::Hitbox());
+            coordinator->addComponent(player, SFML::Health(2));
+            coordinator->addComponent(player, SFML::EntityType(SFML::EntityTypeEnum::Player));
 
             RType::Packet::SpawnEntity entity_payload(player, name, 0,
-                static_cast<float>(200 * id));
+                static_cast<float>(200 * id), SFML::EntityTypeEnum::Player);
             auto packet = package_manager->createPacket<RType::Packet::SpawnEntity>(
                 entity_payload);
             sendPacketToAllPlayer(&packet, sizeof(packet), udp_handler);
         }
         std::cout << "All players spawned" << std::endl;
     }
+
     /**
      * @brief Get the Entity from a PlayerID
      * @param id The PlayerID

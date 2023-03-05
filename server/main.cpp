@@ -2,20 +2,41 @@
 
 #include "../common/PackageManager.hpp"
 #include "../common/UDPHandler.hpp"
+#include "../common/component/EntityType.hpp"
 #include "../common/component/SpriteReference.hpp"
+#include "../common/component/Tint.hpp"
 #include "../common/component/Transform.hpp"
+#include "../common/packet/CreateSpriteReference.hpp"
 #include "../common/packet/EntityPosition.hpp"
 #include "../common/packet/GameStart.hpp"
 #include "../common/packet/PlayerInputs.hpp"
 #include "../common/packet/PlayerName.hpp"
+#include "../common/packet/SetEntityLinearMove.hpp"
 #include "../common/packet/SpawnEntity.hpp"
+#include "../common/system/LinearMove.hpp"
 #include "../ecs/Coordinator.hpp"
-#include "../ecs/RuntimeException.hpp"
 #include "../server/PlayerManager.hpp"
+#include "../sfml/Clock.hpp"
 #include "../sfml/SpriteManager.hpp"
 #include "../sfml/TextureManager.hpp"
+#include "BulletManager.hpp"
+#include "EnemyManager.hpp"
 #include "Server.hpp"
+#include "component/BackupTransform.hpp"
+#include "component/Health.hpp"
+#include "system/DestroyEntityOutWindow.hpp"
+#include "system/HitByBullet.hpp"
+#include "system/KillNoLife.hpp"
+#include "system/Shoot.hpp"
+#include "system/UpdateEntityPositions.hpp"
 
+/**
+ * @brief Function that parse arguments
+ *
+ * @param ac Number of arguments
+ * @param av Arguments
+ * @return Port of the server
+ */
 std::uint16_t RType::Server::parseArguments(int ac, char** av)
 {
     if (ac != 2)
@@ -28,6 +49,12 @@ std::uint16_t RType::Server::parseArguments(int ac, char** av)
     return (port);
 }
 
+/**
+ * @brief Function that register every resource used in the server to the ecs
+ *
+ * @param coordinator Reference to the ecs coordinator
+ * @param port Port of the server, used to create the UDPHandler
+ */
 void RType::Server::registerResources(
     std::unique_ptr<ECS::Coordinator>& coordinator, std::uint16_t port)
 {
@@ -37,15 +64,58 @@ void RType::Server::registerResources(
     coordinator->registerResource<RType::PlayerManager>();
     coordinator->registerResource<SFML::TextureManager>();
     coordinator->registerResource<SFML::SpriteManager>();
+    coordinator->registerResource<RType::EnemyManager>();
+    coordinator->registerResource<RType::BulletManager>();
+    coordinator->registerResource<SFML::Clock>();
 }
 
+/**
+ * @brief Function that register every components used in the server to the ecs
+ *
+ * @param coordinator Reference to the ecs coordinator
+ */
 void RType::Server::registerComponents(
     std::unique_ptr<ECS::Coordinator>& coordinator)
 {
     coordinator->registerComponent<SFML::SpriteReference>();
     coordinator->registerComponent<SFML::Transform>();
+    coordinator->registerComponent<SFML::Hitbox>();
+    coordinator->registerComponent<SFML::Attack>();
+    coordinator->registerComponent<SFML::DestroyEntity>();
+    coordinator->registerComponent<SFML::Direction>();
+    coordinator->registerComponent<SFML::Health>();
+    coordinator->registerComponent<SFML::Speed>();
+    coordinator->registerComponent<SFML::BackupTransform>();
+    coordinator->registerComponent<SFML::EntityType>();
 }
 
+/**
+ * @brief Function that register every systems used in the server to the ecs
+ *
+ * @param coordinator Reference to the ecs coordinator
+ */
+void RType::Server::registerSystems(
+    std::unique_ptr<ECS::Coordinator>& coordinator)
+{
+    coordinator->registerSystem<SFML::DestroyEntityOutWindow>();
+    coordinator->setSignatureBits<SFML::DestroyEntityOutWindow, SFML::DestroyEntity, SFML::Transform>();
+    coordinator->registerSystem<SFML::LinearMove>();
+    coordinator->setSignatureBits<SFML::LinearMove, SFML::Speed, SFML::Direction, SFML::Transform>();
+    coordinator->registerSystem<SFML::Shoot>();
+    coordinator->setSignatureBits<SFML::Shoot, SFML::Attack, SFML::EntityType>();
+    coordinator->registerSystem<SFML::KillNoLife>();
+    coordinator->setSignatureBits<SFML::KillNoLife, SFML::Health>();
+    coordinator->registerSystem<SFML::UpdateEntityPositions>();
+    coordinator->setSignatureBits<SFML::UpdateEntityPositions, SFML::Transform, SFML::BackupTransform>();
+    coordinator->registerSystem<SFML::HitByBullet>();
+    coordinator->setSignatureBits<SFML::HitByBullet, SFML::Hitbox, SFML::Transform>();
+}
+
+/**
+ * @brief Function that register every packet types to the ecs
+ *
+ * @param coordinator Reference to the ecs coordinator
+ */
 void RType::Server::registerPackets(
     std::unique_ptr<ECS::Coordinator>& coordinator)
 {
@@ -56,8 +126,17 @@ void RType::Server::registerPackets(
     package_manager->registerPacket<RType::Packet::SpawnEntity>();
     package_manager->registerPacket<RType::Packet::PlayerInputs>();
     package_manager->registerPacket<RType::Packet::EntityPosition>();
+    package_manager->registerPacket<RType::Packet::TransformEntity>();
+    package_manager->registerPacket<RType::Packet::DestroyEntity>();
+    package_manager->registerPacket<RType::Packet::CreateSpriteReference>();
+    package_manager->registerPacket<RType::Packet::SetEntityLinearMove>();
 }
 
+/**
+ * @brief Function that loads the assets of the game (textures and sprites)
+ *
+ * @param coordinator Reference of the ecs coordinator
+ */
 void RType::Server::loadAssets(std::unique_ptr<ECS::Coordinator>& coordinator)
 {
     auto texture_manager = coordinator->getResource<SFML::TextureManager>();
@@ -71,6 +150,14 @@ void RType::Server::loadAssets(std::unique_ptr<ECS::Coordinator>& coordinator)
         "../assets/textures/player-green.png");
     texture_manager->registerTexture("player_orange",
         "../assets/textures/player-orange.png");
+    texture_manager->registerTexture("bulletTexturePlayer",
+        "../assets/textures/bulletPlayer.png");
+    texture_manager->registerTexture("bulletTextureEnemie",
+        "../assets/textures/bulletEnnemie.png");
+    texture_manager->registerTexture("enemy_A",
+        "../assets/textures/enemy.png");
+    texture_manager->registerTexture("enemy_B",
+        "../assets/textures/enemy2.png");
     sprite_manager->registerSprite("player_1",
         texture_manager->getTexture("player_blue"));
     sprite_manager->registerSprite("player_2",
@@ -81,6 +168,11 @@ void RType::Server::loadAssets(std::unique_ptr<ECS::Coordinator>& coordinator)
         texture_manager->getTexture("player_orange"));
 }
 
+/**
+ * @brief Player connection system, waiting for players to connect to the server
+ *
+ * @param coordinator Reference to the ecs coordinator
+ */
 void RType::Server::waiting_for_players(
     std::unique_ptr<ECS::Coordinator>& coordinator)
 {
@@ -104,17 +196,31 @@ void RType::Server::waiting_for_players(
         }
     }
     std::cout << "Everyone joined! The game can finally start!" << std::endl;
-    player_manager->sendGamestartToAllPlayers(udp_handler, package_manager);
+    player_manager->sendGameStartToAllPlayers(udp_handler, package_manager);
 }
 
+/**
+ * @brief Main loop of the game, once every player is connected
+ *
+ * @param coordinator Reference to the ecs coordinator
+ */
 void RType::Server::game_loop(std::unique_ptr<ECS::Coordinator>& coordinator)
 {
     auto package_manager = coordinator->getResource<RType::Network::PackageManager>();
     auto udp_handler = coordinator->getResource<RType::Network::UDPHandler>();
     auto player_manager = coordinator->getResource<RType::PlayerManager>();
+    auto enemy_manager = coordinator->getResource<RType::EnemyManager>();
+    auto bullet_manager = coordinator->getResource<RType::BulletManager>();
+    auto clock = coordinator->getResource<SFML::Clock>();
 
     std::cout << "Game loop started!" << std::endl;
     player_manager->spawnPlayers(udp_handler, package_manager, coordinator);
+    int32_t gameTm = 0;
+    int32_t prevTm = 0;
+    int32_t spawnEnemies = 0;
+    srand(clock->getElapsedTime().asMicroseconds());
+    std::cout << clock->getElapsedTime().asMicroseconds() << std::endl;
+    clock->restart();
     while (player_manager->getNbPlayerConnected() > 0) {
         while (!udp_handler->isQueueEmpty()) {
             RType::Network::ReceivedPacket packet_received = udp_handler->popElement();
@@ -126,28 +232,52 @@ void RType::Server::game_loop(std::unique_ptr<ECS::Coordinator>& coordinator)
                     packet_received.packet_data);
                 auto player = player_manager->getEntityFromPlayerID(header->player_id);
                 auto& transform = coordinator->getComponent<SFML::Transform>(player);
-                float movement_x = 0;
-                float movement_y = 0;
-                float speed = 10;
+                auto& attack = coordinator->getComponent<SFML::Attack>(player);
+                auto& health = coordinator->getComponent<SFML::Health>(player);
 
-                if (decoded_player_inputs->left == 1)
-                    movement_x -= speed;
-                if (decoded_player_inputs->right == 1)
-                    movement_x += speed;
-                if (decoded_player_inputs->up == 1)
-                    movement_y -= speed;
-                if (decoded_player_inputs->down == 1)
-                    movement_y += speed;
-                transform.position = sf::Vector2f(transform.position.getX() + movement_x,
-                    transform.position.getY() + movement_y);
-                RType::Packet::EntityPosition entity_position(
-                    player, transform.position.getX(), transform.position.getY());
-                auto packet = package_manager->createPacket<RType::Packet::EntityPosition>(
-                    entity_position);
-                player_manager->sendPacketToAllPlayer(&packet, sizeof(packet),
-                    udp_handler);
+                if (health.healthPoints > 0) {
+                    float movement_x = 0;
+                    float movement_y = 0;
+                    float speed = 10;
+
+                    if (decoded_player_inputs->left == 1)
+                        movement_x -= speed;
+                    if (decoded_player_inputs->right == 1)
+                        movement_x += speed;
+                    if (decoded_player_inputs->up == 1)
+                        movement_y -= speed;
+                    if (decoded_player_inputs->down == 1)
+                        movement_y += speed;
+                    if (decoded_player_inputs->shoot == 1)
+                        attack.attack = true;
+                    else
+                        attack.attack = false;
+                    transform.position = sf::Vector2f(transform.position.getX() + movement_x,
+                        transform.position.getY() + movement_y);
+                    RType::Packet::EntityPosition entity_position(
+                        player, transform.position.getX(), transform.position.getY());
+                    auto packet = package_manager->createPacket<RType::Packet::EntityPosition>(
+                        entity_position);
+                    player_manager->sendPacketToAllPlayer(&packet, sizeof(packet),
+                        udp_handler);
+                }
             }
         }
+        int32_t tm = clock->getElapsedTime().asMilliseconds();
+        int32_t elapsed = tm - prevTm;
+        prevTm = tm;
+        gameTm += elapsed;
+        spawnEnemies += elapsed;
+        if (spawnEnemies > 5000) {
+            enemy_manager->spawnEnemy(udp_handler, coordinator, rand() % 2);
+            spawnEnemies = 0;
+        }
+        coordinator->getSystem<SFML::LinearMove>()->update(coordinator, elapsed);
+        coordinator->getSystem<SFML::KillNoLife>()->update(coordinator);
+        coordinator->getSystem<SFML::Shoot>()->update(coordinator, elapsed);
+        coordinator->getSystem<SFML::DestroyEntityOutWindow>()->update(coordinator);
+        coordinator->getSystem<SFML::UpdateEntityPositions>()->update(coordinator, udp_handler, elapsed);
+        coordinator->getSystem<SFML::HitByBullet>()->update(coordinator, elapsed);
     }
 }
 
@@ -166,6 +296,7 @@ int main(int ac, char** av)
         RType::Server::registerResources(coordinator, port);
         RType::Server::registerPackets(coordinator);
         RType::Server::registerComponents(coordinator);
+        RType::Server::registerSystems(coordinator);
 
         auto udp_handler = coordinator->getResource<RType::Network::UDPHandler>();
 

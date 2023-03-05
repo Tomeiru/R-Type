@@ -1,11 +1,11 @@
 #pragma once
 
+#include "../../common/component/Hitbox.hpp"
 #include "../../common/component/SpriteReference.hpp"
 #include "../../common/component/Transform.hpp"
 #include "../../ecs/Coordinator.hpp"
 #include "../../ecs/System.hpp"
 #include "../../sfml/SpriteManager.hpp"
-#include "../component/Hitbox.hpp"
 
 namespace SFML {
 /**
@@ -31,10 +31,10 @@ public:
             sprite->setRotation(transform.rotation);
             sprite->setScale(transform.scale);
             sprite->setOrigin(transform.origin);
-            // if (coordinator->hasComponent<Hitbox>(entity)) {
-            //     auto &hitbox = coordinator->getComponent<Hitbox>(entity);
-            //     hitbox.rect = sprite->getGlobalBounds();
-            // }
+            if (coordinator->hasComponent<Hitbox>(entity)) {
+                auto& hitbox = coordinator->getComponent<Hitbox>(entity);
+                hitbox.rect = sprite->getGlobalBounds();
+            }
         }
     }
 };

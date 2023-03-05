@@ -1,10 +1,11 @@
 #pragma once
 
+#include "../../common/component/Hitbox.hpp"
+#include "../../common/component/Transform.hpp"
+#include "../../ecs/Coordinator.hpp"
+#include "../../ecs/System.hpp"
+#include "../../sfml/TextManager.hpp"
 #include "../component/TextReference.hpp"
-#include "../component/Transform.hpp"
-#include "../ecs/Coordinator.hpp"
-#include "../ecs/System.hpp"
-#include "../sfml/TextManager.hpp"
 
 namespace SFML {
 /**
@@ -17,18 +18,23 @@ public:
      *
      * @param coordinator Reference to the ecs coordinator
      */
-    void update(ECS::Coordinator& coordinator)
+    void update(std::unique_ptr<ECS::Coordinator>& coordinator)
     {
-        auto text_manager = coordinator.getResource<SFML::TextManager>();
+        auto text_manager = coordinator->getResource<SFML::TextManager>();
         for (const auto& entity : entities) {
-            auto& text_ref = coordinator.getComponent<TextReference>(entity);
-            auto& transform = coordinator.getComponent<Transform>(entity);
+            auto& text_ref = coordinator->getComponent<TextReference>(entity);
+            auto& transform = coordinator->getComponent<Transform>(entity);
             auto text = text_manager->getText(text_ref.id);
 
             text->setPosition(transform.position);
             text->setRotation(transform.rotation);
             text->setScale(transform.scale);
             text->setOrigin(transform.origin);
+
+            if (coordinator->hasComponent<Hitbox>(entity)) {
+                auto& hitbox = coordinator->getComponent<Hitbox>(entity);
+                hitbox.rect = text->getGlobalBounds();
+            }
         }
     }
 };

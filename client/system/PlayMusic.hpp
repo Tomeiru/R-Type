@@ -1,9 +1,9 @@
 #pragma once
 
+#include "../../ecs/Coordinator.hpp"
+#include "../../ecs/System.hpp"
+#include "../../sfml/MusicManager.hpp"
 #include "../component/MusicReference.hpp"
-#include "../ecs/Coordinator.hpp"
-#include "../ecs/System.hpp"
-#include "../sfml/MusicManager.hpp"
 
 namespace SFML {
 /**
@@ -16,14 +16,14 @@ public:
      *
      * @param coordinator Reference to the ecs coordinator
      */
-    void update(ECS::Coordinator& coordinator)
+    void update(std::unique_ptr<ECS::Coordinator>& coordinator)
     {
-        auto music_manager = coordinator.getResource<SFML::MusicManager>();
+        auto music_manager = coordinator->getResource<SFML::MusicManager>();
 
         if (!music_manager->isEnabled())
             return;
         for (const auto& entity : entities) {
-            auto& music_ref = coordinator.getComponent<MusicReference>(entity);
+            auto& music_ref = coordinator->getComponent<MusicReference>(entity);
             auto music = music_manager->getMusic(music_ref.id);
 
             if (!music_ref.first || music->getStatus() == music_ref.status) {

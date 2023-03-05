@@ -1,10 +1,10 @@
 #pragma once
 
-#include "../component/Hitbox.hpp"
+#include "../../common/component/Hitbox.hpp"
+#include "../../ecs/Coordinator.hpp"
+#include "../../ecs/System.hpp"
+#include "../../sfml/Mouse.hpp"
 #include "../component/Hover.hpp"
-#include "../ecs/Coordinator.hpp"
-#include "../ecs/System.hpp"
-#include "../sfml/Mouse.hpp"
 
 namespace SFML {
 /**
@@ -17,17 +17,16 @@ public:
      *
      * @param coordinator Reference to the ecs coordinator
      */
-    void update(ECS::Coordinator& coordinator)
+    void update(std::unique_ptr<ECS::Coordinator>& coordinator)
     {
-        auto window = coordinator.getResource<SFML::Window>();
+        auto window = coordinator->getResource<SFML::Window>();
         auto mouse_pos = SFML::Mouse::getWindowPosition(window);
         for (const auto& entity : entities) {
-            auto& hitbox = coordinator.getComponent<Hitbox>(entity);
-            auto& hover = coordinator.getComponent<Hover>(entity);
-
-            if (hitbox.rect.contains(mouse_pos.getX(), mouse_pos.getY()))
+            auto& hitbox = coordinator->getComponent<Hitbox>(entity);
+            auto& hover = coordinator->getComponent<Hover>(entity);
+            if (hitbox.rect.contains(mouse_pos.getX(), mouse_pos.getY())) {
                 hover.hovered = true;
-            else
+            } else
                 hover.hovered = false;
         }
     }

@@ -9,6 +9,7 @@ namespace RType::Network {
 struct ReceivedPacket {
     /**
      * @brief Constructs a new ReceivedPacket object
+     *
      * @param ip The IP address of the sender
      * @param port The port of the sender
      * @param packet_data The data of the packet
@@ -21,6 +22,7 @@ struct ReceivedPacket {
 
     /**
      * @brief Constructs a new ReceivedPacket object
+     *
      * @param sender The sender of the packet
      * @param packet_data The data of the packet
      */

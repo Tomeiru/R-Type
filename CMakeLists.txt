@@ -11,7 +11,7 @@ set(SRC_ECS
 set(SRC_ENCAPSULATION
         sfml/Clock.hpp sfml/Color.hpp sfml/ColorManager.hpp sfml/Event.hpp sfml/EventManager.hpp sfml/Font.hpp
         sfml/FontManager.hpp sfml/Image.hpp sfml/ImageManager.hpp sfml/IpAddress.hpp sfml/Joystick.hpp sfml/Keyboard.hpp
-        sfml/Mouse.hpp sfml/Music.hpp sfml/MusicManager.hpp sfml/Rect.hpp sfml/RuntimeException.hpp sfml/SoundBuffer.hpp
+        sfml/Mouse.hpp sfml/Mouse.cpp sfml/Music.hpp sfml/MusicManager.hpp sfml/Rect.hpp sfml/RuntimeException.hpp sfml/SoundBuffer.hpp
         sfml/SoundBufferManager.hpp sfml/Sound.hpp sfml/SoundManager.hpp sfml/Sprite.hpp sfml/SpriteManager.hpp sfml/Text.hpp
         sfml/TextManager.hpp sfml/Texture.hpp sfml/TextureManager.hpp sfml/Time.hpp sfml/UDPSocket.hpp sfml/Vector2.hpp sfml/Window.hpp
         )
@@ -20,13 +20,14 @@ set (SRC_COMMON
         common/PackageManager.hpp common/RuntimeException.hpp common/ThreadSafeQueue.hpp common/UDPHandler.hpp
         common/packet/PlayerName.hpp common/ReceivedPacket.hpp common/packet/GameStart.hpp common/packet/PlayerInputs.hpp common/packet/EntityPosition.hpp)
 
+set(CMAKE_BUILD_TYPE Debug)
 set(SRC_CLIENT
         client/main.cpp
-        client/Client.hpp client/PlayerID.hpp client/ServerEntityManager.hpp)
+        client/Client.hpp client/PlayerID.hpp client/SceneManager.hpp client/ServerEntityManager.hpp server/component/Speed.hpp server/component/Direction.hpp server/component/Attack.hpp server/component/DestroyEntity.hpp server/component/Health.hpp server/system/DestroyEntityOutWindow.hpp common/system/LinearMove.hpp server/system/Shoot.hpp server/system/KillNoLife.hpp client/system/TintSprite.hpp client/component/Clickable.hpp client/component/Hover.hpp client/component/Hover.hpp client/component/HoverTint.hpp client/component/MovementJoystick.hpp client/component/MusicReference.hpp client/component/Outline.hpp client/component/SoundReference.hpp client/component/Spin.hpp client/component/TextReference.hpp client/system/DrawText.hpp client/system/OutlineText.hpp client/system/PlayMusic.hpp client/system/PlaySound.hpp client/system/SpinSprite.hpp client/system/TintText.hpp client/system/TransformText.hpp client/system/UpdateClick.hpp client/system/UpdateHover.hpp client/system/UpdateHoverTint.hpp client/system/UpdateJoystickMovements.hpp server/system/UpdateEntityPositions.hpp server/component/BackupTransform.hpp common/packet/TransformEntity.hpp common/packet/DestroyEntity.hpp client/PacketManager.hpp common/packet/CreateSpriteReference.hpp)
 
 set(SRC_SERVER
         server/main.cpp
-        server/PlayerManager.hpp common/UDPClient.hpp server/Types.hpp server/Server.hpp)
+        server/PlayerManager.hpp common/UDPClient.hpp server/Types.hpp server/Server.hpp server/EnemyManager.hpp server/BulletManager.hpp)
 
 #CMake for Windows and Windows Compilers
 if (MSVC OR MSYS OR MINGW OR WIN32)
@@ -46,6 +47,13 @@ if (MSVC OR MSYS OR MINGW OR WIN32)
     if(result)
         message(FATAL_ERROR "Echec de l'installation de la SFML: ${output}")
     endif()
+    execute_process(COMMAND ${CMAKE_BINARY_DIR}/vcpkg-2023.01.09/vcpkg install rapidjson --triplet x64-windows
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/vcpkg-2023.01.09
+        RESULT_VARIABLE result
+        OUTPUT_VARIABLE output)
+    if(result)
+    message(FATAL_ERROR "Echec de l'installation de la rapidjson: ${output}")
+    endif()
 endif()
 
 #CMake for Linux and Apple
@@ -59,12 +67,29 @@ if (UNIX)
         file(REMOVE ${CMAKE_BINARY_DIR}/vcpkg.tar.gz)
     endif()
     #Install SFML and all its dependencies
+    message(STATUS "Installation de la SFML...")
     execute_process(COMMAND ${CMAKE_BINARY_DIR}/vcpkg-2023.01.09/vcpkg install sfml
             WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/vcpkg-2023.01.09
             RESULT_VARIABLE result
             OUTPUT_VARIABLE output)
     if(result)
         message(FATAL_ERROR "Echec de l'installation de la SFML: ${output}")
+    endif()
+    message(STATUS "Installation de la RapidJSON...")
+    execute_process(COMMAND ${CMAKE_BINARY_DIR}/vcpkg-2023.01.09/vcpkg install rapidjson
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/vcpkg-2023.01.09
+        RESULT_VARIABLE result
+        OUTPUT_VARIABLE output)
+    if(result)
+        message(FATAL_ERROR "Echec de l'installation de rapidjson: ${output}")
+    endif()
+    message(STATUS "Installation de la FreeType...")
+    execute_process(COMMAND ${CMAKE_BINARY_DIR}/vcpkg-2023.01.09/vcpkg install freetype
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/vcpkg-2023.01.09
+        RESULT_VARIABLE result
+        OUTPUT_VARIABLE output)
+    if(result)
+        message(FATAL_ERROR "Echec de l'installation de freetype: ${output}")
     endif()
 endif()
 
@@ -100,12 +125,16 @@ if(UNIX)
 endif()
 
 find_package(SFML 2.5 COMPONENTS audio graphics network system window REQUIRED)
+find_package(RapidJSON REQUIRED)
+find_package(freetype CONFIG REQUIRED)
+
 set(SFML_LIBS
-        sfml-audio
-        sfml-graphics
-        sfml-network
-        sfml-system
-        sfml-window
-        )
+    sfml-audio
+    sfml-graphics
+    sfml-network
+    sfml-system
+    sfml-window
+    freetype
+    )
 target_link_libraries(client ${SFML_LIBS})
-target_link_libraries(server ${SFML_LIBS})
+target_link_libraries(server ${SFML_LIBS} rapidjson)

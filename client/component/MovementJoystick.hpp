@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../sfml/Joystick.hpp"
+#include "../../sfml/Joystick.hpp"
 
 namespace SFML {
 /**

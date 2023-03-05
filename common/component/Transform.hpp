@@ -22,6 +22,20 @@ struct Transform {
         , origin(origin)
     {
     }
+
+    /**
+     * @brief Construct a new Transform Component
+     *
+     * @param transform Transform to copy it in a new transform component
+     */
+    Transform(SFML::Transform const& transform)
+        : position(transform.position)
+        , rotation(transform.rotation)
+        , scale(transform.scale)
+        , origin(transform.origin)
+    {
+    }
+
     Vector2f position;
     float rotation;
     Vector2f scale;
