@@ -9,7 +9,7 @@
                 },
                 "dir": 180,
                 "speed": 2,
-                "life": 7,
+                "life": 2,
                 "texture_ref": "enemy_A",
                 "transform": {
                     "x": 1960,
@@ -26,7 +26,7 @@
                 },
                 "dir": 180,
                 "speed": 1,
-                "life": 20,
+                "life": 5,
                 "texture_ref": "enemy_B",
                 "transform": {
                     "x": 1960,
