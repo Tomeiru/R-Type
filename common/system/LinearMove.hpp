@@ -1,5 +1,7 @@
 #pragma once
 
+#include <cmath>
+
 #include "../../ecs/Coordinator.hpp"
 #include "../../ecs/System.hpp"
 #include "../../server/component/Direction.hpp"
