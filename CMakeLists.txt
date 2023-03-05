@@ -67,6 +67,7 @@ if (UNIX)
         file(REMOVE ${CMAKE_BINARY_DIR}/vcpkg.tar.gz)
     endif()
     #Install SFML and all its dependencies
+    message(STATUS "Installation de la SFML...")
     execute_process(COMMAND ${CMAKE_BINARY_DIR}/vcpkg-2023.01.09/vcpkg install sfml
             WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/vcpkg-2023.01.09
             RESULT_VARIABLE result
@@ -74,12 +75,21 @@ if (UNIX)
     if(result)
         message(FATAL_ERROR "Echec de l'installation de la SFML: ${output}")
     endif()
+    message(STATUS "Installation de la RapidJSON...")
     execute_process(COMMAND ${CMAKE_BINARY_DIR}/vcpkg-2023.01.09/vcpkg install rapidjson
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/vcpkg-2023.01.09
         RESULT_VARIABLE result
         OUTPUT_VARIABLE output)
     if(result)
-    message(FATAL_ERROR "Echec de l'installation de la rapidjson: ${output}")
+        message(FATAL_ERROR "Echec de l'installation de rapidjson: ${output}")
+    endif()
+    message(STATUS "Installation de la FreeType...")
+    execute_process(COMMAND ${CMAKE_BINARY_DIR}/vcpkg-2023.01.09/vcpkg install freetype
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/vcpkg-2023.01.09
+        RESULT_VARIABLE result
+        OUTPUT_VARIABLE output)
+    if(result)
+        message(FATAL_ERROR "Echec de l'installation de freetype: ${output}")
     endif()
 endif()
 
@@ -116,13 +126,15 @@ endif()
 
 find_package(SFML 2.5 COMPONENTS audio graphics network system window REQUIRED)
 find_package(RapidJSON REQUIRED)
+find_package(freetype CONFIG REQUIRED)
+
 set(SFML_LIBS
-        sfml-audio
-        sfml-graphics
-        sfml-network
-        sfml-system
-        sfml-window
-        freetype
-        )
+    sfml-audio
+    sfml-graphics
+    sfml-network
+    sfml-system
+    sfml-window
+    freetype
+    )
 target_link_libraries(client ${SFML_LIBS})
 target_link_libraries(server ${SFML_LIBS} rapidjson)
